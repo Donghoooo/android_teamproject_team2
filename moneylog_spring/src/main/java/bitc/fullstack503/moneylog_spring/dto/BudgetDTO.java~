@@ -1,0 +1,8 @@
+package bitc.fullstack503.moneylog_spring.dto;
+import lombok.Data;
+@Data
+public class BudgetDTO
+{
+  private String memberId;
+  private int 24_1;
+}
