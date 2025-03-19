@@ -11,5 +11,4 @@ public class IncomeLogDTO
   private LocalDateTime incomeDate;
   private String incomeCate;
   private String memo;
-  private String incomeSource;
 }
