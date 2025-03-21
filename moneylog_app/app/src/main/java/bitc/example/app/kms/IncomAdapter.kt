@@ -4,11 +4,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import bitc.example.app.databinding.ItemRecyclerViewBinding
+import bitc.example.app.databinding.IncomItemRecyclerViewBinding
 
-class MyAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class IncomAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MyViewHolder(ItemRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return IncomViewHolder(IncomItemRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -18,11 +18,11 @@ class MyAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerVi
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         Log.d("fullstack503", "onBindViewHolder : $position")
 
-        val binding = (holder as MyViewHolder).binding
+        val binding = (holder as IncomViewHolder).binding
 
-        binding.itemData.text = datas[position]
+        binding.incomItemData.text = datas[position]
 
-        binding.itemData.setOnClickListener {
+        binding.incomItemData.setOnClickListener {
             Log.d("fullstack503", "item data click : $position")
         }
     }

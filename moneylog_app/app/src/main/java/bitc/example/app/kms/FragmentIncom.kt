@@ -1,6 +1,5 @@
 package bitc.example.app.kms
 
-import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import bitc.example.app.R
 import bitc.example.app.databinding.FragmentIncomBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,14 +32,12 @@ class FragmentIncom : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 
         binding = FragmentIncomBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,11 +51,11 @@ class FragmentIncom : Fragment() {
             items.add("Item $i")
         }
 
-        val adapter = MyAdapter(items)
+        val adapter = IncomAdapter(items)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+        binding.incomRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.incomRecyclerView.adapter = adapter
+        binding.incomRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
     }
 
     companion object {

@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.R
+import bitc.example.app.databinding.FragmentExpenseBinding
+import bitc.example.app.databinding.FragmentIncomBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +26,8 @@ class FragmentExpense : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var binding: FragmentExpenseBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,8 +40,24 @@ class FragmentExpense : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_expense, container, false)
+
+        binding = FragmentExpenseBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val items = mutableListOf<String>()
+        for (i in 10..20) {
+            items.add("Item $i")
+        }
+
+        val adapter = ExpenseAdapter(items)
+
+        binding.expenseRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.expenseRecyclerView.adapter = adapter
+        binding.expenseRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
     }
 
     companion object {
