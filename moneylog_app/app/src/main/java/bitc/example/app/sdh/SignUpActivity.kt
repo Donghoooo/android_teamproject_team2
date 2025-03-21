@@ -58,22 +58,7 @@ class SignUpActivity : AppCompatActivity() {
         // member 를 서버로 보냄
         val api = AppServerClass.instance
         val call = api.postSignUp(member)
-        call.enqueue(object : Callback<String> {
-          override fun onResponse(p0: Call<String>, res: Response<String>) {
-            if (res.isSuccessful) {
-              //            서버에서 전달받은 데이터만 변수로 저장
-              val result = res.body()
-              Log.d("fullstack503", "result : $result")
-            }
-            else {
-              Log.d("fullstack503", "송신 실패")
-            }
-          }
-
-          override fun onFailure(p0: Call<String>, t: Throwable) {
-            Log.d("fullstack503", "message : $t.message")
-          }
-        })
+        retrofitResponse(call)
       }
     }
 
@@ -102,5 +87,26 @@ class SignUpActivity : AppCompatActivity() {
     super.onSupportNavigateUp()
     onBackPressedDispatcher.onBackPressed()
     return true
+  }
+
+  // Retrofit 통신 응답 부분
+  // Callback<String> 부분이 서버에서 전달받을 데이터 타입임
+  private fun retrofitResponse(call: Call<String>) {
+    call.enqueue(object : Callback<String> {
+      override fun onResponse(p0: Call<String>, res: Response<String>) {
+        if (res.isSuccessful) {
+          // 서버에서 전달받은 데이터만 변수로 저장
+          val result = res.body()
+          Log.d("fullstack503", "result : $result")
+        }
+        else {
+          Log.d("fullstack503", "송신 실패")
+        }
+      }
+
+      override fun onFailure(p0: Call<String>, t: Throwable) {
+        Log.d("fullstack503", "message : $t.message")
+      }
+    })
   }
 }
