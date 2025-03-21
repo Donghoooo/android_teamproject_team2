@@ -13,19 +13,19 @@
         android:theme="@style/Theme.App"
         tools:targetApi="31">
         <activity
-            android:name=".OutcomeReceiptActivity"
+            android:name=".ksm.OutcomeReceiptActivity"
             android:exported="false" />
         <activity
-            android:name=".IncomeReceiptActivity"
+            android:name=".ksm.IncomeReceiptActivity"
             android:exported="false" />
         <activity
-            android:name=".IncomeCateActivity"
+            android:name=".ksm.IncomeCateActivity"
             android:exported="false" />
         <activity
-            android:name=".OutcomeCateActivity"
+            android:name=".ksm.OutcomeCateActivity"
             android:exported="false" />
         <activity
-            android:name=".AddInfoActivity"
+            android:name=".ksm.AddInfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ksm.MainActivity"
             android:exported="false" />
     </application>
 

@@ -1,13 +1,10 @@
-package bitc.example.app
+package bitc.example.app.ksm
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.databinding.ActivityIncomeReceiptBinding
@@ -93,7 +90,6 @@ private lateinit var incomePassReceipt : TextView
             expense.expenseMemo = expenseMemo
             expense.expenseCate = expenseCate
             Log.d("fullstack503","expense 값: $expenseCate , expnese 값:$expenseMemo")
-
         }
     }
 }

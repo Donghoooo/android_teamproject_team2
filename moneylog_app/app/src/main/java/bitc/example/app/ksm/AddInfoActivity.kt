@@ -1,4 +1,4 @@
-package bitc.example.app
+package bitc.example.app.ksm
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,6 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.databinding.ActivityAddInfoBinding
-import bitc.example.app.databinding.ActivityIncomeCateBinding
 
 class AddInfoActivity : AppCompatActivity() {
 
@@ -60,7 +59,7 @@ private lateinit var binding: ActivityAddInfoBinding
             val text = incomeResult.text.toString()
 
 
-            val intent = Intent(this,IncomeCateActivity::class.java).apply{
+            val intent = Intent(this, IncomeCateActivity::class.java).apply{
             putExtra("text_value2",text)
             }
             startActivity(intent)
@@ -78,7 +77,7 @@ private lateinit var binding: ActivityAddInfoBinding
 
 //            intent를 사용하여 OutcomeCateActivity 로 전달한다.
 //            putExtra 메소드로 text_value 라는 키에 text를 넣어 전달한다.
-            val intent = Intent(this,OutcomeCateActivity::class.java).apply{
+            val intent = Intent(this, OutcomeCateActivity::class.java).apply{
                 putExtra("text_value",text)
             }
             startActivity(intent)

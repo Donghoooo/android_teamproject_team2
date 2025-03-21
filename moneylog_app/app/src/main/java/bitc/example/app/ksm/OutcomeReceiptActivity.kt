@@ -1,4 +1,4 @@
-package bitc.example.app
+package bitc.example.app.ksm
 
 import android.os.Bundle
 import android.widget.TextView
@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.databinding.ActivityOutcomeReceiptBinding
-import org.w3c.dom.Text
 
 class OutcomeReceiptActivity : AppCompatActivity() {
 
