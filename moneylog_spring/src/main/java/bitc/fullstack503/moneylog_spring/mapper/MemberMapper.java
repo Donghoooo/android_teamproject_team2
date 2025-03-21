@@ -4,5 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberMapper
 {
-  public void signUp (MemberDTO member) throws Exception;
+  void signUp (MemberDTO member) throws Exception;
+  
+  int isMemberId (String memberId) throws Exception;
 }

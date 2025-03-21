@@ -14,4 +14,15 @@ public class MemberServiceImpl implements MemberService
   {
     memberMapper.signUp (member);
   }
+  
+  @Override
+  public int isMemberId (String memberId) throws Exception
+  {
+    int result = memberMapper.isMemberId (memberId);
+    if (result > 0)
+    {
+      return 1;
+    }
+    return 0;
+  }
 }

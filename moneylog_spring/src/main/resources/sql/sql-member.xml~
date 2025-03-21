@@ -8,8 +8,6 @@
   </insert>
   
   <select id="isMemberId" parameterType="java.lang.String" resultType="java.lang.Integer">
-    select count(*)
-    from member
-    where member_id = #{memberId}
+    select count(*) from member where member_id = #{memberId}
   </select>
 </mapper>
