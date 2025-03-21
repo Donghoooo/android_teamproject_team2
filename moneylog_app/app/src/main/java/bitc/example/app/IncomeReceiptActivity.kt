@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.databinding.ActivityIncomeReceiptBinding
 import bitc.example.app.dto.ExpenseLogDTO
 
+
 class IncomeReceiptActivity : AppCompatActivity() {
 
     //    값을 저장할 incomeResultReceipt 변수
@@ -88,7 +89,6 @@ private lateinit var incomePassReceipt : TextView
 
             val expenseMemo = binding.incomeMemoReceipt.text.toString()
             val expenseCate = binding.btnPassIncome.text.toString()
-            val expenseMoney = binding.incomeMoneyReceipt.text.toString()
 
             expense.expenseMemo = expenseMemo
             expense.expenseCate = expenseCate
