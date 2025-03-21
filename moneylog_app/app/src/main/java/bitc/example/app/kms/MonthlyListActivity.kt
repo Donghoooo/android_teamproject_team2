@@ -7,6 +7,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityMonthlyListBinding
 
@@ -35,7 +37,7 @@ class MonthlyListActivity : AppCompatActivity() {
             transaction = fragmentManager.beginTransaction()
             transaction.replace(R.id.layout_fragment_base, fragmentIncom)
             transaction.setReorderingAllowed(true)
-            transaction.addToBackStack(null)
+            transaction.addToBackStack("")
             transaction.commit()
         }
 
