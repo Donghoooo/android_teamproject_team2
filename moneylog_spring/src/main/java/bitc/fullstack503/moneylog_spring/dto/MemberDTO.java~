@@ -1,0 +1,23 @@
+package bitc.fullstack503.moneylog_spring.dto;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+@Data
+public class MemberDTO
+{
+  @JsonProperty ("memberSeq")
+  private int memberSeq;
+  @JsonProperty ("memberId")
+  private String memberId;
+  @JsonProperty ("memberPw")
+  private String memberPw;
+  @JsonProperty ("member_name")
+  private String memberName;
+  @JsonProperty ("create_date")
+  private LocalDateTime createDate;
+  @JsonProperty ("update_date")
+  private LocalDateTime updateDate;
+  @JsonProperty ("member_email")
+  private String memberEmail;
+}
