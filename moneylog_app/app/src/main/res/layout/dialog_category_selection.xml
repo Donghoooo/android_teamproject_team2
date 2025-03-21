@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--카테고리 검색 페이지에서 카테고리 선택했을때 뜨는 다이얼로그 ui-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/main">
+
+
+  <!-- 탭 선택 -->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_income"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="수입" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="지출" />
+  </LinearLayout>
+
+  <!-- 체크박스 리스트 -->
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/category_list"
+      android:layout_width="match_parent"
+      android:layout_height="350dp"
+      android:scrollbars="vertical"
+      android:layout_marginTop="8dp"/>
+
+  <!-- 버튼 영역 -->
+  <LinearLayout
+      android:id="@+id/button_container"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:gravity="end">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="취소" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="확인" />
+  </LinearLayout>
+
+
+</LinearLayout>
