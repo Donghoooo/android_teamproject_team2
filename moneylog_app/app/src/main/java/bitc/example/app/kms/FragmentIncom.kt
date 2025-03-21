@@ -47,8 +47,8 @@ class FragmentIncom : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val items = mutableListOf<String>()
-        for (i in 1..20) {
-            items.add("Item $i")
+        for (i in 1..12) {
+            items.add("$i 월")
         }
 
         val adapter = IncomAdapter(items)
