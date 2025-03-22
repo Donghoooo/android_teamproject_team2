@@ -12,4 +12,7 @@
   <color name="gray">#888</color>
   <color name="topToolbarColor">#53d2c2</color>
   <color name="success">#4BE230</color>
+  <color name="click">#B8B8FF</color>
+  <color name="default_button_color">#F5F5F5</color>
+  <color name="selected_button_color">#FF9F45</color>
 </resources>

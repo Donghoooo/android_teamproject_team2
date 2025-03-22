@@ -11,13 +11,13 @@ public class TestController
 {
   @Autowired
   private MemberService memberService;
-
+  
   @GetMapping ({"/", ""})
   public String home () throws Exception
   {
     return "index";
   }
-
+  
   @PostMapping ("loginProcess")
   public String loginProcess (@RequestBody MemberDTO member) throws Exception
   {
@@ -25,7 +25,7 @@ public class TestController
     System.out.println (member.getMemberPw ());
     return "login";
   }
-
+  
   @PostMapping ("signUp/process")
   public void signUpProcess (@RequestBody MemberDTO member) throws Exception
   {

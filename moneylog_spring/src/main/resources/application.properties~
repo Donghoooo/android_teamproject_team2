@@ -6,6 +6,7 @@ spring.datasource.hikari.jdbc-url=jdbc:mysql://58.239.58.243:3306/java503_team2_
 spring.datasource.hikari.username=java503_team2_mobile
 spring.datasource.hikari.password=java503_team2_mobile_1234
 spring.datasource.hikari.connection-test-query=SELECT 1
+
 mybatis.configuration.map-underscore-to-camel-case=true
 mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
 mybatis.mapper-locations=classpath:/sql/*.xml
