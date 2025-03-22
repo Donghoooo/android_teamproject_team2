@@ -7,4 +7,9 @@
   <color name="expense">#f05d5e</color>
   <color name="lightgray">#efefef</color>
   <color name="sub">#e8f6f3</color>
+  <color name="line">#E8F6F3</color>
+  <color name="hyperLink">#4D81E7</color>
+  <color name="gray">#888</color>
+  <color name="topToolbarColor">#53d2c2</color>
+  <color name="success">#4BE230</color>
 </resources>

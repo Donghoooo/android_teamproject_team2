@@ -18,14 +18,14 @@ public class DatabaseConfiguration
 {
   @Autowired
   ApplicationContext applicationContext;
-  
+
   @Bean
   @ConfigurationProperties (prefix = "spring.datasource.hikari")
   public HikariConfig hikariConfig ()
   {
     return new HikariConfig ();
   }
-  
+
   @Bean
   public DataSource dataSource ()
   {
@@ -33,7 +33,7 @@ public class DatabaseConfiguration
     System.out.println (dataSource.toString ());
     return dataSource;
   }
-  
+
   @Bean
   public SqlSessionFactory sqlSessionFactory (DataSource dataSource) throws Exception
   {
@@ -43,13 +43,13 @@ public class DatabaseConfiguration
     sqlSessionFactoryBean.setConfiguration (mybatisConfig ());
     return sqlSessionFactoryBean.getObject ();
   }
-  
+
   @Bean
   public SqlSessionTemplate sqlSessionTemplate (SqlSessionFactory sqlSessionFactory)
   {
     return new SqlSessionTemplate (sqlSessionFactory);
   }
-  
+
   @Bean
   @ConfigurationProperties (prefix = "mybatis.configuration")
   public org.apache.ibatis.session.Configuration mybatisConfig ()
