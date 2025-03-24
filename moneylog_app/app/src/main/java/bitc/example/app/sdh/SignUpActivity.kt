@@ -5,7 +5,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -38,7 +37,7 @@ class SignUpActivity : AppCompatActivity() {
       val pw = binding.pw.text.toString()
       val pwCheck = binding.pwCheck.text.toString()
       val name = binding.name.text.toString()
-      val emil = binding.email.text.toString()
+      val email = binding.email.text.toString()
       if (id.length < 4) {
         Snackbar.make(binding.root, "아이디는 4자 이상이어야 합니다", Snackbar.LENGTH_SHORT).show()
         return@setOnClickListener
@@ -50,7 +49,13 @@ class SignUpActivity : AppCompatActivity() {
       }
 
       if (pw != pwCheck) {
-        Toast.makeText(this, "비밀번호가 다릅니다", Toast.LENGTH_SHORT).show()
+        Snackbar.make(binding.root, "비밀번호가 일치하지 않습니다", Snackbar.LENGTH_SHORT).show()
+        return@setOnClickListener
+      }
+
+      if (!email.matches(Regex("^[A-Za-z0-9+_.-]+@(.+)$"))) {
+        Snackbar.make(binding.root, "이메일 형식이 올바르지 않습니다.", Snackbar.LENGTH_SHORT).show()
+        return@setOnClickListener
       }
       else {
         binding.id.setText("")
@@ -62,7 +67,7 @@ class SignUpActivity : AppCompatActivity() {
         member.memberId = id
         member.memberPw = pw
         member.memberName = name
-        member.memberEmail = emil
+        member.memberEmail = email
         val api = AppServerClass.instance
         val call = api.postSignUp(member)
         signUpProcess(call)

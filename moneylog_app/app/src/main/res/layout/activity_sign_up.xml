@@ -211,7 +211,7 @@
       android:backgroundTint="@color/white"
       android:gravity="center_vertical"
       android:hint="e-mail"
-      android:inputType="text"
+      android:inputType="textEmailAddress"
       android:padding="8dp"
       android:textSize="16sp" />
   </com.google.android.material.card.MaterialCardView>

@@ -1,6 +1,7 @@
 package bitc.example.app.sdh
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -19,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
   private val binding: ActivityLoginBinding by lazy {
     ActivityLoginBinding.inflate(layoutInflater)
   }
-
+  private lateinit var sharedPreferences: SharedPreferences
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -38,8 +39,6 @@ class LoginActivity : AppCompatActivity() {
     binding.login.setOnClickListener {
       val id = binding.id.text.toString()
       val pw = binding.pw.text.toString()
-      binding.id.setText("")
-      binding.pw.setText("")
       var member = MemberDTO()
       member.memberId = id
       member.memberPw = pw
@@ -51,7 +50,21 @@ class LoginActivity : AppCompatActivity() {
     setSupportActionBar(binding.topToolbar)
     supportActionBar?.setDisplayShowTitleEnabled(false)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    //    initEventListener()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    sharedPreferences = getSharedPreferences("savedId", MODE_PRIVATE)
+    val savedId = sharedPreferences.getString("savedId", null)
+    val isIdSaved = sharedPreferences.getBoolean("isIdSaved", false)
+    if (isIdSaved) {
+      binding.id.setText(savedId)
+      binding.saveId.isChecked = true
+    }
+    else {
+      binding.id.setText("")
+      binding.saveId.isChecked = false
+    }
   }
 
   override fun onSupportNavigateUp(): Boolean {
@@ -60,12 +73,6 @@ class LoginActivity : AppCompatActivity() {
     return true
   }
 
-  //  fun initEventListener() {
-  //    val savedId = binding.getString("saved_id", "")
-  //    if (!savedId.isNullOrEmpty()) {
-  //      binding.id.setText(savedId)
-  //      binding.saveId.isChecked = true
-  //  }
   private fun logInProcess(call: Call<Boolean>) {
     call.enqueue(object : Callback<Boolean> {
       override fun onResponse(p0: Call<Boolean>, res: Response<Boolean>) {
@@ -74,6 +81,19 @@ class LoginActivity : AppCompatActivity() {
 
           if (result) {
             Snackbar.make(binding.root, "로그인 성공", Snackbar.LENGTH_SHORT).show()
+            val isSaveIdChecked = binding.saveId.isChecked
+            val editor = sharedPreferences.edit()
+            if (isSaveIdChecked) {
+              val id = binding.id.text.toString()
+              editor.putString("savedId", id)
+              editor.putBoolean("isIdSaved", true)
+            }
+            else {
+              editor.putBoolean("isIdSaved", false)
+            }
+            binding.id.setText("")
+            binding.pw.setText("")
+            editor.apply()
           }
           else {
             Snackbar.make(binding.root, "아이디 또는 비밀번호가 다릅니다", Snackbar.LENGTH_SHORT).show()
