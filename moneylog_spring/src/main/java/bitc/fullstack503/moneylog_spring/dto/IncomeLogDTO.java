@@ -10,7 +10,7 @@ public class IncomeLogDTO
   private int incomeLogSeq;
   @JsonProperty ("memberId")
   private String memberId;
-  @JsonProperty ("income")
+  @JsonProperty ("incomeMoney")
   private int income;
   @JsonProperty ("incomeDate")
   private LocalDateTime incomeDate;
@@ -20,4 +20,7 @@ public class IncomeLogDTO
   private String memo;
   @JsonProperty ("incomeSource")
   private String incomeSource;
+  @JsonProperty ("incomeUse")
+  private String incomeUse;
+
 }

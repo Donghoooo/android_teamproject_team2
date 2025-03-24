@@ -1,4 +1,5 @@
 package bitc.fullstack503.moneylog_spring.service;
+import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
 import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import bitc.fullstack503.moneylog_spring.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,5 +14,10 @@ public class MemberServiceImpl implements MemberService
   public void signUp (MemberDTO member) throws Exception
   {
     memberMapper.signUp (member);
+  }
+
+  @Override
+  public void income(IncomeLogDTO income) throws Exception {
+    memberMapper.income(income);
   }
 }

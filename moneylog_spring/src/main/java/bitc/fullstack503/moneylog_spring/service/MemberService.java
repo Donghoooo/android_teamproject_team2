@@ -1,6 +1,9 @@
 package bitc.fullstack503.moneylog_spring.service;
+import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
 import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 public interface MemberService
 {
   void signUp (MemberDTO member) throws Exception;
+
+  void income(IncomeLogDTO income) throws Exception;
 }

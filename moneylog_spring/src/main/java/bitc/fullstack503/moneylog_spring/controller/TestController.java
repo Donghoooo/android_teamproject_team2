@@ -1,4 +1,5 @@
 package bitc.fullstack503.moneylog_spring.controller;
+import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
 import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import bitc.fullstack503.moneylog_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,12 @@ public class TestController
   {
     memberService.signUp (member);
   }
+
+  @PostMapping("income/process")
+  public void incomeProcess (@RequestBody IncomeLogDTO income) throws Exception
+  {
+   memberService.income(income);
+  }
+
+
 }
