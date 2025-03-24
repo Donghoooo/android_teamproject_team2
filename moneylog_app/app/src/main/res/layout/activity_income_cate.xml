@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,19 +27,30 @@
                 android:src="@drawable/back" />
 
             <TextView
+                android:id="@+id/income_result_cate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1,500원"
-                android:id="@+id/income_result_cate"
                 android:layout_marginRight="10dp"
+                android:text="1,500원"
                 android:textColor="#4E89AE"
                 android:textSize="30sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="원"
-                 android:textSize="20sp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="memberId"
+                android:layout_marginLeft="130dp"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
 

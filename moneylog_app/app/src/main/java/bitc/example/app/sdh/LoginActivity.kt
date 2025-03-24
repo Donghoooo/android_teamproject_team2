@@ -1,15 +1,21 @@
 package bitc.example.app.sdh
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.AddInfoActivity
 import bitc.example.app.databinding.ActivityLoginBinding
 import bitc.example.app.dto.MemberDTO
 
 class LoginActivity : AppCompatActivity() {
+
+  private lateinit var sharedPreferences: SharedPreferences
+
   private val binding: ActivityLoginBinding by lazy {
     ActivityLoginBinding.inflate(layoutInflater)
   }
@@ -23,6 +29,18 @@ class LoginActivity : AppCompatActivity() {
       v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
       insets
     }
+
+    sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+
+    // 저장된 ID 불러오기
+    val savedId = sharedPreferences.getString("saved_id", "")
+    if (!savedId.isNullOrEmpty()) {
+      binding.id.setText(savedId)
+      binding.saveId.isChecked = true
+    }
+
+
+
     //    initEventListener()
     binding.tv2.setOnClickListener {
       val intent = Intent(this, SignUpActivity::class.java)
@@ -37,7 +55,15 @@ class LoginActivity : AppCompatActivity() {
       var member = MemberDTO()
       member.memberId = id
       member.memberPw = pw
-    }
+
+      val intent = Intent(this, AddInfoActivity::class.java).apply {
+        putExtra("user_id", id) // ID를 Intent에 추가
+      }
+      startActivity(intent)
+
+
+
+  }
 
     setSupportActionBar(binding.topToolbar)
     supportActionBar?.setDisplayShowTitleEnabled(false)

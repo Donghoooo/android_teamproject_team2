@@ -24,6 +24,7 @@ class OutcomeReceiptActivity : AppCompatActivity() {
     private lateinit var infoReceipt: TextView
     private lateinit var memoReceipt: TextView
     private lateinit var outcomeDialog: TextView
+    private lateinit var userId:TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,12 +43,21 @@ class OutcomeReceiptActivity : AppCompatActivity() {
         infoReceipt = binding.outcomeInfoReceipt
         memoReceipt = binding.outcomeMemoReceipt
         outcomeDialog = binding.outcomeDialogReceipt
+        userId = binding.userId
 
         val money = intent.getStringExtra("text_value3")
         if (money != null) {
             moneyReceipt.text = money
         } else {
             moneyReceipt.text = "No data receivced"
+        }
+
+        val id = intent.getStringExtra("user_id")
+        if (id != null){
+            userId.text = id
+        }
+        else{
+            userId.text = "No data received"
         }
 
         val memo = intent.getStringExtra("text_value4")
@@ -80,6 +90,7 @@ class OutcomeReceiptActivity : AppCompatActivity() {
             val outcomeSource = binding.outcomeDialogReceipt.text.toString()
             val outcomeMemo = binding.outcomeMemoReceipt.text.toString()
             val outcomeUse = binding.outcomeInfoReceipt.text.toString()
+            val id = binding.userId.text.toString()
 
 
             val outcome = ExpenseLogDTO()
@@ -88,6 +99,8 @@ class OutcomeReceiptActivity : AppCompatActivity() {
             outcome.paymentOption = outcomeSource
             outcome.expenseMemo = outcomeMemo
             outcome.expenseUse = outcomeUse
+            outcome.memberId = id
+
 
             val api = AppServerClass.instance
             val call = api.postOutcome(outcome)

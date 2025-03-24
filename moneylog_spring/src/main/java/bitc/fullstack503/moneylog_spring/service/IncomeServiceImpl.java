@@ -15,4 +15,6 @@ public class IncomeServiceImpl implements IncomeService {
     public void income(IncomeLogDTO income) throws Exception {
         incomeMapper.income(income);
     }
+
+
 }
