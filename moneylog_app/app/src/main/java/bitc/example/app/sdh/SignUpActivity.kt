@@ -53,7 +53,12 @@ class SignUpActivity : AppCompatActivity() {
         return@setOnClickListener
       }
 
-      if (!email.matches(Regex("^[A-Za-z0-9+_.-]+@(.+)$"))) {
+      if (!email.matches(
+          Regex(
+            "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+          )
+        )
+      ) {
         Snackbar.make(binding.root, "이메일 형식이 올바르지 않습니다.", Snackbar.LENGTH_SHORT).show()
         return@setOnClickListener
       }
