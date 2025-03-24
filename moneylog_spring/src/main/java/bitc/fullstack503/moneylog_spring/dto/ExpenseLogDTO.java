@@ -20,4 +20,6 @@ public class ExpenseLogDTO
   private String memo;
   @JsonProperty ("paymentOption")
   private String paymentOption;
+  @JsonProperty ("expenseUse")
+  private String expenseUse;
 }

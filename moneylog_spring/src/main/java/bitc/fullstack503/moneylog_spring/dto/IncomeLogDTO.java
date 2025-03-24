@@ -20,4 +20,6 @@ public class IncomeLogDTO
   private String memo;
   @JsonProperty ("incomeSource")
   private String incomeSource;
+  @JsonProperty ("incomeUse")
+  private String incomeUse;
 }

@@ -17,5 +17,7 @@ data class IncomeLogDTO(
   @SerializedName("incomeMemo")
   var incomeMemo: String? = null,
   @SerializedName("incomeSource")
-  var incomeSource: String? = null
+  var incomeSource: String? = null,
+  @SerializedName("incomeUse")
+  var incomeUse: String? = null
 )
