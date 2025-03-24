@@ -11,13 +11,13 @@ public class IncomeLogDTO
   @JsonProperty ("memberId")
   private String memberId;
   @JsonProperty ("incomeMoney")
-  private int income;
+  private int incomeMoney;
   @JsonProperty ("incomeDate")
   private LocalDateTime incomeDate;
   @JsonProperty ("incomeCate")
   private String incomeCate;
-  @JsonProperty ("memo")
-  private String memo;
+  @JsonProperty ("incomeMemo")
+  private String incomeMemo;
   @JsonProperty ("incomeSource")
   private String incomeSource;
   @JsonProperty ("incomeUse")

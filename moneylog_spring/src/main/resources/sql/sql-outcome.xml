@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.moneylog_spring.mapper.OutcomeMapper">
+
+
+    <insert id="expense" parameterType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO">
+        insert into expense_log(member_id,expense,expense_date,expense_cate,expense_memo,payment_option,expense_use)
+        values (#{memberId},#{expense},#{expenseDate},#{expenseCate},#{expenseMemo},#{paymentOption},#{expenseUse})
+    </insert>
+
+</mapper>

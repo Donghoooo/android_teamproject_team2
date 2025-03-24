@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="bitc.fullstack503.moneylog_spring.mapper.MemberMapper">
+
   <insert id="signUp" parameterType="bitc.fullstack503.moneylog_spring.dto.MemberDTO">
     insert into member(member_id, member_pw, member_name, member_email)
     values (#{memberId}, #{memberPw}, #{memberName}, #{memberEmail})
   </insert>
+
+
+
+
+
 </mapper>
