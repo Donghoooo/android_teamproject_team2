@@ -7,9 +7,23 @@
     values (#{memberId}, #{memberPw}, #{memberName}, #{memberEmail})
   </insert>
   
+  <select id="isMember" parameterType="bitc.fullstack503.moneylog_spring.dto.MemberDTO"
+          resultType="bitc.fullstack503.moneylog_spring.dto.MemberDTO">
+    select *
+    from member
+    where member_id = #{memberId}
+      and member_pw = #{memberPw}
+  </select>
+  
   <select id="isMemberId" parameterType="java.lang.String" resultType="java.lang.Integer">
     select count(*)
     from member
     where member_id = #{memberId}
+  </select>
+  
+  <select id="isMemberName" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*)
+    from member
+    where member_name = #{memberName}
   </select>
 </mapper>

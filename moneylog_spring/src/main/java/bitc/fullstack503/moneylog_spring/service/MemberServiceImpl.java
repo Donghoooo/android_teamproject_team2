@@ -16,13 +16,34 @@ public class MemberServiceImpl implements MemberService
   }
   
   @Override
-  public int isMemberId (String memberId) throws Exception
+  public boolean isMember (MemberDTO member) throws Exception
+  {
+    if (memberMapper.isMember (member) != null)
+    {
+      return true;
+    }
+    return false;
+  }
+  
+  @Override
+  public boolean isMemberId (String memberId) throws Exception
   {
     int result = memberMapper.isMemberId (memberId);
     if (result > 0)
     {
-      return 1;
+      return true;
     }
-    return 0;
+    return false;
+  }
+  
+  @Override
+  public boolean isMemberName (String memberName) throws Exception
+  {
+    int result = memberMapper.isMemberName (memberName);
+    if (result > 0)
+    {
+      return true;
+    }
+    return false;
   }
 }

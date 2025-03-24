@@ -2,12 +2,9 @@ package bitc.fullstack503.moneylog_spring.controller;
 import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import bitc.fullstack503.moneylog_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 @RestController
-public class TestController
+public class MemberController
 {
   @Autowired
   private MemberService memberService;
@@ -18,17 +15,21 @@ public class TestController
     return "index";
   }
   
-  @PostMapping ("loginProcess")
-  public String loginProcess (@RequestBody MemberDTO member) throws Exception
+  @PostMapping ("logIn/Process")
+  public Boolean loginProcess (@RequestBody MemberDTO member) throws Exception
   {
-    System.out.println (member.getMemberId ());
-    System.out.println (member.getMemberPw ());
-    return "login";
+    return memberService.isMember (member);
   }
   
   @PostMapping ("signUp/process")
   public void signUpProcess (@RequestBody MemberDTO member) throws Exception
   {
     memberService.signUp (member);
+  }
+  
+  @GetMapping ("isMemberId")
+  public boolean isMemberId (@RequestParam ("Id") String memberId) throws Exception
+  {
+    return memberService.isMemberId (memberId);
   }
 }

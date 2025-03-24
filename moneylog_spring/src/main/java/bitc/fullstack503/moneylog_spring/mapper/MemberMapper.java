@@ -6,5 +6,9 @@ public interface MemberMapper
 {
   void signUp (MemberDTO member) throws Exception;
   
+  MemberDTO isMember (MemberDTO member) throws Exception;
+  
   int isMemberId (String memberId) throws Exception;
+  
+  int isMemberName (String memberName) throws Exception;
 }

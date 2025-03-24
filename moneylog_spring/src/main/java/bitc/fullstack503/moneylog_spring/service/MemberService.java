@@ -4,5 +4,9 @@ public interface MemberService
 {
   void signUp (MemberDTO member) throws Exception;
   
-  int isMemberId (String memberId) throws Exception;
+  boolean isMember (MemberDTO member) throws Exception;
+  
+  boolean isMemberId (String memberId) throws Exception;
+  
+  boolean isMemberName (String memberName) throws Exception;
 }

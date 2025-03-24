@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -38,10 +39,17 @@ class SignUpActivity : AppCompatActivity() {
       val pwCheck = binding.pwCheck.text.toString()
       val name = binding.name.text.toString()
       val emil = binding.email.text.toString()
-      if (pw.isEmpty() || pwCheck.isEmpty()) {
-        Snackbar.make(binding.root, "비밀번호를 입력해주세요", Snackbar.LENGTH_SHORT).show()
+      if (id.length < 4) {
+        Snackbar.make(binding.root, "아이디는 4자 이상이어야 합니다", Snackbar.LENGTH_SHORT).show()
+        return@setOnClickListener
       }
-      else if (pw != pwCheck) {
+
+      if (pw.length < 4) {
+        Snackbar.make(binding.root, "비밀번호는 4자 이상이어야 합니다", Snackbar.LENGTH_SHORT).show()
+        return@setOnClickListener
+      }
+
+      if (pw != pwCheck) {
         Toast.makeText(this, "비밀번호가 다릅니다", Toast.LENGTH_SHORT).show()
       }
       else {
@@ -55,26 +63,49 @@ class SignUpActivity : AppCompatActivity() {
         member.memberPw = pw
         member.memberName = name
         member.memberEmail = emil
-        // member 를 서버로 보냄
         val api = AppServerClass.instance
         val call = api.postSignUp(member)
-        retrofitResponse(call)
+        signUpProcess(call)
       }
     }
 
     binding.id.addTextChangedListener(object : TextWatcher {
-      // 입련 전
       override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
       }
 
-      // 입력 중
       override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
       }
 
-      // 입력 후
       override fun afterTextChanged(s: Editable?) {
         val id = binding.id.text.toString()
-        Log.d("fullstack503", id)
+        if (id.length >= 4) {
+          val api = AppServerClass.instance
+          val call = api.isMemberId(id)
+          isMemberId(call)
+        }
+        else {
+          binding.idCheck.visibility = View.GONE
+        }
+      }
+    })
+
+    binding.name.addTextChangedListener(object : TextWatcher {
+      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+      }
+
+      override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+      }
+
+      override fun afterTextChanged(s: Editable?) {
+        val name = binding.name.text.toString()
+        if (name.length >= 4) {
+          val api = AppServerClass.instance
+          val call = api.isMemberName(name)
+          isMemberName(call)
+        }
+        else {
+          binding.nameCheck.visibility = View.GONE
+        }
       }
     })
 
@@ -91,7 +122,7 @@ class SignUpActivity : AppCompatActivity() {
 
   // Retrofit 통신 응답 부분
   // Callback<String> 부분이 서버에서 전달받을 데이터 타입임
-  private fun retrofitResponse(call: Call<String>) {
+  private fun signUpProcess(call: Call<String>) {
     call.enqueue(object : Callback<String> {
       override fun onResponse(p0: Call<String>, res: Response<String>) {
         if (res.isSuccessful) {
@@ -105,6 +136,56 @@ class SignUpActivity : AppCompatActivity() {
       }
 
       override fun onFailure(p0: Call<String>, t: Throwable) {
+        Log.d("fullstack503", "message : $t.message")
+      }
+    })
+  }
+
+  private fun isMemberId(call: Call<Boolean>) {
+    call.enqueue(object : Callback<Boolean> {
+      override fun onResponse(p0: Call<Boolean>, res: Response<Boolean>) {
+        if (res.isSuccessful) {
+          val result = res.body() ?: true
+          if (!result) {
+            binding.idCheck.visibility = View.VISIBLE
+          }
+          else {
+            binding.idCheck.visibility = View.GONE
+          }
+        }
+        else {
+          Snackbar.make(binding.root, "송신 실패", Snackbar.LENGTH_SHORT).show()
+          Log.d("fullstack503", "송신 실패")
+        }
+      }
+
+      override fun onFailure(p0: Call<Boolean>, t: Throwable) {
+        Snackbar.make(binding.root, "네트워크 오류", Snackbar.LENGTH_SHORT).show()
+        Log.d("fullstack503", "message : $t.message")
+      }
+    })
+  }
+
+  private fun isMemberName(call: Call<Boolean>) {
+    call.enqueue(object : Callback<Boolean> {
+      override fun onResponse(p0: Call<Boolean>, res: Response<Boolean>) {
+        if (res.isSuccessful) {
+          val result = res.body() ?: true
+          if (!result) {
+            binding.nameCheck.visibility = View.VISIBLE
+          }
+          else {
+            binding.nameCheck.visibility = View.GONE
+          }
+        }
+        else {
+          Snackbar.make(binding.root, "송신 실패", Snackbar.LENGTH_SHORT).show()
+          Log.d("fullstack503", "송신 실패")
+        }
+      }
+
+      override fun onFailure(p0: Call<Boolean>, t: Throwable) {
+        Snackbar.make(binding.root, "네트워크 오류", Snackbar.LENGTH_SHORT).show()
         Log.d("fullstack503", "message : $t.message")
       }
     })
