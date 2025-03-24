@@ -19,7 +19,8 @@ import bitc.example.app.R
 import bitc.example.app.adapter.SearchListAdapter
 import bitc.example.app.databinding.ActivityCateSearchBinding
 import bitc.example.app.model.SearchListItem
-import bitc.example.app.ui.dialog.CategorySeletionDialog
+import bitc.example.app.ui.dialog.BankSelectionDialog
+import bitc.example.app.ui.dialog.CategorySelectionDialog
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,19 +40,11 @@ class CateSearchActivity : AppCompatActivity() {
 //  카테고리 선택
   private val selectedCategories = mutableMapOf<String, Boolean>() // 선택한 항목 저장
 
-
-//  입금, 지출 구분 못한 경우에 쓴 카테고리 선택 관련 코드
-//  private lateinit var category: TextView
-//  private val categoryList = arrayOf("식비", "교통비", "문화생활", "생활품", "의류", "교육", "의료", "회비", "공과금", "경조사", "카드대금" , "가전", "저축","보험","세금","기타") // 카테고리 리스트
-//  private val selectedCategories = mutableListOf<String>()  // 선택된 카테고리 저장 리스트
+//  자산방식 선택
+  private val selectedBanks = mutableMapOf<String, Boolean>()
 
   //    정렬방식 드롭다운
   private lateinit var btnSort: Button
-
-//  자산 방식 선택
-  private lateinit var bank: TextView
-  private val bankList = arrayOf("현금", "이체", "체크카드", "신용카드")
-  private val selectedBanks = mutableListOf<String>()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -91,29 +84,23 @@ class CateSearchActivity : AppCompatActivity() {
     }
 
 //    카테고리 선택
-    val btnOpenDialog = binding.category
-    btnOpenDialog.setOnClickListener {
-      val dialog = CategorySeletionDialog(this, selectedCategories) { selected ->
+    val btnOpenCateDialog = binding.category
+    btnOpenCateDialog.setOnClickListener {
+      val cateDialog = CategorySelectionDialog(this, selectedCategories) { selected ->
         selectedCategories.putAll(selected)
         updateCategoryText()
       }
-      dialog.show()
+      cateDialog.show()
     }
 
-
-//    카테고리 입금, 지출 구분 못했을때 쓴 코드
-////    카테고리 선택
-//    category = binding.category
-////      카테고리 선택 부분 클릭 이벤트
-//    category.setOnClickListener{
-//      showCategoryDialog()
-//    }
-
-//    자산 방식 선택
-    bank = binding.bank
-//    자산 방식 선택 클릭 이벤트
-    bank.setOnClickListener {
-      showBankDialog()
+//    자산방식 선택
+    val btnOpenBankDialog = binding.bank
+    btnOpenBankDialog.setOnClickListener {
+      val bankDialog = BankSelectionDialog(this, selectedBanks) { selected ->
+        selectedBanks.putAll(selected)
+        updateBankText()
+      }
+      bankDialog.show()
     }
 
 //    정렬방식 드롭다운 클릭 이벤트
@@ -164,70 +151,17 @@ class CateSearchActivity : AppCompatActivity() {
 
 //  카테고리 선택 부분 클릭 시 다이얼로그 표시
   private fun updateCategoryText() {
-  val selectedText = selectedCategories.filter { it.value }.keys.joinToString(", ")
-  binding.category.text = selectedText
+  val selectedCateText = selectedCategories.filter { it.value }.keys.joinToString(", ")
+  binding.category.text = selectedCateText
   }
-
-//  카테고리 선택 부분 클릭 시 다이얼로그 표시 (수입, 지출 구분 못했을떄)
-//  private fun showCategoryDialog() {
-//    val checkItems = BooleanArray(categoryList.size) { i ->
-//      selectedCategories.contains(categoryList[i])
-//    }
-//    val builder = AlertDialog.Builder(this)
-//    builder.setTitle("카테고리")
-//      .setMultiChoiceItems(categoryList, checkItems) { _, which, isChecked ->
-//        if (isChecked) {
-//          selectedCategories.add(categoryList[which])
-//        }
-//        else {
-//          selectedCategories.remove(categoryList[which])
-//        }
-//      }
-//      .setPositiveButton("확인") { _, _ ->
-//        category.text = if (selectedCategories.isNotEmpty()) {
-//          selectedCategories.joinToString ("", "")
-//        }
-//        else{
-//          "카테고리"
-//        }
-//        category.post {
-//          category.text = selectedCategories.joinToString()  // UI 강제 업데이트
-//        }
-//      }
-//      .setNegativeButton("취소", null)
-//      .show()
-//  }
 
 //  자산 방식 클릭 시 다이얼로그 표시
-  private fun showBankDialog() {
-  val checkItems = BooleanArray(bankList.size) { i ->
-    selectedBanks.contains(bankList[i])
-  }
-  val builder = AlertDialog.Builder(this)
-  builder.setTitle("자산방식")
-    .setMultiChoiceItems(bankList, checkItems) { _, which, isChecked ->
-      if (isChecked) {
-        selectedBanks.add(bankList[which])
-      }
-      else {
-        selectedBanks.remove(bankList[which])
-      }
-    }
-    .setPositiveButton("확인") { _, _ ->
-      bank.text = if (selectedBanks.isNotEmpty()) {
-        selectedBanks.joinToString ("", "")
-      }
-      else{
-        "자산방식"
-      }
-      bank.post {
-        bank.text = selectedBanks.joinToString()  // UI 강제 업데이트
-      }
-    }
-    .setNegativeButton("취소", null)
-    .show()
-  }
+private fun updateBankText(){
+  val selectedBankText = selectedBanks.filter { it.value }.keys.joinToString(", ")
+  binding.bank.text = selectedBankText
+}
 
+//  정렬방식 드롭다운
   private fun showPopupMenu(view: View) {
     val popup = PopupMenu(this, view)
     popup.menuInflater.inflate(R.menu.sort_menu, popup.menu)
