@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/main"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".sdh.SignUpActivity">
+
+  <androidx.appcompat.widget.Toolbar
+    android:id="@+id/topToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/topToolbarColor"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="회원가입"
+      android:textSize="16sp"
+      android:textStyle="bold" />
+  </androidx.appcompat.widget.Toolbar>
+
+  <TextView
+    android:id="@+id/idTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:text="아이디"
+    android:textColor="@color/gray"
+    app:layout_constraintBottom_toTopOf="@+id/idBox"
+    app:layout_constraintStart_toStartOf="@+id/idBox" />
+
+  <com.google.android.material.card.MaterialCardView
+    android:id="@+id/idBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp"
+    app:cardCornerRadius="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/topToolbar"
+    app:strokeColor="@color/line"
+    app:strokeWidth="2dp">
+
+    <EditText
+      android:id="@+id/id"
+      android:layout_width="350dp"
+      android:layout_height="50dp"
+      android:backgroundTint="@color/white"
+      android:gravity="center_vertical"
+      android:hint="아이디 입력"
+      android:inputType="text"
+      android:padding="8dp"
+      android:textSize="16sp" />
+  </com.google.android.material.card.MaterialCardView>
+
+  <TextView
+    android:id="@+id/idCheck"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="사용가능"
+    android:textColor="@color/success"
+    android:textSize="12sp"
+    android:visibility="invisible"
+    app:layout_constraintEnd_toEndOf="@+id/idBox"
+    app:layout_constraintTop_toBottomOf="@+id/idBox" />
+
+  <TextView
+    android:id="@+id/pwTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:text="비밀번호"
+    android:textColor="@color/gray"
+    app:layout_constraintBottom_toTopOf="@+id/pwBox"
+    app:layout_constraintStart_toStartOf="@+id/pwBox" />
+
+  <com.google.android.material.card.MaterialCardView
+    android:id="@+id/pwBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp"
+    app:cardCornerRadius="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/idBox"
+    app:strokeColor="@color/line"
+    app:strokeWidth="2dp">
+
+    <EditText
+      android:id="@+id/pw"
+      android:layout_width="350dp"
+      android:layout_height="50dp"
+      android:backgroundTint="@color/white"
+      android:gravity="center_vertical"
+      android:hint="비밀번호 입력"
+      android:inputType="textPassword"
+      android:padding="8dp"
+      android:textSize="16sp" />
+  </com.google.android.material.card.MaterialCardView>
+
+  <TextView
+    android:id="@+id/pwCheckTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:text="비밀번호 확인"
+    android:textColor="@color/gray"
+    app:layout_constraintBottom_toTopOf="@+id/pwCheckBox"
+    app:layout_constraintStart_toStartOf="@+id/pwCheckBox" />
+
+  <com.google.android.material.card.MaterialCardView
+    android:id="@+id/pwCheckBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp"
+    app:cardCornerRadius="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/pwBox"
+    app:strokeColor="@color/line"
+    app:strokeWidth="2dp">
+
+    <EditText
+      android:id="@+id/pwCheck"
+      android:layout_width="350dp"
+      android:layout_height="50dp"
+      android:backgroundTint="@color/white"
+      android:gravity="center_vertical"
+      android:hint="비밀번호 확인"
+      android:inputType="textPassword"
+      android:padding="8dp"
+      android:textSize="16sp" />
+  </com.google.android.material.card.MaterialCardView>
+
+  <TextView
+    android:id="@+id/nameTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:text="이름"
+    android:textColor="@color/gray"
+    app:layout_constraintBottom_toTopOf="@+id/nameBox"
+    app:layout_constraintStart_toStartOf="@+id/nameBox" />
+
+  <com.google.android.material.card.MaterialCardView
+    android:id="@+id/nameBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp"
+    app:cardCornerRadius="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/pwCheckBox"
+    app:strokeColor="@color/line"
+    app:strokeWidth="2dp">
+
+    <EditText
+      android:id="@+id/name"
+      android:layout_width="350dp"
+      android:layout_height="50dp"
+      android:backgroundTint="@color/white"
+      android:gravity="center_vertical"
+      android:hint="이름 입력"
+      android:inputType="text"
+      android:padding="8dp"
+      android:textSize="16sp" />
+  </com.google.android.material.card.MaterialCardView>
+
+  <TextView
+    android:id="@+id/nameCheck"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="@+id/nameBox"
+    android:text="사용가능"
+    android:textColor="@color/success"
+    android:textSize="12sp"
+    android:visibility="invisible"
+    app:layout_constraintTop_toBottomOf="@+id/nameBox" />
+
+  <TextView
+    android:id="@+id/emailTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:text="e-mail"
+    android:textColor="@color/gray"
+    app:layout_constraintBottom_toTopOf="@+id/emailBox"
+    app:layout_constraintStart_toStartOf="@+id/emailBox" />
+
+  <com.google.android.material.card.MaterialCardView
+    android:id="@+id/emailBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp"
+    app:cardCornerRadius="8dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/nameBox"
+    app:strokeColor="@color/line"
+    app:strokeWidth="2dp">
+
+    <EditText
+      android:id="@+id/email"
+      android:layout_width="350dp"
+      android:layout_height="50dp"
+      android:backgroundTint="@color/white"
+      android:gravity="center_vertical"
+      android:hint="e-mail"
+      android:inputType="text"
+      android:padding="8dp"
+      android:textSize="16sp" />
+  </com.google.android.material.card.MaterialCardView>
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/signUp"
+    android:layout_width="350dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="24dp"
+    android:text="회원가입"
+    android:textColor="@color/black"
+    android:textSize="16sp"
+    android:background="@drawable/btn_style2"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/emailBox" />
+
+  <View
+    android:id="@+id/btmHr"
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:background="@color/line"
+    app:layout_constraintBottom_toTopOf="@+id/btmToolbar"
+    tools:layout_editor_absoluteX="0dp" />
+
+  <androidx.appcompat.widget.Toolbar
+    android:id="@+id/btmToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:layout_constraintBottom_toBottomOf="parent"
+    tools:layout_editor_absoluteX="-65dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
