@@ -43,6 +43,17 @@
     <activity
       android:name=".AddInfoActivity"
       android:exported="false" />
-  </application>
 
+
+    <activity
+      android:name=".InComeHolder"
+      android:exported="false" />
+    <activity
+      android:name=".IncomeAdapter"
+      android:exported="false" />
+    <activity
+      android:name=".Analyze_List"
+      android:exported="false">
+    </activity>
+  </application>
 </manifest>
