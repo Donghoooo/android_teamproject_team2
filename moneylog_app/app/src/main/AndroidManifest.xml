@@ -17,6 +17,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".kms.MonthlyListActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".DetailOutcomeActivity"
             android:exported="false" />
         <activity
@@ -27,12 +36,8 @@
             android:exported="false" />
         <activity
             android:name=".sdh.LoginActivity"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
         <activity
             android:name=".OutcomeReceiptActivity"
