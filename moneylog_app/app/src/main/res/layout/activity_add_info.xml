@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:id="@+id/toolbar"
+        android:background="@color/main"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="2025/03/18"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_id"
+            android:text="user_id"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginLeft="180dp"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/btn_back"
+            android:src="@drawable/back"
+            android:layout_gravity="end"
+            android:layout_marginRight="10dp"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:textSize="40sp"
+            android:text="￦"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:id="@+id/tv_result"
+            android:textSize="40sp"
+            android:textColor="#53D2C2"
+            android:text="0원"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:gravity="end|center_vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:textAlignment="center"
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:id="@+id/btn_income"
+            android:text="수입"
+            android:enabled="false"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:background="@drawable/btn_income"
+            android:textColor="@color/white"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:id="@+id/btn_outcome"
+            android:enabled="false"
+            android:layout_margin="5dp"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_outcome"
+            android:text="지출"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:columnCount="3"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="30dp"
+        android:padding="12dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn1"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="1"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn2"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="2"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn3"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="3"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn4"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="4"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn5"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="5"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn6"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="6"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn7"
+            android:layout_margin="8dp"
+            android:textStyle="bold"
+            android:background="@drawable/btn_style"
+            android:text="7"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn8"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="8"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn9"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="9"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_delete"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="Delete"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn0"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="0"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_clear"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_style"
+            android:textStyle="bold"
+            android:text="Clear"/>
+
+
+
+
+    </GridLayout>
+
+
+</LinearLayout>

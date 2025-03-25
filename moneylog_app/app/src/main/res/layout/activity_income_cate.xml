@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/main"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:id="@+id/income_result_cate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="1,500원"
+                android:textColor="#4E89AE"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="원"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/user_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="memberId"
+                android:layout_marginLeft="130dp"
+                android:textAlignment="textEnd"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="내역"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/income_info_cate"
+                android:hint="내역을 입력하세요"
+                android:inputType="text"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="방식"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/income_dialog_cate"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/white"
+                android:text="선택해주세요"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginTop="30dp"
+            android:columnCount="4">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_allowance"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="3dp"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="#F5F5F5"
+                android:onClick="onCategorySelected"
+                android:text="용돈" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_salary"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="3dp"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="#F5F5F5"
+                android:onClick="onCategorySelected"
+                android:text="월급" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_partmoney"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="3dp"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="#F5F5F5"
+                android:onClick="onCategorySelected"
+                android:text="알바비" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_dutch"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="3dp"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="#F5F5F5"
+                android:onClick="onCategorySelected"
+                android:text="정산" />
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_etc"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="3dp"
+                android:layout_marginBottom="6dp"
+                android:backgroundTint="#F5F5F5"
+                android:onClick="onCategorySelected"
+                android:text="기타" />
+
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:text="메모"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/income_memo_cate"
+                android:background="@drawable/text_border"
+                android:hint="메모를 입력하세요"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:maxLength="45"
+                android:maxLines="3"
+                android:gravity="start|top"
+                android:scrollbars="vertical"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_submit"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:enabled="false"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#F5F5F5"
+                android:text="확인" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#F5F5F5"
+                android:text="취소" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</ScrollView>

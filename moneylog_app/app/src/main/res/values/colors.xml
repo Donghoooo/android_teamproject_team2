@@ -9,4 +9,14 @@
   <color name="btn_none_click">#D9D9D9</color>
   <color name="btn_plus">#A1A1A1</color>
   <color name="transparent">#00000000</color>
+  <color name="line">#E8F6F3</color>
+  <color name="hyperLink">#4D81E7</color>
+  <color name="gray">#888</color>
+  <color name="topToolbarColor">#53d2c2</color>
+  <color name="success">#4BE230</color>
+  <color name="click">#B8B8FF</color>
+  <color name="default_button_color">#F5F5F5</color>
+  <color name="selected_button_color">#FF9F45</color>
+  <color name="imcome">#4E89AE</color>
+  <color name="expense">#F05D5E</color>
 </resources>
