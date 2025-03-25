@@ -16,8 +16,8 @@ data class ExpenseLogDTO(
   var expenseCate: String? = null,
   @SerializedName("expenseMemo")
   var expenseMemo: String? = null,
-  @SerializedName("expenseSource")
-  var expenseSource: String? = null,
+  @SerializedName("paymentOption")
+  var paymentOption: String? = null,
   @SerializedName("expenseUse")
-  var expenseUse: String? = null
+var expenseUse: String? = null
 )

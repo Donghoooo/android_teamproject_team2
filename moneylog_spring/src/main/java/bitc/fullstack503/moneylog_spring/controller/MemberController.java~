@@ -1,6 +1,10 @@
 package bitc.fullstack503.moneylog_spring.controller;
+import bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO;
+import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
 import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
+import bitc.fullstack503.moneylog_spring.service.IncomeService;
 import bitc.fullstack503.moneylog_spring.service.MemberService;
+import bitc.fullstack503.moneylog_spring.service.OutcomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 @RestController
@@ -8,6 +12,12 @@ public class MemberController
 {
   @Autowired
   private MemberService memberService;
+
+  @Autowired
+  private IncomeService incomeService;
+
+  @Autowired
+  private OutcomeService outcomeService;
   
   @GetMapping ({"/", ""})
   public String home () throws Exception
@@ -26,10 +36,25 @@ public class MemberController
   {
     memberService.signUp (member);
   }
+<<<<<<< HEAD:moneylog_spring/src/main/java/bitc/fullstack503/moneylog_spring/controller/MemberController.java~
   
   @GetMapping ("isMemberId")
   public boolean isMemberId (@RequestParam ("Id") String memberId) throws Exception
   {
     return memberService.isMemberId (memberId);
   }
+=======
+
+  @PostMapping("income/process")
+  public void incomeProcess (@RequestBody IncomeLogDTO income) throws Exception
+  {
+    incomeService.income(income);
+  }
+
+  @PostMapping("outcome/process")
+  public void expenseProcess (@RequestBody ExpenseLogDTO outcome) throws Exception{
+    outcomeService.expense(outcome);
+  }
+
+>>>>>>> origin/sanmin_kms_병합:moneylog_spring/src/main/java/bitc/fullstack503/moneylog_spring/controller/TestController.java
 }

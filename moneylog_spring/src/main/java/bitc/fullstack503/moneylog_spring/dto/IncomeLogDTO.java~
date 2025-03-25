@@ -22,5 +22,8 @@ public class IncomeLogDTO
   private String incomeSource;
   @JsonProperty ("incomeUse")
   private String incomeUse;
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/sanmin_kms_병합
 }

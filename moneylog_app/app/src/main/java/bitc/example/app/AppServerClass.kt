@@ -1,8 +1,10 @@
 package bitc.example.app
 
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.util.concurrent.TimeUnit
 
 object AppServerClass {
   private val BASE_URL = "http://10.100.203.50:8080/"

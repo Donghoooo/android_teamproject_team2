@@ -16,8 +16,8 @@ public class ExpenseLogDTO
   private LocalDateTime expenseDate;
   @JsonProperty ("expenseCate")
   private String expenseCate;
-  @JsonProperty ("memo")
-  private String memo;
+  @JsonProperty ("expenseMemo")
+  private String expenseMemo;
   @JsonProperty ("paymentOption")
   private String paymentOption;
   @JsonProperty ("expenseUse")
