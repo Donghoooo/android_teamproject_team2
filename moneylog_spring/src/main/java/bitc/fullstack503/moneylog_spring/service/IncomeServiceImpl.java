@@ -11,9 +11,22 @@ public class IncomeServiceImpl implements IncomeService {
     @Autowired
     private IncomeMapper incomeMapper;
 
+//    수입 내용 입력하기
     @Override
     public void income(IncomeLogDTO income) throws Exception {
         incomeMapper.income(income);
+    }
+
+//    수입 내용 수정하기
+    @Override
+    public int incomeUpdate(int incomeLogSeq) throws Exception {
+        return incomeMapper.incomeUpdate(incomeLogSeq);
+    }
+
+//    수입 내용 삭제하기
+    @Override
+    public int incomeDelete(int incomeLogSeq) throws Exception {
+        return incomeMapper.incomeDelete(incomeLogSeq);
     }
 
 

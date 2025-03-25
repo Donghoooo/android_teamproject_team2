@@ -25,7 +25,12 @@
       android:exported="false" />
     <activity
       android:name=".sdh.LoginActivity"
-      android:exported="false" >
+      android:exported="true" >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
     </activity>
 
     <activity
@@ -33,7 +38,8 @@
       android:exported="false" />
     <activity
       android:name=".sagmin.DetailIncomeActivity"
-      android:exported="false" />
+      android:exported="false">
+    </activity>
     <activity
       android:name=".sagmin.OutcomeReceiptActivity"
       android:exported="false" />
@@ -48,12 +54,7 @@
       android:exported="false" />
     <activity
       android:name=".sagmin.AddInfoActivity"
-      android:exported="true">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
+      android:exported="false">
     </activity>
 
   </application>

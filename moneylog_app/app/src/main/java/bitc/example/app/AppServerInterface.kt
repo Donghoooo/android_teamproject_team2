@@ -25,6 +25,7 @@ interface AppServerInterface {
   @POST("income/process")
   fun postIncome(@Body income : IncomeLogDTO): Call<String>
 
+
   @POST("/outcome/process")
   fun postOutcome(@Body outcome : ExpenseLogDTO) : Call<String>
 
