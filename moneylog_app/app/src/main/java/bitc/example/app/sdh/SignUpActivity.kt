@@ -1,5 +1,6 @@
 package bitc.example.app.sdh
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -77,6 +78,10 @@ class SignUpActivity : AppCompatActivity() {
         val call = api.postSignUp(member)
         signUpProcess(call)
       }
+
+      val intent = Intent(this,LoginActivity::class.java)
+      startActivity(intent)
+
     }
 
     binding.id.addTextChangedListener(object : TextWatcher {

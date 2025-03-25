@@ -29,6 +29,7 @@ class OutcomeCateActivity : AppCompatActivity() {
             private lateinit var outcomeMoney : TextView
 
             private lateinit var outcomeDialog : AppCompatButton
+            private lateinit var userId:TextView
 
 
     private var selectedButton: AppCompatButton? = null
@@ -113,6 +114,7 @@ class OutcomeCateActivity : AppCompatActivity() {
         outcomeMoney = binding.outcomeResultCate
         outcomeDialog = binding.outcomeDialogCate
         btnSubmit = binding.btnSubmit
+        userId = binding.userId
 
         binding.btnSubmit.setOnClickListener {
             val money =outcomeMoney.text.toString()
@@ -120,10 +122,12 @@ class OutcomeCateActivity : AppCompatActivity() {
             val info = outcomeInfo.text.toString()
             val dialog = outcomeDialog.text.toString()
             val selectedCategory = selectedButton?.text.toString()
+            val id = userId.text.toString()
 
 
 
             val intent = Intent(this,OutcomeReceiptActivity::class.java).apply{
+                putExtra("user_id",id)
                 putExtra("text_value3",money)
                 putExtra("text_value4",memo)
                 putExtra("text_value5",info)
@@ -137,6 +141,22 @@ class OutcomeCateActivity : AppCompatActivity() {
 
 
 //        =========================== 텍스트 넘겨받기 ==============================================
+
+        userId = binding.userId
+
+        val id = intent.getStringExtra("user_id")
+
+        if (id != null){
+            userId.text = id
+        }
+        else{
+            userId.text = "No data received"
+        }
+
+
+
+
+
 //        변수 초기화 : outResult 는 binding.tvResult로 초기화된다.
 //        TextView (tv_result)를 바인딩하는 코드이다.
         outResult = binding.outcomeResultCate

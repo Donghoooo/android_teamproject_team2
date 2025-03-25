@@ -25,10 +25,14 @@
       android:exported="false" />
     <activity
       android:name=".sdh.LoginActivity"
-      android:exported="false">
+      android:exported="false" />
 
-    </activity>
-
+    <activity
+      android:name=".DetailOutcomeActivity"
+      android:exported="false" />
+    <activity
+      android:name=".DetailIncomeActivity"
+      android:exported="false" />
     <activity
       android:name=".OutcomeReceiptActivity"
       android:exported="false" />

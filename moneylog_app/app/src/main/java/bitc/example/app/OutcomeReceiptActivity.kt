@@ -7,102 +7,122 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.databinding.ActivityIncomeReceiptBinding
 import bitc.example.app.databinding.ActivityOutcomeReceiptBinding
 import bitc.example.app.dto.ExpenseLogDTO
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class OutcomeReceiptActivity : AppCompatActivity() {
-  private val binding: ActivityOutcomeReceiptBinding by lazy {
-    ActivityOutcomeReceiptBinding.inflate(layoutInflater)
-  }
-  private lateinit var moneyReceipt: TextView
-  private lateinit var infoReceipt: TextView
-  private lateinit var memoReceipt: TextView
-  private lateinit var outcomeDialog: TextView
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    enableEdgeToEdge()
-    setContentView(binding.root)
-    ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
-      val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-      v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-      insets
-    }
-    binding.btnBack.setOnClickListener {
-      finish()
-    }
-    moneyReceipt = binding.outcomeMoneyReceipt
-    infoReceipt = binding.outcomeInfoReceipt
-    memoReceipt = binding.outcomeMemoReceipt
-    outcomeDialog = binding.outcomeDialogReceipt
-    val money = intent.getStringExtra("text_value3")
-    if (money != null) {
-      moneyReceipt.text = money
-    }
-    else {
-      moneyReceipt.text = "No data receivced"
-    }
-    val memo = intent.getStringExtra("text_value4")
-    if (money != null) {
-      memoReceipt.text = memo
-    }
-    else {
-      memoReceipt.text = "No data receivce"
-    }
-    val info = intent.getStringExtra("text_value5")
-    if (info != null) {
-      infoReceipt.text = info
-    }
-    else {
-      infoReceipt.text = "No data receivce"
-    }
-    val dialog = intent.getStringExtra("outcomeDialog")
-    if (dialog != null) {
-      outcomeDialog.text = dialog
-    }
-    else {
-      outcomeDialog.text = "No data received"
-    }
-    //        선택된 버튼의 텍스트 넘겨주기
-    val selectedCategory = intent.getStringExtra("selectedCategory")
-    binding.btnPassOutcome.text = selectedCategory
 
-    binding.btnSubmit.setOnClickListener {
-      val cate = binding.btnPassOutcome.text.toString()
-      val outcomeMoney = binding.outcomeMoneyReceipt.text.toString().toInt()
-      val outcomeSource = binding.outcomeDialogReceipt.text.toString()
-      val outcomeMemo = binding.outcomeMemoReceipt.text.toString()
-      val outcomeUse = binding.outcomeInfoReceipt.text.toString()
-      val outcome = ExpenseLogDTO()
-      outcome.expenseCate = cate
-      outcome.expense = outcomeMoney
-      outcome.paymentOption = outcomeSource
-      outcome.expenseMemo = outcomeMemo
-      outcome.expenseUse = outcomeUse
-      val api = AppServerClass.instance
-      val call = api.postOutcome(outcome)
-      retrofitResponse(call)
+    private val binding : ActivityOutcomeReceiptBinding by lazy{
+        ActivityOutcomeReceiptBinding.inflate(layoutInflater)
     }
-  }
+    private lateinit var moneyReceipt: TextView
+    private lateinit var infoReceipt: TextView
+    private lateinit var memoReceipt: TextView
+    private lateinit var outcomeDialog: TextView
+    private lateinit var userId:TextView
 
-  private fun retrofitResponse(call: Call<String>) {
-    call.enqueue(object : Callback<String> {
-      override fun onResponse(p0: Call<String>, res: Response<String>) {
-        if (res.isSuccessful) {
-          // 서버에서 전달받은 데이터만 변수로 저장
-          val result = res.body()
-          Log.d("fullstack503", "result : $result")
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
-        else {
-          Log.d("fullstack503", "송신 실패")
+        binding.btnBack.setOnClickListener {
+            finish()
         }
-      }
+        moneyReceipt = binding.outcomeMoneyReceipt
+        infoReceipt = binding.outcomeInfoReceipt
+        memoReceipt = binding.outcomeMemoReceipt
+        outcomeDialog = binding.outcomeDialogReceipt
+        userId = binding.userId
 
-      override fun onFailure(p0: Call<String>, t: Throwable) {
-        Log.d("fullstack503", "message : $t.message")
-      }
-    })
-  }
+        val money = intent.getStringExtra("text_value3")
+        if (money != null) {
+            moneyReceipt.text = money
+        } else {
+            moneyReceipt.text = "No data receivced"
+        }
+
+        val id = intent.getStringExtra("user_id")
+        if (id != null){
+            userId.text = id
+        }
+        else{
+            userId.text = "No data received"
+        }
+
+        val memo = intent.getStringExtra("text_value4")
+        if (money != null) {
+            memoReceipt.text = memo
+        } else {
+            memoReceipt.text = "No data receivce"
+        }
+
+        val info = intent.getStringExtra("text_value5")
+        if (info != null) {
+            infoReceipt.text = info
+        } else {
+            infoReceipt.text = "No data receivce"
+        }
+
+        val dialog = intent.getStringExtra("outcomeDialog")
+        if (dialog != null) {
+            outcomeDialog.text = dialog
+        } else {
+            outcomeDialog.text = "No data received"
+        }
+//        선택된 버튼의 텍스트 넘겨주기
+        val selectedCategory = intent.getStringExtra("selectedCategory")
+        binding.btnPassOutcome.text = selectedCategory
+
+        binding.btnSubmit.setOnClickListener {
+            val cate = binding.btnPassOutcome.text.toString()
+            val outcomeMoney = binding.outcomeMoneyReceipt.text.toString()
+            val outcomeSource = binding.outcomeDialogReceipt.text.toString()
+            val outcomeMemo = binding.outcomeMemoReceipt.text.toString()
+            val outcomeUse = binding.outcomeInfoReceipt.text.toString()
+            val id = binding.userId.text.toString()
+
+
+            val outcome = ExpenseLogDTO()
+            outcome.expenseCate = cate
+            outcome.expense = outcomeMoney
+            outcome.paymentOption = outcomeSource
+            outcome.expenseMemo = outcomeMemo
+            outcome.expenseUse = outcomeUse
+            outcome.memberId = id
+
+
+            val api = AppServerClass.instance
+            val call = api.postOutcome(outcome)
+            retrofitResponse(call)
+        }
+    }
+
+    private fun retrofitResponse(call: Call<String>) {
+        call.enqueue(object : Callback<String> {
+            override fun onResponse(p0: Call<String>, res: Response<String>) {
+                if (res.isSuccessful) {
+                    // 서버에서 전달받은 데이터만 변수로 저장
+                    val result = res.body()
+                    Log.d("fullstack503", "result : $result")
+                } else {
+                    Log.d("fullstack503", "송신 실패")
+                }
+            }
+
+            override fun onFailure(p0: Call<String>, t: Throwable) {
+                Log.d("fullstack503", "message : $t.message")
+            }
+        })
+    }
 }

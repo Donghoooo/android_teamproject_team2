@@ -25,6 +25,7 @@ class IncomeCateActivity : AppCompatActivity() {
     //    입력한 내역 , 메모 변수 생성
     private lateinit var incomeInfo: EditText
     private lateinit var incomeMemo: EditText
+    private lateinit var userId:TextView
 
 
     //    버튼의 값을 저장하고 선택을 누를시 버튼의 값도 다음페이지로 같이 전달, 버튼의 값을 저장할 변수와 버튼 선언
@@ -39,7 +40,6 @@ class IncomeCateActivity : AppCompatActivity() {
     private lateinit var btnPartmoney: AppCompatButton
     private lateinit var btnDutch: AppCompatButton
     private lateinit var btnEtc: AppCompatButton
-    private lateinit var incomeDialogCate: AppCompatButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,11 +99,13 @@ class IncomeCateActivity : AppCompatActivity() {
             val memo = incomeMemo.text.toString()
             val dialog = incomeDialog.text.toString()
             val selectedCategory = selectedButton?.text.toString()
+            val id = userId.text.toString()
 
 
 //            intent를 사용하여 incomeReceiptActivity에 접근가능하게하고
 //            putExtra에 설정한 "text_value3" 이라는 text 문자열에 저장
             val intent = Intent(this, IncomeReceiptActivity::class.java).apply {
+                putExtra("user_id",id)
                 putExtra("text_value3", text)
                 putExtra("text_value4", info)
                 putExtra("text_value5", memo)
@@ -112,7 +114,22 @@ class IncomeCateActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+
+
 //        =========================== addInfo 의 TextView 넘겨주기 ===========================
+        userId = binding.userId
+
+        val id = intent.getStringExtra("user_id")
+
+        if (id != null){
+            userId.text = id
+        }
+        else{
+            userId.text = "No data received"
+        }
+
+
+
         incomeResult = binding.incomeResultCate
 
         val text = intent.getStringExtra("text_value2")

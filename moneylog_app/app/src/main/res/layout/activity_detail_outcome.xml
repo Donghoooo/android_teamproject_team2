@@ -31,18 +31,8 @@
                 android:layout_height="wrap_content"
                 android:text="지출 영수증"
                 android:textColor="#FFFFFF"
-                android:layout_marginLeft="80dp"
                 android:textSize="30sp"
-                android:textAlignment="center"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="userId"
-                android:layout_marginLeft="130dp"
-                android:id="@+id/user_id"
-                android:textSize="20sp"
+                android:layout_gravity="center"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
 
@@ -106,23 +96,12 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="1500원"
-                android:layout_weight="1"
-                android:textAlignment="textEnd"
-                android:textSize="15sp"
+                android:textAlignment="center"
+                android:textSize="20sp"
                 android:id="@+id/outcome_money_receipt"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="원"
-                android:layout_weight="1"
-                android:textAlignment="textStart"
-                android:textSize="15dp"
-                android:textStyle="bold"/>
-
 
 
         </LinearLayout>
@@ -191,14 +170,24 @@
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_submit"
+                android:id="@+id/btn_update"
                 android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="10dp"
                 android:backgroundTint="#F5F5F5"
                 android:textColor="#4E89AE"
                 android:textStyle="bold"
-                android:text="확인" />
+                android:text="수정" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_drop"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#F5F5F5"
+                android:textColor="#4E89AE"
+                android:textStyle="bold"
+                android:text="삭제" />
         </LinearLayout>
 
     </LinearLayout>
