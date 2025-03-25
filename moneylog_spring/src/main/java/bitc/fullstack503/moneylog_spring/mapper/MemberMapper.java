@@ -11,4 +11,8 @@ public interface MemberMapper
   int isMemberId (String memberId) throws Exception;
   
   int isMemberName (String memberName) throws Exception;
+  
+  void memberDelete (String memberId) throws Exception;
+  
+  void memberUpdate (MemberDTO member) throws Exception;
 }

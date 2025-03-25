@@ -25,6 +25,12 @@ interface AppServerInterface {
   @POST("memberInfo")
   fun memberInfo(@Body member: MemberDTO): Call<MemberDTO>
 
+  @POST("memberDelete")
+  fun memberDelete(@Query("Id") Id: String): Call<Void>
+
+  @POST("memberUpdate")
+  fun memberUpdate(@Body member: MemberDTO): Call<MemberDTO>
+
   @POST("income/process")
   fun postIncome(@Body income: IncomeLogDTO): Call<String>
 

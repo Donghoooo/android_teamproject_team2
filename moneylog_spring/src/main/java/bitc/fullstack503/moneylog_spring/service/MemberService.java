@@ -11,4 +11,8 @@ public interface MemberService
   boolean isMemberName (String memberName) throws Exception;
   
   MemberDTO memberInfo (MemberDTO member) throws Exception;
+  
+  void memberDelete (String memberId) throws Exception;
+  
+  MemberDTO memberUpdate (MemberDTO member) throws Exception;
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/main"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".sdh.SignUpActivity">
+
+  <androidx.appcompat.widget.Toolbar
+    android:id="@+id/topToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/topToolbarColor"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="회원 비밀번호 확인"
+      android:textSize="16sp"
+      android:textStyle="bold" />
+  </androidx.appcompat.widget.Toolbar>
+
+  <TextView
+    android:id="@+id/pwTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:text="회원 비밀번호 확인"
+    android:textColor="@color/gray"
+    app:layout_constraintBottom_toTopOf="@+id/pwBox"
+    app:layout_constraintStart_toStartOf="@+id/pwBox" />
+
+  <com.google.android.material.card.MaterialCardView
+    android:id="@+id/pwBox"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    app:cardCornerRadius="8dp"
+    app:layout_constraintBottom_toTopOf="@+id/btmHr"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/topToolbar"
+    app:layout_constraintVertical_bias="0.35"
+    app:strokeColor="@color/line"
+    app:strokeWidth="2dp">
+
+    <EditText
+      android:id="@+id/pw"
+      android:layout_width="350dp"
+      android:layout_height="50dp"
+      android:backgroundTint="@color/white"
+      android:gravity="center_vertical"
+      android:hint="회원 비밀번호 확인"
+      android:inputType="textPassword"
+      android:padding="8dp"
+      android:textSize="16sp" />
+  </com.google.android.material.card.MaterialCardView>
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btnSubmit"
+    android:layout_width="350dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="40dp"
+    android:background="@drawable/btn_style2"
+    android:text="확인"
+    android:textColor="@color/black"
+    android:textSize="16sp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/pwBox" />
+
+  <View
+    android:id="@+id/btmHr"
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:background="@color/line"
+    app:layout_constraintBottom_toTopOf="@+id/btmToolbar"
+    tools:layout_editor_absoluteX="0dp" />
+
+  <androidx.appcompat.widget.Toolbar
+    android:id="@+id/btmToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:layout_constraintBottom_toBottomOf="parent"
+    tools:layout_editor_absoluteX="-65dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,4 +52,20 @@ public class MemberServiceImpl implements MemberService
   {
     return memberMapper.isMember (member);
   }
+  
+  @Override
+  public void memberDelete (String memberId) throws Exception
+  {
+    memberMapper.memberDelete (memberId);
+  }
+  
+  @Override
+  public MemberDTO memberUpdate (MemberDTO member) throws Exception
+  {
+    memberMapper.memberUpdate (member);
+    MemberDTO member2 = new MemberDTO ();
+    member2.setMemberId (member.getMemberId ());
+    member2.setMemberPw (member.getMemberPw ());
+    return memberMapper.isMember (member2);
+  }
 }

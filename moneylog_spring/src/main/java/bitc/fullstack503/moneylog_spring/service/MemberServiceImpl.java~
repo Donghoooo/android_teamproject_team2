@@ -1,10 +1,10 @@
 package bitc.fullstack503.moneylog_spring.service;
-import bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO;
-import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
 import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import bitc.fullstack503.moneylog_spring.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Member;
 @Service
 public class MemberServiceImpl implements MemberService
 {
@@ -53,5 +53,21 @@ public class MemberServiceImpl implements MemberService
   public MemberDTO memberInfo (MemberDTO member) throws Exception
   {
     return memberMapper.isMember (member);
+  }
+  
+  @Override
+  public void memberDelete (String memberId) throws Exception
+  {
+    memberMapper.memberDelete (memberId);
+  }
+  
+  @Override
+  public MemberDTO memberUpdate (MemberDTO member) throws Exception
+  {
+    memberMapper.memberUpdate (member);
+    MemberDTO member2 = new MemberDTO ();
+    member2.setMemberId (member.getMemberId ());
+    member2.setMemberPw (member.getMemberPw ());
+    return memberMapper.isMember (member2);
   }
 }

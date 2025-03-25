@@ -38,4 +38,16 @@ public class MemberController
   {
     return memberService.memberInfo (member);
   }
+  
+  @PostMapping ("memberDelete")
+  public void memberDelete (@RequestParam ("Id") String memberId) throws Exception
+  {
+    memberService.memberDelete (memberId);
+  }
+  
+  @PostMapping ("memberUpdate")
+  public MemberDTO memberUpdate (@RequestBody MemberDTO member) throws Exception
+  {
+    return memberService.memberUpdate (member);
+  }
 }
