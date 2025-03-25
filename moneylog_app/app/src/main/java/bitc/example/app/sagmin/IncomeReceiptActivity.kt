@@ -1,4 +1,4 @@
-package bitc.example.app
+package bitc.example.app.sagmin
 
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityIncomeReceiptBinding
 import bitc.example.app.dto.IncomeLogDTO
 import retrofit2.Call
@@ -38,7 +39,6 @@ class IncomeReceiptActivity : AppCompatActivity() {
     incomeMemo = binding.incomeMemoReceipt
     incomeInfo = binding.incomeInfoReceipt
     incomePassReceipt = binding.incomeDialogReceipt
-    userId = binding.userId
     //        getStringExtra 는 PutExtra에서 text_value 라는 이름을 지정하여 그 text를 가져온다.
     val text = intent.getStringExtra("text_value3")
     //        text의 값이 null이 아닐 경우 incomeResultReceipt에 저장된 값을 가져온다.
@@ -48,13 +48,7 @@ class IncomeReceiptActivity : AppCompatActivity() {
     else {
       incomeResultReceipt.text = "No data received"
     }
-    val id = intent.getStringExtra("user_id")
-    if (id != null) {
-      userId.text = id
-    }
-    else {
-      userId.text = "No data received"
-    }
+
     val info = intent.getStringExtra("text_value4")
 
     if (info != null) {
@@ -93,14 +87,12 @@ class IncomeReceiptActivity : AppCompatActivity() {
       val source = binding.incomeDialogReceipt.text.toString()
       val incomeMemo = binding.incomeMemoReceipt.text.toString()
       val incomeUse = binding.incomeInfoReceipt.text.toString()
-      val id = binding.userId.text.toString()
       var income = IncomeLogDTO()
       income.incomeCate = cate
       income.incomeMoney = money
       income.incomeSource = source
       income.incomeMemo = incomeMemo
       income.incomeUse = incomeUse
-      income.memberId = id
       val api = AppServerClass.instance
       val call = api.postIncome(income)
       retrofitResponse(call)

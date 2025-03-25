@@ -25,34 +25,36 @@
       android:exported="false" />
     <activity
       android:name=".sdh.LoginActivity"
-      android:exported="false" />
+      android:exported="true" >
+    <intent-filter>
+      <action android:name="android.intent.action.MAIN" />
+
+      <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+    </activity>
 
     <activity
-      android:name=".DetailOutcomeActivity"
+      android:name=".sagmin.DetailOutcomeActivity"
       android:exported="false" />
     <activity
-      android:name=".DetailIncomeActivity"
+      android:name=".sagmin.DetailIncomeActivity"
       android:exported="false" />
     <activity
-      android:name=".OutcomeReceiptActivity"
+      android:name=".sagmin.OutcomeReceiptActivity"
       android:exported="false" />
     <activity
-      android:name=".IncomeReceiptActivity"
+      android:name=".sagmin.IncomeReceiptActivity"
       android:exported="false" />
     <activity
-      android:name=".IncomeCateActivity"
+      android:name=".sagmin.IncomeCateActivity"
       android:exported="false" />
     <activity
-      android:name=".OutcomeCateActivity"
+      android:name=".sagmin.OutcomeCateActivity"
       android:exported="false" />
     <activity
-      android:name=".AddInfoActivity"
-      android:exported="true">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
+      android:name=".sagmin.AddInfoActivity"
+      android:exported="false">
 
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
     </activity>
 
   </application>

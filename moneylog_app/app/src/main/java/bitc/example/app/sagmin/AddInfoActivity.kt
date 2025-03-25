@@ -1,4 +1,4 @@
-package bitc.example.app
+package bitc.example.app.sagmin
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,6 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.databinding.ActivityAddInfoBinding
-import bitc.example.app.databinding.ActivityIncomeCateBinding
 
 class AddInfoActivity : AppCompatActivity() {
 
@@ -20,7 +19,6 @@ private lateinit var binding: ActivityAddInfoBinding
 
     private lateinit var outcomeResult : TextView
     private lateinit var btnOutcome: AppCompatButton
-    private lateinit var userId:TextView
 
 
     private lateinit var incomeResult : TextView
@@ -53,15 +51,6 @@ private lateinit var binding: ActivityAddInfoBinding
 
 //        ================Addinfo에서 입력한 금액과 수입 선택 시 입금 카테 선택페이지로 넘기기 =======
 
-        userId = binding.userId
-
-        val id = intent.getStringExtra("user_id")
-        if(id != null){
-            userId.text = id
-        }
-        else{
-            userId.text = "No data received"
-        }
 
 
 
@@ -74,9 +63,8 @@ private lateinit var binding: ActivityAddInfoBinding
 
 
 
-            val intent = Intent(this,IncomeCateActivity::class.java).apply{
+            val intent = Intent(this, IncomeCateActivity::class.java).apply{
             putExtra("text_value2",text)
-                putExtra("user_id",id)
             }
             startActivity(intent)
         }
@@ -95,9 +83,8 @@ private lateinit var binding: ActivityAddInfoBinding
 
 //            intent를 사용하여 OutcomeCateActivity 로 전달한다.
 //            putExtra 메소드로 text_value 라는 키에 text를 넣어 전달한다.
-            val intent = Intent(this,OutcomeCateActivity::class.java).apply{
+            val intent = Intent(this, OutcomeCateActivity::class.java).apply{
                 putExtra("text_value",text)
-                putExtra("user_id",id)
             }
             startActivity(intent)
         }
