@@ -1,5 +1,6 @@
 package bitc.example.app
 
+import bitc.example.app.dto.SearchDTO
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.MemberDTO
@@ -25,8 +26,15 @@ interface AppServerInterface {
   @POST("income/process")
   fun postIncome(@Body income : IncomeLogDTO): Call<String>
 
-
   @POST("/outcome/process")
   fun postOutcome(@Body outcome : ExpenseLogDTO) : Call<String>
 
+//  검색 페이지
+  @GET("search/process")
+  fun getSearchList(
+    @Query("category") cate: String,
+    @Query("source") source: String,
+    @Query("startDate") startDate: String,
+    @Query("endDate") endDate: String
+  ): Call<List<SearchDTO>>
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--검색 페이지에서 다이얼로그 창 상단 수입, 지출 선택하는 영역 틀-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+  <solid android:color="@color/default_button_color" />
+  <corners android:radius="12dp" />
+</shape>
