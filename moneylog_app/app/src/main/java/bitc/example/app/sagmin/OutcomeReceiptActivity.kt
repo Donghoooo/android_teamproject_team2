@@ -84,7 +84,7 @@ class OutcomeReceiptActivity : AppCompatActivity() {
 
             val outcome = ExpenseLogDTO()
             outcome.expenseCate = cate
-            outcome.expense = outcomeMoney
+            outcome.expenseMoney = outcomeMoney
             outcome.paymentOption = outcomeSource
             outcome.expenseMemo = outcomeMemo
             outcome.expenseUse = outcomeUse

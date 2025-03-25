@@ -4,8 +4,8 @@
 
 
     <insert id="expense" parameterType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO">
-        insert into expense_log(member_id,expense,expense_date,expense_cate,expense_memo,payment_option,expense_use)
-        values (#{memberId},#{expense},#{expenseDate},#{expenseCate},#{expenseMemo},#{paymentOption},#{expenseUse})
+        insert into expense_log(member_id,expense_money,expense_date,expense_cate,expense_memo,payment_option,expense_use)
+        values (#{memberId},#{expenseMoney},#{expenseDate},#{expenseCate},#{expenseMemo},#{paymentOption},#{expenseUse})
     </insert>
 
 </mapper>
