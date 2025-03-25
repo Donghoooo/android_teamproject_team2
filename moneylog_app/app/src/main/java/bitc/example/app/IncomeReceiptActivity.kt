@@ -80,7 +80,7 @@ class IncomeReceiptActivity : AppCompatActivity() {
 
     binding.btnSubmit.setOnClickListener {
       val cate = binding.btnPassIncome.text.toString()
-      val money = binding.incomeMoneyReceipt.toString().toInt()
+      val money = binding.incomeMoneyReceipt.toString()
       val source = binding.incomeDialogReceipt.text.toString()
       val incomeMemo = binding.incomeMemoReceipt.text.toString()
       val incomeUse = binding.incomeInfoReceipt.text.toString()
