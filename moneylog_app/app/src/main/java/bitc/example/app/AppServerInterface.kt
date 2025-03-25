@@ -1,11 +1,14 @@
 package bitc.example.app
 
+import bitc.example.app.dto.SearchDTO
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.MemberDTO
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface AppServerInterface {
   @POST("signUp/process")
@@ -16,4 +19,13 @@ interface AppServerInterface {
 
   @POST("/outcome/process")
   fun postOutcome(@Body outcome : ExpenseLogDTO) : Call<String>
+
+//  검색 페이지
+  @GET("search/process")
+  fun getSearchList(
+    @Query("category") cate: String,
+    @Query("source") source: String,
+    @Query("startDate") startDate: String,
+    @Query("endDate") endDate: String
+  ): Call<List<SearchDTO>>
 }

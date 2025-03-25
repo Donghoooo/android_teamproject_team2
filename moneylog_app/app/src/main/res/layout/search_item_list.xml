@@ -29,7 +29,7 @@
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/tvDetail"
+            android:id="@+id/tvUse"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="내역"
@@ -37,7 +37,7 @@
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/tvMethod"
+            android:id="@+id/tvSource"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="카드"
@@ -45,7 +45,7 @@
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/tvAmount"
+            android:id="@+id/tvMoney"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="00,000 원"

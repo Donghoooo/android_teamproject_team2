@@ -114,9 +114,9 @@
           android:layout_width="200dp"
           android:layout_height="40dp"
           android:layout_marginLeft="20dp"
+          android:gravity="center_vertical"
           android:hint="클릭해주세요"
-          android:textSize="14sp"
-          android:gravity="center_vertical"/>
+          android:textSize="14sp" />
     </LinearLayout>
 
     <!--    자산방식 검색 -->
@@ -139,19 +139,34 @@
           android:layout_width="200dp"
           android:layout_height="40dp"
           android:layout_marginLeft="20dp"
+          android:gravity="center_vertical"
           android:hint="클릭해주세요"
-          android:textSize="14sp"
-          android:gravity="center_vertical"/>
+          android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginVertical="8dp">
+
+      <androidx.appcompat.widget.AppCompatButton
+          android:id="@+id/btn_search"
+          android:layout_width="60dp"
+          android:layout_height="30dp"
+          android:background="@drawable/btn_style2"
+          android:text="조회"
+          android:backgroundTint="@null"/>
     </LinearLayout>
 
     <View
         android:layout_width="360dp"
         android:layout_height="2dp"
         android:layout_gravity="center"
-        android:background="@color/lightgray"
-        android:layout_marginVertical="10dp"/>
+        android:layout_marginVertical="10dp"
+        android:background="@color/lightgray" />
 
-<!--    수입, 지출 금액-->
+    <!--    수입, 지출 금액-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -163,37 +178,37 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="수입"
-          android:textSize="15sp"
-          />
+          android:textSize="15sp" />
+
       <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
           android:id="@+id/income"
-          android:text="123,123원"
-          android:textSize="22sp"
-          android:textStyle="bold"
-          android:textColor="@color/income"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
           android:layout_marginLeft="15dp"
-          />
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="지출"
-          android:textSize="15sp"
-          android:layout_marginLeft="30dp"
-          />
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:id="@+id/expense"
           android:text="123,123원"
+          android:textColor="@color/income"
           android:textSize="22sp"
-          android:textStyle="bold"
+          android:textStyle="bold" />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="30dp"
+          android:text="지출"
+          android:textSize="15sp" />
+
+      <TextView
+          android:id="@+id/expense"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="15dp"
+          android:text="123,123원"
           android:textColor="@color/expense"
-          android:layout_marginLeft="15dp" />
+          android:textSize="22sp"
+          android:textStyle="bold" />
     </LinearLayout>
 
-<!--    리스트-->
+    <!--    리스트-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -204,33 +219,34 @@
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
           android:gravity="center"
           android:orientation="horizontal"
           android:paddingHorizontal="20dp"
-          android:layout_marginTop="20dp"
           android:textAlignment="center">
 
-<!--        총 리스트 수 출력 -->
+        <!--        총 리스트 수 출력 -->
         <TextView
+            android:id="@+id/total_count"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/total_count"
+            android:gravity="center"
             android:text="총 00 건"
-            android:textSize="10sp"
-            android:gravity="center" />
+            android:textSize="10sp" />
 
         <!-- 빈 공간 확보 -->
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
-<!--        정렬 방식 드롭다운 -->
+        <!--        정렬 방식 드롭다운 -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sort"
             android:layout_width="50dp"
             android:layout_height="25dp"
             android:background="@drawable/btn_sort"
+            android:backgroundTint="@null"
             android:drawablePadding="0dp"
             android:includeFontPadding="false"
             android:minWidth="0dp"
@@ -238,73 +254,71 @@
             android:padding="0dp"
             android:text="날짜순"
             android:textAlignment="center"
-            android:textSize="9sp"
-            android:backgroundTint="@null"
-            />
+            android:textSize="9sp" />
       </LinearLayout>
 
       <View
           android:layout_width="360dp"
           android:layout_height="2dp"
           android:layout_gravity="center"
-          android:background="@color/lightgray"
-          android:layout_marginTop="5dp"/>
+          android:layout_marginTop="5dp"
+          android:background="@color/lightgray" />
 
-<!--      리스트 헤더 -->
-        <LinearLayout
-            android:layout_width="match_parent"
+      <!--      리스트 헤더 -->
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:padding="8dp">
+
+        <TextView
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:gravity="center">
+            android:text="날짜"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
-          <TextView
-              android:layout_width="50dp"
-              android:layout_height="wrap_content"
-              android:text="날짜"
-              android:textStyle="bold"
-              android:textSize="12sp"
-              android:textAlignment="center"/>
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="카테고리"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
-          <TextView
-              android:layout_width="50dp"
-              android:layout_height="wrap_content"
-              android:text="카테고리"
-              android:textStyle="bold"
-              android:textSize="12sp"
-              android:textAlignment="center"/>
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="내역"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
-          <TextView
-              android:layout_width="80dp"
-              android:layout_height="wrap_content"
-              android:text="내역"
-              android:textStyle="bold"
-              android:textSize="12sp"
-              android:textAlignment="center"/>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="방식"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
-          <TextView
-              android:layout_width="60dp"
-              android:layout_height="wrap_content"
-              android:text="방식"
-              android:textStyle="bold"
-              android:textSize="12sp"
-              android:textAlignment="center"/>
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="금액"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+      </LinearLayout>
 
-          <TextView
-              android:layout_width="80dp"
-              android:layout_height="wrap_content"
-              android:text="금액"
-              android:textStyle="bold"
-              android:textSize="12sp"
-              android:textAlignment="center"/>
-        </LinearLayout>
-
-<!--      리스트 출력 -->
+      <!--      리스트 출력 -->
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/search_list_view"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:divider="?android:attr/listDivider"/>
+          android:divider="?android:attr/listDivider" />
 
     </LinearLayout>
   </LinearLayout>
