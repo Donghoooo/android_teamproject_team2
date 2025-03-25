@@ -8,8 +8,8 @@ data class IncomeLogDTO(
   var incomeLogSeq: Int? = null,
   @SerializedName("memberId")
   var memberId: String? = null,
-  @SerializedName("income")
-  var income: String? = null,
+  @SerializedName("incomeMoney")
+  var incomeMoney: String? = null,
   @SerializedName("incomeDate")
   var incomeDate: LocalDateTime? = null,
   @SerializedName("incomeCate")

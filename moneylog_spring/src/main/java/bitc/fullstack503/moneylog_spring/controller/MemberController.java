@@ -9,12 +9,6 @@ public class MemberController
   @Autowired
   private MemberService memberService;
   
-  @GetMapping ({"/", ""})
-  public String home () throws Exception
-  {
-    return "index";
-  }
-  
   @PostMapping ("logIn/Process")
   public Boolean loginProcess (@RequestBody MemberDTO member) throws Exception
   {

@@ -9,7 +9,7 @@ data class ExpenseLogDTO(
   @SerializedName("memberId")
   var memberId: String? = null,
   @SerializedName("expense")
-  var expense: Int? = null,
+  var expense: String? = null,
   @SerializedName("expenseDate")
   var expenseDate: LocalDateTime? = null,
   @SerializedName("expenseCate")
@@ -19,5 +19,5 @@ data class ExpenseLogDTO(
   @SerializedName("paymentOption")
   var paymentOption: String? = null,
   @SerializedName("expenseUse")
-var expenseUse: String? = null
+  var expenseUse: String? = null
 )
