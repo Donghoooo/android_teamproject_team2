@@ -36,6 +36,6 @@ public class MemberController
   @PostMapping ("memberInfo")
   public MemberDTO memberInfo (@RequestBody MemberDTO member) throws Exception
   {
-    return memberService.memberInfo (member);
+    return memberService. (member);
   }
 }

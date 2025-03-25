@@ -26,4 +26,8 @@
     from member
     where member_name = #{memberName}
   </select>
+  
+  <select id="memberInfo" parameterType="java.lang.String" resultType="bitc.fullstack503.moneylog_spring.dto.MemberDTO">
+    select
+  </select>
 </mapper>

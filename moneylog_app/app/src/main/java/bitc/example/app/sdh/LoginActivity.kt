@@ -15,6 +15,8 @@ import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class LoginActivity : AppCompatActivity() {
   private val binding: ActivityLoginBinding by lazy {
@@ -91,9 +93,17 @@ class LoginActivity : AppCompatActivity() {
             else {
               editor.putBoolean("isIdSaved", false)
             }
+            editor.apply()
+            val id2 = binding.id.text.toString()
+            val pw2 = binding.pw.text.toString()
+            var member = MemberDTO()
+            member.memberId = id2
+            member.memberPw = pw2
+            val api = AppServerClass.instance
+            val call = api.memberInfo(member)
+            getMemberInfo(call)
             binding.id.setText("")
             binding.pw.setText("")
-            editor.apply()
           }
           else {
             Snackbar.make(binding.root, "아이디 또는 비밀번호가 다릅니다", Snackbar.LENGTH_SHORT).show()
@@ -109,5 +119,61 @@ class LoginActivity : AppCompatActivity() {
         Log.d("fullstack503", "네트워크 오류 : $t.message")
       }
     })
+  }
+
+  private fun getMemberInfo(call: Call<MemberDTO>) {
+    call.enqueue(object : Callback<MemberDTO> {
+      override fun onResponse(p0: Call<MemberDTO>, res: Response<MemberDTO>) {
+        if (res.isSuccessful) {
+          val result: MemberDTO? = res.body()
+          if (result != null) {
+            saveMemberInfo(result)
+            sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+            loadMemberInfo()
+          }
+          else {
+            Snackbar.make(binding.root, "아이디 또는 비밀번호가 다릅니다", Snackbar.LENGTH_SHORT).show()
+          }
+        }
+        else {
+          Snackbar.make(binding.root, "송신 실패", Snackbar.LENGTH_SHORT).show()
+        }
+      }
+
+      override fun onFailure(p0: Call<MemberDTO>, t: Throwable) {
+        Snackbar.make(binding.root, "네트워크 오류", Snackbar.LENGTH_SHORT).show()
+        Log.d("fullstack503", "네트워크 오류 : $t.message")
+      }
+    })
+  }
+
+  private fun saveMemberInfo(memberInfo: MemberDTO) {
+    sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+    with(sharedPreferences.edit()) {
+      putString("memberId", memberInfo.memberId)
+      putString("memberName", memberInfo.memberName)
+      val formattedDate = try {
+        val date = LocalDateTime.parse(memberInfo.createDate)
+        date.format(formatter)
+      } catch (e: Exception) {
+        "N/A"
+      }
+      putString("createDate", formattedDate)
+      putString("memberEmail", memberInfo.memberEmail)
+      apply()
+    }
+  }
+
+  private fun loadMemberInfo() {
+    val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+    val memberId = sharedPreferences.getString("memberId", "N/A")
+    val memberName = sharedPreferences.getString("memberName", "N/A")
+    val createDate = sharedPreferences.getString("createDate", "N/A")
+    val memberEmail = sharedPreferences.getString("memberEmail", "N/A")
+    Log.d("fullstack503", "memberId: $memberId")
+    Log.d("fullstack503", "memberName: $memberName")
+    Log.d("fullstack503", "createDate: $createDate")
+    Log.d("fullstack503", "memberEmail: $memberEmail")
   }
 }

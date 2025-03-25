@@ -22,10 +22,12 @@ interface AppServerInterface {
   @GET("isMemberName")
   fun isMemberName(@Query("Name") Name: String): Call<Boolean>
 
+  @POST("memberInfo")
+  fun memberInfo(@Body member: MemberDTO): Call<MemberDTO>
+
   @POST("income/process")
-  fun postIncome(@Body income : IncomeLogDTO): Call<String>
+  fun postIncome(@Body income: IncomeLogDTO): Call<String>
 
   @POST("/outcome/process")
-  fun postOutcome(@Body outcome : ExpenseLogDTO) : Call<String>
-
+  fun postOutcome(@Body outcome: ExpenseLogDTO): Call<String>
 }
