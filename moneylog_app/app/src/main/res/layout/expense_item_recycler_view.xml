@@ -46,6 +46,27 @@
             android:textColor="#F05D5E"
             android:textSize="16sp"
             android:textStyle="bold"/>
+
+        <TextView
+                android:id="@+id/expenseItemMemoData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="숨겨질 텍스트"
+                android:visibility="gone"/>
+
+        <TextView
+                android:id="@+id/expenseItemOptionData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="숨겨질 텍스트"
+                android:visibility="gone"/>
+
+        <TextView
+                android:id="@+id/expenseItemUseData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="숨겨질 텍스트"
+                android:visibility="gone"/>
     </LinearLayout>
 
 
