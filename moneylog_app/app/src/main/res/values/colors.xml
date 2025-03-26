@@ -16,4 +16,11 @@
   <color name="default_button_color">#F5F5F5</color>
   <color name="selected_button_color">#FF9F45</color>
   <color name="imcome">#4E89AE</color>
+  <!--  toolbar 색상-->
+  <color name="blue">#53D2C2</color>
+  <!--  수입 금액 색상-->
+  <color name="imort">#4E89AE</color>
+  <!--  지출 갬액 색상-->
+  <color name="red">#F06D5E</color>
+  <color name="brown">#F5F6F9</color>
 </resources>

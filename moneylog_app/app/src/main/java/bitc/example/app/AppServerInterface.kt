@@ -57,4 +57,12 @@ fun deleteOutcome(@Query("outcomeLogSeq")outcomeLogSeq : Int): Call<Int>
 //  수입/지출 리스트
   @GET("/list/income")
   fun getIncomeList() : Call<List<IncomeLogDTO>>
+
+
+  @GET("/analyze")
+  fun getanalyze(): Call<List<IncomeLogDTO>>
+
+
+  @GET("/analyze1")
+  fun getanalyze1(): Call<List<ExpenseLogDTO>>
 }
