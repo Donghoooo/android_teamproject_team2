@@ -35,7 +35,13 @@
   
   <update id="memberUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.MemberDTO">
     update member
-    set member_id = #{memberId} ,member_pw = #{memberPw}, member_name = #{memberName}, member_email = #{memberEmail}
-    where member_id = #{memberId}
+    set member_id    = #{memberId},
+        member_pw    = #{memberPw},
+        member_name  = #{memberName},
+        member_email = #{memberEmail}
+    where member_seq = #{memberSeq}
   </update>
+  
+  <select id="memberFindSeq" parameterType="java.lang.Integer"
+          resultType="bitc.fullstack503.moneylog_spring.dto.MemberDTO"></select>
 </mapper>

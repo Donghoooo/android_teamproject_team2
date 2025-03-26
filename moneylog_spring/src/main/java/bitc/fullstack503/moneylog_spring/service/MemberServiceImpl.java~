@@ -3,8 +3,6 @@ import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import bitc.fullstack503.moneylog_spring.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.lang.reflect.Member;
 @Service
 public class MemberServiceImpl implements MemberService
 {
@@ -64,10 +62,8 @@ public class MemberServiceImpl implements MemberService
   @Override
   public MemberDTO memberUpdate (MemberDTO member) throws Exception
   {
+    MemberDTO member2 = memberMapper.isMember (member);
     memberMapper.memberUpdate (member);
-    MemberDTO member2 = new MemberDTO ();
-    member2.setMemberId (member.getMemberId ());
-    member2.setMemberPw (member.getMemberPw ());
-    return memberMapper.isMember (member2);
+    return memberMapper.memberFindSeq (member2.getMemberSeq ());
   }
 }
