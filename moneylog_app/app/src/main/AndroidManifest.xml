@@ -38,10 +38,78 @@
       android:name=".sdh.LoginActivity"
       android:exported="false">
 
+    <activity
+      android:name=".Analyze_List"
+      android:exported="false">
+      <!--            <intent-filter>-->
+      <!--                <action android:name="android.intent.action.MAIN" />-->
+
+      <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+      <!--            </intent-filter>-->
     </activity>
     <activity
-      android:name=".kms.MonthlyListActivity"
+      android:name=".sagmin.OutcomeBankChangeActivity"
       android:exported="false" />
+    <activity
+      android:name=".sagmin.IncomeBankChangeActivity"
+      android:exported="false" />
+    <activity
+      android:name=".sagmin.IncomeCategoryChangeActivity"
+      android:exported="false" />
+    <activity
+      android:name=".sagmin.OutcomeCategoryChangeActivity"
+      android:exported="false" />
+    <activity
+      android:name=".kms.MonthlyListActivity"
+      android:exported="true" >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name=".ui.dialog.BankSelectionDialog"
+      android:exported="false" />
+    <activity
+      android:name=".ui.dialog.CategorySeletionDialog"
+      android:exported="false"
+      tools:ignore="Instantiatable" />
+    <activity
+      android:name=".ui.CateSearchActivity"
+      android:exported="false" />
+    <activity
+      android:name=".MainActivity"
+      android:exported="false" />
+    <activity
+      android:name=".sagmin.DetailOutcomeActivity"
+      android:exported="false">
+      <!--        <intent-filter>-->
+      <!--            <action android:name="android.intent.action.MAIN" />-->
+
+      <!--            <category android:name="android.intent.category.LAUNCHER" />-->
+      <!--        </intent-filter>-->
+    </activity>
+    <activity
+      android:name=".sagmin.DetailIncomeActivity"
+      android:exported="false">
+    </activity>
+    <activity
+      android:name=".sagmin.OutcomeReceiptActivity"
+      android:exported="false" />
+    <activity
+      android:name=".sagmin.IncomeReceiptActivity"
+      android:exported="false" />
+    <activity
+      android:name=".sagmin.IncomeCateActivity"
+      android:exported="false" />
+    <activity
+      android:name=".sagmin.OutcomeCateActivity"
+      android:exported="false" />
+    <activity
+      android:name=".sagmin.AddInfoActivity"
+      android:exported="false" />
+
   </application>
 
 </manifest>

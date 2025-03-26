@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--카테고리 검색 페이지에서 카테고리 선택했을때 뜨는 다이얼로그 ui 파일-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/main">
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:paddingLeft="20sp"
+      android:layout_marginTop="10dp"
+      android:text="카테고리"
+      android:textSize="18sp"
+      android:gravity="center_vertical"
+      android:textStyle="bold"/>
+<!---->
+
+  <!--  전체선택 체크박스 -->
+  <CheckBox
+      android:id="@+id/checkbox_select_all"
+      android:layout_width="wrap_content"
+      android:layout_height="20dp"
+      android:text="전체 선택"
+      android:layout_marginHorizontal="40dp"
+      android:layout_marginTop="18dp"
+      android:layout_marginBottom="10dp"
+      android:checked="false"/>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="2dp"
+      android:layout_gravity="center"
+      android:layout_marginHorizontal="40dp"
+      android:background="@color/lightgray" />
+
+  <!-- 체크박스 리스트 -->
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/category_list"
+      android:layout_width="match_parent"
+      android:layout_height="300dp"
+      android:scrollbars="vertical" />
+
+  <!-- 버튼 영역 -->
+  <LinearLayout
+      android:id="@+id/button_container"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginVertical="15dp"
+      android:gravity="center">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:text="취소"
+        android:background="@color/default_button_color"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_confirm"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:text="확인"
+        android:layout_marginLeft="20dp"
+        android:background="@color/sub"/>
+  </LinearLayout>
+
+
+</LinearLayout>

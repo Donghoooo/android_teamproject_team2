@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingVertical="8dp"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="3.15"
+            android:textSize="10sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="식비"
+            android:textSize="11sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/tvUse"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="내역"
+            android:textSize="11sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/tvSource"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="카드"
+            android:textSize="11sp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/tvMoney"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="00,000 원"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/expense"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="360dp"
+        android:layout_height="2dp"
+        android:layout_gravity="center"
+        android:background="@color/lightgray"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

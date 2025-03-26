@@ -30,10 +30,9 @@ android {
   kotlinOptions {
     jvmTarget = "11"
   }
-
-  viewBinding {
-    enable = true
-  }
+   viewBinding {
+     enable = true
+   }
 }
 
 dependencies {
@@ -60,5 +59,8 @@ dependencies {
 
 //  리사이클러 뷰
   implementation ("androidx.recyclerview:recyclerview:1.2.1")
+
+  implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
 
 }

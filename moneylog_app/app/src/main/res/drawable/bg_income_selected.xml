@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--검색 패이지 카테고리 선택 다이얼로그 창에서 수입 선택 됐을때-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+  <solid android:color="@android:color/white" />
+  <corners android:radius="12dp"/>
+</shape>

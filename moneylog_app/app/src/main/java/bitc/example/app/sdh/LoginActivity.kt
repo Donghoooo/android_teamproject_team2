@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityLoginBinding
 import bitc.example.app.dto.MemberDTO
+import bitc.example.app.sagmin.AddInfoActivity
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,11 +48,18 @@ class LoginActivity : AppCompatActivity() {
       val api = AppServerClass.instance
       val call = api.postLogIn(member)
       logInProcess(call)
+
+
+      val intent = Intent(this,AddInfoActivity::class.java)
+      startActivity(intent)
+
     }
 
     setSupportActionBar(binding.topToolbar)
     supportActionBar?.setDisplayShowTitleEnabled(false)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
   }
 
   override fun onResume() {
