@@ -24,19 +24,20 @@
       android:exported="false" />
     <activity
       android:name=".sdh.MyPageActivity"
+      android:exported="false"></activity>
+    <activity
+      android:name=".sdh.SignUpActivity"
+      android:exported="false" />
+    <activity
+      android:name=".sdh.LoginActivity"
       android:exported="true">
+
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity
-      android:name=".sdh.SignUpActivity"
-      android:exported="false" />
-    <activity
-      android:name=".sdh.LoginActivity"
-      android:exported="false" />
 
     <activity
       android:name=".Analyze_List"
