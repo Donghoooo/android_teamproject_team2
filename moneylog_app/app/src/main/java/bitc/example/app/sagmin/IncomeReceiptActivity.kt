@@ -1,5 +1,6 @@
 package bitc.example.app.sagmin
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -18,6 +19,8 @@ class IncomeReceiptActivity : AppCompatActivity() {
   private val binding: ActivityIncomeReceiptBinding by lazy {
     ActivityIncomeReceiptBinding.inflate(layoutInflater)
   }
+
+  private lateinit var sharedPreferences: SharedPreferences
 
   //    값을 저장할 incomeResultReceipt 변수
   private lateinit var incomeResultReceipt: TextView
@@ -82,12 +85,17 @@ class IncomeReceiptActivity : AppCompatActivity() {
     }
 
     binding.btnSubmit.setOnClickListener {
+      val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+      val memberId = sharedPreferences.getString("memberId", "아이디").toString()
+      Log.d("fullstack503", memberId)
+
       val cate = binding.btnPassIncome.text.toString()
       val money = binding.incomeMoneyReceipt.text.toString()
       val source = binding.incomeDialogReceipt.text.toString()
       val incomeMemo = binding.incomeMemoReceipt.text.toString()
       val incomeUse = binding.incomeInfoReceipt.text.toString()
       var income = IncomeLogDTO()
+      income.memberId = memberId
       income.incomeCate = cate
       income.incomeMoney = money
       income.incomeSource = source

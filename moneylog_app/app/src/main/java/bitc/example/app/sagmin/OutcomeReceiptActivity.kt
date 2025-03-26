@@ -1,5 +1,6 @@
 package bitc.example.app.sagmin
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -23,7 +24,7 @@ class OutcomeReceiptActivity : AppCompatActivity() {
     private lateinit var infoReceipt: TextView
     private lateinit var memoReceipt: TextView
     private lateinit var outcomeDialog: TextView
-
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +76,11 @@ class OutcomeReceiptActivity : AppCompatActivity() {
         binding.btnPassOutcome.text = selectedCategory
 
         binding.btnSubmit.setOnClickListener {
+
+            val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+            val memberId = sharedPreferences.getString("memberId", "아이디").toString()
+            Log.d("fullstack503", memberId)
+
             val cate = binding.btnPassOutcome.text.toString()
             val outcomeMoney = binding.outcomeMoneyReceipt.text.toString()
             val outcomeSource = binding.outcomeDialogReceipt.text.toString()
@@ -83,6 +89,7 @@ class OutcomeReceiptActivity : AppCompatActivity() {
 
 
             val outcome = ExpenseLogDTO()
+            outcome.memberId = memberId
             outcome.expenseCate = cate
             outcome.expenseMoney = outcomeMoney
             outcome.paymentOption = outcomeSource

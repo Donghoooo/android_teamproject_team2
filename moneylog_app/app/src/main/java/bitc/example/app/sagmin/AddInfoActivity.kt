@@ -1,9 +1,11 @@
 package bitc.example.app.sagmin
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,7 @@ private lateinit var binding: ActivityAddInfoBinding
     private lateinit var outcomeResult : TextView
     private lateinit var btnOutcome: AppCompatButton
 
+    private lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var incomeResult : TextView
     private lateinit var btnIncome: AppCompatButton
@@ -59,6 +62,10 @@ private lateinit var binding: ActivityAddInfoBinding
 
         binding.btnIncome.setOnClickListener {
             val text = incomeResult.text.toString()
+
+            val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+            val memberId = sharedPreferences.getString("memberId", "아이디").toString()
+            Log.d("fullstack503", memberId)
 
 
 
