@@ -26,8 +26,8 @@ public class OutcomeController {
 
 //    지출 내용 수정하기
     @PostMapping("outcome/update")
-    public int expenseUpdate (@RequestParam("expenseLogSeq")int expenseLogSeq)throws Exception{
-        return outcomeService.expenseUpdate(expenseLogSeq);
+    public int expenseUpdate (@RequestBody ExpenseLogDTO outcomeLog)throws Exception{
+        return outcomeService.expenseUpdate(outcomeLog);
     }
 
 //    지출 내용 삭제하기

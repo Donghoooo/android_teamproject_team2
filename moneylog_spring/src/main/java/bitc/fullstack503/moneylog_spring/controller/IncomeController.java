@@ -23,10 +23,10 @@ public class IncomeController {
     }
 
 //    수입 내용 수정하기
-    @PostMapping("income/update")
-    public int incomeUpdatae (@RequestParam("incomeLogSeq")int incomeLogSeq)throws Exception{
-       return incomeService.incomeUpdate(incomeLogSeq);
-    }
+@PostMapping("income/update")
+public int incomeUpdate(@RequestBody IncomeLogDTO incomeLog) throws Exception {
+    return incomeService.incomeUpdate(incomeLog);
+}
 
 //    수입 내용 삭제하기
     @PostMapping("income/delete")

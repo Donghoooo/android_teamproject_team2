@@ -10,7 +10,7 @@
 
 
 <!-- 지출 내역 수정하기   -->
-    <update id="expenseUpdate" parameterType="int">
+    <update id="expenseUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO">
         update expense_log
         set expense_money =#{expenseMoney}, expense_cate = #{expenseCate}, expense_memo = #{expenseMemo}, payment_option = #{paymentOption},
             expense_use = #{expenseUse}

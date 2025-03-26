@@ -7,8 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.AppServerClass
+import bitc.example.app.databinding.ActivityDetailIncomeBinding
 import bitc.example.app.databinding.ActivityDetailOutcomeBinding
 import bitc.example.app.dto.ExpenseLogDTO
+import bitc.example.app.ui.dialog.IncomeBankChangeActivity
+import bitc.example.app.ui.dialog.IncomeCategoryChangeActivity
+import bitc.example.app.ui.dialog.OutcomeCategoryChangeActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +22,15 @@ class DetailOutcomeActivity : AppCompatActivity() {
     private val binding: ActivityDetailOutcomeBinding by lazy {
         ActivityDetailOutcomeBinding.inflate(layoutInflater)
     }
+
+
+
+    //  카테고리 선택
+    private var selectedCategories : String? = null // 선택한 항목 저장
+
+    //  자산방식 선택
+    private var selectedBanks : String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,25 +42,31 @@ class DetailOutcomeActivity : AppCompatActivity() {
             insets
         }
 
+
+        binding.outcomeDialogReceipt.setOnClickListener{
+            val bankDialog = IncomeBankChangeActivity(this, selectedBanks ?: "") { selected ->
+                selectedBanks = selected.toString()
+                updateBankText()
+            }
+            bankDialog.show()
+
+
+        }
+
+
+
+        binding.btnPassOutcome.setOnClickListener {
+            val categoryDialog = OutcomeCategoryChangeActivity(this, selectedCategories ?:""){ selected ->
+                selectedCategories = selected.toString()
+                updateCategoryText()
+            }
+            categoryDialog.show()
+
+        }
+
+
         binding.btnUpdate.setOnClickListener {
-            val cate = binding.btnPassOutcome.text.toString()
-            val outcomeMoney = binding.outcomeMoneyReceipt.text.toString()
-            val outcomeSource = binding.outcomeDialogReceipt.text.toString()
-            val outcomeMemo = binding.outcomeMemoReceipt.text.toString()
-            val outcomeUse = binding.outcomeInfoReceipt.text.toString()
 
-
-            val outcome = ExpenseLogDTO()
-            outcome.expenseCate = cate
-            outcome.expenseMoney = outcomeMoney
-            outcome.paymentOption = outcomeSource
-            outcome.expenseMemo = outcomeMemo
-            outcome.expenseUse = outcomeUse
-
-
-            val api = AppServerClass.instance
-            val call = api.postOutcome(outcome)
-            retrofitResponse(call)
         }
 
 
@@ -55,22 +74,22 @@ class DetailOutcomeActivity : AppCompatActivity() {
 
         }
     }
+    //  카테고리 선택 부분 클릭 시 다이얼로그 표시
+    private fun updateCategoryText() {
+            binding.btnPassOutcome.text = selectedCategories ?: "선택해주세요"
 
-    private fun retrofitResponse(call: Call<String>) {
-        call.enqueue(object : Callback<String> {
-            override fun onResponse(p0: Call<String>, res: Response<String>) {
-                if (res.isSuccessful) {
-                    // 서버에서 전달받은 데이터만 변수로 저장
-                    val result = res.body()
-                    Log.d("fullstack503", "result : $result")
-                } else {
-                    Log.d("fullstack503", "송신 실패")
-                }
-            }
+        }
 
-            override fun onFailure(p0: Call<String>, t: Throwable) {
-                Log.d("fullstack503", "message : $t.message")
-            }
-        })
+
+        //  자산 방식 클릭 시 다이얼로그 표시
+    private fun updateBankText(){
+        binding.outcomeDialogReceipt.text = selectedBanks ?: "선택해주세요"
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        super.onSupportNavigateUp()
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
 }

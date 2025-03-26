@@ -17,11 +17,13 @@ public class OutcomeServiceImpl implements OutcomeService {
         outcomeMapper.expense(outcome);
     }
 
-//    지출 내용 수정하기
+    //    지출 내용 수정하기
     @Override
-    public int expenseUpdate(int expenseLogSeq) throws Exception {
-        return outcomeMapper.expenseUpdate(expenseLogSeq);
+    public int expenseUpdate(ExpenseLogDTO outcomeLog) throws Exception {
+        return outcomeMapper.expenseUpdate(outcomeLog);
     }
+
+
 
 //    지출 내용 삭제하기
     @Override

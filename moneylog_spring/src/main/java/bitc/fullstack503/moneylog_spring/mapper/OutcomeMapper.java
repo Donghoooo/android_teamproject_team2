@@ -9,8 +9,9 @@ public interface OutcomeMapper {
     public void expense(ExpenseLogDTO outcome)throws Exception;
 
 //    지출 내용 수정하기
-    int expenseUpdate(int expenseLogSeq) throws Exception;
+    int expenseUpdate(ExpenseLogDTO outcomeLog)throws Exception;
 
 //    지출 내용 삭제하기
     int expenseDelete(int expenseLogSeq)throws Exception;
+
 }

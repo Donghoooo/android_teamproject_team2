@@ -9,7 +9,7 @@
     </insert>
 
 <!--    수입 내용 수정하기 -->
-    <update id="incomeUpdate" parameterType="int">
+    <update id="incomeUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">
 update income_log
 set income_money =#{incomeMoney}, income_cate = #{incomeCate}, income_memo = #{incomeMemo}, income_source = #{incomeSource},
     income_use = #{incomeUse}

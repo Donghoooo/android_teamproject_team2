@@ -18,11 +18,10 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
 //    수입 내용 수정하기
-    @Override
-    public int incomeUpdate(int incomeLogSeq) throws Exception {
-        return incomeMapper.incomeUpdate(incomeLogSeq);
-    }
-
+@Override
+public int incomeUpdate(IncomeLogDTO incomeLog)throws Exception {
+    return incomeMapper.incomeUpdate(incomeLog);
+}
 //    수입 내용 삭제하기
     @Override
     public int incomeDelete(int incomeLogSeq) throws Exception {
