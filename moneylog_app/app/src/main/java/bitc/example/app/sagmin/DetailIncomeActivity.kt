@@ -45,6 +45,7 @@ class DetailIncomeActivity : AppCompatActivity() {
             finish()
         }
 
+
         val incomeDate = intent.getStringExtra("incomeDate")
         val incomeCate = intent.getStringExtra("incomeCate")
         val incomeMoney = intent.getStringExtra("incomeMoney")
@@ -81,8 +82,10 @@ class DetailIncomeActivity : AppCompatActivity() {
             val source = binding.incomeDialogReceipt.text.toString()
             val incomeMemo = binding.incomeMemoReceipt.text.toString()
             val incomeUse = binding.incomeInfoReceipt.text.toString()
+            val seq = binding.incomeLogSeq.text.toString().toInt()
 
             var income = IncomeLogDTO()
+            income.incomeLogSeq = seq
             income.incomeCate = cate
             income.incomeMoney = money
             income.incomeSource = source
