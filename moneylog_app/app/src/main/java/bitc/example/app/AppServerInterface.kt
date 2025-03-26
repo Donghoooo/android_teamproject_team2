@@ -1,7 +1,5 @@
 package bitc.example.app
 
-import bitc.example.app.dto.ExpenseLogDTO
-import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.MemberDTO
 import retrofit2.Call
 import retrofit2.http.Body
@@ -30,10 +28,4 @@ interface AppServerInterface {
 
   @POST("memberUpdate")
   fun memberUpdate(@Body member: MemberDTO): Call<MemberDTO>
-
-  @POST("income/process")
-  fun postIncome(@Body income: IncomeLogDTO): Call<String>
-
-  @POST("/outcome/process")
-  fun postOutcome(@Body outcome: ExpenseLogDTO): Call<String>
 }

@@ -40,28 +40,6 @@
 
     </activity>
     <activity
-      android:name=".DetailOutcomeActivity"
-      android:exported="false" />
-
-    <activity
-      android:name=".DetailIncomeActivity"
-      android:exported="false" />
-    <activity
-      android:name=".OutcomeReceiptActivity"
-      android:exported="false" />
-    <activity
-      android:name=".IncomeReceiptActivity"
-      android:exported="false" />
-    <activity
-      android:name=".IncomeCateActivity"
-      android:exported="false" />
-    <activity
-      android:name=".OutcomeCateActivity"
-      android:exported="false" />
-    <activity
-      android:name=".AddInfoActivity"
-      android:exported="false" />
-    <activity
       android:name=".kms.MonthlyListActivity"
       android:exported="false" />
   </application>

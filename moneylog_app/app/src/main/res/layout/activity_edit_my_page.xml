@@ -46,13 +46,12 @@
     app:strokeColor="@color/line"
     app:strokeWidth="2dp">
 
-    <EditText
+    <TextView
       android:id="@+id/id"
       android:layout_width="350dp"
       android:layout_height="50dp"
       android:backgroundTint="@color/white"
       android:gravity="center_vertical"
-      android:hint="아이디 입력"
       android:inputType="text"
       android:padding="8dp"
       android:textSize="16sp" />

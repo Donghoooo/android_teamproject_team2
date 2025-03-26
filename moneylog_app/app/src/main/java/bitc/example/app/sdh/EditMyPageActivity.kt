@@ -40,7 +40,7 @@ class EditMyPageActivity : AppCompatActivity() {
     val memberId = sharedPreferences.getString("memberId", "아이디")
     val memberName = sharedPreferences.getString("memberName", "이름")
     val memberEmail = sharedPreferences.getString("memberEmail", "이메일")
-    binding.id.setText(memberId)
+    binding.id.text = memberId
     binding.name.setText(memberName)
     binding.email.setText(memberEmail)
 
