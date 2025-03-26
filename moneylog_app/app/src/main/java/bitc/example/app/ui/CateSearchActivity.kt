@@ -165,6 +165,21 @@ private fun updateBankText(){
   binding.bank.text = selectedBankText
 }
 
+//   수입, 지출 총 금액 계산
+  private fun calculateTotalAmount(transactions: List<SearchDTO>): Pair<Int, Int> {
+    var totalIncome = 0
+    var totalExpense = 0
+
+    for (item in transactions) {
+      if (item.type == "income") {
+        totalIncome += item.money ?: 0
+      } else {
+        totalExpense += item.money ?: 0
+      }
+    }
+    return Pair(totalIncome, totalExpense)
+  }
+
 //  정렬방식 드롭다운
   private fun showPopupMenu(view: View) {
     val popup = PopupMenu(this, view)
@@ -199,22 +214,23 @@ private fun updateBankText(){
   }
 
   private fun fetchTransactionData() {
+
 //    선택한 자산빙식 및 카테고리 가져오기
     // 선택한 카테고리 (미선택 시 null)
-    val selectedCategory = selectedCategories.filter { it.value }.keys.joinToString(", ")
-      .ifEmpty { null }
-
-    val selectedBank = selectedBanks.filter { it.value }.keys.joinToString(", ")
-      .ifEmpty { null }
+    val selectedCategory = selectedCategories.filter { it.value }.keys.toList().takeIf { it.isNotEmpty() }
+    val selectedBank = selectedBanks.filter { it.value }.keys.toList().takeIf { it.isNotEmpty() }
 
     // 선택한 날짜 가져오기
     val startDate = binding.startDate.text.toString()
     val endDate = binding.endDate.text.toString()
 
     // Retrofit API 호출
-    AppServerClass.instance.getSearchList(selectedCategory.toString(),
-      selectedBank.toString(), startDate, endDate)
-      .enqueue(object : Callback<List<SearchDTO>> {
+    AppServerClass.instance.getSearchList(
+      selectedCategory,  // null이 전달될 수 있도록 수정
+      selectedBank,
+      startDate,
+      endDate
+    ).enqueue(object : Callback<List<SearchDTO>>  {
         @SuppressLint("NotifyDataSetChanged")
         override fun onResponse(call: Call<List<SearchDTO>>, response: Response<List<SearchDTO>>) {
           if (response.isSuccessful) {
@@ -225,13 +241,19 @@ private fun updateBankText(){
             searchItemList.addAll(transactions.map {
               SearchListItem(
                 it.date,
-                it.category,
+                it.category ?: "미분류",
                 "내역 없음",  // 필요하면 변경
-                it.source,
+                it.source ?: "알 수 없음",
                 "${it.money} 원",
                 (it.type == "income").toString()
               )
             })
+
+            // 총 수입 & 총 지출 계산 후 UI 반영**
+            val (totalIncome, totalExpense) = calculateTotalAmount(transactions)
+            binding.income.text = "$totalIncome 원"
+            binding.expense.text = "$totalExpense 원"
+
 //            리스트 새로고침
             searchListAdapter.notifyDataSetChanged()
             // 총 검색된 리스트 수 표시

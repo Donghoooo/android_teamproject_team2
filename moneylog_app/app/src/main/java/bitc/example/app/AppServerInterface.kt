@@ -23,9 +23,9 @@ interface AppServerInterface {
 //  검색 페이지
   @GET("search/process")
   fun getSearchList(
-    @Query("category") cate: String,
-    @Query("source") source: String,
-    @Query("startDate") startDate: String,
-    @Query("endDate") endDate: String
+  @Query("category") cate: List<String>?,
+  @Query("source") source: List<String>?,
+  @Query("startDate") startDate: String,
+  @Query("endDate") endDate: String
   ): Call<List<SearchDTO>>
 }

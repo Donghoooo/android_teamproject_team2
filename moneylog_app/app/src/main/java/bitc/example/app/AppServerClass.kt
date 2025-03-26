@@ -7,7 +7,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 object AppServerClass {
-  private val BASE_URL = "http://10.100.203.62:8080/"
+  private val BASE_URL = "http://10.100.203.59:8080/"
   val instance: AppServerInterface by lazy {
     Retrofit.Builder()
       .baseUrl(BASE_URL)
