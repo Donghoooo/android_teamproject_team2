@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.text.ParseException;
+
+import java.util.List;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -69,8 +72,8 @@ public class TestController
 //  검색 페이지
   @GetMapping("search/process")
   public List<SearchDTO> getSearchList (
-      @RequestParam(required = false) List<String> category,
-      @RequestParam(required = false) List<String> source,
+      @RequestParam(required = false) String category,
+      @RequestParam(required = false) String source,
       @RequestParam String startDate,
       @RequestParam String endDate) throws Exception{
 

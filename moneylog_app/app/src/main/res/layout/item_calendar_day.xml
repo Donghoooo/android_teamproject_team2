@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="50dp"
+    android:layout_height="53dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <!-- 일자 텍스트 -->
+    <TextView
+        android:id="@+id/tvDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="#000"
+        android:textAlignment="textStart"/>
+
+    <!-- 지출 텍스트 -->
+    <TextView
+        android:id="@+id/tvExpense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+    <!-- 수입 텍스트 -->
+    <TextView
+        android:id="@+id/tvIncome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:textColor="@color/blue"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+</LinearLayout>
+

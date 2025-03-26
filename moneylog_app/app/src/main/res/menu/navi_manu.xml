@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/calenderFragment"
+        android:title=""
+        android:icon="@drawable/calendar_days_solid"/>
+
+    <item
+        android:id="@+id/chartFragment"
+        android:title=""
+        android:icon="@drawable/chart_pie_solid"/>
+
+    <item
+        android:id="@+id/userFragment"
+        android:title=""
+        android:icon="@drawable/user_solid"/>
+
+    <item
+        android:id="@+id/listFragment"
+        android:title=""
+        android:icon="@drawable/list_ul_solid"/>
+
+    <item
+        android:id="@+id/glassedFragment"
+        android:title=""
+        android:icon="@drawable/magnifying_glass_solid"/>
+
+
+</menu>

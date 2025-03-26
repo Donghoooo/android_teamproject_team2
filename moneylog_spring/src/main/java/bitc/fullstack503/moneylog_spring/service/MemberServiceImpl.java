@@ -16,4 +16,36 @@ public class MemberServiceImpl implements MemberService
   {
     memberMapper.signUp (member);
   }
+  
+  @Override
+  public boolean isMember (MemberDTO member) throws Exception
+  {
+    if (memberMapper.isMember (member) != null)
+    {
+      return true;
+    }
+    return false;
+  }
+  
+  @Override
+  public boolean isMemberId (String memberId) throws Exception
+  {
+    int result = memberMapper.isMemberId (memberId);
+    if (result > 0)
+    {
+      return true;
+    }
+    return false;
+  }
+  
+  @Override
+  public boolean isMemberName (String memberName) throws Exception
+  {
+    int result = memberMapper.isMemberName (memberName);
+    if (result > 0)
+    {
+      return true;
+    }
+    return false;
+  }
 }

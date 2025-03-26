@@ -41,6 +41,8 @@
             android:text="원"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
