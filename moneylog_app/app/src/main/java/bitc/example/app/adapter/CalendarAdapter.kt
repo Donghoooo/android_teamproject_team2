@@ -1,52 +1,65 @@
 package bitc.example.app.adapter
 
+import android.icu.util.Calendar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.R
 import bitc.example.app.databinding.ItemCalendarDayBinding
 import bitc.example.app.model.CalendarData
 
-class CalendarAdapter(private val calendarData: List<CalendarData>) :
-    RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
+class CalendarAdapter(
+    private val calendarData: List<CalendarData>,
+    private val onDayClick: (Int?, Int, Int, Int) -> Unit // 날짜, 수입, 지출, 월을 전달하는 클릭 이벤트
+) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
 
-    class CalendarViewHolder(val binding: ItemCalendarDayBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    class CalendarViewHolder(val binding: ItemCalendarDayBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
-        val binding =
-            ItemCalendarDayBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemCalendarDayBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CalendarViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         val data = calendarData[position]
+        val context = holder.itemView.context
 
-        // 빈 칸 처리 (day가 null인 경우)
-        if (data.day == null) {
-            holder.binding.tvDay.text = ""
-            holder.binding.tvExpense.visibility = View.GONE // 빈 칸인 경우에는 지출을 숨김
-            holder.binding.tvIncome.visibility = View.GONE // 빈 칸인 경우에는 수입을 숨김
-        } else {
-            holder.binding.tvDay.text = data.day.toString()
+        // 날짜가 존재하면 표시
+        data.day?.let { day ->
+            holder.binding.tvDay.text = day.toString()
 
-            // 지출 데이터 표시
-            if (data.isExpense) {
-                holder.binding.tvExpense.text = "- 지출"
-                holder.binding.tvExpense.visibility = View.VISIBLE
-            } else {
-                holder.binding.tvExpense.text = ""
-                holder.binding.tvExpense.visibility = View.GONE
+            val calendar = Calendar.getInstance().apply {
+                set(Calendar.YEAR, data.year)
+                set(Calendar.MONTH, data.month)
+                set(Calendar.DAY_OF_MONTH, day)
             }
 
-            // 수입 데이터 표시
-            if (data.isIncome) {
-                holder.binding.tvIncome.text = "+ 수입"
-                holder.binding.tvIncome.visibility = View.VISIBLE
-            } else {
-                holder.binding.tvIncome.text = ""
-                holder.binding.tvIncome.visibility = View.GONE
+            val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+
+            when (dayOfWeek) {
+                Calendar.SATURDAY -> holder.binding.tvDay.setTextColor(ContextCompat.getColor(context, R.color.blue))
+                Calendar.SUNDAY -> holder.binding.tvDay.setTextColor(ContextCompat.getColor(context, R.color.red))
+                else -> holder.binding.tvDay.setTextColor(ContextCompat.getColor(context, R.color.black))
+            }
+        }
+
+        // 빈 칸 처리
+        if (data.day == null) {
+            holder.binding.tvDay.text = ""
+            holder.binding.tvExpense.visibility = View.GONE
+            holder.binding.tvIncome.visibility = View.GONE
+        } else {
+            holder.binding.tvExpense.text = if (data.isExpense) "- 지출" else ""
+            holder.binding.tvExpense.visibility = if (data.isExpense) View.VISIBLE else View.GONE
+
+            holder.binding.tvIncome.text = if (data.isIncome) "+ 수입" else ""
+            holder.binding.tvIncome.visibility = if (data.isIncome) View.VISIBLE else View.GONE
+
+            holder.binding.tvDay.setOnClickListener {
+                val selectedMonth = (data.month ?: 0) + 1
+                onDayClick(data.day, if (data.isIncome) 1 else 0, if (data.isExpense) 1 else 0, selectedMonth)
             }
         }
     }

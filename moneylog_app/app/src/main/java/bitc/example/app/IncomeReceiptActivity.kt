@@ -2,18 +2,13 @@ package bitc.example.app
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.databinding.ActivityIncomeReceiptBinding
-import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
-import bitc.example.app.dto.MemberDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,17 +17,18 @@ import retrofit2.Response
 class IncomeReceiptActivity : AppCompatActivity() {
 
 
-    private val binding : ActivityIncomeReceiptBinding by lazy{
+    private val binding: ActivityIncomeReceiptBinding by lazy {
         ActivityIncomeReceiptBinding.inflate(layoutInflater)
     }
+
     //    값을 저장할 incomeResultReceipt 변수
     private lateinit var incomeResultReceipt: TextView
-    private lateinit var userId:TextView
+    private lateinit var userId: TextView
 
     private lateinit var incomeInfo: TextView
     private lateinit var incomeMemo: TextView
 
-private lateinit var incomePassReceipt : TextView
+    private lateinit var incomePassReceipt: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,10 +58,9 @@ private lateinit var incomePassReceipt : TextView
 
 
         val id = intent.getStringExtra("user_id")
-        if (id != null){
+        if (id != null) {
             userId.text = id
-        }
-        else{
+        } else {
             userId.text = "No data received"
         }
 
@@ -111,7 +106,6 @@ private lateinit var incomePassReceipt : TextView
             val id = binding.userId.text.toString()
 
 
-
             var income = IncomeLogDTO()
             income.incomeCate = cate
             income.incomeMoney = money
@@ -126,25 +120,25 @@ private lateinit var incomePassReceipt : TextView
 
         }
     }
-        // Retrofit 통신 응답 부분
-        // Callback<String> 부분이 서버에서 전달받을 데이터 타입임
-        private fun retrofitResponse(call: Call<String>) {
-            call.enqueue(object : Callback<String> {
-                override fun onResponse(p0: Call<String>, res: Response<String>) {
-                    if (res.isSuccessful) {
-                        // 서버에서 전달받은 데이터만 변수로 저장
-                        val result = res.body()
-                        Log.d("fullstack503", "result : $result")
-                    }
-                    else {
-                        Log.d("fullstack503", "송신 실패")
-                    }
-                }
 
-                override fun onFailure(p0: Call<String>, t: Throwable) {
-                    Log.d("fullstack503", "message : $t.message")
+    // Retrofit 통신 응답 부분
+    // Callback<String> 부분이 서버에서 전달받을 데이터 타입임
+    private fun retrofitResponse(call: Call<String>) {
+        call.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                    // 서버에서 전달받은 데이터만 변수로 저장
+                    val result = response.body()
+                    Log.d("fullstack503", "result : $result")
+                } else {
+                    Log.d("fullstack503", "송신 실패")
                 }
-            })
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.d("fullstack503", "message : ${t.message}")
+            }
+        })
     }
-    }
+}
 
