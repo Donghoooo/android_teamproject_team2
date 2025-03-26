@@ -1,6 +1,5 @@
 package bitc.example.app.kms
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.FragmentIncomBinding
 import bitc.example.app.dto.IncomeLogDTO
-import bitc.example.app.sagmin.DetailIncomeActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,7 +77,6 @@ class FragmentIncom : Fragment() {
                 Log.d("csy", "message : ${t.message}")
             }
         })
-
 
 //        val items = mutableListOf<String>()
 //        for (i in 1..12) {

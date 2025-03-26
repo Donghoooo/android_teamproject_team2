@@ -74,9 +74,9 @@ class MonthlyListActivity : AppCompatActivity() {
             transaction.commit()
         }
 
-//        binding.layoutFragmentBase.setOnClickListener {
-//            val intent = Intent(requireContext(), DetailIncomeActivity::class.java)
-//            startActivity(intent)
-//        }
+        binding.layoutFragmentBase.setOnClickListener {
+            val intent = Intent(this, DetailIncomeActivity::class.java)
+            startActivity(intent)
+        }
         }
     }
