@@ -81,6 +81,7 @@ class DetailIncomeActivity : AppCompatActivity() {
             val source = binding.incomeDialogReceipt.text.toString()
             val incomeMemo = binding.incomeMemoReceipt.text.toString()
             val incomeUse = binding.incomeInfoReceipt.text.toString()
+
             var income = IncomeLogDTO()
             income.incomeCate = cate
             income.incomeMoney = money

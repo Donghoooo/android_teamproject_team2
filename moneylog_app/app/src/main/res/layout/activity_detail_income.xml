@@ -40,6 +40,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/detail_income_date"
                 android:text="날짜"/>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/income_log_seq"/>
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
