@@ -3,6 +3,7 @@ package bitc.example.app
 import android.app.DatePickerDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -11,7 +12,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.databinding.ActivityAnalyzeListBinding
+import bitc.example.app.dto.IncomeLogDTO
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -47,13 +54,9 @@ class Analyze_List : AppCompatActivity() {
         }
 
 
-
-
-
-
 //       .......부터 날짜 선택하기
-        binding.imageButton1.setOnClickListener{
-            DatePickerDialog(this,object: DatePickerDialog.OnDateSetListener {
+        binding.imageButton1.setOnClickListener {
+            DatePickerDialog(this, object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                     val formattedDate = "$year-${month}-$dayOfMonth"
 
@@ -61,12 +64,12 @@ class Analyze_List : AppCompatActivity() {
                     binding.textViewDate1.text = formattedDate
 
                 }
-            },2025,3-1,20).show()
+            }, 2025, 3 - 1, 20).show()
         }
 
 //        .......까지 날짜 선택하기
-        binding.imageButton2.setOnClickListener{
-            DatePickerDialog(this,object: DatePickerDialog.OnDateSetListener {
+        binding.imageButton2.setOnClickListener {
+            DatePickerDialog(this, object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                     val formattedDate = "$year-${month}-$dayOfMonth"
 
@@ -74,27 +77,66 @@ class Analyze_List : AppCompatActivity() {
                     binding.textViewDate2.text = formattedDate
 
                 }
-            },2025,3,20).show()
+            }, 2025, 3, 20).show()
         }
 
 
-//        확인 버튼 이벤트
 
-        binding.checkButton.setOnClickListener{
-            // 버튼 클릭 리스너 설정
-            binding.checkButton.setOnClickListener {
-                // 버튼 클릭 시 텍스트뷰에 정보 설정
-                binding.incomeMoney.text = "정보1"
-                binding.expenMoney.text = "정보2"
+        binding.checkButton.setOnClickListener {
+            Log.d("csy", "gettest1 시작")
+            val api = AppServerClass.instance
+            val call = api.getanalyze()
 
+            call.enqueue(object : Callback<List<IncomeLogDTO>> {
+                override fun onResponse(
+                    p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>
+                ) {
+                    if (res.isSuccessful) {
+                        val result = res.body()
+                        Log.d("csy", "result : $result")
 
-                // 토스트 메시지 정보 알림
-                Toast.makeText(this, "정보를 가져왔습니다!", Toast.LENGTH_SHORT).show()
-            }
+                    } else {
+                        Log.d("csy", "송신실패")
+                    }
+                }
 
-
-
+                override fun onFailure(p0: Call<List<IncomeLogDTO>>, t: Throwable) {
+                    Log.d("csy", "message : ${t.message}")
+                }
+            })
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+////        확인 버튼 이벤트
+//
+//        binding.checkButton.setOnClickListener{
+//            // 버튼 클릭 리스너 설정
+//            binding.checkButton.setOnClickListener {
+//                // 버튼 클릭 시 텍스트뷰에 정보 설정
+//                binding.incomeMoney.text = "정보1"
+//                binding.expenMoney.text = "정보2"
+//
+//
+//                // 토스트 메시지 정보 알림
+//                Toast.makeText(this, "정보를 가져왔습니다!", Toast.LENGTH_SHORT).show()
+//            }
+//
+//
+//
+//        }
 
 
 //        Fragment vs 수입/지출 버튼 색상 설정
