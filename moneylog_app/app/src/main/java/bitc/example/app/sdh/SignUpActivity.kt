@@ -22,7 +22,8 @@ class SignUpActivity : AppCompatActivity() {
   private val binding: ActivitySignUpBinding by lazy {
     ActivitySignUpBinding.inflate(layoutInflater)
   }
-
+  private var isId: Boolean = false
+  private var isName: Boolean = false
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -63,7 +64,7 @@ class SignUpActivity : AppCompatActivity() {
         Snackbar.make(binding.root, "이메일 형식이 올바르지 않습니다.", Snackbar.LENGTH_SHORT).show()
         return@setOnClickListener
       }
-      else {
+      if (isId && isName) {
         binding.id.setText("")
         binding.pw.setText("")
         binding.pwCheck.setText("")
@@ -78,10 +79,12 @@ class SignUpActivity : AppCompatActivity() {
         val call = api.postSignUp(member)
         signUpProcess(call)
       }
-
-      val intent = Intent(this,LoginActivity::class.java)
+      else {
+        Snackbar.make(binding.root, "다시 입력해 주세요", Snackbar.LENGTH_SHORT).show()
+        return@setOnClickListener
+      }
+      val intent = Intent(this, LoginActivity::class.java)
       startActivity(intent)
-
     }
 
     binding.id.addTextChangedListener(object : TextWatcher {
@@ -163,9 +166,13 @@ class SignUpActivity : AppCompatActivity() {
           val result = res.body() ?: true
           if (!result) {
             binding.idCheck.visibility = View.VISIBLE
+            isId = true
+            Log.d("fullstack503", "아이디성공 +  true")
           }
           else {
             binding.idCheck.visibility = View.GONE
+            isId = false
+            Log.d("fullstack503", "아이디실패 +  false")
           }
         }
         else {
@@ -188,9 +195,13 @@ class SignUpActivity : AppCompatActivity() {
           val result = res.body() ?: true
           if (!result) {
             binding.nameCheck.visibility = View.VISIBLE
+            isName = true
+            Log.d("fullstack503", "이름성공 +  true")
           }
           else {
             binding.nameCheck.visibility = View.GONE
+            isName = false
+            Log.d("fullstack503", "이름실패 +  false")
           }
         }
         else {

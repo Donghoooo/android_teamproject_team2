@@ -104,6 +104,7 @@ class LoginActivity : AppCompatActivity() {
             getMemberInfo(call)
             binding.id.setText("")
             binding.pw.setText("")
+            // intent 메인화면
           }
           else {
             Snackbar.make(binding.root, "아이디 또는 비밀번호가 다릅니다", Snackbar.LENGTH_SHORT).show()
@@ -128,7 +129,6 @@ class LoginActivity : AppCompatActivity() {
           val result: MemberDTO? = res.body()
           if (result != null) {
             saveMemberInfo(result)
-            sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
             loadMemberInfo()
           }
           else {
@@ -151,6 +151,7 @@ class LoginActivity : AppCompatActivity() {
     sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
     with(sharedPreferences.edit()) {
+      putInt("memberSeq", memberInfo.memberSeq!!)
       putString("memberId", memberInfo.memberId)
       putString("memberName", memberInfo.memberName)
       val formattedDate = try {
@@ -167,10 +168,12 @@ class LoginActivity : AppCompatActivity() {
 
   private fun loadMemberInfo() {
     val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+    val memberSeq = sharedPreferences.getInt("memberSeq", 0)
     val memberId = sharedPreferences.getString("memberId", "N/A")
     val memberName = sharedPreferences.getString("memberName", "N/A")
     val createDate = sharedPreferences.getString("createDate", "N/A")
     val memberEmail = sharedPreferences.getString("memberEmail", "N/A")
+    Log.d("fullstack503", "memberSeq: $memberSeq")
     Log.d("fullstack503", "memberId: $memberId")
     Log.d("fullstack503", "memberName: $memberName")
     Log.d("fullstack503", "createDate: $createDate")

@@ -15,4 +15,6 @@ public interface MemberMapper
   void memberDelete (String memberId) throws Exception;
   
   void memberUpdate (MemberDTO member) throws Exception;
+  
+  MemberDTO memberFindSeq (int memberSeq) throws Exception;
 }

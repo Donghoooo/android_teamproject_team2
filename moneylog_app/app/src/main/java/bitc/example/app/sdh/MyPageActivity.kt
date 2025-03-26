@@ -30,15 +30,6 @@ class MyPageActivity : AppCompatActivity() {
       v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
       insets
     }
-    val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
-    val memberId = sharedPreferences.getString("memberId", "아이디").toString()
-    val memberName = sharedPreferences.getString("memberName", "이름").toString()
-    val createDate = sharedPreferences.getString("createDate", "생성날짜").toString()
-    val memberEmail = sharedPreferences.getString("memberEmail", "이메일").toString()
-    binding.id.text = memberId
-    binding.createDate.text = createDate
-    binding.name.text = memberName
-    binding.email.text = memberEmail
 
     binding.btnEdit.setOnClickListener {
       val intent = Intent(this, MyPageCheckActivity::class.java)
@@ -48,6 +39,19 @@ class MyPageActivity : AppCompatActivity() {
     binding.btnDelete.setOnClickListener {
       showDeleteConfirmationDialog()
     }
+  }
+
+  override fun onResume() {
+    super.onResume()
+    val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+    val memberId = sharedPreferences.getString("memberId", "아이디").toString()
+    val memberName = sharedPreferences.getString("memberName", "이름").toString()
+    val createDate = sharedPreferences.getString("createDate", "생성날짜").toString()
+    val memberEmail = sharedPreferences.getString("memberEmail", "이메일").toString()
+    binding.id.text = memberId
+    binding.createDate.text = createDate
+    binding.name.text = memberName
+    binding.email.text = memberEmail
   }
 
   private fun showDeleteConfirmationDialog() {

@@ -63,9 +63,6 @@ public class MemberServiceImpl implements MemberService
   public MemberDTO memberUpdate (MemberDTO member) throws Exception
   {
     memberMapper.memberUpdate (member);
-    MemberDTO member2 = new MemberDTO ();
-    member2.setMemberId (member.getMemberId ());
-    member2.setMemberPw (member.getMemberPw ());
-    return memberMapper.isMember (member2);
+    return memberMapper.memberFindSeq (member.getMemberSeq ());
   }
 }
