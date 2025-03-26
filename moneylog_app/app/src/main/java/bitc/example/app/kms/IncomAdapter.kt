@@ -1,11 +1,13 @@
 package bitc.example.app.kms
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.databinding.IncomItemRecyclerViewBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.sagmin.DetailIncomeActivity
 
 class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //class IncomAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -28,9 +30,21 @@ class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<R
 
         val binding = (holder as IncomViewHolder).binding
 
-        binding.incomItemDateData.text = datas[index].incomeDate
-        binding.incomItemCateData.text = datas[index].incomeCate
-        binding.incomItemMoneyData.text = datas[index].incomeMoney
+        val item = datas[index]
+
+        binding.incomItemDateData.text = item.incomeDate
+        binding.incomItemCateData.text = item.incomeCate
+        binding.incomItemMoneyData.text = item.incomeMoney
+
+        binding.incomItemCateData.setOnClickListener {
+            val context = binding.root.context
+            val intent = Intent(context, DetailIncomeActivity::class.java).apply {
+                putExtra("incomeDate", item.incomeDate)
+                putExtra("incomeCate", item.incomeCate)
+                putExtra("incomeMoney", item.incomeMoney)
+            }
+            context.startActivity(intent)
+        }
+    }
     }
 
-}
