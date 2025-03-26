@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bitc.fullstack503.moneylog_spring.mapper.IncomeMapper">
+<mapper namespace="bitc.fullstack503.moneylog_spring.mapper.sangmin.IncomeMapper">
 
 <!-- 수입 내역 입력하기 -->
     <insert id="income" parameterType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">

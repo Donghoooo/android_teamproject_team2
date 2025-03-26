@@ -1,7 +1,7 @@
-package bitc.fullstack503.moneylog_spring.controller;
+package bitc.fullstack503.moneylog_spring.controller.sangmin;
 
 import bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO;
-import bitc.fullstack503.moneylog_spring.service.OutcomeService;
+import bitc.fullstack503.moneylog_spring.service.sangmin.OutcomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

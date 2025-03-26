@@ -1,4 +1,4 @@
-package bitc.fullstack503.moneylog_spring.service;
+package bitc.fullstack503.moneylog_spring.service.sangmin;
 
 import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
 

@@ -1,4 +1,4 @@
-package bitc.fullstack503.moneylog_spring.mapper;
+package bitc.fullstack503.moneylog_spring.mapper.sangmin;
 import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 @Mapper

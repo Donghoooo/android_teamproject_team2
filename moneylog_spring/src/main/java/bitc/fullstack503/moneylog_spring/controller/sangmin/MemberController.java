@@ -1,4 +1,4 @@
-package bitc.fullstack503.moneylog_spring.controller;
+package bitc.fullstack503.moneylog_spring.controller.sangmin;
 import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import bitc.fullstack503.moneylog_spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;

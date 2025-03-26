@@ -1,7 +1,7 @@
-package bitc.fullstack503.moneylog_spring.service;
+package bitc.fullstack503.moneylog_spring.service.sangmin;
 
 import bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO;
-import bitc.fullstack503.moneylog_spring.mapper.OutcomeMapper;
+import bitc.fullstack503.moneylog_spring.mapper.sangmin.OutcomeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
