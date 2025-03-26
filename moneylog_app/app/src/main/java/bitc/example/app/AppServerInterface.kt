@@ -53,4 +53,8 @@ fun deleteOutcome(@Query("outcomeLogSeq")outcomeLogSeq : Int): Call<Int>
     @Query("startDate") startDate: String,
     @Query("endDate") endDate: String
   ): Call<List<SearchDTO>>
+
+//  수입/지출 리스트
+  @GET("/list/income")
+  fun getIncomeList() : Call<List<IncomeLogDTO>>
 }

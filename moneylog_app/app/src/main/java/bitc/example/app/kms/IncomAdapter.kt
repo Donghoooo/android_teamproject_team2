@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.databinding.IncomItemRecyclerViewBinding
+import bitc.example.app.dto.IncomeLogDTO
 
-class IncomAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    //class IncomAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return IncomViewHolder(IncomItemRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
@@ -15,12 +17,20 @@ class IncomAdapter(val datas: MutableList<String>): RecyclerView.Adapter<Recycle
         return datas.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, index: Int) {
 //        Log.d("fullstack503", "onBindViewHolder : $position")
+//        Log.d("csy", "datas : $datas")
+
+//        val incomeDateList = datas.map { it.incomeDate }
+//        val incomeCateList = datas.map { it.incomeCate }
+//        val incomeMoneyList = datas.map { it.incomeMoney }
+
 
         val binding = (holder as IncomViewHolder).binding
 
-        binding.incomItemData.text = datas[position]
+        binding.incomItemDateData.text = datas[index].incomeDate
+        binding.incomItemCateData.text = datas[index].incomeCate
+        binding.incomItemMoneyData.text = datas[index].incomeMoney
     }
 
 }
