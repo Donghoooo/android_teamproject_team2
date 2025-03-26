@@ -65,7 +65,7 @@
     android:text="사용가능"
     android:textColor="@color/success"
     android:textSize="12sp"
-    android:visibility="invisible"
+    android:visibility="gone"
     app:layout_constraintEnd_toEndOf="@+id/idBox"
     app:layout_constraintTop_toBottomOf="@+id/idBox" />
 
@@ -179,7 +179,7 @@
     android:text="사용가능"
     android:textColor="@color/success"
     android:textSize="12sp"
-    android:visibility="invisible"
+    android:visibility="gone"
     app:layout_constraintTop_toBottomOf="@+id/nameBox" />
 
   <TextView
@@ -211,7 +211,7 @@
       android:backgroundTint="@color/white"
       android:gravity="center_vertical"
       android:hint="e-mail"
-      android:inputType="text"
+      android:inputType="textEmailAddress"
       android:padding="8dp"
       android:textSize="16sp" />
   </com.google.android.material.card.MaterialCardView>

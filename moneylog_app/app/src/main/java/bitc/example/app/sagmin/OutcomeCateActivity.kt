@@ -1,9 +1,7 @@
-package bitc.example.app
+package bitc.example.app.sagmin
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -14,8 +12,8 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.R
 import bitc.example.app.databinding.ActivityOutcomeCateBinding
-import kotlinx.coroutines.selects.select
 
 class OutcomeCateActivity : AppCompatActivity() {
 
@@ -123,7 +121,7 @@ class OutcomeCateActivity : AppCompatActivity() {
 
 
 
-            val intent = Intent(this,OutcomeReceiptActivity::class.java).apply{
+            val intent = Intent(this, OutcomeReceiptActivity::class.java).apply{
                 putExtra("text_value3",money)
                 putExtra("text_value4",memo)
                 putExtra("text_value5",info)
@@ -137,6 +135,8 @@ class OutcomeCateActivity : AppCompatActivity() {
 
 
 //        =========================== 텍스트 넘겨받기 ==============================================
+
+
 //        변수 초기화 : outResult 는 binding.tvResult로 초기화된다.
 //        TextView (tv_result)를 바인딩하는 코드이다.
         outResult = binding.outcomeResultCate

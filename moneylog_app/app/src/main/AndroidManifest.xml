@@ -12,10 +12,50 @@
   <uses-permission android:name="android.permission.INTERNET" />
 
   <application
+      android:allowBackup="true"
+      android:dataExtractionRules="@xml/data_extraction_rules"
+      android:fullBackupContent="@xml/backup_rules"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/Theme.App"
       android:usesCleartextTraffic="true"
       tools:targetApi="31">
+    <activity
+        android:name=".sdh.EditMyPageActivity"
+        android:exported="true"/>
+    <activity
+        android:name=".sdh.MyPageCheckActivity"
+        android:exported="false" />
+    <activity
+        android:name=".sdh.MyPageActivity"
+        android:exported="false"/>
+    <activity
+        android:name=".sdh.SignUpActivity"
+        android:exported="false" />
+    <activity
+        android:name=".sdh.LoginActivity"
+        android:exported="false" />
+
+    <activity
+        android:name=".Analyze_List"
+        android:exported="true" />
+    <activity
+        android:name=".sagmin.OutcomeBankChangeActivity"
+        android:exported="false" />
+    <activity
+        android:name=".sagmin.IncomeBankChangeActivity"
+        android:exported="false" />
+    <activity
+        android:name=".sagmin.IncomeCategoryChangeActivity"
+        android:exported="false" />
+    <activity
+        android:name=".sagmin.OutcomeCategoryChangeActivity"
+        android:exported="false" />
+    <activity
+        android:name=".kms.MonthlyListActivity"
+        android:exported="false" />
     <activity
         android:name=".ui.dialog.BankSelectionDialog"
         android:exported="false" />
@@ -25,7 +65,7 @@
         tools:ignore="Instantiatable" />
     <activity
         android:name=".ui.CateSearchActivity"
-        android:exported="true">
+        android:exported="true" >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -36,26 +76,62 @@
         android:name=".MainActivity"
         android:exported="false" />
     <activity
-        android:name=".sdh.SignUpActivity"
-        android:exported="false"></activity>
-    <activity
-        android:name=".sdh.LoginActivity"
+        android:name=".sagmin.DetailOutcomeActivity"
         android:exported="false" />
     <activity
-        android:name=".OutcomeReceiptActivity"
+        android:name=".sagmin.DetailIncomeActivity"
         android:exported="false" />
     <activity
-        android:name=".IncomeReceiptActivity"
+        android:name=".sagmin.OutcomeReceiptActivity"
         android:exported="false" />
     <activity
-        android:name=".IncomeCateActivity"
+        android:name=".sagmin.IncomeReceiptActivity"
         android:exported="false" />
     <activity
-        android:name=".OutcomeCateActivity"
+        android:name=".sagmin.IncomeCateActivity"
         android:exported="false" />
     <activity
-        android:name=".AddInfoActivity"
+        android:name=".sagmin.OutcomeCateActivity"
         android:exported="false" />
+    <activity
+        android:name=".sagmin.AddInfoActivity"
+        android:exported="false" >
+
+    </activity>
+
   </application>
+
+<!--  <application-->
+<!--      android:supportsRtl="true"-->
+<!--      android:theme="@style/Theme.App"-->
+<!--      android:usesCleartextTraffic="true"-->
+<!--      tools:targetApi="31">-->
+<!--    <activity-->
+<!--        android:name=".ui.dialog.BankSelectionDialog"-->
+<!--        android:exported="false" />-->
+<!--    <activity-->
+<!--        android:name=".ui.dialog.CategorySeletionDialog"-->
+<!--        android:exported="false"-->
+<!--        tools:ignore="Instantiatable" />-->
+<!--    <activity-->
+<!--        android:name=".ui.CateSearchActivity"-->
+<!--        android:exported="true">-->
+<!--      <intent-filter>-->
+<!--        <action android:name="android.intent.action.MAIN" />-->
+
+<!--        <category android:name="android.intent.category.LAUNCHER" />-->
+<!--      </intent-filter>-->
+<!--    </activity>-->
+<!--    <activity-->
+<!--        android:name=".MainActivity"-->
+<!--        android:exported="false" />-->
+<!--    <activity-->
+<!--        android:name=".sdh.SignUpActivity"-->
+<!--        android:exported="false"></activity>-->
+<!--    <activity-->
+<!--        android:name=".sdh.LoginActivity"-->
+<!--        android:exported="false" />-->
+
+<!--  </application>-->
 
 </manifest>

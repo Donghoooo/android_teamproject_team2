@@ -13,7 +13,7 @@ public class IncomeLogDTO
   @JsonProperty ("incomeMoney")
   private int incomeMoney;
   @JsonProperty ("incomeDate")
-  private LocalDateTime incomeDate;
+  private String incomeDate;
   @JsonProperty ("incomeCate")
   private String incomeCate;
   @JsonProperty ("incomeMemo")

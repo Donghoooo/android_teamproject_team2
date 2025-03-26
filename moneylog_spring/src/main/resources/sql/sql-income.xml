@@ -2,11 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.moneylog_spring.mapper.IncomeMapper">
 
-
+<!-- 수입 내역 입력하기 -->
     <insert id="income" parameterType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">
         insert into income_log(member_id,income_date,income_money,income_cate,income_memo,income_source,income_use)
         values (#{memberId},#{incomeDate},#{incomeMoney},#{incomeCate},#{incomeMemo},#{incomeSource},#{incomeUse})
     </insert>
+
+<!--    수입 내용 수정하기 -->
+    <update id="incomeUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">
+update income_log
+set income_money =#{incomeMoney}, income_cate = #{incomeCate}, income_memo = #{incomeMemo}, income_source = #{incomeSource},
+    income_use = #{incomeUse}
+where income_log_seq = #{incomeLogSeq}
+    </update>
+
+<!--    수입 내용 삭제하기 -->
+<delete id="incomeDelete" parameterType="int">
+    DELETE FROM income_log
+    where income_log_seq = #{incomeLogSeq}
+</delete>
 
 
 </mapper>

@@ -14,5 +14,5 @@ data class SearchDTO (
   @SerializedName("money")
   val money: Int,          // 금액
   @SerializedName("date")
-  val date: String // 거래 날짜
+  val date: String, // 거래 날짜
 )

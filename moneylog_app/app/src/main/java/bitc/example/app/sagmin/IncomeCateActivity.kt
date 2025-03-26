@@ -1,4 +1,4 @@
-package bitc.example.app
+package bitc.example.app.sagmin
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.R
 import bitc.example.app.databinding.ActivityIncomeCateBinding
 
 class IncomeCateActivity : AppCompatActivity() {
@@ -39,7 +40,6 @@ class IncomeCateActivity : AppCompatActivity() {
     private lateinit var btnPartmoney: AppCompatButton
     private lateinit var btnDutch: AppCompatButton
     private lateinit var btnEtc: AppCompatButton
-    private lateinit var incomeDialogCate: AppCompatButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,7 +112,13 @@ class IncomeCateActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+
+
 //        =========================== addInfo 의 TextView 넘겨주기 ===========================
+
+
+
+
         incomeResult = binding.incomeResultCate
 
         val text = intent.getStringExtra("text_value2")
@@ -160,12 +166,16 @@ class IncomeCateActivity : AppCompatActivity() {
         // 선택된 버튼이 있으면 원래 상태로 복원 (배경색 초기화)
         selectedButton?.let {
             // 이전에 선택된 버튼의 배경색을 기본 배경색으로 변경
-            it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.default_button_color)
+            it.backgroundTintList = ContextCompat.getColorStateList(this,
+                R.color.default_button_color
+            )
         }
 
         // 현재 클릭된 버튼을 선택된 버튼으로 설정하고 배경색 변경
         // 선택된 버튼의 배경색을 지정
-        button.backgroundTintList = ContextCompat.getColorStateList(this, R.color.selected_button_color)
+        button.backgroundTintList = ContextCompat.getColorStateList(this,
+            R.color.selected_button_color
+        )
 
         // 현재 선택된 버튼을 저장
         selectedButton = button

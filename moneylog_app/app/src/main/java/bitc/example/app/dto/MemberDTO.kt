@@ -1,7 +1,6 @@
 package bitc.example.app.dto
 
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDateTime
 
 data class MemberDTO(
   @SerializedName("memberSeq")
@@ -13,9 +12,9 @@ data class MemberDTO(
   @SerializedName("memberName")
   var memberName: String? = null,
   @SerializedName("createDate")
-  var createDate: LocalDateTime? = null,
+  var createDate: String? = null,
   @SerializedName("updateDate")
-  var updateDate: LocalDateTime? = null,
+  var updateDate: String? = null,
   @SerializedName("memberEmail")
   var memberEmail: String? = null
 )
