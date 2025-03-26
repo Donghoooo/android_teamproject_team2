@@ -36,17 +36,11 @@
       android:exported="false" />
     <activity
       android:name=".sdh.LoginActivity"
-      android:exported="false">
+      android:exported="false" />
 
     <activity
       android:name=".Analyze_List"
-      android:exported="false">
-      <!--            <intent-filter>-->
-      <!--                <action android:name="android.intent.action.MAIN" />-->
-
-      <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-      <!--            </intent-filter>-->
-    </activity>
+      android:exported="false" />
     <activity
       android:name=".sagmin.OutcomeBankChangeActivity"
       android:exported="false" />
@@ -61,13 +55,7 @@
       android:exported="false" />
     <activity
       android:name=".kms.MonthlyListActivity"
-      android:exported="true" >
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
+      android:exported="false" />
     <activity
       android:name=".ui.dialog.BankSelectionDialog"
       android:exported="false" />
@@ -83,17 +71,10 @@
       android:exported="false" />
     <activity
       android:name=".sagmin.DetailOutcomeActivity"
-      android:exported="false">
-      <!--        <intent-filter>-->
-      <!--            <action android:name="android.intent.action.MAIN" />-->
-
-      <!--            <category android:name="android.intent.category.LAUNCHER" />-->
-      <!--        </intent-filter>-->
-    </activity>
+      android:exported="false" />
     <activity
       android:name=".sagmin.DetailIncomeActivity"
-      android:exported="false">
-    </activity>
+      android:exported="false" />
     <activity
       android:name=".sagmin.OutcomeReceiptActivity"
       android:exported="false" />
