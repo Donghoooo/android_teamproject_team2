@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,15 +18,6 @@ import java.util.Map;
 @RestController
 public class TestController
 {
-  @Autowired
-  private MemberService memberService;
-
-  @Autowired
-  private IncomeService incomeService;
-
-  @Autowired
-  private OutcomeService outcomeService;
-
 //  검색 페이지
   @Autowired
   private SearchService searchService;
@@ -37,31 +27,7 @@ public class TestController
   {
     return "index";
   }
-  
-  @PostMapping ("loginProcess")
-  public String loginProcess (@RequestBody MemberDTO member) throws Exception
-  {
-    System.out.println (member.getMemberId ());
-    System.out.println (member.getMemberPw ());
-    return "login";
-  }
-  
-  @PostMapping ("signUp/process")
-  public void signUpProcess (@RequestBody MemberDTO member) throws Exception
-  {
-    memberService.signUp (member);
-  }
 
-  @PostMapping("income/process")
-  public void incomeProcess (@RequestBody IncomeLogDTO income) throws Exception
-  {
-    incomeService.income(income);
-  }
-
-  @PostMapping("outcome/process")
-  public void expenseProcess (@RequestBody ExpenseLogDTO outcome) throws Exception{
-    outcomeService.expense(outcome);
-  }
 
 //  검색 페이지
   @GetMapping("search/process")
