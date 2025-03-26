@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.moneylog_spring.mapper.OutcomeMapper">
 
-
+<!-- 지출 입력하기-->
     <insert id="expense" parameterType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO">
-        insert into expense_log(member_id,expense,expense_date,expense_cate,expense_memo,payment_option,expense_use)
-        values (#{memberId},#{expense},#{expenseDate},#{expenseCate},#{expenseMemo},#{paymentOption},#{expenseUse})
+        insert into expense_log(member_id,expense_money,expense_date,expense_cate,expense_memo,payment_option,expense_use)
+        values (#{memberId},#{expenseMoney},#{expenseDate},#{expenseCate},#{expenseMemo},#{paymentOption},#{expenseUse})
     </insert>
 
+<<<<<<< HEAD
     <!-- 특정 날짜에 대한 수입과 지출 합계를 가져오는 쿼리 -->
     <select id="selectIncomeAndExpenseByDate" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseDataDTO">
         SELECT
@@ -30,6 +31,22 @@
         GROUP BY expense_date
     </select>
 
+=======
+
+<!-- 지출 내역 수정하기   -->
+    <update id="expenseUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO">
+        update expense_log
+        set expense_money =#{expenseMoney}, expense_cate = #{expenseCate}, expense_memo = #{expenseMemo}, payment_option = #{paymentOption},
+            expense_use = #{expenseUse}
+        where expense_log_seq = #{expenseLogSeq}
+    </update>
+
+<!--    지출 내용 삭제하기 -->
+    <delete id="expenseDelete" parameterType="int">
+DELETE FROM outcome_log
+where expense_log_seq = ${expenseLogSeq}
+    </delete>
+>>>>>>> origin/khamro1
 
 
 </mapper>

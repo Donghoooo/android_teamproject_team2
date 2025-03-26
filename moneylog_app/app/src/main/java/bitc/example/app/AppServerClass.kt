@@ -8,6 +8,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 
 object AppServerClass {
+<<<<<<< HEAD
     private val BASE_URL = "http://10.100.203.69:8080/"
     val instance: AppServerInterface by lazy {
         Retrofit.Builder()
@@ -38,4 +39,15 @@ object AppServerClass {
             }
         })
     }
+=======
+  private val BASE_URL = "http://10.100.203.55:8080/"
+  val instance: AppServerInterface by lazy {
+    Retrofit.Builder()
+      .baseUrl(BASE_URL)
+      .addConverterFactory(ScalarsConverterFactory.create())
+      .addConverterFactory(GsonConverterFactory.create())
+      .build()
+      .create(AppServerInterface::class.java)
+  }
+>>>>>>> origin/khamro1
 }

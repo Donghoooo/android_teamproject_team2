@@ -1,4 +1,4 @@
-package bitc.example.app
+package bitc.example.app.sagmin
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.R
 import bitc.example.app.databinding.ActivityIncomeCateBinding
 
 class IncomeCateActivity : AppCompatActivity() {
@@ -25,7 +26,6 @@ class IncomeCateActivity : AppCompatActivity() {
     //    입력한 내역 , 메모 변수 생성
     private lateinit var incomeInfo: EditText
     private lateinit var incomeMemo: EditText
-    private lateinit var userId:TextView
 
 
     //    버튼의 값을 저장하고 선택을 누를시 버튼의 값도 다음페이지로 같이 전달, 버튼의 값을 저장할 변수와 버튼 선언
@@ -99,13 +99,11 @@ class IncomeCateActivity : AppCompatActivity() {
             val memo = incomeMemo.text.toString()
             val dialog = incomeDialog.text.toString()
             val selectedCategory = selectedButton?.text.toString()
-            val id = userId.text.toString()
 
 
 //            intent를 사용하여 incomeReceiptActivity에 접근가능하게하고
 //            putExtra에 설정한 "text_value3" 이라는 text 문자열에 저장
             val intent = Intent(this, IncomeReceiptActivity::class.java).apply {
-                putExtra("user_id",id)
                 putExtra("text_value3", text)
                 putExtra("text_value4", info)
                 putExtra("text_value5", memo)
@@ -117,16 +115,7 @@ class IncomeCateActivity : AppCompatActivity() {
 
 
 //        =========================== addInfo 의 TextView 넘겨주기 ===========================
-        userId = binding.userId
 
-        val id = intent.getStringExtra("user_id")
-
-        if (id != null){
-            userId.text = id
-        }
-        else{
-            userId.text = "No data received"
-        }
 
 
 
@@ -177,12 +166,16 @@ class IncomeCateActivity : AppCompatActivity() {
         // 선택된 버튼이 있으면 원래 상태로 복원 (배경색 초기화)
         selectedButton?.let {
             // 이전에 선택된 버튼의 배경색을 기본 배경색으로 변경
-            it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.default_button_color)
+            it.backgroundTintList = ContextCompat.getColorStateList(this,
+                R.color.default_button_color
+            )
         }
 
         // 현재 클릭된 버튼을 선택된 버튼으로 설정하고 배경색 변경
         // 선택된 버튼의 배경색을 지정
-        button.backgroundTintList = ContextCompat.getColorStateList(this, R.color.selected_button_color)
+        button.backgroundTintList = ContextCompat.getColorStateList(this,
+            R.color.selected_button_color
+        )
 
         // 현재 선택된 버튼을 저장
         selectedButton = button

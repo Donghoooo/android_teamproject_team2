@@ -8,6 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface OutcomeMapper {
+<<<<<<< HEAD
     // 수입과 지출을 저장하는 메서드
     void expense(ExpenseLogDTO outcome) throws Exception;
 
@@ -21,4 +22,15 @@ public interface OutcomeMapper {
 //        "FROM expense_log WHERE YEAR(expense_date) = #{year} AND MONTH(expense_date) = #{month} " +
 //        "GROUP BY expense_date")
 //    List<ExpenseDataDTO> selectIncomeAndExpenseByMonth(int year, int month);
+=======
+//     지출 내용 입력하기
+    public void expense(ExpenseLogDTO outcome)throws Exception;
+
+//    지출 내용 수정하기
+    int expenseUpdate(ExpenseLogDTO outcomeLog)throws Exception;
+
+//    지출 내용 삭제하기
+    int expenseDelete(int expenseLogSeq)throws Exception;
+
+>>>>>>> origin/khamro1
 }

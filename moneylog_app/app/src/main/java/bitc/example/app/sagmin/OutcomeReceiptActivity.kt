@@ -1,4 +1,4 @@
-package bitc.example.app
+package bitc.example.app.sagmin
 
 import android.os.Bundle
 import android.util.Log
@@ -7,10 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import bitc.example.app.databinding.ActivityIncomeReceiptBinding
+import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityOutcomeReceiptBinding
 import bitc.example.app.dto.ExpenseLogDTO
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +23,6 @@ class OutcomeReceiptActivity : AppCompatActivity() {
     private lateinit var infoReceipt: TextView
     private lateinit var memoReceipt: TextView
     private lateinit var outcomeDialog: TextView
-    private lateinit var userId:TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +41,6 @@ class OutcomeReceiptActivity : AppCompatActivity() {
         infoReceipt = binding.outcomeInfoReceipt
         memoReceipt = binding.outcomeMemoReceipt
         outcomeDialog = binding.outcomeDialogReceipt
-        userId = binding.userId
 
         val money = intent.getStringExtra("text_value3")
         if (money != null) {
@@ -52,13 +49,6 @@ class OutcomeReceiptActivity : AppCompatActivity() {
             moneyReceipt.text = "No data receivced"
         }
 
-        val id = intent.getStringExtra("user_id")
-        if (id != null){
-            userId.text = id
-        }
-        else{
-            userId.text = "No data received"
-        }
 
         val memo = intent.getStringExtra("text_value4")
         if (money != null) {
@@ -90,16 +80,14 @@ class OutcomeReceiptActivity : AppCompatActivity() {
             val outcomeSource = binding.outcomeDialogReceipt.text.toString()
             val outcomeMemo = binding.outcomeMemoReceipt.text.toString()
             val outcomeUse = binding.outcomeInfoReceipt.text.toString()
-            val id = binding.userId.text.toString()
 
 
             val outcome = ExpenseLogDTO()
             outcome.expenseCate = cate
-            outcome.expense = outcomeMoney
+            outcome.expenseMoney = outcomeMoney
             outcome.paymentOption = outcomeSource
             outcome.expenseMemo = outcomeMemo
             outcome.expenseUse = outcomeUse
-            outcome.memberId = id
 
 
             val api = AppServerClass.instance
