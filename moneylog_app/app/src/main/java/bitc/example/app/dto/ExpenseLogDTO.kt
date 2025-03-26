@@ -8,7 +8,7 @@ data class ExpenseLogDTO(
   var expenseLogSeq: Int? = null,
   @SerializedName("memberId")
   var memberId: String? = null,
-  @SerializedName("expense")
+  @SerializedName("expenseMoney")
   var expenseMoney: String? = null,
   @SerializedName("expenseDate")
   var expenseDate: String? = null,

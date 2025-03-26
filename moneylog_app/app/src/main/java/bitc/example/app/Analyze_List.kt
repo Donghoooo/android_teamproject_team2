@@ -81,30 +81,31 @@ class Analyze_List : AppCompatActivity() {
         }
 
 
-
-        binding.checkButton.setOnClickListener {
-            Log.d("csy", "gettest1 시작")
-            val api = AppServerClass.instance
-            val call = api.getanalyze()
-
-            call.enqueue(object : Callback<List<IncomeLogDTO>> {
-                override fun onResponse(
-                    p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>
-                ) {
-                    if (res.isSuccessful) {
-                        val result = res.body()
-                        Log.d("csy", "result : $result")
-
-                    } else {
-                        Log.d("csy", "송신실패")
-                    }
-                }
-
-                override fun onFailure(p0: Call<List<IncomeLogDTO>>, t: Throwable) {
-                    Log.d("csy", "message : ${t.message}")
-                }
-            })
-        }
+//
+//        binding.checkButton.setOnClickListener {
+//            Log.d("csy", "gettest1 시작")
+//            val api = AppServerClass.instance
+//            val call = api.getanalyze()
+//
+//            call.enqueue(object : Callback<List<IncomeLogDTO>> {
+//                override fun onResponse(
+//                    p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>
+//                ) {
+//                    if (res.isSuccessful) {
+//                        val result = res.body()
+//                        Log.d("csy", "result : $result")
+//
+//
+//                    } else {
+//                        Log.d("csy", "송신실패")
+//                    }
+//                }
+//
+//                override fun onFailure(p0: Call<List<IncomeLogDTO>>, t: Throwable) {
+//                    Log.d("csy", "message : ${t.message}")
+//                }
+//            })
+//        }
 
 
 
