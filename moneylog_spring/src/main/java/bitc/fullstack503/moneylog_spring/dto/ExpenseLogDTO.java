@@ -8,8 +8,8 @@ public class ExpenseLogDTO
   private int expenseLogSeq;
   @JsonProperty ("memberId")
   private String memberId;
-  @JsonProperty ("expense")
-  private int expense;
+  @JsonProperty ("expenseMoney")
+  private int expenseMoney;
   @JsonProperty ("expenseDate")
   private String expenseDate;
   @JsonProperty ("expenseCate")

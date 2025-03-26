@@ -1,13 +1,19 @@
 package bitc.example.app.kms
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.FragmentIncomBinding
+import bitc.example.app.dto.IncomeLogDTO
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,16 +52,42 @@ class FragmentIncom : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val items = mutableListOf<String>()
-        for (i in 1..12) {
-            items.add("$i 월")
-        }
 
-        val adapter = IncomAdapter(items)
+        val api = AppServerClass.instance
+        val call = api.getIncomeList()
 
-        binding.incomRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.incomRecyclerView.adapter = adapter
-        binding.incomRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+        call.enqueue(object : Callback<List<IncomeLogDTO>>{
+            override fun onResponse(p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>) {
+                if (res.isSuccessful) {
+                    val result = res.body()?.toMutableList()
+                    Log.d("csy", "result : $result")
+
+                    val adapter = result?.let { IncomAdapter(it) }
+
+                    binding.incomRecyclerView.layoutManager = LinearLayoutManager(context)
+                    binding.incomRecyclerView.adapter = adapter
+                    binding.incomRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+                }
+                else {
+                    Log.d("csy", "송신실패")
+                }
+            }
+
+            override fun onFailure(p0: Call<List<IncomeLogDTO>>, t: Throwable) {
+                Log.d("csy", "message : ${t.message}")
+            }
+        })
+
+//        val items = mutableListOf<String>()
+//        for (i in 1..12) {
+//            items.add("$i")
+//        }
+
+//        val adapter = IncomAdapter(items)
+//
+//        binding.incomRecyclerView.layoutManager = LinearLayoutManager(context)
+//        binding.incomRecyclerView.adapter = adapter
+//        binding.incomRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
     }
 
     companion object {
