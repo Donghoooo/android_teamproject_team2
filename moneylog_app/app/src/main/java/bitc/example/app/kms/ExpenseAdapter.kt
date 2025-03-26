@@ -35,6 +35,7 @@ class ExpenseAdapter(val datas: MutableList<ExpenseLogDTO>): RecyclerView.Adapte
         binding.expenseItemMemoData.text = datas[index].expenseMemo
         binding.expenseItemOptionData.text = datas[index].paymentOption
         binding.expenseItemUseData.text = datas[index].expenseUse
+        binding.expenseItemSeqData.text = datas[index].expenseLogSeq.toString()
     }
 
 }

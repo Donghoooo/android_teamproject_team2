@@ -34,6 +34,7 @@ class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<R
         binding.incomItemMemoData.text = datas[index].incomeMemo
         binding.incomItemSourceData.text = datas[index].incomeSource
         binding.incomItemUseData.text = datas[index].incomeUse
+        binding.incomItemSeqData.text = datas[index].incomeLogSeq.toString()
     }
 
 }

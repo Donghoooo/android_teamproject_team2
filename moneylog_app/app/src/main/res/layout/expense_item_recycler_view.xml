@@ -67,6 +67,13 @@
                 android:layout_height="wrap_content"
                 android:text="숨겨질 텍스트"
                 android:visibility="gone"/>
+
+        <TextView
+                android:id="@+id/expenseItemSeqData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="숨겨질 텍스트"
+                android:visibility="gone"/>
     </LinearLayout>
 
 
