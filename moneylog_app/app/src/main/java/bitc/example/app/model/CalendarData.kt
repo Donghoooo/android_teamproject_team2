@@ -8,6 +8,8 @@ data class CalendarData(
   val isIncome: Boolean,  // 수입 여부
   val isExpense: Boolean, // 지출 여부
   val year: Int,         // 연도
-  val month: Int         // 월 (0-based)
+  val month: Int,         // 월
+  val isClicked: Boolean = false, //클릭 날짜
+  val expense: Double = 0.0
 )
 

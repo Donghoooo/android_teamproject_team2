@@ -1,6 +1,5 @@
-package bitc.example.app.adapter
-
-import android.icu.util.Calendar
+import android.graphics.Typeface
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.R
 import bitc.example.app.databinding.ItemCalendarDayBinding
 import bitc.example.app.model.CalendarData
+import java.util.Calendar
 
 class CalendarAdapter(
     private val calendarData: List<CalendarData>,
@@ -26,9 +26,34 @@ class CalendarAdapter(
         val data = calendarData[position]
         val context = holder.itemView.context
 
-        // 날짜가 존재하면 표시
+        // 날짜가 존재 하면 표시
         data.day?.let { day ->
             holder.binding.tvDay.text = day.toString()
+
+            // 지출 정보 표시
+            if (data.isExpense) {
+                holder.binding.tvExpense.text = "- 지출" // 지출 표시
+                holder.binding.tvExpense.visibility = View.VISIBLE
+            } else {
+                holder.binding.tvExpense.visibility = View.GONE
+            }
+
+            // 수입 정보 표시
+            if (data.isIncome) {
+                holder.binding.tvIncome.text = "+ 수입" // 수입 표시
+                holder.binding.tvIncome.visibility = View.VISIBLE
+            } else {
+                holder.binding.tvIncome.visibility = View.GONE
+            }
+
+            // 클릭된 날짜일 경우 스타일 적용
+            if (data.isClicked) {
+                holder.binding.tvDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)  // 텍스트 크기 변경
+                holder.binding.tvDay.setTypeface(null, Typeface.BOLD)  // 텍스트 굵게 변경
+            } else {
+                holder.binding.tvDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)  // 기본 크기
+                holder.binding.tvDay.setTypeface(null, Typeface.NORMAL)  // 기본 굵기
+            }
 
             val calendar = Calendar.getInstance().apply {
                 set(Calendar.YEAR, data.year)
@@ -51,14 +76,18 @@ class CalendarAdapter(
             holder.binding.tvExpense.visibility = View.GONE
             holder.binding.tvIncome.visibility = View.GONE
         } else {
-            holder.binding.tvExpense.text = if (data.isExpense) "- 지출" else ""
-            holder.binding.tvExpense.visibility = if (data.isExpense) View.VISIBLE else View.GONE
+            // 지출 표시
+            holder.binding.tvExpense.text = if (data.expense > 0) "- ₩${data.expense}" else ""
+            holder.binding.tvExpense.visibility = if (data.expense > 0) View.VISIBLE else View.GONE
 
-            holder.binding.tvIncome.text = if (data.isIncome) "+ 수입" else ""
-            holder.binding.tvIncome.visibility = if (data.isIncome) View.VISIBLE else View.GONE
+            // 수입 표시
+//            holder.binding.tvIncome.text = if (data.income > 0) "+ ₩${data.income}" else ""
+//            holder.binding.tvIncome.visibility = if (data.income > 0) View.VISIBLE else View.GONE
+
 
             holder.binding.tvDay.setOnClickListener {
                 val selectedMonth = (data.month ?: 0) + 1
+                // 클릭한 날짜를 isClicked로 설정하고, 나머지 날짜는 해제
                 onDayClick(data.day, if (data.isIncome) 1 else 0, if (data.isExpense) 1 else 0, selectedMonth)
             }
         }

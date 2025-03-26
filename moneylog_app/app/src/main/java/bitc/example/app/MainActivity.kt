@@ -1,5 +1,6 @@
 package bitc.example.app
 
+import CalendarAdapter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
@@ -13,33 +14,33 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import bitc.example.app.adapter.CalendarAdapter
 import bitc.example.app.databinding.ActivityMainBinding
 import bitc.example.app.viewmodel.CalendarViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: CalendarViewModel by viewModels()  // ViewModel을 가져옵니다.
+    private val viewModel: CalendarViewModel by viewModels()  // ViewModel을 가져옴
+    private lateinit var binding: ActivityMainBinding  // Binding 초기화
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        // ViewBinding을 사용하여 레이아웃을 inflate
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // headerDate에 대한 옵저버
-        viewModel.headerDate.observe(this, Observer {
-            findViewById<TextView>(R.id.tvHeader).text = it
+        viewModel.headerDate.observe(this, Observer { date ->
+            binding.tvHeader.text = date // headerDate TextView 업데이트
         })
 
         // scrollMonth를 옵저빙해서 tvScrollMonth에 표시
-        viewModel.scrollMonth.observe(this, Observer {
-            findViewById<TextView>(R.id.tvScrollMonth).text = it
+        viewModel.scrollMonth.observe(this, Observer { month ->
+            binding.tvScrollMonth.text = month // scrollMonth TextView 업데이트
         })
 
-
+        // calendarData를 RecyclerView에 달력 데이터 표시
         viewModel.calendarData.observe(this) { data ->
-            // RecyclerView에 달력 데이터 표시
             binding.calendar.layoutManager = GridLayoutManager(this, 7) // 한 주에 7일
             binding.calendar.adapter = CalendarAdapter(data) { day, income, expense, month ->
                 // 날짜 클릭 시 데이터 업데이트
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
                     binding.tvScrollIncome.text = "+ ${if (income == 1) "수입" else "0원"}"
                     binding.tvScrollExpense.text = "- ${if (expense == 1) "지출" else "0원"}"
 
+                    // 해당 월을 업데이트
                     viewModel.scrollMonth.value = month.toString()
                 }
             }
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 이미지뷰 색상 필터 적용
-        val imageView: ImageView = findViewById(R.id.imageView)
+        val imageView: ImageView = binding.imageView  // binding을 통해 이미지뷰 접근
         val colorFilter = PorterDuffColorFilter(
             ContextCompat.getColor(this, R.color.btn_plus), PorterDuff.Mode.SRC_IN
         )

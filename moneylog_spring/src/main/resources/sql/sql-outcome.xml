@@ -8,4 +8,28 @@
         values (#{memberId},#{expense},#{expenseDate},#{expenseCate},#{expenseMemo},#{paymentOption},#{expenseUse})
     </insert>
 
+    <!-- 특정 날짜에 대한 수입과 지출 합계를 가져오는 쿼리 -->
+    <select id="selectIncomeAndExpenseByDate" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseDataDTO">
+        SELECT
+        expense_date AS date,
+        SUM(CASE WHEN expense_use = 'income' THEN expense ELSE 0 END) AS income,
+        SUM(CASE WHEN expense_use = 'expense' THEN expense ELSE 0 END) AS expense
+        FROM expense_log
+        WHERE DATE(expense_date) = #{date}  <!-- 특정 날짜에 대해 조회 -->
+        GROUP BY expense_date
+    </select>
+
+    <!-- 특정 기간(월) 동안 수입과 지출을 가져오는 쿼리 -->
+    <select id="selectIncomeAndExpenseByMonth" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseDataDTO">
+        SELECT
+            expense_date AS date,
+            SUM(CASE WHEN expense_use = 'income' THEN expense ELSE 0 END) AS income,
+            SUM(CASE WHEN expense_use = 'expense' THEN expense ELSE 0 END) AS expense
+        FROM expense_log
+        WHERE YEAR(expense_date) = #{year} AND MONTH(expense_date) = #{month}
+        GROUP BY expense_date
+    </select>
+
+
+
 </mapper>

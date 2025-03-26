@@ -6,10 +6,10 @@ import bitc.fullstack503.moneylog_spring.service.IncomeService;
 import bitc.fullstack503.moneylog_spring.service.MemberService;
 import bitc.fullstack503.moneylog_spring.service.OutcomeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 public class TestController
 {
@@ -52,5 +52,6 @@ public class TestController
   public void expenseProcess (@RequestBody ExpenseLogDTO outcome) throws Exception{
     outcomeService.expense(outcome);
   }
+
 
 }
