@@ -1,10 +1,12 @@
 package bitc.example.app.sagmin
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailIncomeBinding
 import bitc.example.app.ui.dialog.IncomeBankChangeActivity
 import bitc.example.app.ui.dialog.IncomeCategoryChangeActivity
@@ -64,6 +66,18 @@ class DetailIncomeActivity : AppCompatActivity() {
         binding.btnDrop.setOnClickListener {
 
         }
+
+
+        val incomeDate = intent.getStringExtra("incomeDate")
+        val incomeCate = intent.getStringExtra("incomeCate")
+        val incomeMoney = intent.getStringExtra("incomeMoney")
+
+        findViewById<TextView>(R.id.detail_income_date).text = incomeDate
+        findViewById<TextView>(R.id.btn_pass_income).text = incomeCate
+        findViewById<TextView>(R.id.income_money_receipt).text = incomeMoney
+
+
+
     }
     //  카테고리 선택 부분 클릭 시 다이얼로그 표시
     private fun updateCategoryText() {

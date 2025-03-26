@@ -1,10 +1,12 @@
 package bitc.example.app.kms
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentManager
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityMonthlyListBinding
+import bitc.example.app.sagmin.DetailIncomeActivity
 
 class MonthlyListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,5 +73,10 @@ class MonthlyListActivity : AppCompatActivity() {
             transaction.addToBackStack("")
             transaction.commit()
         }
+
+//        binding.layoutFragmentBase.setOnClickListener {
+//            val intent = Intent(requireContext(), DetailIncomeActivity::class.java)
+//            startActivity(intent)
+//        }
+        }
     }
-}
