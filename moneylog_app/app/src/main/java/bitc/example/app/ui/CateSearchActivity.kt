@@ -3,6 +3,8 @@ package bitc.example.app.ui
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -71,6 +73,16 @@ class CateSearchActivity : AppCompatActivity() {
     supportActionBar?.setDisplayShowTitleEnabled(false)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+////    키워드 검색
+//    binding.searchView.addTextChangedListener(object : TextWatcher {
+//      override fun afterTextChanged(s: Editable?) {
+//        filterList(s.toString())  // 입력된 검색어로 리스트 필터링
+//      }
+//
+//      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//      override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+//    })
+
 //    날짜 선택
     startDate = binding.startDate
     endDate = binding.endDate
@@ -130,6 +142,10 @@ class CateSearchActivity : AppCompatActivity() {
     }
   }
 
+
+
+
+
   //  뒤로가기 버튼
   override fun onSupportNavigateUp(): Boolean {
     super.onSupportNavigateUp()
@@ -137,6 +153,15 @@ class CateSearchActivity : AppCompatActivity() {
     return true
   }
 
+////  키워드 검색 기능
+//  private fun filterList(string: String) {
+//  val filteredList = searchItemList.filter { it: SearchListItem ->
+//    it.category.contains(keyword, ignoreCase = true) ||  // 카테고리 검색
+//        it.source.contains(keyword, ignoreCase = true)       // 출처 검색
+//  }
+//
+//  searchListAdapter.submitList(filteredList)
+//  }
 //  DatePickerDialog 표시 (캘린더 창 생성)
   private fun showDatePicker(textView: TextView) {
     val calendar = Calendar.getInstance()
