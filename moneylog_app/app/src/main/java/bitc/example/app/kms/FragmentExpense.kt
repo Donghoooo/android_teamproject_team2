@@ -1,15 +1,22 @@
 package bitc.example.app.kms
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import bitc.example.app.AppServerClass
 import bitc.example.app.R
 import bitc.example.app.databinding.FragmentExpenseBinding
 import bitc.example.app.databinding.FragmentIncomBinding
+import bitc.example.app.dto.ExpenseLogDTO
+import bitc.example.app.dto.IncomeLogDTO
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,16 +55,41 @@ class FragmentExpense : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val items = mutableListOf<String>()
-        for (i in 1..12) {
-            items.add("$i 월")
-        }
+        val api = AppServerClass.instance
+        val call = api.getExpenseList()
 
-        val adapter = ExpenseAdapter(items)
+        call.enqueue(object : Callback<List<ExpenseLogDTO>> {
+            override fun onResponse(p0: Call<List<ExpenseLogDTO>>, res: Response<List<ExpenseLogDTO>>) {
+                if (res.isSuccessful) {
+                    val result = res.body()?.toMutableList()
+                    Log.d("csy", "result : $result")
 
-        binding.expenseRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.expenseRecyclerView.adapter = adapter
-        binding.expenseRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+                    val adapter = result?.let { ExpenseAdapter(it) }
+
+                    binding.expenseRecyclerView.layoutManager = LinearLayoutManager(context)
+                    binding.expenseRecyclerView.adapter = adapter
+                    binding.expenseRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+                }
+                else {
+                    Log.d("csy", "송신실패")
+                }
+            }
+
+            override fun onFailure(p0: Call<List<ExpenseLogDTO>>, t: Throwable) {
+                Log.d("csy", "message : ${t.message}")
+            }
+        })
+
+//        val items = mutableListOf<String>()
+//        for (i in 1..12) {
+//            items.add("$i 월")
+//        }
+//
+//        val adapter = ExpenseAdapter(items)
+//
+//        binding.expenseRecyclerView.layoutManager = LinearLayoutManager(context)
+//        binding.expenseRecyclerView.adapter = adapter
+//        binding.expenseRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
     }
 
     companion object {
