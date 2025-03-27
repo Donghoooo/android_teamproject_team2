@@ -3,10 +3,7 @@ package bitc.fullstack503.moneylog_spring.controller;
 import bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO;
 import bitc.fullstack503.moneylog_spring.service.OutcomeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 
@@ -31,7 +28,7 @@ public class OutcomeController {
     }
 
 //    지출 내용 삭제하기
-    @PostMapping("outcome/delete")
+    @DeleteMapping("outcome/delete")
     public int expenseDelete (@RequestParam("expenseLogSeq")int expenseLogSeq)throws Exception{
         return outcomeService.expenseDelete(expenseLogSeq);
     }

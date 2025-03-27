@@ -26,8 +26,6 @@ class DetailIncomeActivity : AppCompatActivity() {
         ActivityDetailIncomeBinding.inflate(layoutInflater)
     }
 
-
-
     //  카테고리 선택
     private var selectedCategories : String? = null // 선택한 항목 저장
 
@@ -48,21 +46,7 @@ class DetailIncomeActivity : AppCompatActivity() {
             finish()
         }
 
-        val incomeLogSeq = intent.getIntExtra("incomeLogSeq", -1)
-        val incomeDate = intent.getStringExtra("incomeDate")
-        val incomeCate = intent.getStringExtra("incomeCate")
-        val incomeMoney = intent.getStringExtra("incomeMoney")
-        val incomeSource = intent.getStringExtra("incomeSource")
-        val incomeMemo = intent.getStringExtra("incomeMemo")
-        val incomeUse = intent.getStringExtra("incomeUse")
 
-        findViewById<TextView>(R.id.detail_income_date).text = incomeDate
-        findViewById<TextView>(R.id.btn_pass_income).text = incomeCate
-        findViewById<TextView>(R.id.income_money_receipt).text = incomeMoney
-        findViewById<TextView>(R.id.income_memo_receipt).text = incomeMemo
-        findViewById<TextView>(R.id.income_dialog_receipt).text = incomeSource
-        findViewById<TextView>(R.id.income_info_receipt).text = incomeUse
-        findViewById<TextView>(R.id.income_log_seq).text = incomeLogSeq.toString()
 
 
         binding.incomeDialogReceipt.setOnClickListener{
@@ -84,6 +68,22 @@ class DetailIncomeActivity : AppCompatActivity() {
             }
             categoryDialog.show()
         }
+
+        val incomeLogSeq = intent.getIntExtra("incomeLogSeq", -1)
+        val incomeDate = intent.getStringExtra("incomeDate")
+        val incomeCate = intent.getStringExtra("incomeCate")
+        val incomeMoney = intent.getStringExtra("incomeMoney")
+        val incomeSource = intent.getStringExtra("incomeSource")
+        val incomeMemo = intent.getStringExtra("incomeMemo")
+        val incomeUse = intent.getStringExtra("incomeUse")
+
+        findViewById<TextView>(R.id.detail_income_date).text = incomeDate
+        findViewById<TextView>(R.id.btn_pass_income).text = incomeCate
+        findViewById<TextView>(R.id.income_money_receipt).text = incomeMoney
+        findViewById<TextView>(R.id.income_memo_receipt).text = incomeMemo
+        findViewById<TextView>(R.id.income_dialog_receipt).text = incomeSource
+        findViewById<TextView>(R.id.income_info_receipt).text = incomeUse
+        findViewById<TextView>(R.id.income_log_seq).text = incomeLogSeq.toString()
 
 
         binding.btnUpdate.setOnClickListener {

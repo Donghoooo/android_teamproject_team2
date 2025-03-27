@@ -49,8 +49,8 @@ interface AppServerInterface {
   @POST("/outcome/update")
   fun updateOutcome(@Body outcomeLog : ExpenseLogDTO) : Call<Int>
   //지출 삭제
-  @DELETE
-  fun deleteOutcome(@Query("outcomeLogSeq")outcomeLogSeq : Int): Call<Int>
+  @DELETE("outcome/delete")
+  fun deleteOutcome(@Query("expenseLogSeq")expenseLogSeq : Int): Call<Int>
 
 
   //  검색 페이지

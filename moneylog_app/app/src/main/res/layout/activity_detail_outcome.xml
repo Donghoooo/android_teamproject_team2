@@ -34,6 +34,18 @@
                 android:textSize="30sp"
                 android:layout_gravity="center"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detail_outcome_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수입 날짜" />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:id="@+id/outcome_log_seq"/>
+
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
@@ -134,7 +146,7 @@
                 android:textStyle="bold" />
 
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="입력된 내역"

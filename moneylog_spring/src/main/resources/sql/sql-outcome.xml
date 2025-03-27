@@ -19,7 +19,7 @@
 
 <!--    지출 내용 삭제하기 -->
     <delete id="expenseDelete" parameterType="int">
-DELETE FROM outcome_log
+DELETE FROM expense_log
 where expense_log_seq = ${expenseLogSeq}
     </delete>
 
