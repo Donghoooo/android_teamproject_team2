@@ -24,6 +24,7 @@ class InComeAdapter(val datas: List<IncomeLogDTO>): RecyclerView.Adapter<Recycle
 
         binding.CateDate.text = datas[position].incomeCate
         binding.MoneyDate.text = datas[position].incomeMoney
+
 //        binding.itemData.text
 //        binding.bal.text = datas[position]
 

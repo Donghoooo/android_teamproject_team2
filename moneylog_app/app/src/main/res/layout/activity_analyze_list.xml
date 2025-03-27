@@ -35,7 +35,7 @@
                 android:textSize="20sp" />
 
             <ImageButton
-                android:id="@+id/image_button1"
+                android:id="@+id/time_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -60,7 +60,7 @@
                 android:textSize="20sp" />
 
             <ImageButton
-                android:id="@+id/image_button2"
+                android:id="@+id/time_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"

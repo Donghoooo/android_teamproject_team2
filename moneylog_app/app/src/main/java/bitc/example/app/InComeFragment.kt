@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.databinding.FragmentIncomeBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.dto.MemberDTO
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -36,6 +37,13 @@ class InComeFragment : Fragment() {
 
     private lateinit var binding: FragmentIncomeBinding
 
+
+    private lateinit var totalIncomeMoney: String
+
+    interface totalIncome {
+        fun totalIncome(data: String)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -56,7 +64,10 @@ class InComeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+//        var memberDTO = MemberDTO()
+//        memberDTO.memberId
+//        memberDTO.createDate
+//        memberDTO.updateDate
         val api = AppServerClass.instance
         val call = api.getanalyze()
 
@@ -66,6 +77,13 @@ class InComeFragment : Fragment() {
             ) {
                 if (res.isSuccessful) {
                     val result = res.body()
+                    val totalIncome = result?.sumOf { it.incomeMoney?.toIntOrNull() ?: 0 }
+                    Log.d("fullstack503", totalIncome.toString())
+
+                    totalIncomeMoney = totalIncome.toString()
+
+                    (activity as? totalIncome)?.totalIncome(totalIncomeMoney)
+
                     Log.d("csy", "result : $result")
 
                     val adapter = result?.let { InComeAdapter(it) }
@@ -88,10 +106,8 @@ class InComeFragment : Fragment() {
         })
 
 
-
-
-    // PieChart 초기화
-        val pieChart: PieChart = binding.pieChart
+        // PieChart 초기화
+        val pieChart: PieChart = binding.pieChart1
 
         // 데이터 준비
         val entries = ArrayList<PieEntry>()
@@ -123,24 +139,6 @@ class InComeFragment : Fragment() {
         pieChart.description.isEnabled = false
 //        pieChart.isRotationEnabled = false
 
-
-
-//        recyclerView
-
-        val items = mutableListOf<String>()
-        for (i in 1..5){
-            items.add("10%")
-
-//            items.add("1000원 $i")
-        }
-//
-//        val adapter = InComeAdapter(items)
-////
-//        binding.recyclerView.layoutManager = LinearLayoutManager(context)
-//        binding.recyclerView.adapter = adapter
-//        binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-//
-////    }
     }
 
     companion object {

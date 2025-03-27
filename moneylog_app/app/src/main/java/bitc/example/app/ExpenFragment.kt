@@ -36,6 +36,12 @@ class ExpenFragment : Fragment() {
 
     private lateinit var binding: FragmentExpenBinding
 
+    private lateinit var totalExpenMoney: String
+
+    interface totalExpen {
+        fun totalExpen(data1: String)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -49,7 +55,7 @@ class ExpenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentExpenBinding.inflate(inflater,container,false)
+        binding = FragmentExpenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -60,13 +66,21 @@ class ExpenFragment : Fragment() {
         val api = AppServerClass.instance
         val call = api.getanalyze1()
 
-        call.enqueue(object : Callback<List<ExpenseLogDTO>> { override fun onResponse(
-            p0: Call<List<ExpenseLogDTO>>,
-            res: Response<List<ExpenseLogDTO>>
-        ) {
+        call.enqueue(object : Callback<List<ExpenseLogDTO>> {
+            override fun onResponse(
+                p0: Call<List<ExpenseLogDTO>>, res: Response<List<ExpenseLogDTO>>
+            ) {
                 if (res.isSuccessful) {
                     val result = res.body()
+                    val totalExpen = result?.sumOf { it.expenseMoney?.toIntOrNull() ?: 0 }
+                    Log.d("fullstack503", totalExpen.toString())
+
+                    totalExpenMoney = totalExpen.toString()
+
+                    (activity as? totalExpen)?.totalExpen(totalExpenMoney)
+
                     Log.d("csy", "result : $result")
+
 
                     val adapter = result?.let { ExpenAdapter(it) }
                     binding.recyclerView2.layoutManager = LinearLayoutManager(context)
@@ -88,10 +102,6 @@ class ExpenFragment : Fragment() {
         })
 
 
-
-
-
-
         // PieChart 초기화
         val pieChart: PieChart = binding.pieChart
 
@@ -106,7 +116,7 @@ class ExpenFragment : Fragment() {
 
 
         // PieDataSet 생성
-        val dataSet = PieDataSet(entries,"")
+        val dataSet = PieDataSet(entries, "")
         dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList() // 색상 지정
         dataSet.valueTextSize = 15f // 값 텍스트 크기 설정
 
@@ -125,22 +135,6 @@ class ExpenFragment : Fragment() {
         pieChart.description.isEnabled = false
 //        pieChart.isRotationEnabled = false
 
-
-//        recyclerView
-//
-//        val items = mutableListOf<String>()
-//        for (i in 1..5){
-//            items.add("10%")
-//
-////            items.add("1000원 $i")
-//        }
-//
-//        val adapter = ExpenAdapter(items)
-//
-//        binding.recyclerView2.layoutManager = LinearLayoutManager(context)
-//        binding.recyclerView2.adapter = adapter
-//        binding.recyclerView2.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-//
     }
 
     companion object {
