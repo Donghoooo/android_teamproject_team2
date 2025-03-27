@@ -1,15 +1,12 @@
 package bitc.fullstack503.moneylog_spring.controller;
-import bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO;
-import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
-import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import bitc.fullstack503.moneylog_spring.dto.SearchDTO;
-import bitc.fullstack503.moneylog_spring.service.IncomeService;
-import bitc.fullstack503.moneylog_spring.service.MemberService;
-import bitc.fullstack503.moneylog_spring.service.OutcomeService;
 import bitc.fullstack503.moneylog_spring.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,33 +16,40 @@ import java.util.Map;
 @RestController
 public class TestController
 {
-//  검색 페이지
   @Autowired
   private SearchService searchService;
-  
-  @GetMapping ({"/", ""})
-  public String home () throws Exception
-  {
-    return "index";
-  }
 
-//  검색 페이지
+  //  검색 페이지
   @GetMapping("search/process")
   public List<SearchDTO> getSearchList (
-      @RequestParam(required = false) String category,
-      @RequestParam(required = false) String source,
-      @RequestParam String startDate,
-      @RequestParam String endDate) throws Exception{
+          @RequestParam(required = false) List<String> category,
+          @RequestParam(required = false) List<String> source,
+          @RequestParam String startDate,
+          @RequestParam String endDate,
+          @RequestParam(required = false, defaultValue = "date") String sortBy,
+          @RequestParam String keyword) throws Exception{
+
+    //    날짜 형식 변경
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date parsedStartDate, parsedEndDate;
+
+    try {
+      parsedStartDate = dateFormat.parse(startDate);
+      parsedEndDate = dateFormat.parse(endDate);
+    } catch (ParseException e) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 날짜 형식입니다.");
+    }
 
     // NULL 값이 들어오면 빈 문자열("")로 처리
     Map<String, Object> paramMap = new HashMap<>();
-    paramMap.put("category", (category != null) ? category : "");
-    paramMap.put("source", (source != null) ? source : "");
+    paramMap.put("memberId", "test1");
+    paramMap.put("startDate", parsedStartDate);
+    paramMap.put("endDate", parsedEndDate);
+    paramMap.put("category", category);
+    paramMap.put("source", source);
+    paramMap.put("keyword", keyword);
+    paramMap.put("sortBy", sortBy);
 
-//    날짜 형식 변경
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    paramMap.put("startDate", dateFormat.parse(startDate));
-    paramMap.put("endDate", dateFormat.parse(endDate));
 
     return searchService.getSearchList(paramMap);
   }
