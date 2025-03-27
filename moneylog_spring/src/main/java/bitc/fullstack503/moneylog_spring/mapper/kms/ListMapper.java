@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface ListMapper {
-    List<IncomeLogDTO> selectincomeList() throws Exception;
+    List<IncomeLogDTO> selectincomeList(String memberId) throws Exception;
 
-    List<ExpenseLogDTO> selectExpenseList() throws Exception;
+    List<ExpenseLogDTO> selectExpenseList(String memberId) throws Exception;
 }
