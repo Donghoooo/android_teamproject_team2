@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             binding.tvScrollMonth.text = month // scrollMonth TextView 업데이트
         })
 
+
         // calendarData를 RecyclerView에 달력 데이터 표시
         viewModel.calendarData.observe(this) { data ->
             binding.calendar.layoutManager = GridLayoutManager(this, 7) // 한 주에 7일
