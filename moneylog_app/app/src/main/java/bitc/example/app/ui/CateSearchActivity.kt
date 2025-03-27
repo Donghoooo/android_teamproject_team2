@@ -28,6 +28,7 @@ import bitc.example.app.ui.dialog.CategorySelectionDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -162,6 +163,7 @@ class CateSearchActivity : AppCompatActivity() {
 //
 //  searchListAdapter.submitList(filteredList)
 //  }
+
 //  DatePickerDialog 표시 (캘린더 창 생성)
   private fun showDatePicker(textView: TextView) {
     val calendar = Calendar.getInstance()
@@ -191,18 +193,21 @@ private fun updateBankText(){
 }
 
 //   수입, 지출 총 금액 계산
-  private fun calculateTotalAmount(transactions: List<SearchDTO>): Pair<Int, Int> {
+  private fun calculateTotalAmount(transactions: List<SearchDTO>): Pair<String, String> {
     var totalIncome = 0
     var totalExpense = 0
 
     for (item in transactions) {
+      val moneyValue = item.money ?: 0  // null 값이면 0으로 출력
       if (item.type == "income") {
-        totalIncome += item.money ?: 0
-      } else {
-        totalExpense += item.money ?: 0
+        totalIncome += moneyValue
+      }
+      else {
+        totalExpense += moneyValue
       }
     }
-    return Pair(totalIncome, totalExpense)
+    val formatter = DecimalFormat("#,###")  // 숫자를 00,000 형식으로 변환하는 포맷
+    return Pair("${formatter.format(totalIncome)} 원", "${formatter.format(totalExpense)} 원")
   }
 
 //  정렬방식 드롭다운
@@ -267,17 +272,17 @@ private fun updateBankText(){
               SearchListItem(
                 it.date,
                 it.category ?: "미분류",
-                "내역 없음",  // 필요하면 변경
-                it.source ?: "알 수 없음",
+                it.use ?: "내역없음",  // 필요하면 변경
+                it.source ?: "미분류",
                 "${it.money} 원",
-                (it.type == "income").toString()
+                it.type // 타입 저장할때 'income' or 'expense' 로 저장
               )
             })
 
-            // 총 수입 & 총 지출 계산 후 UI 반영**
-            val (totalIncome, totalExpense) = calculateTotalAmount(transactions)
-            binding.income.text = "$totalIncome 원"
-            binding.expense.text = "$totalExpense 원"
+            // 총 수입 & 총 지출 계산 후 UI 반영
+            val (formattedIncome, formattedExpense) = calculateTotalAmount(transactions)
+            binding.income.text = formattedIncome
+            binding.expense.text = formattedExpense
 
 //            리스트 새로고침
             searchListAdapter.notifyDataSetChanged()

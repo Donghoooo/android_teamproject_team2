@@ -41,7 +41,7 @@
       </foreach>
     </if>
     </where>
-    ORDER BY date DESC
+    ORDER BY date ASC
   </select>
 </mapper>
 <!--<mapper namespace="bitc.fullstack503.moneylog_spring.mapper.SearchMapper">-->
