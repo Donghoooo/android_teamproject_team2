@@ -38,6 +38,8 @@ class SCategoryAdapter(
             onCategorySelected(category)
             notifyDataSetChanged()
         }
+
+
     }
 
     override fun getItemCount(): Int = categories.size
