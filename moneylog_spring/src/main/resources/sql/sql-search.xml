@@ -56,7 +56,14 @@
       )
     </if>
     </where>
-    ORDER BY date ASC
+
+    ORDER BY
+    <if test="sortBy == 'amount'">
+      money DESC
+    </if>
+    <if test="sortBy == 'date'">
+      date ASC
+    </if>
   </select>
 </mapper>
 <!--<mapper namespace="bitc.fullstack503.moneylog_spring.mapper.SearchMapper">-->

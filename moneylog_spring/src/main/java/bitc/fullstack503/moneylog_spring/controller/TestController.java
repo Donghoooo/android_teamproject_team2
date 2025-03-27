@@ -32,6 +32,7 @@ public class TestController
       @RequestParam(required = false) List<String> source,
       @RequestParam String startDate,
       @RequestParam String endDate,
+      @RequestParam(required = false, defaultValue = "date") String sortBy,
       @RequestParam String keyword) throws Exception{
 
     //    날짜 형식 변경
@@ -53,6 +54,8 @@ public class TestController
     paramMap.put("category", category);
     paramMap.put("source", source);
     paramMap.put("keyword", keyword);
+    paramMap.put("sortBy", sortBy);
+
 
     return searchService.getSearchList(paramMap);
   }

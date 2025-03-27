@@ -137,7 +137,7 @@ class CateSearchActivity : AppCompatActivity() {
 
     // 검색 버튼 클릭 시 API 요청
     binding.btnSearch.setOnClickListener {
-      fetchTransactionData()
+      fetchTransactionData("date")
     }
   }
 
@@ -151,16 +151,6 @@ class CateSearchActivity : AppCompatActivity() {
     onBackPressedDispatcher.onBackPressed()
     return true
   }
-
-////  키워드 검색 기능
-//  private fun filterList(string: String) {
-//  val filteredList = searchItemList.filter { it: SearchListItem ->
-//    it.category.contains(keyword, ignoreCase = true) ||  // 카테고리 검색
-//        it.source.contains(keyword, ignoreCase = true)       // 출처 검색
-//  }
-//
-//  searchListAdapter.submitList(filteredList)
-//  }
 
 //  DatePickerDialog 표시 (캘린더 창 생성)
   private fun showDatePicker(textView: TextView) {
@@ -233,16 +223,19 @@ private fun updateBankText(){
 
   private fun sortByAmount() {
     Toast.makeText(this, "금액순 정렬", Toast.LENGTH_SHORT).show()
-//    금액 순 정렬 코드 입력 필요
+//    금액 순 정렬 코드
+    fetchTransactionData("amount")
   }
 
   private fun sortByDate() {
     Toast.makeText(this, "날짜순 정렬", Toast.LENGTH_SHORT).show()
-//    날짜 순 정렬 코드 입력 필요
+//    날짜 순 정렬 코드
+    fetchTransactionData("date")
   }
 
-  private fun fetchTransactionData() {
+  private fun fetchTransactionData(sortBy: String) {
 
+    Log.d("DEBUG", "정렬 방식: $sortBy")
 //    선택한 자산빙식 및 카테고리 가져오기
     // 선택한 카테고리 (미선택 시 null)
     val selectedCategory = selectedCategories.filter { it.value }.keys.toList().takeIf { it.isNotEmpty() }
@@ -261,11 +254,13 @@ private fun updateBankText(){
       selectedBank,
       startDate,
       endDate,
-      keyword
+      keyword,
+      sortBy
     ).enqueue(object : Callback<List<SearchDTO>>  {
         @SuppressLint("NotifyDataSetChanged")
         override fun onResponse(call: Call<List<SearchDTO>>, response: Response<List<SearchDTO>>) {
           if (response.isSuccessful) {
+            Log.d("DEBUG", "서버 응답 성공. 데이터 수: ${response.body()?.size}")
             val transactions = response.body() ?: emptyList()
 
             // 기존 데이터 지우고 새 데이터 추가

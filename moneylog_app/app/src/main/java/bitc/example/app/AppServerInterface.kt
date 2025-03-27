@@ -59,7 +59,8 @@ interface AppServerInterface {
   @Query("source") source: List<String>?, // 자산방식
   @Query("startDate") startDate: String,  // 시작날짜
   @Query("endDate") endDate: String,  // 끝 날짜
-  @Query("keyword") keyword: String?  // 키워드
+  @Query("keyword") keyword: String?,  // 키워드
+  @Query("sortBy") sortBy: String // 정렬 기준
 ): Call<List<SearchDTO>>
 
   //  수입/지출 리스트
