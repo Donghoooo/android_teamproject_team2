@@ -44,7 +44,7 @@ class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<R
         binding.incomItemUseData.text = datas[index].incomeUse
         binding.incomItemSeqData.text = datas[index].incomeLogSeq.toString()
 
-        binding.incomItemCateData.setOnClickListener {
+        binding.linearIncome.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailIncomeActivity::class.java).apply {
                 putExtra("incomeLogSeq", datas[index].incomeLogSeq)

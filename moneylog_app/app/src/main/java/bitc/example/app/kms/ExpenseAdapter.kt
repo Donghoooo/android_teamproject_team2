@@ -39,7 +39,7 @@ class ExpenseAdapter(val datas: MutableList<ExpenseLogDTO>): RecyclerView.Adapte
         binding.expenseItemUseData.text = datas[index].expenseUse
         binding.expenseItemSeqData.text = datas[index].expenseLogSeq.toString()
 
-        binding.expenseItemCateData.setOnClickListener {
+        binding.linearOutcome.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailOutcomeActivity::class.java).apply{
                 putExtra("expenseLogSeq",datas[index].expenseLogSeq)
