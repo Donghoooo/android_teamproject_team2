@@ -3,7 +3,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-@Data
 public class MemberDTO
 {
   @JsonProperty ("memberSeq")
@@ -20,4 +19,74 @@ public class MemberDTO
   private LocalDateTime updateDate;
   @JsonProperty ("memberEmail")
   private String memberEmail;
+  
+  public int getMemberSeq ()
+  {
+    return memberSeq;
+  }
+  
+  public void setMemberSeq (int memberSeq)
+  {
+    this.memberSeq = memberSeq;
+  }
+  
+  public String getMemberId ()
+  {
+    return memberId;
+  }
+  
+  public void setMemberId (String memberId)
+  {
+    this.memberId = memberId;
+  }
+  
+  public String getMemberPw ()
+  {
+    return memberPw;
+  }
+  
+  public void setMemberPw (String memberPw)
+  {
+    this.memberPw = memberPw;
+  }
+  
+  public String getMemberName ()
+  {
+    return memberName;
+  }
+  
+  public void setMemberName (String memberName)
+  {
+    this.memberName = memberName;
+  }
+  
+  public LocalDateTime getCreateDate ()
+  {
+    return createDate;
+  }
+  
+  public void setCreateDate (LocalDateTime createDate)
+  {
+    this.createDate = createDate;
+  }
+  
+  public LocalDateTime getUpdateDate ()
+  {
+    return updateDate;
+  }
+  
+  public void setUpdateDate (LocalDateTime updateDate)
+  {
+    this.updateDate = updateDate;
+  }
+  
+  public String getMemberEmail ()
+  {
+    return memberEmail;
+  }
+  
+  public void setMemberEmail (String memberEmail)
+  {
+    this.memberEmail = memberEmail;
+  }
 }

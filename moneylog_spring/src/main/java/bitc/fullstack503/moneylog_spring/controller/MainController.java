@@ -4,6 +4,7 @@ import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import bitc.fullstack503.moneylog_spring.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public class MainController
   private MainService mainService;
   
   @PostMapping ("mainList")
-  public List<MainListDTO> mainList (MemberDTO member) throws Exception
+  public List<MainListDTO> mainList (@RequestBody MemberDTO member) throws Exception
   {
     LocalDateTime date = member.getCreateDate ();
     LocalDateTime endOfDay = date.toLocalDate ().atTime (LocalTime.MAX);

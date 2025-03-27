@@ -23,7 +23,6 @@ import bitc.example.app.adapter.ListAdapter
 import bitc.example.app.databinding.ActivityMainBinding
 import bitc.example.app.dto.MainListDTO
 import bitc.example.app.dto.MemberDTO
-import bitc.example.app.model.ListData
 import bitc.example.app.viewmodel.CalendarViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,9 +34,11 @@ class MainActivity : AppCompatActivity() {
     ActivityMainBinding.inflate(layoutInflater)
   } // Binding 초기화
   private lateinit var sharedPreferences: SharedPreferences
-  var year: String = "2025"
-  var month: String = "3"
-  var day: String = "26"
+  lateinit var year1: String
+  lateinit var month1: String
+  lateinit var day1: String
+  private var dataList: List<MainListDTO> = mutableListOf()
+  private lateinit var listAdapter: ListAdapter
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -52,23 +53,11 @@ class MainActivity : AppCompatActivity() {
     val memberId = sharedPreferences.getString("memberId", "test1")
     var member = MemberDTO()
     member.memberId = memberId
-    year = "2025"
-    month = "03"
-    day = "26"
-    val date = String.format("%04d-%02d-%02dT00:00:00", year.toInt(), month.toInt(), day.toInt())
-    Log.d("fullstack503", "📅 변환된 날짜: $date")
+    val date = String.format("%04d-%02d-%02dT00:00:00", year1.toInt(), month1.toInt(), day1.toInt())
     member.createDate = date
     val api = AppServerClass.instance
-    Log.d("fullstack503", member.toString())
-    if (member != null) {
-      val call = api.mainList(member)
-      mainListFunc(call)
-    }
-    val dataList = listOf(
-      ListData("식비", "456465몰라", "현금", 5000),
-      ListData("식비", "123라몰라", "현금", 5000),
-      ListData("식비", "몰5몰라", "현금", 5000)
-    )
+    val call = api.mainList(member)
+    mainListFunc(call)
     // RecyclerView의 LayoutManager 설정
     binding.listRecycle.layoutManager = LinearLayoutManager(this)
     // ListAdapter 초기화 및 RecyclerView에 연결
@@ -91,9 +80,10 @@ class MainActivity : AppCompatActivity() {
         if (day != null) {
           binding.scrollView.visibility = View.VISIBLE
           binding.tvScrollDay.text = day.toString() // 날짜 업데이트
-          Log.d("fullstack503", year.toString())
-          Log.d("fullstack503", month.toString())
-          Log.d("fullstack503", day.toString())
+          year1 = year.toString()
+          month1 = month1.toString()
+          day1 = day.toString()
+
           binding.tvScrollIncome.text = "+ ${if (income == 1) "수입" else "0원"}"
           binding.tvScrollExpense.text = "- ${if (expense == 1) "지출" else "0원"}"
           // 해당 월을 업데이트
@@ -125,11 +115,15 @@ class MainActivity : AppCompatActivity() {
 
   private fun mainListFunc(call: Call<List<MainListDTO>>) {
     call.enqueue(object : Callback<List<MainListDTO>> {
-      override fun onResponse(p0: Call<List<MainListDTO>>, res: Response<List<MainListDTO>>) {
+      override fun onResponse(
+        p0: Call<List<MainListDTO>>,
+        res: Response<List<MainListDTO>>
+      ) {
         if (res.isSuccessful) {
-          // 서버에서 전달받은 데이터만 변수로 저장
-          val result = res.body()
-          Log.d("fullstack503", "result : $result")
+          // 서버에서 전달받은 데이터를 dataList에 할당
+          dataList = res.body() ?: emptyList()  // null이 반환될 경우 빈 리스트로 초기화
+          listAdapter.notifyDataSetChanged()  // RecyclerView 갱신
+          Log.d("fullstack503", "result : $dataList")
         }
         else {
           val errorBody = res.errorBody()?.string()
@@ -138,7 +132,7 @@ class MainActivity : AppCompatActivity() {
       }
 
       override fun onFailure(p0: Call<List<MainListDTO>>, t: Throwable) {
-        Log.d("fullstack503", "message : $t.message")
+        Log.d("fullstack503", "message : ${t.message}")
       }
     })
   }
