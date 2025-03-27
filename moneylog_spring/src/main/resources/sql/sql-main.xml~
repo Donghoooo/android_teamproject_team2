@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.moneylog_spring.mapper.MainListMapper">
   
-  <select id="mainList" parameterType="bitc.fullstack503.moneylog_spring.dto.MemberDTO"
+  <select id="MainList" parameterType="bitc.fullstack503.moneylog_spring.dto.MemberDTO"
           resultType="bitc.fullstack503.moneylog_spring.dto.MainListDTO">
     SELECT income_cate   as cate,
            income_use    as usee,

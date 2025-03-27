@@ -13,7 +13,7 @@ public class ExpenseLogDTO
   @JsonProperty ("expense")
   private int expense;
   @JsonProperty ("expenseDate")
-  private LocalDateTime expenseDate;
+  private String expenseDate;
   @JsonProperty ("expenseCate")
   private String expenseCate;
   @JsonProperty ("expenseMemo")

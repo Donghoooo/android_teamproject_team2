@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.moneylog_spring.mapper.SearchMapper">
+  <select id="getSearchList" parameterType="java.util.Map" resultType="bitc.fullstack503.moneylog_spring.dto.SearchDTO">
+    SELECT 'income' AS type, income_log_seq AS seq, income_cate AS category, income_source AS source, income_money AS money, income_date AS date, `income_use` AS `use`
+    FROM income_log
+--     WHERE (#{category} IS NULL OR income_cate = #{category})
+--         AND (#{source} IS NULL OR income_source = #{source})
+--         AND income_date BETWEEN #{startDate} AND #{endDate}
+    WHERE (IFNULL(#{category}, '') = '' OR income_cate = #{category})
+      AND (IFNULL(#{source}, '') = '' OR income_source = #{source})
+      AND income_date BETWEEN #{startDate} AND #{endDate}
+
+    UNION ALL
+
+    SELECT 'expense' AS type, expense_log_seq AS seq, expense_cate AS category, payment_option AS source, expense_money AS money, expense_date AS date, `expense_use` AS `use`
+    FROM expense_log
+--     WHERE (#{category} IS NULL OR expense_cate = #{category})
+--         AND (#{source} IS NULL OR payment_option = #{source})
+--         AND expense_date BETWEEN #{startDate} AND #{endDate}
+    WHERE (IFNULL(#{category}, '') = '' OR expense_cate = #{category})
+      AND (IFNULL(#{source}, '') = '' OR payment_option = #{source})
+      AND expense_date BETWEEN #{startDate} ANd #{endDate}
+  </select>
+</mapper>

@@ -62,7 +62,8 @@ public class MemberServiceImpl implements MemberService
   @Override
   public MemberDTO memberUpdate (MemberDTO member) throws Exception
   {
+    MemberDTO member2 = memberMapper.isMember (member);
     memberMapper.memberUpdate (member);
-    return memberMapper.memberFindSeq (member.getMemberSeq ());
+    return memberMapper.memberFindSeq (member2.getMemberSeq ());
   }
 }

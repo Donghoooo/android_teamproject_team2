@@ -1,8 +1,6 @@
 package bitc.fullstack503.moneylog_spring.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 @Data
 public class IncomeLogDTO
 {
@@ -13,7 +11,7 @@ public class IncomeLogDTO
   @JsonProperty ("incomeMoney")
   private int incomeMoney;
   @JsonProperty ("incomeDate")
-  private LocalDateTime incomeDate;
+  private String incomeDate;
   @JsonProperty ("incomeCate")
   private String incomeCate;
   @JsonProperty ("incomeMemo")
@@ -22,5 +20,4 @@ public class IncomeLogDTO
   private String incomeSource;
   @JsonProperty ("incomeUse")
   private String incomeUse;
-
 }
