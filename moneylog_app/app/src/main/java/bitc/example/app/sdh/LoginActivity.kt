@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityLoginBinding
 import bitc.example.app.dto.MemberDTO
+import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.sagmin.AddInfoActivity
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -50,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
       logInProcess(call)
 
 
-      val intent = Intent(this,AddInfoActivity::class.java)
+      val intent = Intent(this,MonthlyListActivity::class.java)
       startActivity(intent)
 
     }
