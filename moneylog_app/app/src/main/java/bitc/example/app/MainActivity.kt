@@ -4,6 +4,7 @@ import CalendarAdapter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -21,6 +22,7 @@ import bitc.example.app.adapter.ListAdapter
 import bitc.example.app.databinding.ActivityMainBinding
 import bitc.example.app.model.ListData
 import bitc.example.app.viewmodel.CalendarViewModel
+import java.time.Year
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +30,10 @@ class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     } // Binding 초기화
+
+  lateinit var year: String
+  lateinit var month: String
+  lateinit var day: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +47,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val dataList = listOf(
-            ListData("식비", "몰라몰라", "현금", 5000),
-            ListData("식비", "몰라몰라", "현금", 5000),
-            ListData("식비", "몰라몰라", "현금", 5000)
+        
+         val dataList = listOf(
+            ListData("식비", "456465몰라", "현금", 5000),
+            ListData("식비", "123라몰라", "현금", 5000),
+            ListData("식비", "몰5몰라", "현금", 5000)
         )
 
         // RecyclerView의 LayoutManager 설정
@@ -69,11 +76,14 @@ class MainActivity : AppCompatActivity() {
         // calendarData를 RecyclerView에 달력 데이터 표시
         viewModel.calendarData.observe(this) { data ->
             binding.calendar.layoutManager = GridLayoutManager(this, 7) // 한 주에 7일
-            binding.calendar.adapter = CalendarAdapter(data) { day, income, expense, month ->
+            binding.calendar.adapter = CalendarAdapter(data) { day, income, expense, month, year ->
                 // 날짜 클릭 시 데이터 업데이트
                 if (day != null) {
                     binding.scrollView.visibility = View.VISIBLE
                     binding.tvScrollDay.text = day.toString() // 날짜 업데이트
+                    Log.d("fullstack503", year.toString())
+                    Log.d("fullstack503", month.toString())
+                  Log.d("fullstack503", day.toString())
                     binding.tvScrollIncome.text = "+ ${if (income == 1) "수입" else "0원"}"
                     binding.tvScrollExpense.text = "- ${if (expense == 1) "지출" else "0원"}"
 

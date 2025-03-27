@@ -12,7 +12,7 @@ import java.util.Calendar
 
 class CalendarAdapter(
     private val calendarData: List<CalendarData>,
-    private val onDayClick: (Int?, Int, Int, Int) -> Unit // 날짜, 수입, 지출, 월을 전달하는 클릭 이벤트
+    private val onDayClick: (Int?, Int, Int, Int, Int) -> Unit // 날짜, 수입, 지출, 월을 전달하는 클릭 이벤트
 ) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
 
     class CalendarViewHolder(val binding: ItemCalendarDayBinding) : RecyclerView.ViewHolder(binding.root)
@@ -88,7 +88,8 @@ class CalendarAdapter(
             holder.binding.tvDay.setOnClickListener {
                 val selectedMonth = (data.month ?: 0) + 1
                 // 클릭한 날짜를 isClicked로 설정하고, 나머지 날짜는 해제
-                onDayClick(data.day, if (data.isIncome) 1 else 0, if (data.isExpense) 1 else 0, selectedMonth)
+                val year = data.year
+                onDayClick(data.day, if (data.isIncome) 1 else 0, if (data.isExpense) 1 else 0, selectedMonth, year)
             }
         }
     }

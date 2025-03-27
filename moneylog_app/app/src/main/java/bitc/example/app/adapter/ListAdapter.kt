@@ -27,9 +27,9 @@ class ListAdapter(private val mainList: List<ListData>) :
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val item = mainList[position]
-        holder.cateTextView.text = item.cate.toString()
-        holder.useeTextView.text = item.usee.toString()
-        holder.wayTextView.text = item.way.toString()
+        holder.cateTextView.text = item.cate
+        holder.useeTextView.text = item.usee
+        holder.wayTextView.text = item.way
         holder.amountTextView.text = "${item.amount}원"
     }
 
