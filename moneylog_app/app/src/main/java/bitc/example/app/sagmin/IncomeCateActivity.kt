@@ -1,8 +1,10 @@
 package bitc.example.app.sagmin
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -14,8 +16,18 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityIncomeCateBinding
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class IncomeCateActivity : AppCompatActivity() {
+
+//    달력 표시
+    private lateinit var startDate: TextView
+    private lateinit var startDatePicker: ImageView
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+
 
     private lateinit var incomeResult: TextView
 
@@ -62,6 +74,25 @@ class IncomeCateActivity : AppCompatActivity() {
             finish()
         }
 
+//        =========================== 달력 날짜 선택하기 =========================================
+
+//    날짜 선택
+        startDate = binding.date
+        startDatePicker = binding.startDatePicker
+
+
+//    오늘날짜 기본값 설정
+        val today = Calendar.getInstance()
+        val todayDate = dateFormat.format(today.time)
+        startDate.text = todayDate
+
+
+//    시작 날짜 캘린더 아이콘 클릭 이벤트
+        startDatePicker.setOnClickListener {
+            showDatePicker(startDate)
+        }
+
+
 
 
 //  =================== 버튼 선택 후 그 버튼의 정보들을 넘겨주기 ===================================
@@ -90,6 +121,7 @@ class IncomeCateActivity : AppCompatActivity() {
         incomeMemo = binding.incomeMemoCate
 //        btnSubmit 이란 변수는 incomeCate 의 btnSubmit 을 binding 한다.
         btnSubmit = binding.btnSubmit
+        startDate = binding.date
 
 //        확인 버튼을 누를 시 발생되는 이벤트
         binding.btnSubmit.setOnClickListener {
@@ -99,6 +131,7 @@ class IncomeCateActivity : AppCompatActivity() {
             val memo = incomeMemo.text.toString()
             val dialog = incomeDialog.text.toString()
             val selectedCategory = selectedButton?.text.toString()
+            val date = startDate.text.toString()
 
 
 //            intent를 사용하여 incomeReceiptActivity에 접근가능하게하고
@@ -109,6 +142,7 @@ class IncomeCateActivity : AppCompatActivity() {
                 putExtra("text_value5", memo)
                 putExtra("incomeDialog",dialog)
                 putExtra("selectedCategory",selectedCategory)
+                putExtra("date",date)
             }
             startActivity(intent)
         }
@@ -136,6 +170,22 @@ class IncomeCateActivity : AppCompatActivity() {
             showIncomeCate(binding)
         }
     }
+
+//    =============================== 날짜 캘린더 설정 =============================================
+private fun showDatePicker(textView: TextView) {
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+    val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+        val selectedDate = Calendar.getInstance()
+        selectedDate.set(selectedYear, selectedMonth, selectedDay)
+        textView.text = dateFormat.format(selectedDate.time)
+    }, year, month, day)
+
+    datePickerDialog.show()
+}
 
     //  현금 결제 수단 선택
     private fun showIncomeCate(binding: ActivityIncomeCateBinding) {

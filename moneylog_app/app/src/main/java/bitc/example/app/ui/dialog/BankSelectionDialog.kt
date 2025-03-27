@@ -42,6 +42,7 @@ class BankSelectionDialog(
     }
 
 
+
     // '전체선택' 체크박스 초기 선택 상태를 false로 설정 (선택되지 않도록)
     if (selectedBanks.isEmpty()) {
       banks.forEach { selectedBanks[it] = false }

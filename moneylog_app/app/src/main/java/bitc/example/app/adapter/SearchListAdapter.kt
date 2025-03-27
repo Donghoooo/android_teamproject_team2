@@ -15,13 +15,17 @@ import java.text.DecimalFormat
 
 class SearchListAdapter(private val searchItems: List<SearchListItem>) : RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
 
+
+
   class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val tvDate: TextView = view.findViewById(R.id.tvDate)
     val tvCategory: TextView = view.findViewById(R.id.tvCategory)
     val tvUse: TextView = view.findViewById(R.id.tvUse)
     val tvSource: TextView = view.findViewById(R.id.tvSource)
     val tvMoney: TextView = view.findViewById(R.id.tvMoney)
+    val tvSeq : TextView = view.findViewById(R.id.tv_seq)
   }
+
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val view = LayoutInflater.from(parent.context)
@@ -30,6 +34,7 @@ class SearchListAdapter(private val searchItems: List<SearchListItem>) : Recycle
   }
 
   override fun onBindViewHolder(holder: ViewHolder, index: Int) {
+
     val searchItem = searchItems[index]
 
 //    금액 부분 숫자만 추출
@@ -45,6 +50,9 @@ class SearchListAdapter(private val searchItems: List<SearchListItem>) : Recycle
     holder.tvUse.text = searchItem.use
     holder.tvSource.text = searchItem.source
     holder.tvMoney.text = moneyFormatted
+
+
+
 
 //    금액 색상을 지출이면 빨간색, 수입이면 파란색
     if (searchItem.type=="expense"){

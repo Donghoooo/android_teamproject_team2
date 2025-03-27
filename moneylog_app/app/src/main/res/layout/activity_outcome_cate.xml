@@ -44,6 +44,34 @@
 
 
     </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="25dp"
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:id="@+id/start_date_picker"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:contentDescription="달력선택"
+            android:src="@android:drawable/ic_menu_my_calendar" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="8dp"
+            android:text="2025-03-20"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

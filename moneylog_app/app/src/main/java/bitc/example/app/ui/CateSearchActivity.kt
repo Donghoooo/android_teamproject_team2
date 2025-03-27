@@ -103,6 +103,7 @@ class CateSearchActivity : AppCompatActivity() {
       showDatePicker(endDate)
     }
 
+
 //    카테고리 선택
     val btnOpenCateDialog = binding.category
     btnOpenCateDialog.setOnClickListener {
@@ -140,7 +141,6 @@ class CateSearchActivity : AppCompatActivity() {
       fetchTransactionData("date")
     }
 
-    binding.search
 
 
 
@@ -278,7 +278,7 @@ class CateSearchActivity : AppCompatActivity() {
               it.use ?: "내역없음",  // 필요하면 변경
               it.source ?: "미분류",
               "${it.money} 원",
-              it.type// 타입 저장할때 'income' or 'expense' 로 저장
+              it.type // 타입 저장할때 'income' or 'expense' 로 저장
             )
           })
 

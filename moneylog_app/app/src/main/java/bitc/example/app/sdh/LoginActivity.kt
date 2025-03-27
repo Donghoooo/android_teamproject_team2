@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
       logInProcess(call)
 
 
-      val intent = Intent(this,MonthlyListActivity::class.java)
+      val intent = Intent(this,AddInfoActivity::class.java)
       startActivity(intent)
 
     }

@@ -14,20 +14,13 @@
         android:background="@color/main"
         tools:ignore="MissingConstraints">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="2025/03/18"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:id="@+id/btn_back"
             android:src="@drawable/back"
-            android:layout_gravity="end"
+            android:layout_gravity="start"
             android:layout_marginRight="10dp"/>
     </androidx.appcompat.widget.Toolbar>
 

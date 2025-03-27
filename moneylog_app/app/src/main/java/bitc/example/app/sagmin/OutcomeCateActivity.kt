@@ -1,8 +1,10 @@
 package bitc.example.app.sagmin
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -14,10 +16,20 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityOutcomeCateBinding
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class OutcomeCateActivity : AppCompatActivity() {
 
-//    TextView를 저장할 변수
+//    =============== 달력 표시 ===========
+private lateinit var startDate: TextView
+    private lateinit var startDatePicker: ImageView
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+
+
+    //    TextView를 저장할 변수
 //    lateinit 키워드는 변수가 나중에 초기화 될 것임을 나타낸다
     private lateinit var outResult : TextView
 
@@ -166,6 +178,26 @@ class OutcomeCateActivity : AppCompatActivity() {
 //            binding 은 ActivityOutcomeCateBinding의 객체로, 레이아웃의 뷰들을 바인딩하여 쉽게 접근하도록 해줌
             showBtnDialog(binding)
         }
+
+
+//        ========================= 달력 아이콘 선택 시, 날짜 선택 ===========================
+
+//    날짜 선택
+        startDate = binding.date
+        startDatePicker = binding.startDatePicker
+
+
+//    오늘날짜 기본값 설정
+        val today = Calendar.getInstance()
+        val todayDate = dateFormat.format(today.time)
+        startDate.text = todayDate
+
+
+//    시작 날짜 캘린더 아이콘 클릭 이벤트
+        startDatePicker.setOnClickListener {
+            showDatePicker(startDate)
+        }
+
     }
 
 //    /paymentMethodSelectButton 버튼 아이디
@@ -220,6 +252,23 @@ private fun onCategorySelected(button: AppCompatButton) {
 
     btnSubmit.isEnabled = selectedButton != null
     btnSubmit.isEnabled = outcomeDialog != null
+}
+
+
+//    ==================== 달력 날짜 선택 설정 ===================================
+private fun showDatePicker(textView: TextView) {
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+    val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+        val selectedDate = Calendar.getInstance()
+        selectedDate.set(selectedYear, selectedMonth, selectedDay)
+        textView.text = dateFormat.format(selectedDate.time)
+    }, year, month, day)
+
+    datePickerDialog.show()
 }
     }
 

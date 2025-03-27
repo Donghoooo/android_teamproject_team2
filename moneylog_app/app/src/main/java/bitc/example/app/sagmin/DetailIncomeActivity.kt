@@ -86,6 +86,8 @@ class DetailIncomeActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.income_log_seq).text = incomeLogSeq.toString()
 
 
+
+
         binding.btnUpdate.setOnClickListener {
             val cate = binding.btnPassIncome.text.toString()
             val money = binding.incomeMoneyReceipt.text.toString()
