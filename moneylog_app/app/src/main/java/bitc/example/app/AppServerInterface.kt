@@ -2,6 +2,7 @@ package bitc.example.app
 
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.dto.MainListDTO
 import bitc.example.app.dto.MemberDTO
 import retrofit2.Call
 import retrofit2.http.Body
@@ -14,10 +15,10 @@ interface AppServerInterface {
   fun postSignUp(@Body member: MemberDTO): Call<String>
 
   @POST("income/process")
-  fun postIncome(@Body income : IncomeLogDTO): Call<String>
+  fun postIncome(@Body income: IncomeLogDTO): Call<String>
 
   @POST("/outcome/process")
-  fun postOutcome(@Body outcome : ExpenseLogDTO) : Call<String>
+  fun postOutcome(@Body outcome: ExpenseLogDTO): Call<String>
 
   @GET("outcome/getByDate/{year}/{month}/{day}")
   fun getExpenseByDate(
@@ -25,4 +26,7 @@ interface AppServerInterface {
     @Path("month") month: Int,
     @Path("day") day: Int
   ): Call<List<ExpenseLogDTO>>  // 반환되는 데이터 타입
+
+  @POST("mainList")
+  fun mainList(@Body member: MemberDTO): Call<List<MainListDTO>>
 }

@@ -13,9 +13,7 @@ import bitc.example.app.databinding.ActivityLoginBinding
 import bitc.example.app.dto.MemberDTO
 
 class LoginActivity : AppCompatActivity() {
-
   private lateinit var sharedPreferences: SharedPreferences
-
   private val binding: ActivityLoginBinding by lazy {
     ActivityLoginBinding.inflate(layoutInflater)
   }
@@ -31,17 +29,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
-
-    // 저장된 ID 불러오기
     val savedId = sharedPreferences.getString("saved_id", "")
     if (!savedId.isNullOrEmpty()) {
       binding.id.setText(savedId)
       binding.saveId.isChecked = true
     }
-
-
-
-    //    initEventListener()
     binding.tv2.setOnClickListener {
       val intent = Intent(this, SignUpActivity::class.java)
       startActivity(intent)
@@ -55,15 +47,11 @@ class LoginActivity : AppCompatActivity() {
       var member = MemberDTO()
       member.memberId = id
       member.memberPw = pw
-
       val intent = Intent(this, AddInfoActivity::class.java).apply {
         putExtra("user_id", id) // ID를 Intent에 추가
       }
       startActivity(intent)
-
-
-
-  }
+    }
 
     setSupportActionBar(binding.topToolbar)
     supportActionBar?.setDisplayShowTitleEnabled(false)
