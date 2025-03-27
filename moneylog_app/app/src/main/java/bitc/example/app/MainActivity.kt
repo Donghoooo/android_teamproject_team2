@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.adapter.ListAdapter
 import bitc.example.app.databinding.ActivityMainBinding
+import bitc.example.app.dto.MainListDTO
 import bitc.example.app.model.ListData
 import bitc.example.app.viewmodel.CalendarViewModel
 import java.time.Year
@@ -31,9 +32,9 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     } // Binding 초기화
 
-  lateinit var year: String
-  lateinit var month: String
-  lateinit var day: String
+    lateinit var year: String
+    lateinit var month: String
+    lateinit var day: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,20 +48,25 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        
-         val dataList = listOf(
-            ListData("식비", "456465몰라", "현금", 5000),
-            ListData("식비", "123라몰라", "현금", 5000),
-            ListData("식비", "몰5몰라", "현금", 5000)
+
+        val mainList = listOf(
+            MainListDTO("식비", "456465몰라", "현금", 5000, "hello", "hell"),
+            MainListDTO("식비", "123라몰라", "현금", 5000),
+            MainListDTO("식비", "몰5몰라", "현금", 5000)
         )
 
         // RecyclerView의 LayoutManager 설정
         binding.listRecycle.layoutManager = LinearLayoutManager(this)
 
         // ListAdapter 초기화 및 RecyclerView에 연결
-        val listAdapter: ListAdapter = ListAdapter(dataList)
+        val listAdapter: ListAdapter = ListAdapter(mainList)
         binding.listRecycle.adapter = listAdapter
-        binding.listRecycle.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        binding.listRecycle.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                LinearLayoutManager.VERTICAL
+            )
+        )
 
         // headerDate
         viewModel.headerDate.observe(this, Observer { date ->
@@ -83,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                     binding.tvScrollDay.text = day.toString() // 날짜 업데이트
                     Log.d("fullstack503", year.toString())
                     Log.d("fullstack503", month.toString())
-                  Log.d("fullstack503", day.toString())
+                    Log.d("fullstack503", day.toString())
                     binding.tvScrollIncome.text = "+ ${if (income == 1) "수입" else "0원"}"
                     binding.tvScrollExpense.text = "- ${if (expense == 1) "지출" else "0원"}"
 
@@ -111,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         )
         imageView.setColorFilter(colorFilter)
 
-        // WindowInsets 처리 (전체 화면을 위한 설정)
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

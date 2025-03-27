@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.R
+import bitc.example.app.dto.MainListDTO
 import bitc.example.app.model.ListData
 
 
-class ListAdapter(private val mainList: List<ListData>) :
+class ListAdapter(private val mainList: List<MainListDTO>) :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {

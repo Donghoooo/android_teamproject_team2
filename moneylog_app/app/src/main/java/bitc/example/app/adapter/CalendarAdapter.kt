@@ -47,13 +47,13 @@ class CalendarAdapter(
             }
 
             // 클릭된 날짜일 경우 스타일 적용
-            if (data.isClicked) {
-                holder.binding.tvDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)  // 텍스트 크기 변경
-                holder.binding.tvDay.setTypeface(null, Typeface.BOLD)  // 텍스트 굵게 변경
-            } else {
-                holder.binding.tvDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)  // 기본 크기
-                holder.binding.tvDay.setTypeface(null, Typeface.NORMAL)  // 기본 굵기
-            }
+//            if (data.isClicked) {
+//                holder.binding.tvDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)  // 텍스트 크기 변경
+//                holder.binding.tvDay.setTypeface(null, Typeface.BOLD)  // 텍스트 굵게 변경
+//            } else {
+//                holder.binding.tvDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)  // 기본 크기
+//                holder.binding.tvDay.setTypeface(null, Typeface.NORMAL)  // 기본 굵기
+//            }
 
             val calendar = Calendar.getInstance().apply {
                 set(Calendar.YEAR, data.year)

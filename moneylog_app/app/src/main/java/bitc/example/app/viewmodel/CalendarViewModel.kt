@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import bitc.example.app.AppServerClass
 import bitc.example.app.dto.ExpenseLogDTO
+import bitc.example.app.dto.MainListDTO
 import bitc.example.app.model.CalendarData
 
 class CalendarViewModel : ViewModel() {
@@ -119,13 +120,14 @@ class CalendarViewModel : ViewModel() {
   calendarData.value = updatedData
   }
 
+
 //  // 해당 날짜에 지출 데이터가 있는지 확인하는 함수
 //  private fun getExpenseForDate(day: Int): ExpenseData {
 //    // 서버에서 데이터를 가져오는 로직
 //    // 이 예시에서는 지출 데이터를 더미로 반환
 //    return ExpenseData(isIncome = true, isExpense = true)
 //  }
-
-  // ExpenseData 클래스
-  data class ExpenseData(val isIncome: Boolean, val isExpense: Boolean)
+//
+//  // ExpenseData 클래스
+//  data class ExpenseData(val isIncome: Boolean, val isExpense: Boolean)
 }
