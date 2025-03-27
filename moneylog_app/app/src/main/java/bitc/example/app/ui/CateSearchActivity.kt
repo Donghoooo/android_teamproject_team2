@@ -139,6 +139,11 @@ class CateSearchActivity : AppCompatActivity() {
     binding.btnSearch.setOnClickListener {
       fetchTransactionData("date")
     }
+
+    binding.search
+
+
+
   }
 
 
