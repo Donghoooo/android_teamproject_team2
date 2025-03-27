@@ -72,25 +72,62 @@ class ExpenFragment : Fragment() {
             ) {
                 if (res.isSuccessful) {
                     val result = res.body()
+
+                    // 수입 합계 계산
                     val totalExpen = result?.sumOf { it.expenseMoney?.toIntOrNull() ?: 0 }
                     Log.d("fullstack503", totalExpen.toString())
-
                     totalExpenMoney = totalExpen.toString()
 
+                    // 총 수입 데이터를 액티비티로 전달
                     (activity as? totalExpen)?.totalExpen(totalExpenMoney)
 
                     Log.d("csy", "result : $result")
 
+                    val categoryExpenMap = mutableMapOf<String, Int>()
+                    result?.forEach { expenLog ->
+                        val category1 = expenLog.expenseCate ?: "Unknown"
+                        val amount1 = expenLog.expenseMoney?.toIntOrNull() ?: 0
 
-                    val adapter = result?.let { ExpenAdapter(it) }
-                    binding.recyclerView2.layoutManager = LinearLayoutManager(context)
-                    binding.recyclerView2.adapter = adapter
-                    binding.recyclerView2.addItemDecoration(
-                        DividerItemDecoration(
-                            context,
-                            LinearLayoutManager.VERTICAL
+                        // 카테고리별로 합산
+                        categoryExpenMap[category1] =
+                            categoryExpenMap.getOrDefault(category1, 0) + amount1
+
+                        val adapter = result?.let { ExpenAdapter(it) }
+                        binding.recyclerView2.layoutManager = LinearLayoutManager(context)
+                        binding.recyclerView2.adapter = adapter
+                        binding.recyclerView2.addItemDecoration(
+                            DividerItemDecoration(
+                                context,
+                                LinearLayoutManager.VERTICAL
+                            )
                         )
-                    )
+
+                        // PieChart 초기화
+                        val pieChart: PieChart = binding.pieChart
+
+                        // 데이터 준비
+                        val entries = ArrayList<PieEntry>()
+                        categoryExpenMap.forEach { (category, totalAmount) ->
+                            entries.add(PieEntry(totalAmount.toFloat(), category))
+                        }
+
+                        // PieDataSet 생성
+                        val dataSet = PieDataSet(entries, "")
+                        dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList() // 색상 지정
+                        dataSet.valueTextSize = 15f // 값 텍스트 크기 설정
+
+                        // PieData 생성
+                        val data = PieData(dataSet)
+
+                        // PieChart에 데이터 설정
+                        pieChart.data = data
+
+                        // 기타 설정
+                        pieChart.isDrawHoleEnabled = true  // 원형 차트 내부에 홀(구멍) 그리기
+                        pieChart.setUsePercentValues(true)  // 퍼센트 값 표시
+                        pieChart.invalidate()  // 차트 업데이트
+                        pieChart.description.isEnabled = false
+                    }
                 } else {
                     Log.d("csy", "송신실패")
                 }
@@ -100,41 +137,6 @@ class ExpenFragment : Fragment() {
                 Log.d("csy", "message : ${t.message}")
             }
         })
-
-
-        // PieChart 초기화
-        val pieChart: PieChart = binding.pieChart
-
-        // 데이터 준비
-        val entries = ArrayList<PieEntry>()
-        entries.add(PieEntry(4f))
-        entries.add(PieEntry(10f))
-        entries.add(PieEntry(13f))
-        entries.add(PieEntry(14f))
-        entries.add(PieEntry(15f))
-        entries.add(PieEntry(26f))
-
-
-        // PieDataSet 생성
-        val dataSet = PieDataSet(entries, "")
-        dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList() // 색상 지정
-        dataSet.valueTextSize = 15f // 값 텍스트 크기 설정
-
-        // PieData 생성
-        val data = PieData(dataSet)
-
-        // PieChart에 데이터 설정
-        pieChart.data = data
-
-        // 기타 설정
-        pieChart.isDrawHoleEnabled = true  // 원형 차트 내부에 홀(구멍) 그리기
-//        pieChart.holeRadius = 30f
-//        pieChart.setHoleColor(R.color.white)  // 구멍 색상 설정
-        pieChart.setUsePercentValues(true)  // 퍼센트 값 표시
-        pieChart.invalidate()  // 차트 업데이트
-        pieChart.description.isEnabled = false
-//        pieChart.isRotationEnabled = false
-
     }
 
     companion object {

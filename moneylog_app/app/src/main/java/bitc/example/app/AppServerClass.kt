@@ -7,13 +7,13 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 object AppServerClass {
-  private val BASE_URL = "http://10.100.203.55:8080/"
-  val instance: AppServerInterface by lazy {
-    Retrofit.Builder()
-      .baseUrl(BASE_URL)
-      .addConverterFactory(ScalarsConverterFactory.create())
-      .addConverterFactory(GsonConverterFactory.create())
-      .build()
-      .create(AppServerInterface::class.java)
-  }
+    private val BASE_URL = "http://192.168.219.112:8080/"
+    val instance: AppServerInterface by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(AppServerInterface::class.java)
+    }
 }

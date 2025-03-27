@@ -6,7 +6,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp"
         android:gravity="center"
         android:orientation="horizontal">
@@ -16,38 +17,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/blue"
-            android:id="@+id/itemData"/>
+            android:id="@+id/itemData" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="학비"
-            android:id="@+id/Cate_Date"/>
+            android:id="@+id/Cate_Date" />
 
         <VideoView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1000원"
-            android:id="@+id/Money_Date"/>
+            android:id="@+id/Money_Date" />
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </LinearLayout>

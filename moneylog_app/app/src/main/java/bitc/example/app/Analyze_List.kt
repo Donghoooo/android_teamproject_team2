@@ -41,22 +41,63 @@ class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragm
 
     override fun totalIncome(data: String) {
         incomeTotal = data
-        binding.incomeMoney.text = incomeTotal
-
+        binding.incomeMoney.text = incomeTotal + "원"
         Log.d("fullstack503", "main$data")
     }
 
     override fun totalExpen(data1: String) {
         expenTotal = data1
-        binding.expenMoney.text = expenTotal
+        binding.expenMoney.text = expenTotal + "원"
 
-        Log.d("fullstack5031", "main$data1")
+        Log.d("fullstack503", "main$data1")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
+        //        Fragment vs 수입/지출 버튼 색상 설정
+
+        val fragmentManager: FragmentManager = supportFragmentManager
+        var transaction: FragmentTransaction = fragmentManager.beginTransaction()
+
+        val incomeFragment = InComeFragment()
+        val expenFragment = ExpenFragment()
+
+
+        transaction.add(R.id.btn_income_expen, expenFragment)
+        binding.btnInput.setBackgroundColor(Color.parseColor("#F5F6F9")) // 기본 화면 수입 버튼 색상
+        binding.btnOutput.setBackgroundColor(Color.parseColor("#FFFFFF")) // 기본 화면 지출 버튼 색상
+        transaction.commit()
+
+
+        binding.btnInput.setOnClickListener {
+            transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.btn_income_expen, incomeFragment)
+            transaction.setReorderingAllowed(true)
+            transaction.addToBackStack("")
+            transaction.commit()
+
+            if (it == binding.btnInput) {
+                binding.expenMoney.text = "000,000"
+                binding.btnInput.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                binding.btnOutput.setBackgroundColor(Color.parseColor("#F5F6F9"))
+            }
+        }
+
+        binding.btnOutput.setOnClickListener {
+            transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.btn_income_expen, expenFragment)
+            transaction.setReorderingAllowed(true)
+            transaction.addToBackStack("")
+            transaction.commit()
+
+            if (it == binding.btnOutput) {
+                binding.incomeMoney.text = "000,000"
+                binding.btnOutput.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                binding.btnInput.setBackgroundColor(Color.parseColor("#F5F6F9"))
+            }
+        }
 
         // 현재 날짜와 시간 얻기
         val currentDate = getCurrentDateTime()
@@ -98,49 +139,7 @@ class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragm
             }, 2025, 3, 20).show()
         }
 
-//        Fragment vs 수입/지출 버튼 색상 설정
 
-        val fragmentManager: FragmentManager = supportFragmentManager
-        var transaction: FragmentTransaction = fragmentManager.beginTransaction()
-
-        val incomeFragment = InComeFragment()
-        val expenFragment = ExpenFragment()
-
-
-        transaction.add(R.id.btn_income_expen, expenFragment)
-        binding.btnInput.setBackgroundColor(Color.parseColor("#F5F6F9")) // 기본 화면 수입 버튼 색상
-        binding.btnOutput.setBackgroundColor(Color.parseColor("#FFFFFF")) // 기본 화면 지출 버튼 색상
-        transaction.commit()
-
-
-        binding.btnInput.setOnClickListener {
-            transaction = fragmentManager.beginTransaction()
-            transaction.replace(R.id.btn_income_expen, incomeFragment)
-            transaction.setReorderingAllowed(true)
-            transaction.addToBackStack("")
-            transaction.commit()
-
-            if (it == binding.btnInput) {
-                binding.btnInput.setBackgroundColor(Color.parseColor("#FFFFFF"))
-                binding.btnOutput.setBackgroundColor(Color.parseColor("#F5F6F9"))
-            }
-
-        }
-
-        binding.btnOutput.setOnClickListener {
-            binding.btnOutput.setOnClickListener {
-                transaction = fragmentManager.beginTransaction()
-                transaction.replace(R.id.btn_income_expen, expenFragment)
-                transaction.setReorderingAllowed(true)
-                transaction.addToBackStack("")
-                transaction.commit()
-
-                if (it == binding.btnOutput) {
-                    binding.btnOutput.setBackgroundColor(Color.parseColor("#FFFFFF"))
-                    binding.btnInput.setBackgroundColor(Color.parseColor("#F5F6F9"))
-                }
-            }
-        }
     }
 }
 
