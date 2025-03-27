@@ -8,31 +8,29 @@ import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.R
 import bitc.example.app.model.ListData
 
-
 class ListAdapter(private val mainList: List<ListData>) :
-    RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+  RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+  class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    val cateTextView: TextView = view.findViewById(R.id.main_list_cate)
+    val useeTextView: TextView = view.findViewById(R.id.main_list_usee)
+    val wayTextView: TextView = view.findViewById(R.id.main_list_way)
+    val amountTextView: TextView = view.findViewById(R.id.main_list_amount)
+  }
 
-    class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val cateTextView: TextView = view.findViewById(R.id.main_list_cate)
-        val useeTextView: TextView = view.findViewById(R.id.main_list_usee)
-        val wayTextView: TextView = view.findViewById(R.id.main_list_way)
-        val amountTextView: TextView = view.findViewById(R.id.main_list_amount)
-    }
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+    val view = LayoutInflater.from(parent.context)
+      .inflate(R.layout.item_list, parent, false)
+    return ListViewHolder(view)
+  }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_list, parent, false)
-        return ListViewHolder(view)
-    }
+  override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+    val item = mainList[position]
+    holder.cateTextView.text = item.cate
+    holder.useeTextView.text = item.usee
+    holder.wayTextView.text = item.way
+    holder.amountTextView.text = "${item.amount}원"
+  }
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val item = mainList[position]
-        holder.cateTextView.text = item.cate
-        holder.useeTextView.text = item.usee
-        holder.wayTextView.text = item.way
-        holder.amountTextView.text = "${item.amount}원"
-    }
-
-    override fun getItemCount(): Int = mainList.size
+  override fun getItemCount(): Int = mainList.size
 }
 

@@ -16,11 +16,11 @@ public class MainController
   private MainService mainService;
   
   @PostMapping ("mainList")
-  public List<MainListDTO> mainList (MemberDTO memberDTO) throws Exception
+  public List<MainListDTO> mainList (MemberDTO member) throws Exception
   {
-    LocalDateTime date = memberDTO.getCreateDate ();
+    LocalDateTime date = member.getCreateDate ();
     LocalDateTime endOfDay = date.toLocalDate ().atTime (LocalTime.MAX);
-    memberDTO.setUpdateDate (endOfDay);
-    return mainService.mainList (memberDTO);
+    member.setUpdateDate (endOfDay);
+    return mainService.mainList (member);
   }
 }
