@@ -76,9 +76,9 @@ class CalendarAdapter(
             holder.binding.tvExpense.visibility = View.GONE
             holder.binding.tvIncome.visibility = View.GONE
         } else {
-            // 지출 표시
-            holder.binding.tvExpense.text = if (data.expense > 0) "- ₩${data.expense}" else ""
-            holder.binding.tvExpense.visibility = if (data.expense > 0) View.VISIBLE else View.GONE
+//            // 지출 표시
+//            holder.binding.tvExpense.text = if (data.expense > 0) "- ₩${data.expense}" else ""
+//            holder.binding.tvExpense.visibility = if (data.expense > 0) View.VISIBLE else View.GONE
 
             // 수입 표시
 //            holder.binding.tvIncome.text = if (data.income > 0) "+ ₩${data.income}" else ""

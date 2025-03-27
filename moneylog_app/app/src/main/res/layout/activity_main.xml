@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
         <!--     헤더 -->
@@ -202,25 +202,6 @@
 
         </LinearLayout>
 
-        <!--    </LinearLayout>-->
-
-
-        <!--    <androidx.core.widget.NestedScrollView-->
-        <!--        android:id="@+id/scrollView"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="0dp"-->
-        <!--        android:backgroundTint="@color/white"-->
-        <!--        android:visibility="gone"-->
-        <!--        app:layout_constraintBottom_toTopOf="@+id/divider_footer"-->
-        <!--        app:layout_constraintTop_toBottomOf="@+id/main_calendar_view">-->
-
-
-        <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--        android:id="@+id/scrollView"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="match_parent"-->
-        <!--        android:visibility="gone">-->
-
 
         <LinearLayout
             android:id="@+id/scrollView"
@@ -229,9 +210,9 @@
             android:background="@drawable/border"
             android:gravity="center"
             android:orientation="vertical"
+            android:visibility="visible"
             app:layout_constraintTop_toTopOf="@+id/scrollView"
-            tools:ignore="MissingConstraints"
-            android:visibility="gone">
+            tools:ignore="MissingConstraints">
 
 
             <LinearLayout
@@ -301,279 +282,20 @@
                 android:layout_width="330dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
-                android:background="#EFEFEF" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="8dp">
-                <!---->
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="2"
-                    android:text="식비"
-                    android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="10sp" />
-                <!---->
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:text="내역"
-                    android:textColor="#000"
-                    android:textSize="10sp" />
-                <!---->
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="카드"
-                    android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="10sp" />
-                <!---->
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="2"
-                    android:text="0,000원"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/red"
-                    android:textSize="10sp" />
-            </LinearLayout>
-            <!---->
-            <View
-                android:layout_width="320dp"
-                android:layout_height="1dp"
                 android:background="@color/main_light" />
 
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list_recycle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                android:id="@+id/listRecycle"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content">
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    android:padding="8dp">-->
+            </androidx.recyclerview.widget.RecyclerView>
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/main_list_cate"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginRight="10dp"-->
-<!--                        android:layout_weight="2"-->
-<!--                        android:text="식비"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textColor="#000"-->
-<!--                        android:textSize="10sp" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/main_list_usee"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="4"-->
-<!--                        android:text="내역"-->
-<!--                        android:textColor="#000"-->
-<!--                        android:textSize="10sp" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/main_list_way"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="2"-->
-<!--                        android:text="카드"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textColor="#000"-->
-<!--                        android:textSize="10sp" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/main_list_amount"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginRight="10dp"-->
-<!--                        android:layout_weight="2"-->
-<!--                        android:text="0,000원"-->
-<!--                        android:textAlignment="textEnd"-->
-<!--                        android:textColor="@color/blue"-->
-<!--                        android:textSize="10sp" />-->
-<!--                </LinearLayout>-->
-
-<!--                <View-->
-<!--                    android:layout_width="320dp"-->
-<!--                    android:layout_height="1dp"-->
-<!--                    android:background="@color/main_light" />-->
-
-<!--            </androidx.recyclerview.widget.RecyclerView>-->
 
         </LinearLayout>
-        <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
     </LinearLayout>
-
-
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:gravity="center_vertical"-->
-    <!--                android:orientation="horizontal"-->
-    <!--                android:padding="8dp">-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_marginRight="10dp"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:text="식비"-->
-    <!--                    android:textAlignment="center"-->
-    <!--                    android:textColor="#000"-->
-    <!--                    android:textSize="10sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="4"-->
-    <!--                    android:text="내역"-->
-    <!--                    android:textColor="#000"-->
-    <!--                    android:textSize="10sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:text="카드"-->
-    <!--                    android:textAlignment="center"-->
-    <!--                    android:textColor="#000"-->
-    <!--                    android:textSize="10sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_marginRight="10dp"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:text="0,000원"-->
-    <!--                    android:textAlignment="textEnd"-->
-    <!--                    android:textColor="@color/red"-->
-    <!--                    android:textSize="10sp" />-->
-    <!--            </LinearLayout>-->
-
-    <!--            <View-->
-    <!--                android:layout_width="320dp"-->
-    <!--                android:layout_height="1dp"-->
-    <!--                android:background="@color/main_light" />-->
-
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:gravity="center_vertical"-->
-    <!--                android:orientation="horizontal"-->
-    <!--                android:padding="8dp">-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_marginRight="10dp"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:text="식비"-->
-    <!--                    android:textAlignment="center"-->
-    <!--                    android:textColor="#000"-->
-    <!--                    android:textSize="10sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="4"-->
-    <!--                    android:text="내역"-->
-    <!--                    android:textColor="#000"-->
-    <!--                    android:textSize="10sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:text="카드"-->
-    <!--                    android:textAlignment="center"-->
-    <!--                    android:textColor="#000"-->
-    <!--                    android:textSize="10sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_marginRight="10dp"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:text="0,000원"-->
-    <!--                    android:textAlignment="textEnd"-->
-    <!--                    android:textColor="@color/red"-->
-    <!--                    android:textSize="10sp" />-->
-    <!--            </LinearLayout>-->
-
-    <!--            <View-->
-    <!--                android:layout_width="320dp"-->
-    <!--                android:layout_height="1dp"-->
-    <!--                android:background="@color/main_light" />-->
-
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:gravity="center_vertical"-->
-    <!--                android:orientation="horizontal"-->
-    <!--                android:padding="8dp">-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_marginRight="10dp"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:text="식비"-->
-    <!--                    android:textAlignment="center"-->
-    <!--                    android:textColor="#000"-->
-    <!--                    android:textSize="10sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="4"-->
-    <!--                    android:text="내역"-->
-    <!--                    android:textColor="#000"-->
-    <!--                    android:textSize="10sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:text="카드"-->
-    <!--                    android:textAlignment="center"-->
-    <!--                    android:textColor="#000"-->
-    <!--                    android:textSize="10sp" />-->
-
-    <!--                <TextView-->
-    <!--                    android:layout_width="0dp"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_marginRight="10dp"-->
-    <!--                    android:layout_weight="2"-->
-    <!--                    android:text="0,000원"-->
-    <!--                    android:textAlignment="textEnd"-->
-    <!--                    android:textColor="@color/red"-->
-    <!--                    android:textSize="10sp" />-->
-    <!--            </LinearLayout>-->
-
-    <!--            <View-->
-    <!--                android:layout_width="320dp"-->
-    <!--                android:layout_height="1dp"-->
-    <!--                android:background="@color/main_light" />-->
-
-
-    <!--        </LinearLayout>-->
-    <!--    </androidx.core.widget.NestedScrollView>-->
-    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
     <View

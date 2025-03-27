@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.R
-import bitc.example.app.dto.MainListDTO
+import bitc.example.app.model.ListData
 
 
-class ListAdapter(private val mainList: List<MainListDTO>) :
+class ListAdapter(private val mainList: List<ListData>) :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -26,11 +26,11 @@ class ListAdapter(private val mainList: List<MainListDTO>) :
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val mainList = mainList[position]
-        holder.cateTextView.text = "${mainList.cate}"
-        holder.useeTextView.text = "${mainList.usee}"
-        holder.wayTextView.text = "${mainList.way}"
-        holder.amountTextView.text = "${mainList.amount}원"
+        val item = mainList[position]
+        holder.cateTextView.text = item.cate.toString()
+        holder.useeTextView.text = item.usee.toString()
+        holder.wayTextView.text = item.way.toString()
+        holder.amountTextView.text = "${item.amount}원"
     }
 
     override fun getItemCount(): Int = mainList.size
