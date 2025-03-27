@@ -6,7 +6,6 @@ import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -14,8 +13,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import bitc.example.app.adapter.ListAdapter
 import bitc.example.app.databinding.ActivityMainBinding
+import bitc.example.app.model.ListData
 import bitc.example.app.viewmodel.CalendarViewModel
+import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,12 +32,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // headerDate에 대한 옵저버
+        val mainList = listOf(
+            ListData("식비", "몰라몰라", "현금", 5000),
+            ListData("식비", "몰라몰라", "현금", 5000),
+            ListData("식비", "몰라몰라", "현금", 5000),
+            ListData("식비", "몰라몰라", "현금", 5000),
+            ListData("식비", "몰라몰라", "현금", 5000),
+            ListData("식비", "몰라몰라", "현금", 5000)
+        )
+
+        // RecyclerView의 LayoutManager 설정
+//        binding.listRecycle.layoutManager = LinearLayoutManager(this)
+//
+//        // ListAdapter 초기화 및 RecyclerView에 연결
+//        val listAdapter = ListAdapter(mainList)
+//        binding.listRecycle.adapter = listAdapter  // 수정된 부분
+
+        // headerDate
         viewModel.headerDate.observe(this, Observer { date ->
             binding.tvHeader.text = date // headerDate TextView 업데이트
         })
 
-        // scrollMonth를 옵저빙해서 tvScrollMonth에 표시
+        // scrollMonth를  tvScrollMonth에 표시
         viewModel.scrollMonth.observe(this, Observer { month ->
             binding.tvScrollMonth.text = month // scrollMonth TextView 업데이트
         })
@@ -56,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
 
         // 이전 월 버튼 클릭 시
         binding.btnPrevMonth.setOnClickListener {
