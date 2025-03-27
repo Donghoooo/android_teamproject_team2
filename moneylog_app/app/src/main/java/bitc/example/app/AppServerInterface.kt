@@ -55,11 +55,12 @@ interface AppServerInterface {
 //  검색 페이지
   @GET("search/process")
   fun getSearchList(
-  @Query("category") cate: List<String>?,
-  @Query("source") source: List<String>?,
-  @Query("startDate") startDate: String,
-  @Query("endDate") endDate: String
-  ): Call<List<SearchDTO>>
+  @Query("category") cate: List<String>?, // 카테고리
+  @Query("source") source: List<String>?, // 자산방식
+  @Query("startDate") startDate: String,  // 시작날짜
+  @Query("endDate") endDate: String,  // 끝 날짜
+  @Query("keyword") keyword: String?  // 키워드
+): Call<List<SearchDTO>>
 
   //  수입/지출 리스트
   @GET("/list/income")

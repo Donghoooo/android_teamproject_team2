@@ -7,5 +7,5 @@ data class SearchListItem(
   val use: String, // 내역
   val source: String, // 지불방식
   val money: String, // 금액
-  val type: String  // 수입인지 지출인지
+  val type: String // 수입인지 지출인지
 )

@@ -3,8 +3,6 @@ package bitc.example.app.ui
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -254,12 +252,16 @@ private fun updateBankText(){
     val startDate = binding.startDate.text.toString()
     val endDate = binding.endDate.text.toString()
 
+//    검색창에서 작성한 키워드 가져오기 (미입력시 null)
+    val keyword = binding.searchView.text.toString().takeIf { it.isNotBlank() } ?: ""
+
     // Retrofit API 호출
     AppServerClass.instance.getSearchList(
       selectedCategory,  // null이 전달될 수 있도록 수정
       selectedBank,
       startDate,
-      endDate
+      endDate,
+      keyword
     ).enqueue(object : Callback<List<SearchDTO>>  {
         @SuppressLint("NotifyDataSetChanged")
         override fun onResponse(call: Call<List<SearchDTO>>, response: Response<List<SearchDTO>>) {
@@ -268,6 +270,7 @@ private fun updateBankText(){
 
             // 기존 데이터 지우고 새 데이터 추가
             searchItemList.clear()
+
             searchItemList.addAll(transactions.map {
               SearchListItem(
                 it.date,
@@ -275,7 +278,7 @@ private fun updateBankText(){
                 it.use ?: "내역없음",  // 필요하면 변경
                 it.source ?: "미분류",
                 "${it.money} 원",
-                it.type // 타입 저장할때 'income' or 'expense' 로 저장
+                it.type// 타입 저장할때 'income' or 'expense' 로 저장
               )
             })
 

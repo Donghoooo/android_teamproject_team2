@@ -29,8 +29,8 @@ class SearchListAdapter(private val searchItems: List<SearchListItem>) : Recycle
     return ViewHolder(view)
   }
 
-  override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    val searchItem = searchItems[position]
+  override fun onBindViewHolder(holder: ViewHolder, index: Int) {
+    val searchItem = searchItems[index]
 
 //    금액 부분 숫자만 추출
     val moneyValue = searchItem.money.filter { it.isDigit() }  // 숫자만 추출

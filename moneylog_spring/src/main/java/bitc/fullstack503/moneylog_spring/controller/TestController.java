@@ -31,7 +31,8 @@ public class TestController
       @RequestParam(required = false) List<String> category,
       @RequestParam(required = false) List<String> source,
       @RequestParam String startDate,
-      @RequestParam String endDate) throws Exception{
+      @RequestParam String endDate,
+      @RequestParam String keyword) throws Exception{
 
     //    날짜 형식 변경
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -51,6 +52,7 @@ public class TestController
     paramMap.put("endDate", parsedEndDate);
     paramMap.put("category", category);
     paramMap.put("source", source);
+    paramMap.put("keyword", keyword);
 
     return searchService.getSearchList(paramMap);
   }

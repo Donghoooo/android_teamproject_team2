@@ -19,6 +19,14 @@
       #{item}
     </foreach>
       </if>
+
+    <if test="keyword != null and keyword != ''">
+      AND (
+      income_cate LIKE CONCAT('%', #{keyword}, '%')
+      OR income_source LIKE CONCAT('%', #{keyword}, '%')
+      OR income_use LIKE CONCAT('%', #{keyword}, '%')
+      )
+    </if>
     </where>
 
     UNION ALL
@@ -39,6 +47,13 @@
       <foreach item ="item" collection="source" open="(" separator="," close=")">
         #{item}
       </foreach>
+    </if>
+    <if test="keyword != null and keyword !=''">
+      AND (
+      expense_cate LIKE CONCAT('%', #{keyword}, '%')
+      OR payment_option LIKE CONCAT('%', #{keyword}, '%')
+      OR expense_use LIKE CONCAT('%', #{keyword}, '%')
+      )
     </if>
     </where>
     ORDER BY date ASC

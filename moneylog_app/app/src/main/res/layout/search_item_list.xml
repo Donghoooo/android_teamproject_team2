@@ -53,6 +53,18 @@
             android:textStyle="bold"
             android:textColor="@color/expense"
             android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/tvSeq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="숨겨질 텍스트"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tvMemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="숨겨질 텍스트"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
