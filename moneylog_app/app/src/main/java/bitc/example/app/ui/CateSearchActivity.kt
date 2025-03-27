@@ -94,6 +94,9 @@ class CateSearchActivity : AppCompatActivity() {
     startDate.text = todayDate
     endDate.text = todayDate
 
+    // 페이지 로드 시 자동으로 오늘 날짜 기준 전체 리스트 조회 실행
+    fetchTransactionData("date")
+
 //    시작 날짜 캘린더 아이콘 클릭 이벤트
     startDatePicker.setOnClickListener {
       showDatePicker(startDate)
@@ -135,7 +138,7 @@ class CateSearchActivity : AppCompatActivity() {
     searchListAdapter = SearchListAdapter(searchItemList)
     binding.searchListView.adapter = searchListAdapter
 
-    // 검색 버튼 클릭 시 API 요청
+    // 검색 버튼 클릭 시 리스트 출력
     binding.btnSearch.setOnClickListener {
       fetchTransactionData("date")
     }

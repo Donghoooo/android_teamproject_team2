@@ -14,10 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class TestController
@@ -42,7 +39,16 @@ public class TestController
     try {
       parsedStartDate = dateFormat.parse(startDate);
       parsedEndDate = dateFormat.parse(endDate);
-    } catch (ParseException e) {
+
+      // endDate를 하루의 마지막 시간(23:59:59)로 설정
+      Calendar cal = Calendar.getInstance();
+      cal.setTime(parsedEndDate);
+      cal.set(Calendar.HOUR_OF_DAY, 23);
+      cal.set(Calendar.MINUTE, 59);
+      cal.set(Calendar.SECOND, 59);
+      parsedEndDate = cal.getTime();
+    }
+    catch (ParseException e) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 날짜 형식입니다.");
     }
 
