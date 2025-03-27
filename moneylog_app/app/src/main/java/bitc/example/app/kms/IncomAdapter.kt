@@ -1,11 +1,13 @@
 package bitc.example.app.kms
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.databinding.IncomItemRecyclerViewBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.sagmin.DetailIncomeActivity
 
 class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //class IncomAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -18,6 +20,12 @@ class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<R
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, index: Int) {
+
+
+
+
+
+
 //        Log.d("fullstack503", "onBindViewHolder : $position")
 //        Log.d("csy", "datas : $datas")
 
@@ -35,6 +43,23 @@ class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<R
         binding.incomItemSourceData.text = datas[index].incomeSource
         binding.incomItemUseData.text = datas[index].incomeUse
         binding.incomItemSeqData.text = datas[index].incomeLogSeq.toString()
+
+        binding.incomItemCateData.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, DetailIncomeActivity::class.java).apply {
+                putExtra("incomeLogSeq", datas[index].incomeLogSeq)
+                putExtra("incomeDate", datas[index].incomeDate)
+                putExtra("incomeCate", datas[index].incomeCate)
+                putExtra("incomeMoney", datas[index].incomeMoney)
+                putExtra("incomeSource", datas[index].incomeSource)
+                putExtra("incomeMemo", datas[index].incomeMemo)
+            }
+            context.startActivity(intent)
+        }
+
     }
+
+
+
 
 }

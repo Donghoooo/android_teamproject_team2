@@ -3,10 +3,7 @@ package bitc.fullstack503.moneylog_spring.controller;
 import bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO;
 import bitc.fullstack503.moneylog_spring.service.IncomeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class IncomeController {
@@ -29,7 +26,7 @@ public int incomeUpdate(@RequestBody IncomeLogDTO incomeLog) throws Exception {
 }
 
 //    수입 내용 삭제하기
-    @PostMapping("income/delete")
+    @DeleteMapping("income/delete")
     public int incomeDelete(@RequestParam("incomeLogSeq") int incomeLogSeq) throws Exception{
         return incomeService.incomeDelete(incomeLogSeq);
     }

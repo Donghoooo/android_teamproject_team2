@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -45,14 +46,21 @@ class DetailIncomeActivity : AppCompatActivity() {
             finish()
         }
 
-
+        val incomeLogSeq = intent.getIntExtra("incomeLogSeq", -1)
         val incomeDate = intent.getStringExtra("incomeDate")
         val incomeCate = intent.getStringExtra("incomeCate")
         val incomeMoney = intent.getStringExtra("incomeMoney")
+        val incomeSource = intent.getStringExtra("incomeSource")
+        val incomeMemo = intent.getStringExtra("incomeMemo")
+        val incomeUse = intent.getStringExtra("incomeUse")
 
         findViewById<TextView>(R.id.detail_income_date).text = incomeDate
         findViewById<TextView>(R.id.btn_pass_income).text = incomeCate
         findViewById<TextView>(R.id.income_money_receipt).text = incomeMoney
+        findViewById<TextView>(R.id.income_memo_receipt).text = incomeMemo
+        findViewById<TextView>(R.id.income_dialog_receipt).text = incomeSource
+        findViewById<TextView>(R.id.income_info_receipt).text = incomeUse
+        findViewById<TextView>(R.id.income_log_seq).text = incomeLogSeq.toString()
 
 
         binding.incomeDialogReceipt.setOnClickListener{
@@ -98,7 +106,24 @@ class DetailIncomeActivity : AppCompatActivity() {
 
 
         binding.btnDrop.setOnClickListener {
+            val seq = binding.incomeLogSeq.text?.toString()?.toIntOrNull() ?: -1
 
+            if (seq == -1) {
+                Log.e("DetailIncomeActivity", "삭제할 수 없는 데이터입니다.")
+                return@setOnClickListener
+            }
+
+            // 삭제 확인 다이얼로그
+            AlertDialog.Builder(this)
+                .setTitle("삭제 확인")
+                .setMessage("정말로 삭제하시겠습니까?")
+                .setPositiveButton("삭제") { _, _ ->
+                    val api = AppServerClass.instance
+                    val call = api.deleteIncome(seq)
+                    retrofitResponse(call) // 재사용 함수 호출
+                }
+                .setNegativeButton("취소", null)
+                .show()
         }
     }
     //  카테고리 선택 부분 클릭 시 다이얼로그 표시

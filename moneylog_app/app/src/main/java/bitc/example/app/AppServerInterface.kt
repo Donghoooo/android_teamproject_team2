@@ -39,7 +39,7 @@ interface AppServerInterface {
   @POST("income/update")
   fun updateIncome(@Body incomeLog : IncomeLogDTO): Call<Int>
   // 수입 삭제
-  @DELETE
+  @DELETE("income/delete")
   fun deleteIncome(@Query("incomeLogSeq")incomeLogSeq : Int): Call<Int>
 
   // 지출 저장

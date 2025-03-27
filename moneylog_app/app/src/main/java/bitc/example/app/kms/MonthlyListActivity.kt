@@ -70,5 +70,6 @@ class MonthlyListActivity : AppCompatActivity() {
             transaction.addToBackStack("")
             transaction.commit()
         }
+
     }
 }
