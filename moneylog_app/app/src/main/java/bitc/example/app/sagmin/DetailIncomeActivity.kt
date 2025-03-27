@@ -1,5 +1,6 @@
 package bitc.example.app.sagmin
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -12,6 +13,7 @@ import bitc.example.app.AppServerClass
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailIncomeBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.ui.dialog.IncomeBankChangeActivity
 import bitc.example.app.ui.dialog.IncomeCategoryChangeActivity
 import retrofit2.Call
@@ -124,6 +126,7 @@ class DetailIncomeActivity : AppCompatActivity() {
                 }
                 .setNegativeButton("취소", null)
                 .show()
+
         }
     }
     //  카테고리 선택 부분 클릭 시 다이얼로그 표시
@@ -154,6 +157,11 @@ class DetailIncomeActivity : AppCompatActivity() {
                     // 서버에서 전달받은 데이터만 변수로 저장
                     val result = res.body()
                     Log.d("fullstack503", "result : $result")
+
+                    val intent = Intent(this@DetailIncomeActivity, MonthlyListActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish() // 현재 액티비티 종료
                 }
                 else {
                     Log.d("fullstack503", "송신 실패")
