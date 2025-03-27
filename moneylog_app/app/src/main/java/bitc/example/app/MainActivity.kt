@@ -17,13 +17,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.adapter.ListAdapter
 import bitc.example.app.databinding.ActivityMainBinding
 import bitc.example.app.dto.MainListDTO
-import bitc.example.app.model.ListData
 import bitc.example.app.viewmodel.CalendarViewModel
-import java.time.Year
 
 class MainActivity : AppCompatActivity() {
 
@@ -90,15 +87,14 @@ class MainActivity : AppCompatActivity() {
                     Log.d("fullstack503", year.toString())
                     Log.d("fullstack503", month.toString())
                     Log.d("fullstack503", day.toString())
-                    binding.tvScrollIncome.text = "+ ${if (income == 1) "수입" else "0원"}"
-                    binding.tvScrollExpense.text = "- ${if (expense == 1) "지출" else "0원"}"
+//                    binding.tvScrollIncome.text = "+ ${if (income == 1) "수입" else "0원"}"
+//                    binding.tvScrollExpense.text = "- ${if (expense == 1) "지출" else "0원"}"
 
                     // 해당 월을 업데이트
                     viewModel.scrollMonth.value = month.toString()
                 }
             }
         }
-
 
         // 이전 월 버튼 클릭 시
         binding.btnPrevMonth.setOnClickListener {
