@@ -1,6 +1,8 @@
 package bitc.example.app.kms
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.activity.enableEdgeToEdge
@@ -15,6 +17,9 @@ import bitc.example.app.R
 import bitc.example.app.databinding.ActivityMonthlyListBinding
 
 class MonthlyListActivity : AppCompatActivity() {
+
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,6 +31,8 @@ class MonthlyListActivity : AppCompatActivity() {
             insets
         }
 
+        val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+        val memberId = sharedPreferences.getString("memberId", "아이디").toString()
         // 수입/지출 버튼 토글
         val toggleGroup = findViewById<RadioGroup>(R.id.toggleGroup)
         val btnIncome = findViewById<RadioButton>(R.id.btn_income)

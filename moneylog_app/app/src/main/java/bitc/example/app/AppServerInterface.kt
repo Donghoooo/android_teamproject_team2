@@ -63,9 +63,10 @@ interface AppServerInterface {
 
   //  수입/지출 리스트
   @GET("/list/income")
-  fun getIncomeList() : Call<List<IncomeLogDTO>>
+  fun getIncomeList(@Query("memberId")memberId : String) : Call<List<IncomeLogDTO>>
   @GET("/list/expense")
-  fun getExpenseList() : Call<List<ExpenseLogDTO>>
+  fun getExpenseList(@Query("memberId")memberId : String) : Call<List<ExpenseLogDTO>>
+
 
 
   @GET("/analyze")

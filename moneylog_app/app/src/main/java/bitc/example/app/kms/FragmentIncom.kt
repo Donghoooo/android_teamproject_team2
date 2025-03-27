@@ -1,5 +1,7 @@
 package bitc.example.app.kms
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -30,6 +32,10 @@ class FragmentIncom : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    // 로그인 되어있는 memberId 값을 담을 변수 memberId
+    private lateinit var memberId1: SharedPreferences
+    private lateinit var memberId: String
+
     private lateinit var binding: FragmentIncomBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,9 +58,16 @@ class FragmentIncom : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //  변수 memberId에 로그인 되어있는 값(test1)을 String타입으로 할당해줌
+        memberId1 = requireContext().getSharedPreferences("memberInfo", MODE_PRIVATE)
+        memberId = memberId1.getString("memberId", "아이디").toString()
 
+        Log.d("fullstack503", "memberId: $memberId")
+
+
+        //  레트로 핏 API로 데이터를 받아오고 로그인 아이디를 담은 memberId를 매개변수로 서버로 전송
         val api = AppServerClass.instance
-        val call = api.getIncomeList()
+        val call = api.getIncomeList(memberId)
 
         call.enqueue(object : Callback<List<IncomeLogDTO>>{
             override fun onResponse(p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>) {

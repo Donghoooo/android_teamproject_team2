@@ -2,15 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.moneylog_spring.mapper.kms.ListMapper">
 
-    <select id="selectincomeList" resultType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">
-        SELECT *
+    <select id="selectincomeList" resultType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO" parameterType="String">
+        SELECT
+            DATE_FORMAT(income_date, '%Y-%m-%d') AS income_date,
+            income_log_seq, member_id, income_money, income_cate, income_memo, income_source, income_use
         FROM income_log
-        WHERE member_id = 'test1'
+        WHERE member_id = #{memberId}
     </select>
 
-    <select id="selectExpenseList" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO">
-        SELECT *
+    <select id="selectExpenseList" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO" parameterType="String">
+        SELECT
+            DATE_FORMAT(expense_date, '%Y-%m-%d') AS expense_date,
+            expense_log_seq, member_id, expense_money, expense_cate, expense_memo, payment_option, expense_use
         FROM expense_log
-        WHERE member_id = 'test1'
+        WHERE member_id = #{memberId}
     </select>
 </mapper>
