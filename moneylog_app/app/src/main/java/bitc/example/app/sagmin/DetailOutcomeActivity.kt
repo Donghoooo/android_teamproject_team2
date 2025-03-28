@@ -1,8 +1,10 @@
 package bitc.example.app.sagmin
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -44,6 +46,7 @@ class DetailOutcomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
 
 
         binding.btnBack.setOnClickListener{
@@ -148,7 +151,7 @@ class DetailOutcomeActivity : AppCompatActivity() {
             }
 
             // 삭제 확인 다이얼로그
-            AlertDialog.Builder(this)
+            val dialog = AlertDialog.Builder(this)
                 .setTitle("삭제 확인")
                 .setMessage("정말로 삭제하시겠습니까?")
                 .setPositiveButton("삭제") { _, _ ->
@@ -157,10 +160,16 @@ class DetailOutcomeActivity : AppCompatActivity() {
                     retrofitResponse(call) // 재사용 함수 호출
                 }
                 .setNegativeButton("취소", null)
-                .show()
+                .create()
 
+
+
+            dialog.setOnDismissListener {
+                // 다이얼로그가 닫힐 때 finish() 호출
+                finish()
+            }
+            dialog.show()
         }
-
     }
     //  카테고리 선택 부분 클릭 시 다이얼로그 표시
     private fun updateCategoryText() {
@@ -173,6 +182,22 @@ class DetailOutcomeActivity : AppCompatActivity() {
     private fun updateBankText(){
         binding.outcomeDialogReceipt.text = selectedBanks ?: "선택해주세요"
     }
+
+    override fun onPause() {
+        super.onPause()
+
+        // 소프트 키보드가 열려 있으면 닫기
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // 입력 채널이 제대로 해제되도록 명시적으로 처리
+        window?.decorView?.rootView?.clearFocus()
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         super.onSupportNavigateUp()
