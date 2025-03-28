@@ -22,15 +22,16 @@ public class AnalyzeController {
     private AnalyzeService analyzeService;
 
     @GetMapping({"/analyze"})
-    public List<IncomeLogDTO> analyze() throws Exception {
-        List<IncomeLogDTO> analyzeList = analyzeService.selectincomeList();
+    public List<IncomeLogDTO> analyze(String startDate, String endDate) throws Exception {
+        System.out.println("startDate: " + startDate + " endDate: " + endDate);
+        List<IncomeLogDTO> analyzeList = analyzeService.selectincomeList(startDate, endDate);
         return analyzeList;
     }
 
 
     @GetMapping({"/analyze1"})
-    public List<ExpenseLogDTO> analyze1() throws Exception {
-        List<ExpenseLogDTO> analyzeList1 = analyzeService.selectexpenseList();
+    public List<ExpenseLogDTO> analyze1(String startDate, String endDate) throws Exception {
+        List<ExpenseLogDTO> analyzeList1 = analyzeService.selectexpenseList(startDate, endDate);
         return analyzeList1;
     }
 

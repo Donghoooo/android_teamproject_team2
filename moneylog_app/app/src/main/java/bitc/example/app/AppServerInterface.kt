@@ -9,7 +9,6 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AppServerInterface {
@@ -78,11 +77,11 @@ interface AppServerInterface {
 //  fun getanalyze(@Body member: MemberDTO): Call<List<IncomeLogDTO>>
 
     @GET("/analyze")
-    fun getanalyze(): Call<List<IncomeLogDTO>>
+    fun getanalyze(@Query("startDate")startDate : String, @Query("endDate")endDate : String): Call<List<IncomeLogDTO>>
 
 
     @GET("/analyze1")
-    fun getanalyze1(): Call<List<ExpenseLogDTO>>
+    fun getanalyze1(@Query("startDate")startDate : String, @Query("endDate")endDate : String): Call<List<ExpenseLogDTO>>
 
 //
 //  @GET("/getTimeData")

@@ -62,9 +62,24 @@ class ExpenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var startDate = this.arguments?.getString("startDate")
+        var endDate = this.arguments?.getString("endDate")
+
+
+        if (startDate == null) {
+            startDate = "2025-01-01"
+        }
+
+        if (endDate == null) {
+            endDate = "2025-12-31"
+        }
+
+        Log.d("fullstack503", "startDate : $startDate")
+        Log.d("fullstack503", "endDate : $endDate")
+
 
         val api = AppServerClass.instance
-        val call = api.getanalyze1()
+        val call = api.getanalyze1(startDate, endDate)
 
         call.enqueue(object : Callback<List<ExpenseLogDTO>> {
             override fun onResponse(

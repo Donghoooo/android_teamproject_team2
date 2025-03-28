@@ -32,6 +32,15 @@ class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragm
     lateinit var incomeTotal: String
     lateinit var expenTotal: String
 
+    var startDate : String = ""
+    var endDate : String = ""
+
+    // 인터페이스 정의
+//    interface DateSelectionListener {
+//        fun onDateSelected(startDate: String, endDate: String)
+//    }
+
+
     private fun getCurrentDateTime(): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = Date()
@@ -121,9 +130,10 @@ class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragm
 
                     // 선택된 날짜를 TextView에 출력
                     binding.textViewDate1.text = formattedDate
+                    startDate = formattedDate
 
                 }
-            }, 2025, 3 - 1, 20).show()
+            }, 2025, 3, 20).show()
         }
 
 //        .......까지 날짜 선택하기
@@ -135,12 +145,44 @@ class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragm
                     // 선택된 날짜를 TextView에 출력
                     binding.textViewDate2.text = formattedDate
 
+                    endDate = formattedDate
+
                 }
             }, 2025, 3, 20).show()
         }
 
 
+        // "check_button" 클릭 시 현재 표시된 Fragment에 선택된 날짜(startDate, endDate) 전달
+        binding.checkButton.setOnClickListener {
+            Log.d("startDate", "startDate : $startDate")
+            Log.d("startDate", "endDate : $endDate")
+
+            val args = Bundle()
+            args.putString("startDate", startDate)
+            args.putString("endDate", endDate)
+
+            incomeFragment.arguments = args
+
+            transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.btn_income_expen, incomeFragment)
+            transaction.setReorderingAllowed(true)
+            transaction.addToBackStack("")
+            transaction.commit()
+
+
+            // 현재 Fragment 찾기 (btn_income_expen 영역에 표시된 Fragment)
+//            val currentFragment = supportFragmentManager.findFragmentById(binding.btnIncomeExpen.id)
+            // 현재 Fragment가 DateSelectionListener 인터페이스를 구현하고 있다면, onDateSelected 호출하여 데이터 전달
+//            if (currentFragment is DateSelectionListener) {
+//                currentFragment.onDateSelected(startDate, endDate)
+//            }
+        }
     }
+
+    // DateSelectionListener 인터페이스 구현 - 선택된 날짜를 로그로 출력
+//    override fun onDateSelected(startDate: String, endDate: String) {
+//        Log.d("Analyze_List", "Selected Dates: $startDate ~ $endDate")
+//    }
 }
 
 

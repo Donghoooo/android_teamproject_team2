@@ -7,9 +7,9 @@ import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import java.util.List;
 
 public interface AnalyzeService {
-    List<IncomeLogDTO> selectincomeList() throws Exception;
+    List<IncomeLogDTO> selectincomeList(String startDate, String endDate) throws Exception;
 
-    List<ExpenseLogDTO> selectexpenseList() throws Exception;
+    List<ExpenseLogDTO> selectexpenseList(String startDate, String endDate) throws Exception;
 
 //    List<IncomeLogDTO> selectTimeList(String timeStart, String timeEnd) throws Exception;
 }

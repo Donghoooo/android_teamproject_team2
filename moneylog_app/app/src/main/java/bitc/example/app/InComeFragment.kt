@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.databinding.FragmentIncomeBinding
 import bitc.example.app.dto.IncomeLogDTO
-import bitc.example.app.dto.MemberDTO
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -19,9 +18,6 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,6 +30,12 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class InComeFragment : Fragment() {
+
+//    override fun onDateSelected(startDate: String, endDate: String) {
+//        Log.d("InComeFragment", "Received Dates: $startDate ~ $endDate")
+//        // 여기서 API 호출을 갱신하는 등의 작업을 하면 됨
+//    }
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -70,8 +72,24 @@ class InComeFragment : Fragment() {
 //        memberDTO.memberId
 //        memberDTO.createDate
 //        memberDTO.updateDate
+
+        var startDate = this.arguments?.getString("startDate")
+        var endDate = this.arguments?.getString("endDate")
+
+
+        if (startDate == null) {
+            startDate = "2025-01-01"
+        }
+
+        if (endDate == null) {
+            endDate = "2025-12-31"
+        }
+
+        Log.d("fullstack503", "startDate : $startDate")
+        Log.d("fullstack503", "endDate : $endDate")
+
         val api = AppServerClass.instance
-        val call = api.getanalyze()
+        val call = api.getanalyze(startDate, endDate)
 
         call.enqueue(object : Callback<List<IncomeLogDTO>> {
             override fun onResponse(
