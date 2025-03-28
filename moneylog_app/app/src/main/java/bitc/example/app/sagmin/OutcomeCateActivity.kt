@@ -16,6 +16,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityOutcomeCateBinding
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.ui.CateSearchActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -150,6 +152,21 @@ private lateinit var startDate: TextView
             startActivity(intent)
         }
 
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {  }
+
+        binding.userIcon.setOnClickListener {  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this, MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
+        }
 
 
 //        =========================== 텍스트 넘겨받기 ==============================================

@@ -1,5 +1,6 @@
 package bitc.example.app.kms
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityMonthlyListBinding
+import bitc.example.app.ui.CateSearchActivity
 
 class MonthlyListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,26 @@ class MonthlyListActivity : AppCompatActivity() {
                     // "지출" 선택 시
                 }
             }
+        }
+
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {  }
+
+        binding.userIcon.setOnClickListener {  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnBack.setOnClickListener{
+            finish()
         }
 
         val fragmentManager: FragmentManager = supportFragmentManager

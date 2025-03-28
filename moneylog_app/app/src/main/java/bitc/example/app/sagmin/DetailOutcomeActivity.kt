@@ -14,6 +14,7 @@ import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailOutcomeBinding
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.ui.CateSearchActivity
 import bitc.example.app.ui.dialog.IncomeBankChangeActivity
 import bitc.example.app.ui.dialog.OutcomeCategoryChangeActivity
 import retrofit2.Call
@@ -48,6 +49,23 @@ class DetailOutcomeActivity : AppCompatActivity() {
 
         binding.btnBack.setOnClickListener{
             finish()
+        }
+
+
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {  }
+
+        binding.userIcon.setOnClickListener {  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
         }
 
 

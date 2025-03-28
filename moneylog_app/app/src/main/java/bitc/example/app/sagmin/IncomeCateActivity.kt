@@ -16,6 +16,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityIncomeCateBinding
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.ui.CateSearchActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -144,6 +146,23 @@ class IncomeCateActivity : AppCompatActivity() {
                 putExtra("selectedCategory",selectedCategory)
                 putExtra("date",date)
             }
+            startActivity(intent)
+        }
+
+
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {  }
+
+        binding.userIcon.setOnClickListener {  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this, MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
             startActivity(intent)
         }
 

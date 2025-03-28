@@ -13,6 +13,8 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.databinding.ActivityAddInfoBinding
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.ui.CateSearchActivity
 
 class AddInfoActivity : AppCompatActivity() {
 
@@ -233,6 +235,27 @@ private lateinit var binding: ActivityAddInfoBinding
                 binding.tvResult.text = num
             }
         }
+
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {  }
+
+        binding.userIcon.setOnClickListener {  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this,CateSearchActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
+
+
     }
     private fun checkSubmitButtonState(){
         val result = binding.tvResult.text.toString()

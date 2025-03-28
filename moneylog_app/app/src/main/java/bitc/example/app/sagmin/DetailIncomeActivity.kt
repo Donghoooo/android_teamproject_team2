@@ -14,6 +14,7 @@ import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailIncomeBinding
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.ui.CateSearchActivity
 import bitc.example.app.ui.dialog.IncomeBankChangeActivity
 import bitc.example.app.ui.dialog.IncomeCategoryChangeActivity
 import retrofit2.Call
@@ -129,6 +130,23 @@ class DetailIncomeActivity : AppCompatActivity() {
                 .setNegativeButton("취소", null)
                 .show()
 
+        }
+
+
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {  }
+
+        binding.userIcon.setOnClickListener {  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
         }
     }
     //  카테고리 선택 부분 클릭 시 다이얼로그 표시

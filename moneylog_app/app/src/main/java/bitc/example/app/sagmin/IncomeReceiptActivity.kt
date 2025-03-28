@@ -1,5 +1,6 @@
 package bitc.example.app.sagmin
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,8 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityIncomeReceiptBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.ui.CateSearchActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -92,6 +95,25 @@ class IncomeReceiptActivity : AppCompatActivity() {
     binding.btnBack.setOnClickListener {
       finish()
     }
+
+
+    binding.calendarIcon.setOnClickListener{}
+
+    binding.chartIcon.setOnClickListener {  }
+
+    binding.userIcon.setOnClickListener {  }
+
+    binding.listIcon.setOnClickListener {
+      val intent = Intent(this, MonthlyListActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.searchIcone.setOnClickListener {
+      val intent = Intent(this, CateSearchActivity::class.java)
+      startActivity(intent)
+    }
+
+
 
     binding.btnSubmit.setOnClickListener {
       val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
