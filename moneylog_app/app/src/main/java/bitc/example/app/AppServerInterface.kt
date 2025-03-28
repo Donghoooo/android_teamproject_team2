@@ -79,4 +79,6 @@ interface AppServerInterface {
   @GET("/analyze1")
   fun getanalyze1(): Call<List<ExpenseLogDTO>>
 
+
+
 }
