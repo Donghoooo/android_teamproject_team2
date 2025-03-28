@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnNextMonth.setOnClickListener { changeMonth(1) }
     }
 
-    // 📌 달력 데이터 생성 함수
+    //  달력 데이터 생성 함수
     private fun generateCalendarData() {
         calendar.set(Calendar.DAY_OF_MONTH, 1) // 1일로 설정
         val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         binding.calendar.adapter?.notifyDataSetChanged()
     }
 
-    // 📌 주말 여부 확인
+    //  주말 여부 확인
     private fun isWeekend(day: Int): Boolean {
         val tempCalendar = Calendar.getInstance()
         tempCalendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR))
@@ -93,17 +93,17 @@ class MainActivity : AppCompatActivity() {
         return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY
     }
 
-    // 📌 년/월 텍스트 반환
+    //  년/월 텍스트 반환
     private fun getHeaderDate(): String {
         return "${calendar.get(Calendar.YEAR)}년 ${calendar.get(Calendar.MONTH) + 1}월"
     }
 
-    // 📌 월만 텍스트 반환
+    //  월만 텍스트 반환
     private fun getMonthOnly(): String {
         return (calendar.get(Calendar.MONTH) + 1).toString()
     }
 
-    // 📌 이전/다음 달 변경
+    //  이전/다음 달 변경
     private fun changeMonth(offset: Int) {
         calendar.add(Calendar.MONTH, offset)
         binding.tvHeader.text = getHeaderDate()
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         setupCalendarAdapter()
     }
 
-    // 📌 날짜 클릭 이벤트 처리
+    //  날짜 클릭 이벤트 처리
     private fun onDateClick(day: Int?, month: Int) {
         if (day != null) {
             binding.scrollView.visibility = View.VISIBLE
@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 📌 리사이클러뷰에 어댑터 연결
+    //  리사이클러뷰에 어댑터 연결
     private fun setupCalendarAdapter() {
         binding.calendar.layoutManager = GridLayoutManager(this, 7)
         binding.calendar.adapter = CalendarAdapter(calendarData) { day, _, _, month, _ ->
@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 📌 Retrofit API 호출 (예제 코드 유지)
+    //  Retrofit API 호출 (예제 코드 유지)
     private fun loadExpenseData() {
         val year = calendar.get(Calendar.YEAR).toString()
         val month = (calendar.get(Calendar.MONTH) + 1).toString()
