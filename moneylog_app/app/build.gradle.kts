@@ -59,6 +59,7 @@ dependencies {
 
 //  리사이클러 뷰
   implementation ("androidx.recyclerview:recyclerview:1.2.1")
+  implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
   implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 

@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.moneylog_spring.mapper.AnalyzeMapper">
-    <select id="selectincomeList" resultType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">
+    <select id="selectincomeList" parameterType="String" resultType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">
         SELECT * FROM income_log
-        WHERE member_id = 'sang'
+        WHERE member_id = #{memberId}
+        and income_date between  #{startDate} and #{endDate}
+--
+--         SELECT * FROM income_log
+--         WHERE member_id = 'test1'
     </select>
 
-    <select id="selectexpenseList" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO">
+    <select id="selectexpenseList" parameterType="String" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO">
         SELECT * FROM expense_log
-        WHERE member_id = 'test1'
+        WHERE member_id = #{memberId}
+        and expense_date between  #{startDate} and #{endDate}
     </select>
+
+<!--    <select id="selectTimeList" resultType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">-->
+<!--        SELECT *-->
+<!--        FROM income_log-->
+<!--        WHERE member_id = 'test1'-->
+<!--          AND income_date BETWEEN '2025-03-01' AND '2025-03-31';-->
+<!--    </select>-->
+
 
 
 </mapper>

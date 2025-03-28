@@ -10,7 +10,7 @@
     <include layout="@layout/tool_bar"></include>
 
 
-<!--    toolbar 밑에 달력 아이콘 있는 부분-->
+    <!--    toolbar 밑에 달력 아이콘 있는 부분-->
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
                 android:textSize="20sp" />
 
             <ImageButton
-                android:id="@+id/image_button1"
+                android:id="@+id/time_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -60,7 +60,7 @@
                 android:textSize="20sp" />
 
             <ImageButton
-                android:id="@+id/image_button2"
+                android:id="@+id/time_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -69,7 +69,7 @@
 
     </LinearLayout>
 
-<!--     확인 버튼-->
+    <!--     확인 버튼-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/check_button"
-            android:text="확인"/>
+            android:text="확인" />
 
     </LinearLayout>
 
@@ -90,23 +90,26 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="20dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="수입"
-                android:textSize="20sp"/>
+                android:text="수입 ="
+                android:textSize="20sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:id="@+id/income_money"
-                android:text="000,000원"
+                android:text="000,000"
                 android:textColor="@color/imort"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -117,21 +120,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="지출"
-                android:textSize="20sp"/>
+                android:text="지출 ="
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:id="@+id/expen_money"
-                android:text="000,000원"
+                android:text="000,000"
                 android:textColor="@color/red"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 
-<!--    수입 vs 지출 버튼-->
+    <!--    수입 vs 지출 버튼-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -141,39 +144,32 @@
         android:paddingVertical="10dp"
         android:background="@color/brown"
         android:padding="3dp"
-        android:gravity="center"
-        >
+        android:gravity="center">
 
         <Button
             android:id="@+id/btn_input"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:textColor="@color/imort"
-            android:text="수입"/>
+            android:text="수입" />
+
         <Button
             android:id="@+id/btn_output"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:textColor="@color/red"
-            android:text="지출"/>
+            android:text="지출" />
 
     </LinearLayout>
 
-<!--    fragment -->
+    <!--    fragment -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:id="@+id/btn_income_expen"
         android:gravity="center"
-        android:orientation="horizontal">
-    </LinearLayout>
-
-
-
-
-
-
+        android:orientation="horizontal"></LinearLayout>
 
 
 </LinearLayout>
