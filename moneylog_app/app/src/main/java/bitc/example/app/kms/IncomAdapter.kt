@@ -23,17 +23,6 @@ class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<R
 
 
 
-
-
-
-//        Log.d("fullstack503", "onBindViewHolder : $position")
-//        Log.d("csy", "datas : $datas")
-
-//        val incomeDateList = datas.map { it.incomeDate }
-//        val incomeCateList = datas.map { it.incomeCate }
-//        val incomeMoneyList = datas.map { it.incomeMoney }
-
-
         val binding = (holder as IncomViewHolder).binding
 
         binding.incomItemDateData.text = datas[index].incomeDate

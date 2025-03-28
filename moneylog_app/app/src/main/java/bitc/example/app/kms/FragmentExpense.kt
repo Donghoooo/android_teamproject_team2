@@ -35,6 +35,9 @@ class FragmentExpense : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    private lateinit var totalZMoney: String
+
     // 로그인 되어있는 memberId 값을 담을 변수 memberId
     private lateinit var memberId1: SharedPreferences
     private lateinit var memberId: String
@@ -80,6 +83,13 @@ class FragmentExpense : Fragment() {
                     binding.expenseRecyclerView.layoutManager = LinearLayoutManager(context)
                     binding.expenseRecyclerView.adapter = adapter
                     binding.expenseRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+
+                    //  총지출
+                    var totalExpense = 0
+                    for (item in result!!) {
+                        totalExpense += item.expenseMoney?.toIntOrNull() ?: 0
+                    }
+                    binding.expenseTotalMoneyData.text = totalExpense.toString()
                 }
                 else {
                     Log.d("csy", "송신실패")

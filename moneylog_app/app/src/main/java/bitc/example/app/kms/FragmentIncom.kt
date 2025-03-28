@@ -80,6 +80,13 @@ class FragmentIncom : Fragment() {
                     binding.incomRecyclerView.layoutManager = LinearLayoutManager(context)
                     binding.incomRecyclerView.adapter = adapter
                     binding.incomRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+
+                    //  총수입 result 안에 incomeMoney 값을 다 더해서 바인딩
+                    var totalIncome = 0
+                    for (item in result!!) {
+                        totalIncome += item.incomeMoney?.toIntOrNull() ?: 0
+                    }
+                    binding.incomTotalMoneyData.text = totalIncome.toString()
                 }
                 else {
                     Log.d("csy", "송신실패")
@@ -124,3 +131,4 @@ class FragmentIncom : Fragment() {
 
     }
 }
+
