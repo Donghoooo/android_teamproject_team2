@@ -1,12 +1,19 @@
 package bitc.example.app.viewmodel
 
+import android.content.Context.MODE_PRIVATE
 import android.icu.util.Calendar
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.AppServerClass
 import bitc.example.app.dto.ExpenseLogDTO
+import bitc.example.app.kms.ExpenseAdapter
 import bitc.example.app.model.CalendarData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CalendarViewModel : ViewModel() {
 
@@ -29,6 +36,38 @@ class CalendarViewModel : ViewModel() {
 
     // 상단 월 표시 (년도 + 월)
     headerDate.value = "${calendar.get(Calendar.YEAR)}년 ${calendar.get(Calendar.MONTH) + 1}월"
+
+    var year : String = (calendar.get(Calendar.YEAR)).toString()
+    var month : String = (calendar.get(Calendar.MONTH) + 1).toString()
+
+    Log.d("month", month)
+    Log.d("month", year)
+
+    //  변수 memberId에 로그인 되어있는 값(test1)을 String타입으로 할당해줌
+//    memberId1 = requireContext().getSharedPreferences("memberInfo", MODE_PRIVATE)
+//    memberId = memberId1.getString("memberId", "아이디").toString()
+
+    //  레트로 핏 API로 데이터를 받아오고 로그인 아이디를 담은 memberId를 매개변수로 서버로 전송
+    val api = AppServerClass.instance
+    val call = api.getMainIncome(year, month, "test1")
+
+    call.enqueue(object : Callback<Int> {
+      override fun onResponse(p0: Call<Int> , res: Response<Int>) {
+        if (res.isSuccessful) {
+          val result = res.body()
+          Log.d("csy", "result : $result")
+        }
+        else {
+          Log.d("csy", "송신실패")
+        }
+      }
+
+      override fun onFailure(p0: Call<Int> , t: Throwable) {
+        Log.d("csy", "message : ${t.message}")
+      }
+    })
+
+
 
 
     // 월만 표시 (숫자)

@@ -20,15 +20,18 @@ import bitc.example.app.viewmodel.CalendarViewModel
 
 
 class MainActivity : AppCompatActivity() {
+    // 로그인 되어있는 memberId 값을 담을 변수 memberId
+    private lateinit var memberId1: SharedPreferences
+    private lateinit var memberId: String
+
     private val viewModel: CalendarViewModel by viewModels()  // ViewModel을 가져옴
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     } // Binding 초기화
     private lateinit var sharedPreferences: SharedPreferences
 
+//    레트로핏
 
-    private var dataList: List<MainListDTO> = mutableListOf()
-    private lateinit var listAdapter: ListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

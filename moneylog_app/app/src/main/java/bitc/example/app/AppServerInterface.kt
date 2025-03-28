@@ -10,6 +10,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface AppServerInterface {
   @POST("signUp/process")
@@ -27,6 +28,9 @@ interface AppServerInterface {
     @Path("month") month: Int,
   ): MonthSumDTO  // 반환되는 데이터 타입
 
-  @POST("mainList")
-  fun mainList(@Body member: MemberDTO): Call<List<MainListDTO>>
+  //  메인 수입/지출 총합
+  @GET("/main/income")
+  fun getMainIncome(@Query("year")year : String, @Query("month")month : String, @Query("memberId")memberId : String) : Call<Int>
+  @GET("/main/expense")
+  fun getMainExpense(@Query("year")year : String, @Query("month")month : String, @Query("memberId")memberId : String) : Call<Int>
 }
