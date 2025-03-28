@@ -58,6 +58,7 @@ private lateinit var startDate: TextView
     private lateinit var btn22: AppCompatButton
     private lateinit var btn23: AppCompatButton
     private lateinit var btn24: AppCompatButton
+    private lateinit var btnEtc : AppCompatButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,6 +95,7 @@ private lateinit var startDate: TextView
         btn22 = binding.btn22
         btn23 = binding.btn23
         btn24 = binding.btn24
+        btnEtc = binding.btnEtc
 
         btn10.setOnClickListener { onCategorySelected(btn10) }
         btn11.setOnClickListener { onCategorySelected(btn11) }
@@ -110,6 +112,7 @@ private lateinit var startDate: TextView
         btn22.setOnClickListener { onCategorySelected(btn22) }
         btn23.setOnClickListener { onCategorySelected(btn23) }
         btn24.setOnClickListener { onCategorySelected(btn24) }
+        btnEtc.setOnClickListener { onCategorySelected(btnEtc) }
 
 
 
