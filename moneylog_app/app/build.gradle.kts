@@ -62,5 +62,10 @@ dependencies {
 
   implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+// https://mvnrepository.com/artifact/com.github.prolificinteractive/material-calendarview
+  implementation("com.github.prolificinteractive:material-calendarview:2.0.0-RC2")
+
+  // https://mvnrepository.com/artifact/com.squareup.okhttp3/logging-interceptor
+  implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14")
 
 }
