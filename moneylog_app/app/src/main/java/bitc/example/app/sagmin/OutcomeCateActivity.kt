@@ -269,6 +269,11 @@ private fun showDatePicker(textView: TextView) {
     val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
         val selectedDate = Calendar.getInstance()
         selectedDate.set(selectedYear, selectedMonth, selectedDay)
+        selectedDate.set(Calendar.HOUR_OF_DAY, 0)
+        selectedDate.set(Calendar.MINUTE, 0)
+        selectedDate.set(Calendar.SECOND, 0)
+        selectedDate.set(Calendar.MILLISECOND, 0)
+
         textView.text = dateFormat.format(selectedDate.time)
     }, year, month, day)
 
