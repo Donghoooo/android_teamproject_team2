@@ -210,7 +210,7 @@
             android:background="@drawable/border"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="@+id/scrollView"
             tools:ignore="MissingConstraints">
 

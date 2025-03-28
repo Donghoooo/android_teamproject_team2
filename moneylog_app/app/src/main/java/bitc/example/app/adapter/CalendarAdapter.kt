@@ -30,30 +30,30 @@ class CalendarAdapter(
         data.day?.let { day ->
             holder.binding.tvDay.text = day.toString()
 
-            // 지출 정보 표시
-            if (data.isExpense) {
-                holder.binding.tvExpense.text = "- 지출" // 지출 표시
-                holder.binding.tvExpense.visibility = View.VISIBLE
-            } else {
-                holder.binding.tvExpense.visibility = View.GONE
-            }
+//            // 지출 정보 표시
+//            if (data.isExpense) {
+//                holder.binding.tvExpense.text = "- 지출" // 지출 표시
+//                holder.binding.tvExpense.visibility = View.VISIBLE
+//            } else {
+//                holder.binding.tvExpense.visibility = View.GONE
+//            }
+//
+//            // 수입 정보 표시
+//            if (data.isIncome) {
+//                holder.binding.tvIncome.text = "+ 수입" // 수입 표시
+//                holder.binding.tvIncome.visibility = View.VISIBLE
+//            } else {
+//                holder.binding.tvIncome.visibility = View.GONE
+//            }
 
-            // 수입 정보 표시
-            if (data.isIncome) {
-                holder.binding.tvIncome.text = "+ 수입" // 수입 표시
-                holder.binding.tvIncome.visibility = View.VISIBLE
-            } else {
-                holder.binding.tvIncome.visibility = View.GONE
-            }
-
-            // 클릭된 날짜일 경우 스타일 적용
-            if (data.isClicked) {
-                holder.binding.tvDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)  // 텍스트 크기 변경
-                holder.binding.tvDay.setTypeface(null, Typeface.BOLD)  // 텍스트 굵게 변경
-            } else {
-                holder.binding.tvDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)  // 기본 크기
-                holder.binding.tvDay.setTypeface(null, Typeface.NORMAL)  // 기본 굵기
-            }
+//            // 클릭된 날짜일 경우 스타일 적용
+//            if (data.isClicked) {
+//                holder.binding.tvDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)  // 텍스트 크기 변경
+//                holder.binding.tvDay.setTypeface(null, Typeface.BOLD)  // 텍스트 굵게 변경
+//            } else {
+//                holder.binding.tvDay.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)  // 기본 크기
+//                holder.binding.tvDay.setTypeface(null, Typeface.NORMAL)  // 기본 굵기
+//            }
 
             val calendar = Calendar.getInstance().apply {
                 set(Calendar.YEAR, data.year)

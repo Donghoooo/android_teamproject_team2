@@ -18,7 +18,7 @@ class CalendarViewModel : ViewModel() {
 
   init {
     generateCalendarData()  // 초기화 시 달력 데이터 생성
-    loadExpenseData() //지출 데이터 가져오기
+//    loadExpenseData() //지출 데이터 가져오기
   }
 
   // 달력 데이터 생성 함수
@@ -30,7 +30,8 @@ class CalendarViewModel : ViewModel() {
     // 상단 월 표시 (년도 + 월)
     headerDate.value = "${calendar.get(Calendar.YEAR)}년 ${calendar.get(Calendar.MONTH) + 1}월"
 
-    // 월만 표시 (숫자) - 최초 월 표시
+
+    // 월만 표시 (숫자)
     if (scrollMonth.value == null) {
       scrollMonth.value = (calendar.get(Calendar.MONTH) + 1).toString()
     }
@@ -68,35 +69,35 @@ class CalendarViewModel : ViewModel() {
 
 
 
-  // 서버에서 지출 데이터 가져오기
-  private fun loadExpenseData() {
-    AppServerClass.getExpenseData(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)) { expenseData ->
-      Log.d("ExpenseData", "Response: $expenseData")
+//  // 서버에서 지출 데이터 가져오기
+//  private fun loadExpenseData() {
+//    AppServerClass.getExpenseData(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH)) { expenseData ->
+//      Log.d("ExpenseData", "Response: $expenseData")
+//
+//      if (expenseData != null) {
+//        Log.d("ExpenseData", "Received expense data: #expenseData")
+//
+//        // 날짜별로 지출 금액 합산
+//        val expenseMap = mutableMapOf<Int, Double>()
+//        expenseData.forEach { expense ->
+//          val dayOfMonth = expense.expenseDate?.dayOfMonth ?: 0
+//          val expenseAmount = expense.expense?.toDoubleOrNull() ?: 0.0
+//          expenseMap[dayOfMonth] = expenseMap.getOrDefault(dayOfMonth, 0.0) + expenseAmount
+//        }
+//        // 각 날짜에 지출 데이터를 추가
+//        updateCalendarWithExpenses(expenseMap)
+//      }
+//    }
+//  }
 
-      if (expenseData != null) {
-        Log.d("ExpenseData", "Received expense data: #expenseData")
-
-        // 날짜별로 지출 금액 합산
-        val expenseMap = mutableMapOf<Int, Double>()
-        expenseData.forEach { expense ->
-          val dayOfMonth = expense.expenseDate?.dayOfMonth ?: 0
-          val expenseAmount = expense.expense?.toDoubleOrNull() ?: 0.0
-          expenseMap[dayOfMonth] = expenseMap.getOrDefault(dayOfMonth, 0.0) + expenseAmount
-        }
-        // 각 날짜에 지출 데이터를 추가
-        updateCalendarWithExpenses(expenseMap)
-      }
-    }
-  }
-
-  // 지출 데이터를 달력에 반영
-  private fun updateCalendarWithExpenses(expenseMap: Map<Int, Double>) {
-    val updatedData = calendarData.value?.map {
-      val expenseAmount = expenseMap[it.day ?: 0] ?: 0.0
-      it.copy(expense = expenseAmount)  // 지출 금액 추가
-    }
-    calendarData.value = updatedData
-  }
+//  // 지출 데이터를 달력에 반영
+//  private fun updateCalendarWithExpenses(expenseMap: Map<Int, Double>) {
+//    val updatedData = calendarData.value?.map {
+//      val expenseAmount = expenseMap[it.day ?: 0] ?: 0.0
+//      it.copy(expense = expenseAmount)  // 지출 금액 추가
+//    }
+//    calendarData.value = updatedData
+//  }
 
   // 월 변경 함수 (이전/다음 월로 이동)
   fun changeMonth(offset: Int) {
@@ -127,5 +128,5 @@ class CalendarViewModel : ViewModel() {
 //  }
 
   // ExpenseData 클래스
-  data class ExpenseData(val isIncome: Boolean, val isExpense: Boolean)
+//  data class ExpenseData(val isIncome: Boolean, val isExpense: Boolean)
 }

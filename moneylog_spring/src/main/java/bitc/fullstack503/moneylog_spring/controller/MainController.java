@@ -3,9 +3,7 @@ import bitc.fullstack503.moneylog_spring.dto.MainListDTO;
 import bitc.fullstack503.moneylog_spring.dto.MemberDTO;
 import bitc.fullstack503.moneylog_spring.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -24,4 +22,5 @@ public class MainController
     member.setUpdateDate (endOfDay);
     return mainService.mainList (member);
   }
+
 }
