@@ -62,7 +62,6 @@ public class TestController
     paramMap.put("keyword", keyword);
     paramMap.put("sortBy", sortBy);
 
-
     return searchService.getSearchList(paramMap);
   }
 }

@@ -16,6 +16,6 @@ public class SearchDTO {
   private int money;
   private String use;
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-  private Date date;
+  private String date;
   private String memberId;
 }
