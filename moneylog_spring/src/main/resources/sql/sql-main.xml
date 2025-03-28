@@ -1,30 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bitc.fullstack503.moneylog_spring.mapper.MainListMapper">
+<mapper namespace="bitc.fullstack503.moneylog_spring.mapper.MainMapper">
   
-  <select id="mainList" parameterType="bitc.fullstack503.moneylog_spring.dto.MemberDTO"
-          resultType="bitc.fullstack503.moneylog_spring.dto.MainListDTO">
-    SELECT income_cate   as cate,
-           income_use    as usee,
-           income_source as way,
-           income_money  AS amount,
-           income_date   AS transaction_date,
-           'income'      AS type
-    FROM income_log
-    WHERE member_id = #{memberId}
-      AND income_date BETWEEN #{createDate} AND #{updateDate}
-    UNION ALL
-    SELECT expense_cate   as cate,
-           expense_use    as usee,
-           payment_option as way,
-           expense_money  AS amount,
-           expense_date   AS transaction_date,
-           'expense'      AS type
-    FROM expense_log
-    WHERE member_id = #{memberId}
-      AND expense_date BETWEEN #{createDate} AND #{updateDate}
-    ORDER BY transaction_date DESC
-  </select>
+<!--  <select id="mainList" parameterType="bitc.fullstack503.moneylog_spring.dto.MemberDTO"-->
+<!--          resultType="bitc.fullstack503.moneylog_spring.dto.MainDTO">-->
+<!--    SELECT income_cate   as cate,-->
+<!--           income_use    as usee,-->
+<!--           income_source as way,-->
+<!--           income_money  AS amount,-->
+<!--           income_date   AS transaction_date,-->
+<!--           'income'      AS type-->
+<!--    FROM income_log-->
+<!--    WHERE member_id = #{memberId}-->
+<!--      AND income_date BETWEEN #{createDate} AND #{updateDate}-->
+<!--    UNION ALL-->
+<!--    SELECT expense_cate   as cate,-->
+<!--           expense_use    as usee,-->
+<!--           payment_option as way,-->
+<!--           expense_money  AS amount,-->
+<!--           expense_date   AS transaction_date,-->
+<!--           'expense'      AS type-->
+<!--    FROM expense_log-->
+<!--    WHERE member_id = #{memberId}-->
+<!--      AND expense_date BETWEEN #{createDate} AND #{updateDate}-->
+<!--    ORDER BY transaction_date DESC-->
+<!--  </select>-->
 
+  <select id="mainList" parameterType="java.lang.String"
+          resultType="bitc.fullstack503.moneylog_spring.dto.MainDTO">
+
+    select sum(amount) as totalAmount,
+           type
+    from (select income_money as amount, income_date as transaction_date, 'income' as type
+          from income_log
+          where member_id = #{memberId}
+            and income_date between #{firstDay}
+            and #{lastDay}
+          union all
+          select expense_money as amount, expense_date as transaction_date, 'expense' as type
+          from expense_log
+          where member_id = #{memberId}
+            and expense_date between #{firstDay}
+            and #{lastDay})
+           as combined
+    group by type;
+
+  </select>
 
 </mapper>

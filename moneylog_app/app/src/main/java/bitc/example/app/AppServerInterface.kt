@@ -4,6 +4,7 @@ import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.MainListDTO
 import bitc.example.app.dto.MemberDTO
+import bitc.example.app.dto.MonthSumDTO
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -21,11 +22,10 @@ interface AppServerInterface {
   fun postOutcome(@Body outcome: ExpenseLogDTO): Call<String>
 
   @GET("outcome/getByDate/{year}/{month}/{day}")
-  fun getExpenseByDate(
+  fun getMonthSum(
     @Path("year") year: Int,
     @Path("month") month: Int,
-    @Path("day") day: Int
-  ): Call<List<ExpenseLogDTO>>  // 반환되는 데이터 타입
+  ): MonthSumDTO  // 반환되는 데이터 타입
 
   @POST("mainList")
   fun mainList(@Body member: MemberDTO): Call<List<MainListDTO>>

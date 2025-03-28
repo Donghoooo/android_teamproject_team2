@@ -1,10 +1,11 @@
 package bitc.fullstack503.moneylog_spring.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.val;
 
 import java.time.LocalDateTime;
 @Data
-public class MainListDTO
+public class MainDTO
 {
   @JsonProperty ("cate")
   private String cate;
@@ -18,4 +19,5 @@ public class MainListDTO
   private LocalDateTime transactionDate;
   @JsonProperty ("type")
   private String type;
+
 }

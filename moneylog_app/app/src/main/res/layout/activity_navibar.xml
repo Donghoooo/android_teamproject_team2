@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <TextView
+      android:text=""
+      android:layout_width="412dp"
+      android:layout_height="84dp"
+      android:id="@+id/textView"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintHorizontal_bias="0.666"
+      app:layout_constraintVertical_bias="1.0" />
+
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@drawable/calendar_days_solid"
+      android:id="@+id/imageView2"
+      tools:layout_editor_absoluteY="670dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintHorizontal_bias="0.097"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@drawable/chart_pie_solid"
+      android:id="@+id/imageView3"
+      tools:layout_editor_absoluteY="677dp"
+      app:layout_constraintStart_toStartOf="@+id/textView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.296" />
+
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@drawable/user_solid"
+      android:id="@+id/imageView4"
+      tools:layout_editor_absoluteY="670dp"
+      app:layout_constraintStart_toStartOf="@+id/textView"
+      app:layout_constraintEnd_toEndOf="@+id/textView"
+      app:layout_constraintHorizontal_bias="0.497" />
+
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@drawable/list_ul_solid"
+      android:id="@+id/imageView5"
+      tools:layout_editor_absoluteY="674dp"
+      app:layout_constraintStart_toStartOf="@+id/textView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.711" />
+
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:srcCompat="@drawable/magnifying_glass_solid"
+      android:id="@+id/imageView6"
+      tools:layout_editor_absoluteY="674dp"
+      app:layout_constraintStart_toStartOf="@+id/textView"
+      app:layout_constraintEnd_toEndOf="@+id/textView"
+      app:layout_constraintHorizontal_bias="0.9" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
