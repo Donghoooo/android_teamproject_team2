@@ -232,6 +232,7 @@ private fun showDatePicker(textView: TextView) {
 
         btnSubmit.isEnabled = selectedButton != null
         btnSubmit.isEnabled = incomeDialog != null
+        btnSubmit.isEnabled = startDate != null
 
     }
 }

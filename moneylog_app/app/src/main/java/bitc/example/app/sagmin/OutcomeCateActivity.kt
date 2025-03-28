@@ -255,6 +255,7 @@ private fun onCategorySelected(button: AppCompatButton) {
 
     btnSubmit.isEnabled = selectedButton != null
     btnSubmit.isEnabled = outcomeDialog != null
+    btnSubmit.isEnabled = startDate != null
 }
 
 
