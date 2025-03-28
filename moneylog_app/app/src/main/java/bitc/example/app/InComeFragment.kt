@@ -139,7 +139,7 @@ class InComeFragment : Fragment() {
                     )
 
                     // PieChart 초기화
-                    val pieChart: PieChart = binding.pieChart1
+                    val pieChart: PieChart = binding.pieChart
 
                     // 데이터 준비
                     val entries = ArrayList<PieEntry>()

@@ -20,7 +20,6 @@ import bitc.example.app.ui.dialog.OutcomeCategoryChangeActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.exp
 
 
 class DetailOutcomeActivity : AppCompatActivity() {
