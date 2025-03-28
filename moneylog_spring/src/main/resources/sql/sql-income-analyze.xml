@@ -3,7 +3,7 @@
 <mapper namespace="bitc.fullstack503.moneylog_spring.mapper.AnalyzeMapper">
     <select id="selectincomeList" parameterType="String" resultType="bitc.fullstack503.moneylog_spring.dto.IncomeLogDTO">
         SELECT * FROM income_log
-        WHERE member_id = 'test1'
+        WHERE member_id = #{memberId}
         and income_date between  #{startDate} and #{endDate}
 --
 --         SELECT * FROM income_log
@@ -12,7 +12,7 @@
 
     <select id="selectexpenseList" parameterType="String" resultType="bitc.fullstack503.moneylog_spring.dto.ExpenseLogDTO">
         SELECT * FROM expense_log
-        WHERE member_id = 'test1'
+        WHERE member_id = #{memberId}
         and expense_date between  #{startDate} and #{endDate}
     </select>
 

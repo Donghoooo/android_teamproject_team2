@@ -162,9 +162,11 @@ class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragm
             args.putString("endDate", endDate)
 
             incomeFragment.arguments = args
+            expenFragment.arguments = args
 
             transaction = fragmentManager.beginTransaction()
             transaction.replace(R.id.btn_income_expen, incomeFragment)
+            transaction.replace(R.id.btn_income_expen, expenFragment)
             transaction.setReorderingAllowed(true)
             transaction.addToBackStack("")
             transaction.commit()

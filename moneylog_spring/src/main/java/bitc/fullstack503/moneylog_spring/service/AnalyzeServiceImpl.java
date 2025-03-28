@@ -15,13 +15,13 @@ public class AnalyzeServiceImpl implements AnalyzeService {
     private AnalyzeMapper analyzeMapper;
 
     @Override
-    public List<IncomeLogDTO> selectincomeList(String startDate, String endDate) throws Exception {
-        return analyzeMapper.selectincomeList(startDate, endDate);
+    public List<IncomeLogDTO> selectincomeList(String startDate, String endDate, String memberId) throws Exception {
+        return analyzeMapper.selectincomeList(startDate, endDate, memberId);
     }
 
     @Override
-    public List<ExpenseLogDTO> selectexpenseList(String startDate, String endDate) throws Exception {
-        return analyzeMapper.selectexpenseList(startDate, endDate);
+    public List<ExpenseLogDTO> selectexpenseList(String startDate, String endDate, String memberId) throws Exception {
+        return analyzeMapper.selectexpenseList(startDate, endDate, memberId);
     }
 
 //    @Override

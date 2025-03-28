@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityLoginBinding
 import bitc.example.app.dto.MemberDTO
@@ -50,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
       logInProcess(call)
 
 
-      val intent = Intent(this,AddInfoActivity::class.java)
+      val intent = Intent(this,Analyze_List::class.java)
       startActivity(intent)
 
     }

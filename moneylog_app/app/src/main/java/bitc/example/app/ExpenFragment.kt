@@ -1,5 +1,7 @@
 package bitc.example.app
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -34,6 +36,11 @@ class ExpenFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    // 로그인 되어있는 memberId 값을 담을 변수 memberId
+    private lateinit var memberId1: SharedPreferences
+    private lateinit var memberId: String
+
+
     private lateinit var binding: FragmentExpenBinding
 
     private lateinit var totalExpenMoney: String
@@ -62,6 +69,10 @@ class ExpenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //  변수 memberId에 로그인 되어있는 값(test1)을 String타입으로 할당해줌
+        memberId1 = requireContext().getSharedPreferences("memberInfo", MODE_PRIVATE)
+        memberId = memberId1.getString("memberId", "아이디").toString()
+
         var startDate = this.arguments?.getString("startDate")
         var endDate = this.arguments?.getString("endDate")
 
@@ -79,7 +90,7 @@ class ExpenFragment : Fragment() {
 
 
         val api = AppServerClass.instance
-        val call = api.getanalyze1(startDate, endDate)
+        val call = api.getanalyze1(startDate, endDate, memberId)
 
         call.enqueue(object : Callback<List<ExpenseLogDTO>> {
             override fun onResponse(

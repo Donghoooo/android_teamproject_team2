@@ -9,9 +9,9 @@ import java.util.List;
 
 @Mapper
 public interface AnalyzeMapper {
-    List<IncomeLogDTO> selectincomeList(String startDate, String endDate) throws Exception;
+    List<IncomeLogDTO> selectincomeList(String startDate, String endDate, String memberId) throws Exception;
 
-    List<ExpenseLogDTO> selectexpenseList(String startDate, String endDate)throws Exception;
+    List<ExpenseLogDTO> selectexpenseList(String startDate, String endDate, String memberId)throws Exception;
 
 //    List<IncomeLogDTO> selectTimeList()throws Exception;
 }
