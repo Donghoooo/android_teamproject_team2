@@ -16,7 +16,7 @@
         android:theme="@style/Theme.App"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-      
+     
         <activity
             android:name=".sdh.EditMyPageActivity"
             android:exported="false" />
