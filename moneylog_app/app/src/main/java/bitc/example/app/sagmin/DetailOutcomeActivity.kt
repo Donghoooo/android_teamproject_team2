@@ -1,10 +1,10 @@
 package bitc.example.app.sagmin
 
 import android.content.Context
+import android.view.inputmethod.InputMethodManager
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -164,10 +164,10 @@ class DetailOutcomeActivity : AppCompatActivity() {
 
 
 
-            dialog.setOnDismissListener {
-                // 다이얼로그가 닫힐 때 finish() 호출
-                finish()
-            }
+//            dialog.setOnDismissListener {
+//                // 다이얼로그가 닫힐 때 finish() 호출
+//                finish()
+//            }
             dialog.show()
         }
     }

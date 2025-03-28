@@ -30,6 +30,7 @@ public class OutcomeController {
 //    지출 내용 삭제하기
     @DeleteMapping("outcome/delete")
     public int expenseDelete (@RequestParam("expenseLogSeq")int expenseLogSeq)throws Exception{
+        System.out.println("expenseLogSeq : "+expenseLogSeq);
         return outcomeService.expenseDelete(expenseLogSeq);
     }
 }

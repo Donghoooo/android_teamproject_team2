@@ -55,7 +55,7 @@ interface AppServerInterface {
 
   //지출 삭제
   @DELETE("outcome/delete")
-  fun deleteOutcome(@Query("outcomeLogSeq") outcomeLogSeq: Int): Call<Int>
+  fun deleteOutcome(@Query("expenseLogSeq") outcomeLogSeq: Int): Call<Int>
 
   //  검색 페이지
   @GET("search/process")
