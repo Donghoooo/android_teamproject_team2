@@ -25,6 +25,7 @@ class OutcomeReceiptActivity : AppCompatActivity() {
     private lateinit var memoReceipt: TextView
     private lateinit var outcomeDialog: TextView
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var outcomeDate : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +43,22 @@ class OutcomeReceiptActivity : AppCompatActivity() {
         infoReceipt = binding.outcomeInfoReceipt
         memoReceipt = binding.outcomeMemoReceipt
         outcomeDialog = binding.outcomeDialogReceipt
+        outcomeDate = binding.date
+
 
         val money = intent.getStringExtra("text_value3")
         if (money != null) {
             moneyReceipt.text = money
         } else {
             moneyReceipt.text = "No data receivced"
+        }
+
+        val date = intent.getStringExtra("date")
+        if (date != null){
+            outcomeDate.text = date
+        }
+        else{
+            outcomeDate.text = "No date received"
         }
 
 
@@ -86,9 +97,11 @@ class OutcomeReceiptActivity : AppCompatActivity() {
             val outcomeSource = binding.outcomeDialogReceipt.text.toString()
             val outcomeMemo = binding.outcomeMemoReceipt.text.toString()
             val outcomeUse = binding.outcomeInfoReceipt.text.toString()
+            val date = binding.date.text.toString()
 
 
             val outcome = ExpenseLogDTO()
+            outcome.expenseDate = date
             outcome.memberId = memberId
             outcome.expenseCate = cate
             outcome.expenseMoney = outcomeMoney

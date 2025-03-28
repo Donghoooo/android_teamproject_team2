@@ -24,10 +24,10 @@ class IncomeReceiptActivity : AppCompatActivity() {
 
   //    값을 저장할 incomeResultReceipt 변수
   private lateinit var incomeResultReceipt: TextView
-  private lateinit var userId: TextView
   private lateinit var incomeInfo: TextView
   private lateinit var incomeMemo: TextView
   private lateinit var incomePassReceipt: TextView
+  private lateinit var incomeDate : TextView
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -42,6 +42,7 @@ class IncomeReceiptActivity : AppCompatActivity() {
     incomeMemo = binding.incomeMemoReceipt
     incomeInfo = binding.incomeInfoReceipt
     incomePassReceipt = binding.incomeDialogReceipt
+    incomeDate = binding.date
     //        getStringExtra 는 PutExtra에서 text_value 라는 이름을 지정하여 그 text를 가져온다.
     val text = intent.getStringExtra("text_value3")
     //        text의 값이 null이 아닐 경우 incomeResultReceipt에 저장된 값을 가져온다.
@@ -50,6 +51,14 @@ class IncomeReceiptActivity : AppCompatActivity() {
     }
     else {
       incomeResultReceipt.text = "No data received"
+    }
+
+    val date = intent.getStringExtra("date")
+    if (date != null){
+      incomeDate.text = date
+    }
+    else{
+      incomeDate.text = "No data receivced"
     }
 
     val info = intent.getStringExtra("text_value4")
@@ -89,6 +98,7 @@ class IncomeReceiptActivity : AppCompatActivity() {
       val memberId = sharedPreferences.getString("memberId", "아이디").toString()
       Log.d("fullstack503", memberId)
 
+      val date = binding.date.text.toString()
       val cate = binding.btnPassIncome.text.toString()
       val money = binding.incomeMoneyReceipt.text.toString()
       val source = binding.incomeDialogReceipt.text.toString()
@@ -101,6 +111,7 @@ class IncomeReceiptActivity : AppCompatActivity() {
       income.incomeSource = source
       income.incomeMemo = incomeMemo
       income.incomeUse = incomeUse
+      income.incomeDate = date
       val api = AppServerClass.instance
       val call = api.postIncome(income)
       retrofitResponse(call)

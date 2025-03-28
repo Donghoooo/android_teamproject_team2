@@ -123,6 +123,7 @@ private lateinit var startDate: TextView
         outcomeMoney = binding.outcomeResultCate
         outcomeDialog = binding.outcomeDialogCate
         btnSubmit = binding.btnSubmit
+        startDate = binding.date
 
         binding.btnSubmit.setOnClickListener {
             val money =outcomeMoney.text.toString()
@@ -130,6 +131,7 @@ private lateinit var startDate: TextView
             val info = outcomeInfo.text.toString()
             val dialog = outcomeDialog.text.toString()
             val selectedCategory = selectedButton?.text.toString()
+            val date = startDate.text.toString()
 
 
 
@@ -139,6 +141,7 @@ private lateinit var startDate: TextView
                 putExtra("text_value5",info)
                 putExtra("outcomeDialog",dialog)
                 putExtra("selectedCategory",selectedCategory)
+                putExtra("date",date)
 
             }
             startActivity(intent)
