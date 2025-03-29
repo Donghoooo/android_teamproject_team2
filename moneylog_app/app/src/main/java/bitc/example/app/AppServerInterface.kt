@@ -30,7 +30,7 @@ interface AppServerInterface {
 
   //  메인 수입/지출 총합
   @GET("/main/income")
-  fun getMainIncome(@Query("year")year : String, @Query("month")month : String, @Query("memberId")memberId : String) : Call<Int>
+  fun getMainIncome(@Query("year")year : String, @Query("month")month : String, @Query("memberId")memberId : String) : Call<List<IncomeLogDTO>>
   @GET("/main/expense")
-  fun getMainExpense(@Query("year")year : String, @Query("month")month : String, @Query("memberId")memberId : String) : Call<Int>
+  fun getMainExpense(@Query("year")year : String, @Query("month")month : String, @Query("memberId")memberId : String) : Call<List<ExpenseLogDTO>>
 }

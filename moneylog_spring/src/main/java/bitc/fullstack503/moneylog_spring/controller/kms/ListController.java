@@ -15,6 +15,16 @@ public class ListController {
     @Autowired
     private ListService listService;
 
+//    @GetMapping({"/main/income"})
+//    public List<IncomeLogDTO> incomeMain(String year, String month, String memberId) throws Exception{
+//
+//        String monthPlus = month + 1;
+//
+//        List<IncomeLogDTO> incomeMain = listService.selectIncomeMain(year, month, monthPlus, memberId);
+//
+//        return incomeMain;
+//    }
+
     @GetMapping({"/list/income"})
     public List<IncomeLogDTO> incomelist() throws Exception{
 //        ModelAndView mav = new ModelAndView("main/kms/list");

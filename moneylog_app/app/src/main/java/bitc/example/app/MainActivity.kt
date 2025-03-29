@@ -17,6 +17,9 @@ import bitc.example.app.adapter.ListAdapter
 import bitc.example.app.databinding.ActivityMainBinding
 import bitc.example.app.model.CalendarData
 import bitc.example.app.AppServerClass
+import bitc.example.app.dto.ExpenseLogDTO
+import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.kms.IncomAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,6 +69,9 @@ class MainActivity : AppCompatActivity() {
         val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         val firstDayOfWeek = (calendar.get(Calendar.DAY_OF_WEEK) + 6) % 7
 
+        loadIncomeData()
+        loadExpenseData()
+
         calendarData.clear()
 
         // 첫 주 빈 칸 추가
@@ -110,6 +116,8 @@ class MainActivity : AppCompatActivity() {
         binding.tvScrollMonth.text = getMonthOnly()
         generateCalendarData() // 데이터 갱신
         setupCalendarAdapter()
+        loadIncomeData()
+        loadExpenseData()
     }
 
     //  날짜 클릭 이벤트 처리
@@ -136,24 +144,69 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //  Retrofit API 호출 (예제 코드 유지)
-    private fun loadExpenseData() {
+    //  Retrofit API 호출 (수입 총합)
+    private fun loadIncomeData() {
         val year = calendar.get(Calendar.YEAR).toString()
         val month = (calendar.get(Calendar.MONTH) + 1).toString()
+
+        //  레트로 핏 API로 데이터를 받아오고 로그인 아이디를 담은 memberId를 매개변수로 서버로 전송
         val api = AppServerClass.instance
         val call = api.getMainIncome(year, month, "test1")
 
-        call.enqueue(object : Callback<Int> {
-            override fun onResponse(call: Call<Int>, response: Response<Int>) {
-                if (response.isSuccessful) {
-                    val result = response.body()
+        call.enqueue(object : Callback<List<IncomeLogDTO>>{
+            override fun onResponse(p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>) {
+                if (res.isSuccessful) {
+                    val result = res.body()?.toMutableList()
                     Log.d("csy", "result : $result")
-                } else {
+
+                    //  총수입 result 안에 incomeMoney 값을 다 더해서 바인딩
+                    var totalIncome = 0
+                    for (item in result!!) {
+                        totalIncome += item.incomeMoney?.toIntOrNull() ?: 0
+                    }
+                    Log.d("csy", "totalIncome : $totalIncome")
+                    binding.tvHeaderIncome.text = totalIncome.toString() + "원"
+                }
+                else {
                     Log.d("csy", "송신실패")
                 }
             }
 
-            override fun onFailure(call: Call<Int>, t: Throwable) {
+            override fun onFailure(p0: Call<List<IncomeLogDTO>>, t: Throwable) {
+                Log.d("csy", "message : ${t.message}")
+            }
+        })
+    }
+
+    //  Retrofit API 호출 (지출 총합)
+    private fun loadExpenseData() {
+        val year = calendar.get(Calendar.YEAR).toString()
+        val month = (calendar.get(Calendar.MONTH) + 1).toString()
+
+        //  레트로 핏 API로 데이터를 받아오고 로그인 아이디를 담은 memberId를 매개변수로 서버로 전송
+        val api = AppServerClass.instance
+        val call = api.getMainExpense(year, month, "test1")
+
+        call.enqueue(object : Callback<List<ExpenseLogDTO>>{
+            override fun onResponse(p0: Call<List<ExpenseLogDTO>>, res: Response<List<ExpenseLogDTO>>) {
+                if (res.isSuccessful) {
+                    val result = res.body()?.toMutableList()
+                    Log.d("csy", "result : $result")
+
+                    //  총수입 result 안에 expenseMoney 값을 다 더해서 바인딩
+                    var totalExpense = 0
+                    for (item in result!!) {
+                        totalExpense += item.expenseMoney?.toIntOrNull() ?: 0
+                    }
+                    Log.d("csy", "totalIncome : $totalExpense")
+                    binding.tvHeaderExpense.text = totalExpense.toString() + "원"
+                }
+                else {
+                    Log.d("csy", "송신실패")
+                }
+            }
+
+            override fun onFailure(p0: Call<List<ExpenseLogDTO>>, t: Throwable) {
                 Log.d("csy", "message : ${t.message}")
             }
         })
