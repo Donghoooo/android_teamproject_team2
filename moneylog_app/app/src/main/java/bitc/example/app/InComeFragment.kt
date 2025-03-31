@@ -145,8 +145,20 @@ class InComeFragment : Fragment() {
 
 
                     // PieDataSet 생성
+                    val customColors = listOf(
+                        0xFF1E88E5.toInt(),  // 파란색
+                        0xFF43A047.toInt(),  // 초록색
+                        0xFFFFC107.toInt(),  // 노란색
+                        0xFFEF5350.toInt(),  // 빨간색
+                        0xFF29B6F6.toInt(),  // 하늘색
+                        0xFF9C27B0.toInt(),  // 보라색
+                        0xFF5C6BC0.toInt(),  // 파란색
+                        0xFF00897B.toInt(),  // 청록색
+                        0xFF9E9D24.toInt(),  // 황록색
+                        0xFF6D4C41.toInt()   // 갈색
+                    )
                     val dataSet = PieDataSet(entries, "")
-                    dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList() // 색상 지정
+                    dataSet.colors = customColors
                     dataSet.valueTextSize = 15f // 값 텍스트 크기 설정
 
                     // PieData 생성
