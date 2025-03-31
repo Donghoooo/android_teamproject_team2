@@ -83,7 +83,8 @@
         android:textSize="13sp"
         android:layout_weight="2"
         android:textColor="@color/income"
-        android:textAlignment="textEnd"/>
+        android:textAlignment="textEnd"
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:id="@+id/tv_total_expense"
@@ -91,7 +92,7 @@
         android:layout_height="wrap_content"
         android:text="- 0 원"
         android:textSize="13sp"
-        android:layout_weight="1.5"
+        android:layout_weight="2"
         android:textColor="@color/expense"
         android:textAlignment="textEnd"/>
 
@@ -123,13 +124,9 @@
       android:scrollbars="vertical"
       android:paddingHorizontal="10dp"/>
 
-
-
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="55dp">
-
-
       <!-- 하단 고정 바 -->
       <View
           android:id="@+id/bottom_navigation"
