@@ -15,7 +15,7 @@ public class IncomeController {
     @PostMapping("income/process")
     public void incomeProcess (@RequestBody IncomeLogDTO income) throws Exception
     {
-        income.setMemberId ("test1");
+//        income.setMemberId ("test1");
         incomeService.income (income);
     }
 

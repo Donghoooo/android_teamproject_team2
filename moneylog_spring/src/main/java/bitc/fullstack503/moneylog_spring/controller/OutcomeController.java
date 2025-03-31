@@ -17,7 +17,7 @@ public class OutcomeController {
     @PostMapping("outcome/process")
     public void expenseProcess (@RequestBody ExpenseLogDTO outcome) throws Exception
     {
-        outcome.setMemberId ("test1");
+//        outcome.setMemberId ("test1");
         outcomeService.expense (outcome);
     }
 
