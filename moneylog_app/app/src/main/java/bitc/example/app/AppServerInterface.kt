@@ -74,20 +74,12 @@ interface AppServerInterface {
 
   @GET("/list/expense")
   fun getExpenseList(@Query("memberId")memberId : String): Call<List<ExpenseLogDTO>>
-//
-//  @GET("/analyze")
-//  fun getanalyze(@Body member: MemberDTO): Call<List<IncomeLogDTO>>
 
   @GET("/analyze")
   fun getanalyze(@Query("startDate")startDate : String, @Query("endDate")endDate : String, @Query("memberId")memberId : String): Call<List<IncomeLogDTO>>
-
-
+  
   @GET("/analyze1")
   fun getanalyze1(@Query("startDate")startDate : String, @Query("endDate")endDate : String, @Query("memberId")memberId : String): Call<List<ExpenseLogDTO>>
-
-//
-//  @GET("/getTimeData")
-//  fun getTimeData(@Path("timeStart") timeStart: String, @Path("timeEnd") timeEnd: String): Call<List<IncomeLogDTO>>
 
 
 }

@@ -79,10 +79,6 @@ class InComeFragment : Fragment() {
         memberId1 = requireContext().getSharedPreferences("memberInfo", MODE_PRIVATE)
         memberId = memberId1.getString("memberId", "아이디").toString()
 
-//        var memberDTO = MemberDTO()
-//        memberDTO.memberId
-//        memberDTO.createDate
-//        memberDTO.updateDate
 
         var startDate = this.arguments?.getString("startDate")
         var endDate = this.arguments?.getString("endDate")
@@ -161,12 +157,9 @@ class InComeFragment : Fragment() {
 
                     // 기타 설정
                     pieChart.isDrawHoleEnabled = true  // 원형 차트 내부에 홀(구멍) 그리기
-//        pieChart.holeRadius = 30f
-//        pieChart.setHoleColor(R.color.white)  // 구멍 색상 설정
                     pieChart.setUsePercentValues(true)  // 퍼센트 값 표시
                     pieChart.invalidate()  // 차트 업데이트
                     pieChart.description.isEnabled = false
-//        pieChart.isRotationEnabled = false
 
 
                 } else {

@@ -31,7 +31,7 @@ public class AnalyzeController {
 
 
     @GetMapping({"/analyze1"})
-    public List<ExpenseLogDTO> analyze1(String startDate, String endDate, String memberId) throws Exception {
+    public List<ExpenseLogDTO> analyze1(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("memberId") String memberId) throws Exception {
 
         if (startDate == null) {
             startDate = "2025-01-01";
