@@ -1,6 +1,7 @@
 package bitc.example.app
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -17,10 +18,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.databinding.ActivityAnalyzeListBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageCheckActivity
+import bitc.example.app.ui.CateSearchActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -65,6 +70,31 @@ class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragm
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
+            startActivity(intent) }
+
+        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageCheckActivity::class.java)
+            startActivity(intent)  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
         //        Fragment vs 수입/지출 버튼 색상 설정
 
         val fragmentManager: FragmentManager = supportFragmentManager
@@ -124,31 +154,40 @@ class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragm
 
 //       .......부터 날짜 선택하기
         binding.timeStart.setOnClickListener {
+            // 현재 날짜를 가져오기 위한 Calendar 객체
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)  // 월은 0부터 시작하므로 현재 월을 그대로 사용
+            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
             DatePickerDialog(this, object : DatePickerDialog.OnDateSetListener {
-                override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                    val formattedDate = "$year-${month}-$dayOfMonth"
+                override fun onDateSet(view: DatePicker?, selectedYear: Int, selectedMonth: Int, selectedDayOfMonth: Int) {
+                    val formattedDate = "$selectedYear-${selectedMonth + 1}-$selectedDayOfMonth" // month는 0부터 시작하므로 +1
 
                     // 선택된 날짜를 TextView에 출력
                     binding.textViewDate1.text = formattedDate
                     startDate = formattedDate
-
                 }
-            }, 2025, 3, 20).show()
+            }, year, month, dayOfMonth).show()
         }
 
 //        .......까지 날짜 선택하기
         binding.timeEnd.setOnClickListener {
+            // 현재 날짜를 가져오기 위한 Calendar 객체
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)  // 월은 0부터 시작하므로 현재 월을 그대로 사용
+            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
             DatePickerDialog(this, object : DatePickerDialog.OnDateSetListener {
-                override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                    val formattedDate = "$year-${month}-$dayOfMonth"
+                override fun onDateSet(view: DatePicker?, selectedYear: Int, selectedMonth: Int, selectedDayOfMonth: Int) {
+                    val formattedDate = "$selectedYear-${selectedMonth + 1}-$selectedDayOfMonth" // month는 0부터 시작하므로 +1
 
                     // 선택된 날짜를 TextView에 출력
                     binding.textViewDate2.text = formattedDate
-
                     endDate = formattedDate
-
                 }
-            }, 2025, 3, 20).show()
+            }, year, month, dayOfMonth).show()
         }
 
 
