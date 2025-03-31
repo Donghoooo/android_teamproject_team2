@@ -9,11 +9,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailIncomeBinding
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 import bitc.example.app.ui.dialog.IncomeBankChangeActivity
 import bitc.example.app.ui.dialog.IncomeCategoryChangeActivity
@@ -142,9 +144,11 @@ class DetailIncomeActivity : AppCompatActivity() {
 
         binding.calendarIcon.setOnClickListener{}
 
-        binding.chartIcon.setOnClickListener {  }
+        binding.chartIcon.setOnClickListener {  val intent = Intent(this,Analyze_List::class.java)
+            startActivity(intent) }
 
-        binding.userIcon.setOnClickListener {  }
+        binding.userIcon.setOnClickListener { val intent = Intent(this,MyPageCheckActivity::class.java)
+            startActivity(intent)  }
 
         binding.listIcon.setOnClickListener {
             val intent = Intent(this,MonthlyListActivity::class.java)

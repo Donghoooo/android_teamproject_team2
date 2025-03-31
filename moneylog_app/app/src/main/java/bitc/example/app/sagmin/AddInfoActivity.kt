@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.databinding.ActivityAddInfoBinding
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 
 class AddInfoActivity : AppCompatActivity() {
@@ -236,11 +238,14 @@ private lateinit var binding: ActivityAddInfoBinding
             }
         }
 
+
         binding.calendarIcon.setOnClickListener{}
 
-        binding.chartIcon.setOnClickListener {  }
+        binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
+            startActivity(intent) }
 
-        binding.userIcon.setOnClickListener {  }
+        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageCheckActivity::class.java)
+            startActivity(intent)  }
 
         binding.listIcon.setOnClickListener {
             val intent = Intent(this,MonthlyListActivity::class.java)
@@ -248,7 +253,7 @@ private lateinit var binding: ActivityAddInfoBinding
         }
 
         binding.searchIcone.setOnClickListener {
-            val intent = Intent(this,CateSearchActivity::class.java)
+            val intent = Intent(this, CateSearchActivity::class.java)
             startActivity(intent)
         }
 
