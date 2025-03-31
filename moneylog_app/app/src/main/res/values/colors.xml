@@ -23,4 +23,5 @@
   <!--  지출 갬액 색상-->
   <color name="red">#F06D5E</color>
   <color name="brown">#F5F6F9</color>
+  <color name="transparent">#00000000</color>
 </resources>

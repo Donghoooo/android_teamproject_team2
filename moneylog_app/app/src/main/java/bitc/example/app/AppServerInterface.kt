@@ -4,6 +4,8 @@ import bitc.example.app.dto.SearchDTO
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.MemberDTO
+import bitc.example.app.dto.DailySummaryDTO
+import bitc.example.app.dto.MonthlySummaryDTO
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -79,4 +81,19 @@ interface AppServerInterface {
   @GET("/analyze1")
   fun getanalyze1(): Call<List<ExpenseLogDTO>>
 
+//  메인 페이지
+// 월별 총 수입/지출 조회
+@GET("/main/monthly")
+  fun getMonthlySummary(
+    @Query("year") year: Int,
+    @Query("month") month: Int,
+  ): Call<MonthlySummaryDTO>
+
+  // 특정 날짜의 수입/지출 리스트 조회 API
+  @GET("/main/transactions")
+  fun getDailySummary(
+    @Query("year") year: Int,
+    @Query("month") month: Int,
+    @Query("day") day: Int
+  ): Call<DailySummaryDTO>
 }

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/main">
+
+
+  <!-- 캘린더를 감싸는 FrameLayout -->
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <!-- 캘린더 뷰 -->
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- 월별 수입 및 지출 표시 -->
+    <LinearLayout
+        android:id="@+id/monthlySummaryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:paddingRight="35dp"
+        android:elevation="4dp"
+        android:layout_marginTop="40dp">  <!-- 캘린더 제목 아래 위치 -->
+
+      <TextView
+          android:id="@+id/tv_month_total_income"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="수입: 0 원"
+          android:textSize="16sp"
+          android:textStyle="bold"
+          android:layout_marginEnd="16dp"
+          android:textColor="@color/income"/>
+
+      <TextView
+          android:id="@+id/tv_month_total_expense"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="지출: 0 원"
+          android:textSize="16sp"
+          android:textStyle="bold"
+          android:textColor="@color/expense"/>
+    </LinearLayout>
+
+  </FrameLayout>
+
+  <!-- 총 수입 및 지출 표시 -->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/border"
+      android:orientation="vertical"
+      android:gravity="center">
+
+  <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:layout_marginTop="5dp"
+      android:paddingHorizontal="25dp">
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="3.15"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        android:layout_weight="2"/>
+    <TextView
+        android:id="@+id/tv_total_income"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="+ 0 원"
+        android:textSize="13sp"
+        android:layout_weight="2"
+        android:textColor="@color/income"
+        android:textAlignment="textEnd"/>
+
+    <TextView
+        android:id="@+id/tv_total_expense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="- 0 원"
+        android:textSize="13sp"
+        android:layout_weight="1"
+        android:textColor="@color/expense"
+        android:textAlignment="textEnd"/>
+
+    <TextView
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textAlignment="textEnd"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"/>
+  </LinearLayout>
+
+    <View
+        android:layout_width="350dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/sub" />
+
+  <!-- 날짜별 수입/지출 리스트 -->
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/mainDayList"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginTop="5dp"
+      android:layout_weight="1"
+      android:scrollbars="vertical"
+      android:paddingHorizontal="10dp"/>
+  </LinearLayout>
+
+</LinearLayout>

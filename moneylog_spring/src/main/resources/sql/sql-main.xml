@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitc.fullstack503.moneylog_spring.mapper.MainMapper">
+  <!-- 월별 수입 총합 -->
+  <select id="getTotalIncome" parameterType="map" resultType="java.lang.Integer">
+    SELECT COALESCE(SUM(income_money), 0)
+    FROM income_log
+    WHERE YEAR(income_date) = #{year}
+      AND MONTH(income_date) = #{month}
+  </select>
+
+  <!-- 월별 지출 총합 -->
+  <select id="getTotalExpense" parameterType="map" resultType="java.lang.Integer">
+    SELECT COALESCE(SUM(expense_money), 0)
+    FROM expense_log
+    WHERE YEAR(expense_date) = #{year}
+      AND MONTH(expense_date) = #{month}
+  </select>
+
+  <!-- 날짜별 수입/지출 데이터 -->
+  <select id="getDailySummary" parameterType="map" resultType="bitc.fullstack503.moneylog_spring.dto.DailySummaryDTO">
+    SELECT
+        YEAR(income_date) AS year,
+        MONTH(income_date) AS month,
+        DAY(income_date) AS day,
+      COALESCE(SUM(income_money), 0) AS totalIncome,
+      COALESCE(SUM(expense_money), 0) AS totalExpense
+    FROM income_log
+      LEFT JOIN expense_log ON DATE(income_date) = DATE(expense_date)
+    WHERE YEAR(income_date) = #{year}
+      AND MONTH(income_date) = #{month}
+    GROUP BY YEAR(income_date), MONTH(income_date), DAY(income_date)
+  </select>
+
+  <!-- 특정 날짜의 수입 총합 -->
+  <select id="getTotalIncomeForDay" parameterType="map" resultType="java.lang.Integer">
+    SELECT COALESCE(SUM(income_money), 0)
+    FROM income_log
+    WHERE YEAR(income_date) = #{year}
+      AND MONTH(income_date) = #{month}
+      AND DAY(income_date) = #{day}
+  </select>
+
+  <!-- 특정 날짜의 지출 총합 -->
+  <select id="getTotalExpenseForDay" parameterType="map" resultType="java.lang.Integer">
+    SELECT COALESCE(SUM(expense_money), 0)
+    FROM expense_log
+    WHERE YEAR(expense_date) = #{year}
+      AND MONTH(expense_date) = #{month}
+      AND DAY(expense_date) = #{day}
+  </select>
+
+  <!-- 특정 날짜의 수입/지출 내역 -->
+  <select id="getTransactionsForDay" parameterType="map" resultType="bitc.fullstack503.moneylog_spring.dto.SearchDTO">
+    SELECT 'income' AS type, income_money AS money, income_cate AS category, `income_use` AS `use`, income_source AS source
+    FROM income_log
+    WHERE YEAR(income_date) = #{year}
+      AND MONTH(income_date) = #{month}
+      AND DAY(income_date) = #{day}
+    UNION ALL
+    SELECT 'expense' AS type, expense_money AS money, expense_cate AS category, `expense_use` AS `use`, payment_option AS source
+    FROM expense_log
+    WHERE YEAR(expense_date) = #{year}
+      AND MONTH(expense_date) = #{month}
+      AND DAY(expense_date) = #{day}
+  </select>
+</mapper>
