@@ -10,16 +10,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import bitc.example.app.adapter.ListAdapter
 import bitc.example.app.databinding.ActivityMainBinding
 import bitc.example.app.model.CalendarData
-import bitc.example.app.AppServerClass
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
-import bitc.example.app.kms.IncomAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,8 +23,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val calendar = Calendar.getInstance() // 현재 날짜 가져오기
     private var calendarData: MutableList<CalendarData> = mutableListOf()
-    private lateinit var listAdapter: ListAdapter
-    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,11 +41,6 @@ class MainActivity : AppCompatActivity() {
         binding.tvHeader.text = getHeaderDate() // 년/월 표시
         binding.tvScrollMonth.text = getMonthOnly() // 월 표시
 
-        // 리사이클러뷰 초기화 (리스트)
-        binding.listRecycle.layoutManager = LinearLayoutManager(this)
-        listAdapter = ListAdapter(mutableListOf())
-        binding.listRecycle.adapter = listAdapter
-        binding.listRecycle.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 
         // 달력 데이터 생성 및 표시
         generateCalendarData()
@@ -148,6 +136,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadIncomeData() {
         val year = calendar.get(Calendar.YEAR).toString()
         val month = (calendar.get(Calendar.MONTH) + 1).toString()
+        val date = (calendar.get(Calendar.DATE) + 1). toString()
 
         //  레트로 핏 API로 데이터를 받아오고 로그인 아이디를 담은 memberId를 매개변수로 서버로 전송
         val api = AppServerClass.instance
@@ -182,6 +171,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadExpenseData() {
         val year = calendar.get(Calendar.YEAR).toString()
         val month = (calendar.get(Calendar.MONTH) + 1).toString()
+        val date = (calendar.get(Calendar.DATE) + 1).toString()
 
         //  레트로 핏 API로 데이터를 받아오고 로그인 아이디를 담은 memberId를 매개변수로 서버로 전송
         val api = AppServerClass.instance

@@ -10,7 +10,4 @@ public interface MainService
 
     List<ExpenseLogDTO> selectExpenseMain(String year, String month, String monthPlus, String memberId) throws Exception;
 
-//  List<MainDTO> mainList (MemberDTO memberDTO) throws Exception;
-
-
 }

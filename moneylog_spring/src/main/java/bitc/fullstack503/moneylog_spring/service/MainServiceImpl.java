@@ -23,14 +23,4 @@ public class MainServiceImpl implements MainService
     return mainListMapper.selectExpenseMain(year, month, monthPlus, memberId);
   }
 
-
-//  @Override
-//  public List<MainDTO> mainList (MemberDTO memberDTO) throws Exception
-//  {
-//    return mainListMapper.mainList (memberDTO);
-//  }
-
-
-
-
 }
