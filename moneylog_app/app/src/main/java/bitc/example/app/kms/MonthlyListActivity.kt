@@ -12,8 +12,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import bitc.example.app.Analyze_List
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityMonthlyListBinding
+import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 
 class MonthlyListActivity : AppCompatActivity() {
@@ -50,7 +52,10 @@ class MonthlyListActivity : AppCompatActivity() {
 
         binding.calendarIcon.setOnClickListener{}
 
-        binding.chartIcon.setOnClickListener {  }
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this,Analyze_List::class.java)
+            startActivity(intent)
+        }
 
         binding.userIcon.setOnClickListener {  }
 
