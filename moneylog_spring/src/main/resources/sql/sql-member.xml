@@ -32,6 +32,18 @@
     from member
     where member_id = #{memberId}
   </delete>
+
+  <delete id="memberDeleteIncomeLog" parameterType="java.lang.String">
+    delete
+    from income_log
+    where member_id = #{memberId}
+  </delete>
+
+  <delete id="memberDeleteExpenseLog" parameterType="java.lang.String">
+    delete
+    from expense_log
+    where member_id = #{memberId}
+  </delete>
   
   <update id="memberUpdate" parameterType="bitc.fullstack503.moneylog_spring.dto.MemberDTO">
     update member

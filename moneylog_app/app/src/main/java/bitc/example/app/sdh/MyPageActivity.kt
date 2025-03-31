@@ -9,8 +9,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityMyPageBinding
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.ui.CateSearchActivity
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,6 +42,28 @@ class MyPageActivity : AppCompatActivity() {
     binding.btnDelete.setOnClickListener {
       showDeleteConfirmationDialog()
     }
+
+
+    binding.calendarIcon.setOnClickListener{}
+
+    binding.chartIcon.setOnClickListener {
+      val intent = Intent(this, Analyze_List::class.java)
+      startActivity(intent)
+    }
+
+    binding.userIcon.setOnClickListener { val intent = Intent(this,MyPageActivity::class.java)
+      startActivity(intent)  }
+
+    binding.listIcon.setOnClickListener {
+      val intent = Intent(this, MonthlyListActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.searchIcone.setOnClickListener {
+      val intent = Intent(this, CateSearchActivity::class.java)
+      startActivity(intent)
+    }
+
 
     setSupportActionBar(binding.topToolbar)
     supportActionBar?.setDisplayShowTitleEnabled(false)

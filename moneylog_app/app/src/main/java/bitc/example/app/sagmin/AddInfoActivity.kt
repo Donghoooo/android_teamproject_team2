@@ -16,7 +16,6 @@ import bitc.example.app.Analyze_List
 import bitc.example.app.databinding.ActivityAddInfoBinding
 import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.sdh.MyPageActivity
-import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 
 class AddInfoActivity : AppCompatActivity() {
