@@ -33,6 +33,10 @@ class DetailIncomeActivity : AppCompatActivity() {
     //  자산방식 선택
     private var selectedBanks : String? = null
 
+//
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,13 +82,16 @@ class DetailIncomeActivity : AppCompatActivity() {
         val incomeMemo = intent.getStringExtra("incomeMemo")
         val incomeUse = intent.getStringExtra("incomeUse")
 
-        findViewById<TextView>(R.id.detail_income_date).text = incomeDate
-        findViewById<TextView>(R.id.btn_pass_income).text = incomeCate
-        findViewById<TextView>(R.id.income_money_receipt).text = incomeMoney
-        findViewById<TextView>(R.id.income_memo_receipt).text = incomeMemo
-        findViewById<TextView>(R.id.income_dialog_receipt).text = incomeSource
-        findViewById<TextView>(R.id.income_info_receipt).text = incomeUse
-        findViewById<TextView>(R.id.income_log_seq).text = incomeLogSeq.toString()
+
+
+        binding.incomeLogSeq.text = incomeLogSeq.toString()
+        binding.detailIncomeDate.text = incomeDate
+        binding.btnPassIncome.text = incomeCate
+        binding.incomeMoneyReceipt.setText(incomeMoney)
+        binding.incomeInfoReceipt.setText(incomeUse)
+        binding.incomeMemoReceipt.setText(incomeMemo)
+        binding.incomeDialogReceipt.text = incomeSource
+
 
 
 

@@ -99,14 +99,14 @@ class DetailOutcomeActivity : AppCompatActivity() {
         val expenseUse = intent.getStringExtra("expenseUse")
         val expenseDate = intent.getStringExtra("expenseDate")
 
+        binding.outcomeLogSeq.text = expenseLogSeq.toString()
+        binding.btnPassOutcome.text = expenseCate
+        binding.outcomeMoneyReceipt.setText(expenseMoney)
+        binding.outcomeMemoReceipt.setText(expenseMemo)
+        binding.outcomeDialogReceipt.text = paymentOption
+        binding.outcomeInfoReceipt.setText(expenseUse)
+        binding.detailOutcomeDate.text = expenseDate
 
-        findViewById<TextView>(R.id.detail_outcome_date).text = expenseDate
-        findViewById<TextView>(R.id.btn_pass_outcome).text = expenseCate
-        findViewById<TextView>(R.id.outcome_money_receipt).text = expenseMoney
-        findViewById<TextView>(R.id.outcome_memo_receipt).text = expenseMemo
-        findViewById<TextView>(R.id.outcome_dialog_receipt).text = paymentOption
-        findViewById<TextView>(R.id.outcome_info_receipt).text = expenseUse
-        findViewById<TextView>(R.id.outcome_log_seq).text = expenseLogSeq.toString()
 
         binding.btnUpdate.setOnClickListener {
             val cate = binding.btnPassOutcome.text.toString()
