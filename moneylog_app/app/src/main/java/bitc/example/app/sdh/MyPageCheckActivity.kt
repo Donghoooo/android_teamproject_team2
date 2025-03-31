@@ -40,6 +40,15 @@ class MyPageCheckActivity : AppCompatActivity() {
       val call = api.postLogIn(member)
       pwCheck(call)
     }
+
+    setSupportActionBar(binding.topToolbar)
+    supportActionBar?.setDisplayShowTitleEnabled(false)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+  }
+  override fun onSupportNavigateUp(): Boolean {
+    super.onSupportNavigateUp()
+    onBackPressedDispatcher.onBackPressed()
+    return true
   }
 
   private fun pwCheck(call: Call<Boolean>) {

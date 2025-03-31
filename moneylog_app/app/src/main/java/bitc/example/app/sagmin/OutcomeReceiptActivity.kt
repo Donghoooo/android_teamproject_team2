@@ -1,5 +1,6 @@
 package bitc.example.app.sagmin
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -8,9 +9,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityOutcomeReceiptBinding
 import bitc.example.app.dto.ExpenseLogDTO
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
+import bitc.example.app.ui.CateSearchActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,6 +30,7 @@ class OutcomeReceiptActivity : AppCompatActivity() {
     private lateinit var memoReceipt: TextView
     private lateinit var outcomeDialog: TextView
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var outcomeDate : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +48,22 @@ class OutcomeReceiptActivity : AppCompatActivity() {
         infoReceipt = binding.outcomeInfoReceipt
         memoReceipt = binding.outcomeMemoReceipt
         outcomeDialog = binding.outcomeDialogReceipt
+        outcomeDate = binding.date
+
 
         val money = intent.getStringExtra("text_value3")
         if (money != null) {
             moneyReceipt.text = money
         } else {
             moneyReceipt.text = "No data receivced"
+        }
+
+        val date = intent.getStringExtra("date")
+        if (date != null){
+            outcomeDate.text = date
+        }
+        else{
+            outcomeDate.text = "No date received"
         }
 
 
@@ -86,9 +102,11 @@ class OutcomeReceiptActivity : AppCompatActivity() {
             val outcomeSource = binding.outcomeDialogReceipt.text.toString()
             val outcomeMemo = binding.outcomeMemoReceipt.text.toString()
             val outcomeUse = binding.outcomeInfoReceipt.text.toString()
+            val date = binding.date.text.toString()
 
 
             val outcome = ExpenseLogDTO()
+            outcome.expenseDate = date
             outcome.memberId = memberId
             outcome.expenseCate = cate
             outcome.expenseMoney = outcomeMoney
@@ -101,6 +119,27 @@ class OutcomeReceiptActivity : AppCompatActivity() {
             val call = api.postOutcome(outcome)
             retrofitResponse(call)
         }
+
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this, Analyze_List::class.java)
+            startActivity(intent)
+        }
+
+        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun retrofitResponse(call: Call<String>) {

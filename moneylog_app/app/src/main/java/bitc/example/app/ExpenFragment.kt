@@ -1,5 +1,7 @@
 package bitc.example.app
 
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -34,7 +36,18 @@ class ExpenFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    // 로그인 되어있는 memberId 값을 담을 변수 memberId
+    private lateinit var memberId1: SharedPreferences
+    private lateinit var memberId: String
+
+
     private lateinit var binding: FragmentExpenBinding
+
+    private lateinit var totalExpenMoney: String
+
+    interface totalExpen {
+        fun totalExpen(data1: String)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,34 +62,98 @@ class ExpenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentExpenBinding.inflate(inflater,container,false)
+        binding = FragmentExpenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //  변수 memberId에 로그인 되어있는 값(test1)을 String타입으로 할당해줌
+        memberId1 = requireContext().getSharedPreferences("memberInfo", MODE_PRIVATE)
+        memberId = memberId1.getString("memberId", "아이디").toString()
+
+        var startDate = this.arguments?.getString("startDate")
+        var endDate = this.arguments?.getString("endDate")
+
+
+        if (startDate == null) {
+            startDate = "2025-01-01"
+        }
+
+        if (endDate == null) {
+            endDate = "2025-12-31"
+        }
+
+        Log.d("fullstack503", "startDate : $startDate")
+        Log.d("fullstack503", "endDate : $endDate")
+
 
         val api = AppServerClass.instance
-        val call = api.getanalyze1()
+        val call = api.getanalyze1(startDate, endDate, memberId)
 
-        call.enqueue(object : Callback<List<ExpenseLogDTO>> { override fun onResponse(
-            p0: Call<List<ExpenseLogDTO>>,
-            res: Response<List<ExpenseLogDTO>>
-        ) {
+        call.enqueue(object : Callback<List<ExpenseLogDTO>> {
+            override fun onResponse(
+                p0: Call<List<ExpenseLogDTO>>, res: Response<List<ExpenseLogDTO>>
+            ) {
                 if (res.isSuccessful) {
                     val result = res.body()
+
+                    // 수입 합계 계산
+                    val totalExpen = result?.sumOf { it.expenseMoney?.toIntOrNull() ?: 0 }
+                    Log.d("fullstack503", totalExpen.toString())
+                    totalExpenMoney = totalExpen.toString()
+
+                    // 총 수입 데이터를 액티비티로 전달
+                    (activity as? totalExpen)?.totalExpen(totalExpenMoney)
+
                     Log.d("csy", "result : $result")
 
-                    val adapter = result?.let { ExpenAdapter(it) }
-                    binding.recyclerView2.layoutManager = LinearLayoutManager(context)
-                    binding.recyclerView2.adapter = adapter
-                    binding.recyclerView2.addItemDecoration(
-                        DividerItemDecoration(
-                            context,
-                            LinearLayoutManager.VERTICAL
+                    val categoryExpenMap = mutableMapOf<String, Int>()
+                    result?.forEach { expenLog ->
+                        val category1 = expenLog.expenseCate ?: "Unknown"
+                        val amount1 = expenLog.expenseMoney?.toIntOrNull() ?: 0
+
+                        // 카테고리별로 합산
+                        categoryExpenMap[category1] =
+                            categoryExpenMap.getOrDefault(category1, 0) + amount1
+
+                        val adapter = result?.let { ExpenAdapter(it) }
+                        binding.recyclerView2.layoutManager = LinearLayoutManager(context)
+                        binding.recyclerView2.adapter = adapter
+                        binding.recyclerView2.addItemDecoration(
+                            DividerItemDecoration(
+                                context,
+                                LinearLayoutManager.VERTICAL
+                            )
                         )
-                    )
+
+                        // PieChart 초기화
+                        val pieChart: PieChart = binding.pieChart
+
+                        // 데이터 준비
+                        val entries = ArrayList<PieEntry>()
+                        categoryExpenMap.forEach { (category, totalAmount) ->
+                            entries.add(PieEntry(totalAmount.toFloat(), category))
+                        }
+
+                        // PieDataSet 생성
+                        val dataSet = PieDataSet(entries, "")
+                        dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList() // 색상 지정
+                        dataSet.valueTextSize = 15f // 값 텍스트 크기 설정
+
+                        // PieData 생성
+                        val data = PieData(dataSet)
+
+                        // PieChart에 데이터 설정
+                        pieChart.data = data
+
+                        // 기타 설정
+                        pieChart.isDrawHoleEnabled = true  // 원형 차트 내부에 홀(구멍) 그리기
+                        pieChart.setUsePercentValues(true)  // 퍼센트 값 표시
+                        pieChart.invalidate()  // 차트 업데이트
+                        pieChart.description.isEnabled = false
+                    }
                 } else {
                     Log.d("csy", "송신실패")
                 }
@@ -86,61 +163,6 @@ class ExpenFragment : Fragment() {
                 Log.d("csy", "message : ${t.message}")
             }
         })
-
-
-
-
-
-
-        // PieChart 초기화
-        val pieChart: PieChart = binding.pieChart
-
-        // 데이터 준비
-        val entries = ArrayList<PieEntry>()
-        entries.add(PieEntry(4f))
-        entries.add(PieEntry(10f))
-        entries.add(PieEntry(13f))
-        entries.add(PieEntry(14f))
-        entries.add(PieEntry(15f))
-        entries.add(PieEntry(26f))
-
-
-        // PieDataSet 생성
-        val dataSet = PieDataSet(entries,"")
-        dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList() // 색상 지정
-        dataSet.valueTextSize = 15f // 값 텍스트 크기 설정
-
-        // PieData 생성
-        val data = PieData(dataSet)
-
-        // PieChart에 데이터 설정
-        pieChart.data = data
-
-        // 기타 설정
-        pieChart.isDrawHoleEnabled = true  // 원형 차트 내부에 홀(구멍) 그리기
-//        pieChart.holeRadius = 30f
-//        pieChart.setHoleColor(R.color.white)  // 구멍 색상 설정
-        pieChart.setUsePercentValues(true)  // 퍼센트 값 표시
-        pieChart.invalidate()  // 차트 업데이트
-        pieChart.description.isEnabled = false
-//        pieChart.isRotationEnabled = false
-
-
-//        recyclerView
-//
-//        val items = mutableListOf<String>()
-//        for (i in 1..5){
-//            items.add("10%")
-//
-////            items.add("1000원 $i")
-//        }
-//
-//        val adapter = ExpenAdapter(items)
-//
-//        binding.recyclerView2.layoutManager = LinearLayoutManager(context)
-//        binding.recyclerView2.adapter = adapter
-//        binding.recyclerView2.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-//
     }
 
     companion object {

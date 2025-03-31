@@ -1,5 +1,7 @@
 package bitc.example.app.sagmin
 
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,17 +11,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailOutcomeBinding
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
+import bitc.example.app.sdh.MyPageCheckActivity
+import bitc.example.app.ui.CateSearchActivity
 import bitc.example.app.ui.dialog.IncomeBankChangeActivity
 import bitc.example.app.ui.dialog.OutcomeCategoryChangeActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.exp
 
 
 class DetailOutcomeActivity : AppCompatActivity() {
@@ -46,8 +51,30 @@ class DetailOutcomeActivity : AppCompatActivity() {
         }
 
 
+
         binding.btnBack.setOnClickListener{
             finish()
+        }
+
+
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this,Analyze_List::class.java)
+            startActivity(intent)
+        }
+
+        binding.userIcon.setOnClickListener { val intent = Intent(this,MyPageActivity::class.java)
+            startActivity(intent)  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
         }
 
 
@@ -79,14 +106,14 @@ class DetailOutcomeActivity : AppCompatActivity() {
         val expenseUse = intent.getStringExtra("expenseUse")
         val expenseDate = intent.getStringExtra("expenseDate")
 
+        binding.outcomeLogSeq.text = expenseLogSeq.toString()
+        binding.btnPassOutcome.text = expenseCate
+        binding.outcomeMoneyReceipt.setText(expenseMoney)
+        binding.outcomeMemoReceipt.setText(expenseMemo)
+        binding.outcomeDialogReceipt.text = paymentOption
+        binding.outcomeInfoReceipt.setText(expenseUse)
+        binding.detailOutcomeDate.text = expenseDate
 
-        findViewById<TextView>(R.id.detail_outcome_date).text = expenseDate
-        findViewById<TextView>(R.id.btn_pass_outcome).text = expenseCate
-        findViewById<TextView>(R.id.outcome_money_receipt).text = expenseMoney
-        findViewById<TextView>(R.id.outcome_memo_receipt).text = expenseMemo
-        findViewById<TextView>(R.id.outcome_dialog_receipt).text = paymentOption
-        findViewById<TextView>(R.id.outcome_info_receipt).text = expenseUse
-        findViewById<TextView>(R.id.outcome_log_seq).text = expenseLogSeq.toString()
 
         binding.btnUpdate.setOnClickListener {
             val cate = binding.btnPassOutcome.text.toString()
@@ -131,7 +158,7 @@ class DetailOutcomeActivity : AppCompatActivity() {
             }
 
             // 삭제 확인 다이얼로그
-            AlertDialog.Builder(this)
+            val dialog = AlertDialog.Builder(this)
                 .setTitle("삭제 확인")
                 .setMessage("정말로 삭제하시겠습니까?")
                 .setPositiveButton("삭제") { _, _ ->
@@ -140,10 +167,16 @@ class DetailOutcomeActivity : AppCompatActivity() {
                     retrofitResponse(call) // 재사용 함수 호출
                 }
                 .setNegativeButton("취소", null)
-                .show()
+                .create()
 
+
+
+//            dialog.setOnDismissListener {
+//                // 다이얼로그가 닫힐 때 finish() 호출
+//                finish()
+//            }
+            dialog.show()
         }
-
     }
     //  카테고리 선택 부분 클릭 시 다이얼로그 표시
     private fun updateCategoryText() {
@@ -156,6 +189,22 @@ class DetailOutcomeActivity : AppCompatActivity() {
     private fun updateBankText(){
         binding.outcomeDialogReceipt.text = selectedBanks ?: "선택해주세요"
     }
+
+    override fun onPause() {
+        super.onPause()
+
+        // 소프트 키보드가 열려 있으면 닫기
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // 입력 채널이 제대로 해제되도록 명시적으로 처리
+        window?.decorView?.rootView?.clearFocus()
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         super.onSupportNavigateUp()

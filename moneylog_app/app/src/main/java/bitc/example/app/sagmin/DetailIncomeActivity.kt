@@ -9,11 +9,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailIncomeBinding
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
+import bitc.example.app.sdh.MyPageCheckActivity
+import bitc.example.app.ui.CateSearchActivity
 import bitc.example.app.ui.dialog.IncomeBankChangeActivity
 import bitc.example.app.ui.dialog.IncomeCategoryChangeActivity
 import retrofit2.Call
@@ -31,6 +35,10 @@ class DetailIncomeActivity : AppCompatActivity() {
 
     //  자산방식 선택
     private var selectedBanks : String? = null
+
+//
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,13 +85,16 @@ class DetailIncomeActivity : AppCompatActivity() {
         val incomeMemo = intent.getStringExtra("incomeMemo")
         val incomeUse = intent.getStringExtra("incomeUse")
 
-        findViewById<TextView>(R.id.detail_income_date).text = incomeDate
-        findViewById<TextView>(R.id.btn_pass_income).text = incomeCate
-        findViewById<TextView>(R.id.income_money_receipt).text = incomeMoney
-        findViewById<TextView>(R.id.income_memo_receipt).text = incomeMemo
-        findViewById<TextView>(R.id.income_dialog_receipt).text = incomeSource
-        findViewById<TextView>(R.id.income_info_receipt).text = incomeUse
-        findViewById<TextView>(R.id.income_log_seq).text = incomeLogSeq.toString()
+
+
+        binding.incomeLogSeq.text = incomeLogSeq.toString()
+        binding.detailIncomeDate.text = incomeDate
+        binding.btnPassIncome.text = incomeCate
+        binding.incomeMoneyReceipt.setText(incomeMoney)
+        binding.incomeInfoReceipt.setText(incomeUse)
+        binding.incomeMemoReceipt.setText(incomeMemo)
+        binding.incomeDialogReceipt.text = incomeSource
+
 
 
 
@@ -129,6 +140,27 @@ class DetailIncomeActivity : AppCompatActivity() {
                 .setNegativeButton("취소", null)
                 .show()
 
+        }
+
+
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this,Analyze_List::class.java)
+            startActivity(intent)
+        }
+
+        binding.userIcon.setOnClickListener { val intent = Intent(this,MyPageActivity::class.java)
+            startActivity(intent)  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
         }
     }
     //  카테고리 선택 부분 클릭 시 다이얼로그 표시

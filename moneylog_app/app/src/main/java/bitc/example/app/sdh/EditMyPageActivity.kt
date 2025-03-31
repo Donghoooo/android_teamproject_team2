@@ -137,6 +137,14 @@ class EditMyPageActivity : AppCompatActivity() {
         }
       })
     }
+    setSupportActionBar(binding.topToolbar)
+    supportActionBar?.setDisplayShowTitleEnabled(false)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+  }
+  override fun onSupportNavigateUp(): Boolean {
+    super.onSupportNavigateUp()
+    onBackPressedDispatcher.onBackPressed()
+    return true
   }
 
   private fun updateProcess(call: Call<MemberDTO>) {

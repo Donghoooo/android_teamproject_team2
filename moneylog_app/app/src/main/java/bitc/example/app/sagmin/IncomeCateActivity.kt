@@ -14,8 +14,12 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityIncomeCateBinding
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
+import bitc.example.app.ui.CateSearchActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -147,6 +151,26 @@ class IncomeCateActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this, Analyze_List::class.java)
+            startActivity(intent)
+        }
+
+        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
+        }
+
 
 //        =========================== addInfo 의 TextView 넘겨주기 ===========================
 
@@ -178,11 +202,22 @@ private fun showDatePicker(textView: TextView) {
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)
 
+
+
     val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
         val selectedDate = Calendar.getInstance()
         selectedDate.set(selectedYear, selectedMonth, selectedDay)
-        textView.text = dateFormat.format(selectedDate.time)
+        selectedDate.set(Calendar.HOUR_OF_DAY, 0)
+        selectedDate.set(Calendar.MINUTE, 0)
+        selectedDate.set(Calendar.SECOND, 0)
+        selectedDate.set(Calendar.MILLISECOND, 0)
+
+        val formattedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(selectedDate.time)
+        textView.text = formattedDate
     }, year, month, day)
+
+
+
 
     datePickerDialog.show()
 }
@@ -232,6 +267,7 @@ private fun showDatePicker(textView: TextView) {
 
         btnSubmit.isEnabled = selectedButton != null
         btnSubmit.isEnabled = incomeDialog != null
+        btnSubmit.isEnabled = startDate != null
 
     }
 }

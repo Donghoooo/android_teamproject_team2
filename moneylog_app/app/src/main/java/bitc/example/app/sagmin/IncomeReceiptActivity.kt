@@ -1,5 +1,6 @@
 package bitc.example.app.sagmin
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -8,9 +9,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityIncomeReceiptBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
+import bitc.example.app.ui.CateSearchActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,10 +29,10 @@ class IncomeReceiptActivity : AppCompatActivity() {
 
   //    값을 저장할 incomeResultReceipt 변수
   private lateinit var incomeResultReceipt: TextView
-  private lateinit var userId: TextView
   private lateinit var incomeInfo: TextView
   private lateinit var incomeMemo: TextView
   private lateinit var incomePassReceipt: TextView
+  private lateinit var incomeDate : TextView
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -42,6 +47,7 @@ class IncomeReceiptActivity : AppCompatActivity() {
     incomeMemo = binding.incomeMemoReceipt
     incomeInfo = binding.incomeInfoReceipt
     incomePassReceipt = binding.incomeDialogReceipt
+    incomeDate = binding.date
     //        getStringExtra 는 PutExtra에서 text_value 라는 이름을 지정하여 그 text를 가져온다.
     val text = intent.getStringExtra("text_value3")
     //        text의 값이 null이 아닐 경우 incomeResultReceipt에 저장된 값을 가져온다.
@@ -50,6 +56,14 @@ class IncomeReceiptActivity : AppCompatActivity() {
     }
     else {
       incomeResultReceipt.text = "No data received"
+    }
+
+    val date = intent.getStringExtra("date")
+    if (date != null){
+      incomeDate.text = date
+    }
+    else{
+      incomeDate.text = "No data receivced"
     }
 
     val info = intent.getStringExtra("text_value4")
@@ -84,11 +98,35 @@ class IncomeReceiptActivity : AppCompatActivity() {
       finish()
     }
 
+
+    binding.calendarIcon.setOnClickListener{}
+
+    binding.chartIcon.setOnClickListener {
+      val intent = Intent(this, Analyze_List::class.java)
+      startActivity(intent)
+    }
+
+    binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageActivity::class.java)
+      startActivity(intent)  }
+
+    binding.listIcon.setOnClickListener {
+      val intent = Intent(this,MonthlyListActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.searchIcone.setOnClickListener {
+      val intent = Intent(this, CateSearchActivity::class.java)
+      startActivity(intent)
+    }
+
+
+
     binding.btnSubmit.setOnClickListener {
       val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
       val memberId = sharedPreferences.getString("memberId", "아이디").toString()
       Log.d("fullstack503", memberId)
 
+      val date = binding.date.text.toString()
       val cate = binding.btnPassIncome.text.toString()
       val money = binding.incomeMoneyReceipt.text.toString()
       val source = binding.incomeDialogReceipt.text.toString()
@@ -101,6 +139,7 @@ class IncomeReceiptActivity : AppCompatActivity() {
       income.incomeSource = source
       income.incomeMemo = incomeMemo
       income.incomeUse = incomeUse
+      income.incomeDate = date
       val api = AppServerClass.instance
       val call = api.postIncome(income)
       retrofitResponse(call)

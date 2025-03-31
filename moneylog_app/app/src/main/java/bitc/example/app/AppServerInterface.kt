@@ -4,8 +4,6 @@ import bitc.example.app.dto.SearchDTO
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.MemberDTO
-import bitc.example.app.dto.DailySummaryDTO
-import bitc.example.app.dto.MonthlySummaryDTO
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -69,17 +67,25 @@ interface AppServerInterface {
 
   //  수입/지출 리스트
   @GET("/list/income")
-  fun getIncomeList(@Query("memberId")memberId : String) : Call<List<IncomeLogDTO>>
-  @GET("/list/expense")
-  fun getExpenseList(@Query("memberId")memberId : String) : Call<List<ExpenseLogDTO>>
+  fun getIncomeList(@Query("memberId")memberId : String): Call<List<IncomeLogDTO>>
 
+  @GET("/list/expense")
+  fun getExpenseList(@Query("memberId")memberId : String): Call<List<ExpenseLogDTO>>
+//
+//  @GET("/analyze")
+//  fun getanalyze(@Body member: MemberDTO): Call<List<IncomeLogDTO>>
 
   @GET("/analyze")
-  fun getanalyze(): Call<List<IncomeLogDTO>>
+  fun getanalyze(@Query("startDate")startDate : String, @Query("endDate")endDate : String, @Query("memberId")memberId : String): Call<List<IncomeLogDTO>>
 
 
   @GET("/analyze1")
-  fun getanalyze1(): Call<List<ExpenseLogDTO>>
+  fun getanalyze1(@Query("startDate")startDate : String, @Query("endDate")endDate : String, @Query("memberId")memberId : String): Call<List<ExpenseLogDTO>>
+
+//
+//  @GET("/getTimeData")
+//  fun getTimeData(@Path("timeStart") timeStart: String, @Path("timeEnd") timeEnd: String): Call<List<IncomeLogDTO>>
+
 
 //  메인 페이지
 // 월별 총 수입/지출 조회

@@ -9,8 +9,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityMyPageBinding
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.ui.CateSearchActivity
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,6 +42,37 @@ class MyPageActivity : AppCompatActivity() {
     binding.btnDelete.setOnClickListener {
       showDeleteConfirmationDialog()
     }
+
+
+    binding.calendarIcon.setOnClickListener{}
+
+    binding.chartIcon.setOnClickListener {
+      val intent = Intent(this, Analyze_List::class.java)
+      startActivity(intent)
+    }
+
+    binding.userIcon.setOnClickListener { val intent = Intent(this,MyPageActivity::class.java)
+      startActivity(intent)  }
+
+    binding.listIcon.setOnClickListener {
+      val intent = Intent(this, MonthlyListActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.searchIcone.setOnClickListener {
+      val intent = Intent(this, CateSearchActivity::class.java)
+      startActivity(intent)
+    }
+
+
+    setSupportActionBar(binding.topToolbar)
+    supportActionBar?.setDisplayShowTitleEnabled(false)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+  }
+  override fun onSupportNavigateUp(): Boolean {
+    super.onSupportNavigateUp()
+    onBackPressedDispatcher.onBackPressed()
+    return true
   }
 
   override fun onResume() {
@@ -86,6 +120,8 @@ class MyPageActivity : AppCompatActivity() {
       override fun onResponse(p0: Call<Void>, res: Response<Void>) {
         if (res.isSuccessful) {
           Snackbar.make(binding.root, "삭제 성공", Snackbar.LENGTH_SHORT).show()
+         val intent = Intent(this@MyPageActivity,LoginActivity::class.java)
+          startActivity(intent)
         }
         else {
           Snackbar.make(binding.root, "삭제 실패", Snackbar.LENGTH_SHORT).show()

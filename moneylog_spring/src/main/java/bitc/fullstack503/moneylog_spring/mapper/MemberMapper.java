@@ -13,7 +13,11 @@ public interface MemberMapper
   int isMemberName (String memberName) throws Exception;
   
   void memberDelete (String memberId) throws Exception;
-  
+
+  void memberDeleteIncomeLog (String memberId) throws Exception;
+
+  void memberDeleteExpenseLog (String memberId) throws Exception;
+
   void memberUpdate (MemberDTO member) throws Exception;
   
   MemberDTO memberFindSeq (int memberSeq) throws Exception;

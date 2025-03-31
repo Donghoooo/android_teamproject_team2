@@ -14,8 +14,12 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityOutcomeCateBinding
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
+import bitc.example.app.ui.CateSearchActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -58,6 +62,7 @@ private lateinit var startDate: TextView
     private lateinit var btn22: AppCompatButton
     private lateinit var btn23: AppCompatButton
     private lateinit var btn24: AppCompatButton
+    private lateinit var btnEtc : AppCompatButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,6 +99,7 @@ private lateinit var startDate: TextView
         btn22 = binding.btn22
         btn23 = binding.btn23
         btn24 = binding.btn24
+        btnEtc = binding.btnEtc
 
         btn10.setOnClickListener { onCategorySelected(btn10) }
         btn11.setOnClickListener { onCategorySelected(btn11) }
@@ -110,6 +116,7 @@ private lateinit var startDate: TextView
         btn22.setOnClickListener { onCategorySelected(btn22) }
         btn23.setOnClickListener { onCategorySelected(btn23) }
         btn24.setOnClickListener { onCategorySelected(btn24) }
+        btnEtc.setOnClickListener { onCategorySelected(btnEtc) }
 
 
 
@@ -123,6 +130,7 @@ private lateinit var startDate: TextView
         outcomeMoney = binding.outcomeResultCate
         outcomeDialog = binding.outcomeDialogCate
         btnSubmit = binding.btnSubmit
+        startDate = binding.date
 
         binding.btnSubmit.setOnClickListener {
             val money =outcomeMoney.text.toString()
@@ -130,6 +138,7 @@ private lateinit var startDate: TextView
             val info = outcomeInfo.text.toString()
             val dialog = outcomeDialog.text.toString()
             val selectedCategory = selectedButton?.text.toString()
+            val date = startDate.text.toString()
 
 
 
@@ -139,11 +148,31 @@ private lateinit var startDate: TextView
                 putExtra("text_value5",info)
                 putExtra("outcomeDialog",dialog)
                 putExtra("selectedCategory",selectedCategory)
+                putExtra("date",date)
 
             }
             startActivity(intent)
         }
 
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this, Analyze_List::class.java)
+            startActivity(intent)
+        }
+
+        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
+        }
 
 
 //        =========================== 텍스트 넘겨받기 ==============================================
@@ -252,6 +281,7 @@ private fun onCategorySelected(button: AppCompatButton) {
 
     btnSubmit.isEnabled = selectedButton != null
     btnSubmit.isEnabled = outcomeDialog != null
+    btnSubmit.isEnabled = startDate != null
 }
 
 
@@ -265,6 +295,11 @@ private fun showDatePicker(textView: TextView) {
     val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
         val selectedDate = Calendar.getInstance()
         selectedDate.set(selectedYear, selectedMonth, selectedDay)
+        selectedDate.set(Calendar.HOUR_OF_DAY, 0)
+        selectedDate.set(Calendar.MINUTE, 0)
+        selectedDate.set(Calendar.SECOND, 0)
+        selectedDate.set(Calendar.MILLISECOND, 0)
+
         textView.text = dateFormat.format(selectedDate.time)
     }, year, month, day)
 

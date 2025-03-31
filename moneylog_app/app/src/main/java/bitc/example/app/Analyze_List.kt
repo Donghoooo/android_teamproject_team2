@@ -1,6 +1,7 @@
 package bitc.example.app
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -12,22 +13,39 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.databinding.ActivityAnalyzeListBinding
 import bitc.example.app.dto.IncomeLogDTO
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
+import bitc.example.app.sdh.MyPageCheckActivity
+import bitc.example.app.ui.CateSearchActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class Analyze_List : AppCompatActivity() {
+class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragment.totalExpen {
 
     private val binding: ActivityAnalyzeListBinding by lazy {
         ActivityAnalyzeListBinding.inflate(layoutInflater)
     }
+    lateinit var incomeTotal: String
+    lateinit var expenTotal: String
+
+    var startDate : String = ""
+    var endDate : String = ""
+
+    // 인터페이스 정의
+//    interface DateSelectionListener {
+//        fun onDateSelected(startDate: String, endDate: String)
+//    }
+
 
     private fun getCurrentDateTime(): String {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -35,10 +53,93 @@ class Analyze_List : AppCompatActivity() {
         return dateFormat.format(date)  // "2025-03-23 14:30:00" 형식으로 날짜 반환
     }
 
+
+    override fun totalIncome(data: String) {
+        incomeTotal = data
+        binding.incomeMoney.text = incomeTotal + "원"
+        Log.d("fullstack503", "main$data")
+    }
+
+    override fun totalExpen(data1: String) {
+        expenTotal = data1
+        binding.expenMoney.text = expenTotal + "원"
+
+        Log.d("fullstack503", "main$data1")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
+        binding.calendarIcon.setOnClickListener{}
+
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this,Analyze_List::class.java)
+            startActivity(intent)
+        }
+
+        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)  }
+
+        binding.listIcon.setOnClickListener {
+            val intent = Intent(this,MonthlyListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchIcone.setOnClickListener {
+            val intent = Intent(this, CateSearchActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
+        //        Fragment vs 수입/지출 버튼 색상 설정
+
+        val fragmentManager: FragmentManager = supportFragmentManager
+        var transaction: FragmentTransaction = fragmentManager.beginTransaction()
+
+        val incomeFragment = InComeFragment()
+        val expenFragment = ExpenFragment()
+
+
+        transaction.add(R.id.btn_income_expen, expenFragment)
+        binding.btnInput.setBackgroundColor(Color.parseColor("#F5F6F9")) // 기본 화면 수입 버튼 색상
+        binding.btnOutput.setBackgroundColor(Color.parseColor("#FFFFFF")) // 기본 화면 지출 버튼 색상
+        transaction.commit()
+
+
+        binding.btnInput.setOnClickListener {
+            transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.btn_income_expen, incomeFragment)
+            transaction.setReorderingAllowed(true)
+            transaction.addToBackStack("")
+            transaction.commit()
+
+            if (it == binding.btnInput) {
+                binding.expenMoney.text = "000,000"
+                binding.btnInput.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                binding.btnOutput.setBackgroundColor(Color.parseColor("#F5F6F9"))
+            }
+        }
+
+        binding.btnOutput.setOnClickListener {
+            transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.btn_income_expen, expenFragment)
+            transaction.setReorderingAllowed(true)
+            transaction.addToBackStack("")
+            transaction.commit()
+
+            if (it == binding.btnOutput) {
+                binding.incomeMoney.text = "000,000"
+                binding.btnOutput.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                binding.btnInput.setBackgroundColor(Color.parseColor("#F5F6F9"))
+            }
+        }
 
         // 현재 날짜와 시간 얻기
         val currentDate = getCurrentDateTime()
@@ -55,169 +156,77 @@ class Analyze_List : AppCompatActivity() {
 
 
 //       .......부터 날짜 선택하기
-        binding.imageButton1.setOnClickListener {
+        binding.timeStart.setOnClickListener {
+            // 현재 날짜를 가져오기 위한 Calendar 객체
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)  // 월은 0부터 시작하므로 현재 월을 그대로 사용
+            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
             DatePickerDialog(this, object : DatePickerDialog.OnDateSetListener {
-                override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                    val formattedDate = "$year-${month}-$dayOfMonth"
+                override fun onDateSet(view: DatePicker?, selectedYear: Int, selectedMonth: Int, selectedDayOfMonth: Int) {
+                    val formattedDate = "$selectedYear-${selectedMonth + 1}-$selectedDayOfMonth" // month는 0부터 시작하므로 +1
 
                     // 선택된 날짜를 TextView에 출력
                     binding.textViewDate1.text = formattedDate
-
+                    startDate = formattedDate
                 }
-            }, 2025, 3 - 1, 20).show()
+            }, year, month, dayOfMonth).show()
         }
 
 //        .......까지 날짜 선택하기
-        binding.imageButton2.setOnClickListener {
+        binding.timeEnd.setOnClickListener {
+            // 현재 날짜를 가져오기 위한 Calendar 객체
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)  // 월은 0부터 시작하므로 현재 월을 그대로 사용
+            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
             DatePickerDialog(this, object : DatePickerDialog.OnDateSetListener {
-                override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-                    val formattedDate = "$year-${month}-$dayOfMonth"
+                override fun onDateSet(view: DatePicker?, selectedYear: Int, selectedMonth: Int, selectedDayOfMonth: Int) {
+                    val formattedDate = "$selectedYear-${selectedMonth + 1}-$selectedDayOfMonth" // month는 0부터 시작하므로 +1
 
                     // 선택된 날짜를 TextView에 출력
                     binding.textViewDate2.text = formattedDate
-
+                    endDate = formattedDate
                 }
-            }, 2025, 3, 20).show()
+            }, year, month, dayOfMonth).show()
         }
 
 
-//
-//        binding.checkButton.setOnClickListener {
-//            Log.d("csy", "gettest1 시작")
-//            val api = AppServerClass.instance
-//            val call = api.getanalyze()
-//
-//            call.enqueue(object : Callback<List<IncomeLogDTO>> {
-//                override fun onResponse(
-//                    p0: Call<List<IncomeLogDTO>>, res: Response<List<IncomeLogDTO>>
-//                ) {
-//                    if (res.isSuccessful) {
-//                        val result = res.body()
-//                        Log.d("csy", "result : $result")
-//
-//
-//                    } else {
-//                        Log.d("csy", "송신실패")
-//                    }
-//                }
-//
-//                override fun onFailure(p0: Call<List<IncomeLogDTO>>, t: Throwable) {
-//                    Log.d("csy", "message : ${t.message}")
-//                }
-//            })
-//        }
+        // "check_button" 클릭 시 현재 표시된 Fragment에 선택된 날짜(startDate, endDate) 전달
+        binding.checkButton.setOnClickListener {
+            Log.d("startDate", "startDate : $startDate")
+            Log.d("startDate", "endDate : $endDate")
 
+            val args = Bundle()
+            args.putString("startDate", startDate)
+            args.putString("endDate", endDate)
 
+            incomeFragment.arguments = args
+            expenFragment.arguments = args
 
-
-
-
-
-
-
-
-
-
-
-
-//
-////        확인 버튼 이벤트
-//
-//        binding.checkButton.setOnClickListener{
-//            // 버튼 클릭 리스너 설정
-//            binding.checkButton.setOnClickListener {
-//                // 버튼 클릭 시 텍스트뷰에 정보 설정
-//                binding.incomeMoney.text = "정보1"
-//                binding.expenMoney.text = "정보2"
-//
-//
-//                // 토스트 메시지 정보 알림
-//                Toast.makeText(this, "정보를 가져왔습니다!", Toast.LENGTH_SHORT).show()
-//            }
-//
-//
-//
-//        }
-
-
-//        Fragment vs 수입/지출 버튼 색상 설정
-
-        val fragmentManager:FragmentManager = supportFragmentManager
-        var transaction: FragmentTransaction = fragmentManager.beginTransaction()
-
-        val incomeFragment = InComeFragment()
-        val expenFragment = ExpenFragment()
-
-
-        transaction.add(R.id.btn_income_expen, expenFragment)
-        binding.btnInput.setBackgroundColor(Color.parseColor("#F5F6F9")) // 기본 화면 지출 버튼 색상
-        binding.btnOutput.setBackgroundColor(Color.parseColor("#FFFFFF")) // 기본 화면 지출 버튼 색상
-        transaction.commit()
-
-
-        binding.btnInput.setOnClickListener{
             transaction = fragmentManager.beginTransaction()
-            transaction.replace(R.id.btn_income_expen,incomeFragment)
+            transaction.replace(R.id.btn_income_expen, incomeFragment)
+            transaction.replace(R.id.btn_income_expen, expenFragment)
             transaction.setReorderingAllowed(true)
             transaction.addToBackStack("")
             transaction.commit()
 
-            if (it == binding.btnInput){
-                binding.btnInput.setBackgroundColor(Color.parseColor("#FFFFFF"))
-                binding.btnOutput.setBackgroundColor(Color.parseColor("#F5F6F9"))
-            }
 
+            // 현재 Fragment 찾기 (btn_income_expen 영역에 표시된 Fragment)
+//            val currentFragment = supportFragmentManager.findFragmentById(binding.btnIncomeExpen.id)
+            // 현재 Fragment가 DateSelectionListener 인터페이스를 구현하고 있다면, onDateSelected 호출하여 데이터 전달
+//            if (currentFragment is DateSelectionListener) {
+//                currentFragment.onDateSelected(startDate, endDate)
+//            }
         }
-
-        binding.btnOutput.setOnClickListener{
-            binding.btnOutput.setOnClickListener{
-                transaction = fragmentManager.beginTransaction()
-                transaction.replace(R.id.btn_income_expen,expenFragment)
-                transaction.setReorderingAllowed(true)
-                transaction.addToBackStack("")
-                transaction.commit()
-
-                if (it == binding.btnOutput){
-                    binding.btnOutput.setBackgroundColor(Color.parseColor("#FFFFFF"))
-                    binding.btnInput.setBackgroundColor(Color.parseColor("#F5F6F9"))
-                }
-        }
-            }
-
-        }
-
-
-
-
-//
-//        // PieChart 초기화
-//        val pieChart: PieChart = binding.pieChart
-//
-//        // 데이터 준비
-//        val entries = ArrayList<PieEntry>()
-//        entries.add(PieEntry(23f, "식비"))
-//        entries.add(PieEntry(2f, "학비"))
-//        entries.add(PieEntry(5f, "교통비"))
-//        entries.add(PieEntry(12.5f, "생활용품"))
-//        entries.add(PieEntry(20f, "월세"))
-//        entries.add(PieEntry(12.5f, "외식"))
-//
-//        // PieDataSet 생성
-//        val dataSet = PieDataSet(entries, "지철 정보")
-//        dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList() // 색상 지정
-//        dataSet.valueTextSize = 18f // 값 텍스트 크기 설정
-//
-//        // PieData 생성
-//        val data = PieData(dataSet)
-//
-//        // PieChart에 데이터 설정
-//        pieChart.data = data
-//
-//        // 기타 설정
-//        pieChart.isDrawHoleEnabled = true  // 원형 차트 내부에 홀(구멍) 그리기
-//        pieChart.setHoleColor(android.R.color.white)  // 구멍 색상 설정
-//        pieChart.setUsePercentValues(true)  // 퍼센트 값 표시
-//        pieChart.invalidate()  // 차트 업데이트
     }
+
+    // DateSelectionListener 인터페이스 구현 - 선택된 날짜를 로그로 출력
+//    override fun onDateSelected(startDate: String, endDate: String) {
+//        Log.d("Analyze_List", "Selected Dates: $startDate ~ $endDate")
+//    }
+}
 
 
