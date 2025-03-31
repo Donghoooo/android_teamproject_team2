@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
+import bitc.example.app.MainActivity2
 import bitc.example.app.databinding.ActivityMyPageBinding
 import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.ui.CateSearchActivity
@@ -44,7 +45,8 @@ class MyPageActivity : AppCompatActivity() {
     }
 
 
-    binding.calendarIcon.setOnClickListener{}
+    binding.calendarIcon.setOnClickListener{  val intent = Intent(this, MainActivity2::class.java)
+      startActivity(intent) }
 
     binding.chartIcon.setOnClickListener {
       val intent = Intent(this, Analyze_List::class.java)

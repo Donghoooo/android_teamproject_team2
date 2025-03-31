@@ -10,10 +10,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
+import bitc.example.app.MainActivity
+import bitc.example.app.MainActivity2
 import bitc.example.app.databinding.ActivityLoginBinding
 import bitc.example.app.dto.MemberDTO
 import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.sagmin.AddInfoActivity
+import bitc.example.app.ui.SelectedDateDecorator
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
@@ -113,7 +116,7 @@ class LoginActivity : AppCompatActivity() {
             binding.id.setText("")
             binding.pw.setText("")
             // intent 메인화면
-            val intent = Intent(this@LoginActivity,AddInfoActivity::class.java)
+            val intent = Intent(this@LoginActivity, MainActivity2::class.java)
             startActivity(intent)
 
           }

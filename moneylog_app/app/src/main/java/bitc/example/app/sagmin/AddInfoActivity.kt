@@ -13,9 +13,10 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.Analyze_List
+import bitc.example.app.MainActivity2
 import bitc.example.app.databinding.ActivityAddInfoBinding
 import bitc.example.app.kms.MonthlyListActivity
-import bitc.example.app.sdh.MyPageActivity
+import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 
 class AddInfoActivity : AppCompatActivity() {
@@ -25,6 +26,8 @@ private lateinit var binding: ActivityAddInfoBinding
 
     private lateinit var outcomeResult : TextView
     private lateinit var btnOutcome: AppCompatButton
+
+    private lateinit var dateDay : TextView
 
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -81,6 +84,16 @@ private lateinit var binding: ActivityAddInfoBinding
         }
 
 
+        dateDay = binding.tvDate
+
+        val date = intent.getStringExtra("tvdate")
+        if (date != null){
+            dateDay.text = date
+        }
+        else{
+            dateDay.text = "No data received"
+        }
+
 
 //  ==================================== Addinfo에서 입력한 금액과 지출 선택시 지출 카테 선택페이지로 넘기기
         outcomeResult = binding.tvResult
@@ -99,6 +112,7 @@ private lateinit var binding: ActivityAddInfoBinding
             }
             startActivity(intent)
         }
+
 
 
 // =======================================================================================================
@@ -239,14 +253,13 @@ private lateinit var binding: ActivityAddInfoBinding
         }
 
 
-        binding.calendarIcon.setOnClickListener{}
+        binding.calendarIcon.setOnClickListener{  val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent) }
 
-        binding.chartIcon.setOnClickListener {
-            val intent = Intent(this,Analyze_List::class.java)
-            startActivity(intent)
-        }
+        binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
+            startActivity(intent) }
 
-        binding.userIcon.setOnClickListener { val intent = Intent(this,MyPageActivity::class.java)
+        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageCheckActivity::class.java)
             startActivity(intent)  }
 
         binding.listIcon.setOnClickListener {
@@ -258,6 +271,7 @@ private lateinit var binding: ActivityAddInfoBinding
             val intent = Intent(this, CateSearchActivity::class.java)
             startActivity(intent)
         }
+
 
 
 

@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.Analyze_List
+import bitc.example.app.MainActivity2
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityOutcomeCateBinding
 import bitc.example.app.kms.MonthlyListActivity
@@ -154,7 +155,8 @@ private lateinit var startDate: TextView
             startActivity(intent)
         }
 
-        binding.calendarIcon.setOnClickListener{}
+        binding.calendarIcon.setOnClickListener{  val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent) }
 
         binding.chartIcon.setOnClickListener {
             val intent = Intent(this, Analyze_List::class.java)

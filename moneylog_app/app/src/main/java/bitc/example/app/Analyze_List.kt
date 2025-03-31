@@ -76,7 +76,10 @@ class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragm
             finish()
         }
 
-        binding.calendarIcon.setOnClickListener{}
+        binding.calendarIcon.setOnClickListener{
+            val intent = Intent(this,MainActivity2::class.java)
+            startActivity(intent)
+        }
 
         binding.chartIcon.setOnClickListener {
             val intent = Intent(this,Analyze_List::class.java)

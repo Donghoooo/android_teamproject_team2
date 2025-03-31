@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.Analyze_List
+import bitc.example.app.MainActivity2
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityIncomeCateBinding
 import bitc.example.app.kms.MonthlyListActivity
@@ -28,8 +29,6 @@ class IncomeCateActivity : AppCompatActivity() {
 
 //    달력 표시
     private lateinit var startDate: TextView
-    private lateinit var startDatePicker: ImageView
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
 
 
@@ -78,23 +77,6 @@ class IncomeCateActivity : AppCompatActivity() {
             finish()
         }
 
-//        =========================== 달력 날짜 선택하기 =========================================
-
-//    날짜 선택
-        startDate = binding.date
-        startDatePicker = binding.startDatePicker
-
-
-//    오늘날짜 기본값 설정
-        val today = Calendar.getInstance()
-        val todayDate = dateFormat.format(today.time)
-        startDate.text = todayDate
-
-
-//    시작 날짜 캘린더 아이콘 클릭 이벤트
-        startDatePicker.setOnClickListener {
-            showDatePicker(startDate)
-        }
 
 
 
@@ -151,7 +133,8 @@ class IncomeCateActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.calendarIcon.setOnClickListener{}
+        binding.calendarIcon.setOnClickListener{  val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent) }
 
         binding.chartIcon.setOnClickListener {
             val intent = Intent(this, Analyze_List::class.java)
@@ -186,6 +169,9 @@ class IncomeCateActivity : AppCompatActivity() {
         } else {
             incomeResult.text = "No data received"
         }
+
+
+
 
 //    =========================================== 드롭다운 선택 =======================================
         incomeDialog = binding.incomeDialogCate

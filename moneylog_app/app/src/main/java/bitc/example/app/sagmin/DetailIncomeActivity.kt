@@ -3,7 +3,6 @@ package bitc.example.app.sagmin
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -11,12 +10,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
-import bitc.example.app.R
+import bitc.example.app.MainActivity2
 import bitc.example.app.databinding.ActivityDetailIncomeBinding
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.sdh.MyPageActivity
-import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 import bitc.example.app.ui.dialog.IncomeBankChangeActivity
 import bitc.example.app.ui.dialog.IncomeCategoryChangeActivity
@@ -143,7 +141,8 @@ class DetailIncomeActivity : AppCompatActivity() {
         }
 
 
-        binding.calendarIcon.setOnClickListener{}
+        binding.calendarIcon.setOnClickListener{  val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent) }
 
         binding.chartIcon.setOnClickListener {
             val intent = Intent(this,Analyze_List::class.java)
@@ -165,14 +164,14 @@ class DetailIncomeActivity : AppCompatActivity() {
     }
     //  카테고리 선택 부분 클릭 시 다이얼로그 표시
     private fun updateCategoryText() {
-        binding.btnPassIncome.text = selectedCategories ?: "선택해주세요"
+        binding.btnPassIncome.text = selectedCategories ?: ""
 
     }
 
 
     //  자산 방식 클릭 시 다이얼로그 표시
     private fun updateBankText(){
-        binding.incomeDialogReceipt.text = selectedBanks ?: "선택해주세요"
+        binding.incomeDialogReceipt.text = selectedBanks ?: ""
     }
 
     override fun onSupportNavigateUp(): Boolean {

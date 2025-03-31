@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.Analyze_List
+import bitc.example.app.MainActivity2
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityMonthlyListBinding
 import bitc.example.app.sdh.MyPageActivity
@@ -51,7 +52,8 @@ class MonthlyListActivity : AppCompatActivity() {
             }
         }
 
-        binding.calendarIcon.setOnClickListener{}
+        binding.calendarIcon.setOnClickListener{  val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent) }
 
         binding.chartIcon.setOnClickListener {
             val intent = Intent(this,Analyze_List::class.java)

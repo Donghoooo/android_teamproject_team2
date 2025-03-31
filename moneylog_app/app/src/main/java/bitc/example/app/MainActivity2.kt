@@ -1,5 +1,6 @@
 package bitc.example.app
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,7 +16,11 @@ import bitc.example.app.adapter.DayListAdapter
 import bitc.example.app.databinding.ActivityMain2Binding
 import bitc.example.app.dto.DailySummaryDTO
 import bitc.example.app.dto.MonthlySummaryDTO
+import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.model.SearchListItem
+import bitc.example.app.sagmin.AddInfoActivity
+import bitc.example.app.sdh.MyPageCheckActivity
+import bitc.example.app.ui.CateSearchActivity
 import bitc.example.app.ui.DayDecorator
 import bitc.example.app.ui.SelectedDateDecorator
 
@@ -52,6 +57,10 @@ class MainActivity2 : AppCompatActivity() {
       insets
     }
 
+
+
+
+
     calendarView = binding.calendarView
     tvDate = binding.tvDate
     tvTotalIncome = binding.tvTotalIncome
@@ -68,6 +77,15 @@ class MainActivity2 : AppCompatActivity() {
     selectedDateDecorator = SelectedDateDecorator(this)
     calendarView.addDecorator(selectedDateDecorator)
 
+
+    binding.btnAdd.setOnClickListener {
+      val date = tvDate.text.toString()
+
+      val intent = Intent(this,AddInfoActivity::class.java).apply{
+        putExtra("tvdate",date)
+      }
+      startActivity(intent)
+    }
 
     // 오늘 날짜 가져오기
     val today = CalendarDay.today()
@@ -117,6 +135,26 @@ class MainActivity2 : AppCompatActivity() {
         fetchDailyData(selectedYear, selectedMonth, selectedDay)
       }
     }
+
+
+    binding.calendarIcon.setOnClickListener{}
+
+    binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
+      startActivity(intent) }
+
+    binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageCheckActivity::class.java)
+      startActivity(intent)  }
+
+    binding.listIcon.setOnClickListener {
+      val intent = Intent(this, MonthlyListActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.searchIcone.setOnClickListener {
+      val intent = Intent(this, CateSearchActivity::class.java)
+      startActivity(intent)
+    }
+
   }
 
 

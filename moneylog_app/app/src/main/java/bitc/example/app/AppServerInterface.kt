@@ -1,9 +1,11 @@
 package bitc.example.app
 
+import bitc.example.app.dto.DailySummaryDTO
 import bitc.example.app.dto.SearchDTO
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.dto.MemberDTO
+import bitc.example.app.dto.MonthlySummaryDTO
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
