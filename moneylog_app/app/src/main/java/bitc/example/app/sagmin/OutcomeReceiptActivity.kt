@@ -9,10 +9,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
 import bitc.example.app.databinding.ActivityOutcomeReceiptBinding
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
 import bitc.example.app.ui.CateSearchActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -120,12 +122,16 @@ class OutcomeReceiptActivity : AppCompatActivity() {
 
         binding.calendarIcon.setOnClickListener{}
 
-        binding.chartIcon.setOnClickListener {  }
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this, Analyze_List::class.java)
+            startActivity(intent)
+        }
 
-        binding.userIcon.setOnClickListener {  }
+        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)  }
 
         binding.listIcon.setOnClickListener {
-            val intent = Intent(this, MonthlyListActivity::class.java)
+            val intent = Intent(this,MonthlyListActivity::class.java)
             startActivity(intent)
         }
 

@@ -17,6 +17,7 @@ import bitc.example.app.R
 import bitc.example.app.databinding.ActivityDetailOutcomeBinding
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
 import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 import bitc.example.app.ui.dialog.IncomeBankChangeActivity
@@ -58,10 +59,12 @@ class DetailOutcomeActivity : AppCompatActivity() {
 
         binding.calendarIcon.setOnClickListener{}
 
-        binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
-            startActivity(intent) }
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this,Analyze_List::class.java)
+            startActivity(intent)
+        }
 
-        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageCheckActivity::class.java)
+        binding.userIcon.setOnClickListener { val intent = Intent(this,MyPageActivity::class.java)
             startActivity(intent)  }
 
         binding.listIcon.setOnClickListener {

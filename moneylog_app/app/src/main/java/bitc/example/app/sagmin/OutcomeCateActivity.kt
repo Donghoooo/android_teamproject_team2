@@ -14,9 +14,11 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import bitc.example.app.Analyze_List
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityOutcomeCateBinding
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
 import bitc.example.app.ui.CateSearchActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -154,12 +156,16 @@ private lateinit var startDate: TextView
 
         binding.calendarIcon.setOnClickListener{}
 
-        binding.chartIcon.setOnClickListener {  }
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this, Analyze_List::class.java)
+            startActivity(intent)
+        }
 
-        binding.userIcon.setOnClickListener {  }
+        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)  }
 
         binding.listIcon.setOnClickListener {
-            val intent = Intent(this, MonthlyListActivity::class.java)
+            val intent = Intent(this,MonthlyListActivity::class.java)
             startActivity(intent)
         }
 

@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.Analyze_List
 import bitc.example.app.databinding.ActivityAddInfoBinding
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
 import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 
@@ -241,10 +242,12 @@ private lateinit var binding: ActivityAddInfoBinding
 
         binding.calendarIcon.setOnClickListener{}
 
-        binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
-            startActivity(intent) }
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this,Analyze_List::class.java)
+            startActivity(intent)
+        }
 
-        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageCheckActivity::class.java)
+        binding.userIcon.setOnClickListener { val intent = Intent(this,MyPageActivity::class.java)
             startActivity(intent)  }
 
         binding.listIcon.setOnClickListener {
@@ -256,7 +259,6 @@ private lateinit var binding: ActivityAddInfoBinding
             val intent = Intent(this, CateSearchActivity::class.java)
             startActivity(intent)
         }
-
 
 
 

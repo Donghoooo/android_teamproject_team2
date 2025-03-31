@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.Analyze_List
 import bitc.example.app.R
 import bitc.example.app.databinding.ActivityMonthlyListBinding
+import bitc.example.app.sdh.MyPageActivity
 import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 
@@ -57,7 +58,8 @@ class MonthlyListActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.userIcon.setOnClickListener {  }
+        binding.userIcon.setOnClickListener { val intent = Intent(this,MyPageActivity::class.java)
+            startActivity(intent)  }
 
         binding.listIcon.setOnClickListener {
             val intent = Intent(this,MonthlyListActivity::class.java)

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.databinding.ActivityAnalyzeListBinding
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sdh.MyPageActivity
 import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 import retrofit2.Call
@@ -77,10 +78,12 @@ class Analyze_List : AppCompatActivity(), InComeFragment.totalIncome, ExpenFragm
 
         binding.calendarIcon.setOnClickListener{}
 
-        binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
-            startActivity(intent) }
+        binding.chartIcon.setOnClickListener {
+            val intent = Intent(this,Analyze_List::class.java)
+            startActivity(intent)
+        }
 
-        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageCheckActivity::class.java)
+        binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)  }
 
         binding.listIcon.setOnClickListener {

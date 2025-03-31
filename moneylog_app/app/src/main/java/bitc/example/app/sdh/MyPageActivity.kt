@@ -39,6 +39,15 @@ class MyPageActivity : AppCompatActivity() {
     binding.btnDelete.setOnClickListener {
       showDeleteConfirmationDialog()
     }
+
+    setSupportActionBar(binding.topToolbar)
+    supportActionBar?.setDisplayShowTitleEnabled(false)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+  }
+  override fun onSupportNavigateUp(): Boolean {
+    super.onSupportNavigateUp()
+    onBackPressedDispatcher.onBackPressed()
+    return true
   }
 
   override fun onResume() {
