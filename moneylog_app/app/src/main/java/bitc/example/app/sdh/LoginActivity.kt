@@ -52,8 +52,6 @@ class LoginActivity : AppCompatActivity() {
       logInProcess(call)
 
 
-      val intent = Intent(this,AddInfoActivity::class.java)
-      startActivity(intent)
 
     }
 
@@ -115,6 +113,9 @@ class LoginActivity : AppCompatActivity() {
             binding.id.setText("")
             binding.pw.setText("")
             // intent 메인화면
+            val intent = Intent(this@LoginActivity,AddInfoActivity::class.java)
+            startActivity(intent)
+
           }
           else {
             Snackbar.make(binding.root, "아이디 또는 비밀번호가 다릅니다", Snackbar.LENGTH_SHORT).show()

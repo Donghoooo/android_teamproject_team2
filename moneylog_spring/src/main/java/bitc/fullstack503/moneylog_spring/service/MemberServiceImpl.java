@@ -56,9 +56,9 @@ public class MemberServiceImpl implements MemberService
   @Override
   public void memberDelete (String memberId) throws Exception
   {
-    memberMapper.memberDelete (memberId);
     memberMapper.memberDeleteIncomeLog (memberId);
     memberMapper.memberDeleteExpenseLog (memberId);
+    memberMapper.memberDelete (memberId);
   }
   
   @Override

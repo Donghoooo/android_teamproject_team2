@@ -120,6 +120,8 @@ class MyPageActivity : AppCompatActivity() {
       override fun onResponse(p0: Call<Void>, res: Response<Void>) {
         if (res.isSuccessful) {
           Snackbar.make(binding.root, "삭제 성공", Snackbar.LENGTH_SHORT).show()
+         val intent = Intent(this@MyPageActivity,LoginActivity::class.java)
+          startActivity(intent)
         }
         else {
           Snackbar.make(binding.root, "삭제 실패", Snackbar.LENGTH_SHORT).show()
