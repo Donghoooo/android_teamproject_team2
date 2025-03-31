@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import bitc.example.app.adapter.ListAdapter
 import bitc.example.app.databinding.ActivityMainBinding
 import bitc.example.app.model.CalendarData
-import bitc.example.app.AppServerClass
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -136,7 +135,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //  Retrofit API 호출 (예제 코드 유지)
+    //  Retrofit API 호출
     private fun loadExpenseData() {
         val year = calendar.get(Calendar.YEAR).toString()
         val month = (calendar.get(Calendar.MONTH) + 1).toString()
