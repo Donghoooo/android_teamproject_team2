@@ -59,6 +59,7 @@ interface AppServerInterface {
   //  검색 페이지
   @GET("search/process")
   fun getSearchList(
+    @Query("memberId") memberId: String,
     @Query("category") cate: List<String>?, // 카테고리
     @Query("source") source: List<String>?, // 자산방식
     @Query("startDate") startDate: String,  // 시작날짜

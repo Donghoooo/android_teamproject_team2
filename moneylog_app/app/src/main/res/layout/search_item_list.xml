@@ -59,6 +59,7 @@
             android:layout_height="1dp"
             android:id="@+id/tv_seq"/>
 
+
     </LinearLayout>
 
     <View

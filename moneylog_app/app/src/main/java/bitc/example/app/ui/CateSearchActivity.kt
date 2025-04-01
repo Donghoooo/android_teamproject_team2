@@ -40,6 +40,8 @@ class CateSearchActivity : AppCompatActivity() {
   private lateinit var searchListAdapter: SearchListAdapter
   val searchItemList = mutableListOf<SearchListItem>()
 
+  private lateinit var memberId: String
+
   //    날짜 선택
   private lateinit var startDate: TextView
   private lateinit var endDate: TextView
@@ -59,7 +61,9 @@ class CateSearchActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
-
+    val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+    memberId = sharedPreferences.getString("memberId", "") ?: ""
+    Log.d("DEBUG", "SharedPreferences에 저장된 memberId: ${sharedPreferences.getString("memberId", "없음")}")
     setContentView(binding.root)
     ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
       val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -251,14 +255,15 @@ class CateSearchActivity : AppCompatActivity() {
     val selectedBank = selectedBanks.filter { it.value }.keys.toList().takeIf { it.isNotEmpty() }
 
     // 선택한 날짜 가져오기
-    val startDate = binding.startDate.text.toString()
-    val endDate = binding.endDate.text.toString()
+    val startDate = binding.startDate?.text?.toString() ?: ""
+    val endDate = binding.endDate?.text?.toString() ?: ""
 
 //    검색창에서 작성한 키워드 가져오기 (미입력시 null)
     val keyword = binding.searchView.text.toString().takeIf { it.isNotBlank() } ?: ""
 
     // Retrofit API 호출
     AppServerClass.instance.getSearchList(
+      memberId,
       selectedCategory,  // null이 전달될 수 있도록 수정
       selectedBank,
       startDate,

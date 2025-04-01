@@ -19,6 +19,7 @@ public class TestController
   //  검색 페이지
   @GetMapping("search/process")
   public List<SearchDTO> getSearchList (
+          @RequestParam String memberId,
           @RequestParam(required = false) List<String> category,
           @RequestParam(required = false) List<String> source,
           @RequestParam String startDate,
@@ -47,7 +48,7 @@ public class TestController
 
     // NULL 값이 들어오면 빈 문자열("")로 처리
     Map<String, Object> paramMap = new HashMap<>();
-    paramMap.put("memberId", "test1");
+    paramMap.put("memberId", memberId);
     paramMap.put("startDate", parsedStartDate);
     paramMap.put("endDate", parsedEndDate);
     paramMap.put("category", category);
