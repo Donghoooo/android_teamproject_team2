@@ -128,6 +128,7 @@ class IncomeReceiptActivity : AppCompatActivity() {
       val memberId = sharedPreferences.getString("memberId", "아이디").toString()
       Log.d("fullstack503", memberId)
 
+
       val date = binding.date.text.toString()
       val cate = binding.btnPassIncome.text.toString()
       val money = binding.incomeMoneyReceipt.text.toString()
@@ -145,6 +146,9 @@ class IncomeReceiptActivity : AppCompatActivity() {
       val api = AppServerClass.instance
       val call = api.postIncome(income)
       retrofitResponse(call)
+
+      val intent = Intent(this,MainActivity2::class.java)
+      startActivity(intent)
     }
   }
 
