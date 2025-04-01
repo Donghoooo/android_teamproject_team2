@@ -2,6 +2,7 @@ package bitc.example.app.ui
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,12 +16,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
+import bitc.example.app.MainActivity2
 import bitc.example.app.dto.SearchDTO
 import bitc.example.app.R
 import bitc.example.app.adapter.SearchListAdapter
 import bitc.example.app.databinding.ActivityCateSearchBinding
+import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.model.SearchListItem
+import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.dialog.BankSelectionDialog
 import bitc.example.app.ui.dialog.CategorySelectionDialog
 import retrofit2.Call
@@ -145,15 +150,25 @@ class CateSearchActivity : AppCompatActivity() {
       fetchTransactionData("date")
     }
 
+    binding.calendarIcon.setOnClickListener{  val intent = Intent(this, MainActivity2::class.java)
+      startActivity(intent) }
 
+    binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
+      startActivity(intent) }
 
+    binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageCheckActivity::class.java)
+      startActivity(intent)  }
 
+    binding.listIcon.setOnClickListener {
+      val intent = Intent(this,MonthlyListActivity::class.java)
+      startActivity(intent)
+    }
+
+    binding.searchIcone.setOnClickListener {
+      val intent = Intent(this, CateSearchActivity::class.java)
+      startActivity(intent)
+    }
   }
-
-
-
-
-
   //  뒤로가기 버튼
   override fun onSupportNavigateUp(): Boolean {
     super.onSupportNavigateUp()

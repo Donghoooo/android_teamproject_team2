@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     android:id="@+id/main">
@@ -9,8 +12,11 @@
 
   <!-- 캘린더를 감싸는 FrameLayout -->
   <FrameLayout
+      android:id="@+id/calendarContainer"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      tools:ignore="MissingConstraints"
+      app:layout_constraintTop_toTopOf="parent">
 
     <!-- 캘린더 뷰 -->
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -53,11 +59,16 @@
 
   <!-- 총 수입 및 지출 표시 -->
   <LinearLayout
+      android:id="@+id/summaryLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@drawable/border"
       android:orientation="vertical"
-      android:gravity="center">
+      android:gravity="center"
+      app:layout_constraintTop_toBottomOf="@id/calendarContainer"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      tools:ignore="MissingConstraints">
 
   <LinearLayout
       android:orientation="horizontal"
@@ -120,73 +131,76 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_marginTop="5dp"
-      android:layout_weight="1"
+      app:layout_constraintTop_toBottomOf="@id/summaryLayout"
+      app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
       android:scrollbars="vertical"
       android:paddingHorizontal="10dp"/>
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="55dp">
-      <!-- 하단 고정 바 -->
-      <View
-          android:id="@+id/bottom_navigation"
-          android:layout_width="match_parent"
-          android:layout_height="55dp"
-          android:background="@drawable/bottom"
-          android:layout_alignParentBottom="true" />
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="55dp"
-          android:orientation="horizontal"
-          android:gravity="center"
-          android:padding="10dp">
-
-        <ImageView
-            android:id="@+id/calendar_icon"
-            android:layout_width="30dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_height="30dp"
-            android:layout_marginVertical="10dp"
-            android:src="@drawable/calendar_days"/>
-
-        <ImageView
-            android:id="@+id/chart_icon"
-            android:layout_width="30dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:layout_height="30dp"
-            android:src="@drawable/chart_pie"/>
-
-        <ImageView
-            android:id="@+id/user_icon"
-            android:layout_width="30dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_height="30dp"
-            android:src="@drawable/user"/>
-
-        <ImageView
-            android:id="@+id/list_icon"
-            android:layout_width="30dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_height="30dp"
-            android:src="@drawable/list"/>
-
-        <ImageView
-            android:id="@+id/search_icone"
-            android:layout_width="30dp"
-            android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_height="30dp"
-            android:src="@drawable/search"/>
-
-      </LinearLayout>
-    </RelativeLayout>
   </LinearLayout>
 
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:ignore="MissingConstraints"
+      app:layout_constraintBottom_toBottomOf="parent">
+    <!-- 하단 고정 바 -->
+    <View
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/bottom"
+        android:layout_alignParentBottom="true" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_alignBottom="@id/bottom_navigation">
 
+      <ImageView
+          android:id="@+id/calendar_icon"
+          android:layout_width="30dp"
+          android:layout_marginHorizontal="20dp"
+          android:layout_height="30dp"
+          android:layout_marginVertical="10dp"
+          android:src="@drawable/calendar_days"/>
 
-</LinearLayout>
+      <ImageView
+          android:id="@+id/chart_icon"
+          android:layout_width="30dp"
+          android:layout_marginHorizontal="20dp"
+          android:layout_marginVertical="10dp"
+          android:layout_height="30dp"
+          android:src="@drawable/chart_pie"/>
+
+      <ImageView
+          android:id="@+id/user_icon"
+          android:layout_width="30dp"
+          android:layout_marginVertical="10dp"
+          android:layout_marginHorizontal="20dp"
+          android:layout_height="30dp"
+          android:src="@drawable/user"/>
+
+      <ImageView
+          android:id="@+id/list_icon"
+          android:layout_width="30dp"
+          android:layout_marginVertical="10dp"
+          android:layout_marginHorizontal="20dp"
+          android:layout_height="30dp"
+          android:src="@drawable/list"/>
+
+      <ImageView
+          android:id="@+id/search_icone"
+          android:layout_width="30dp"
+          android:layout_marginVertical="10dp"
+          android:layout_marginHorizontal="20dp"
+          android:layout_height="30dp"
+          android:src="@drawable/search"/>
+
+    </LinearLayout>
+  </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
