@@ -8,6 +8,8 @@ import java.util.List;
 
 @Data
 public class DailySummaryDTO {
+  @JsonProperty("memberId")
+  private String memberId;
   @JsonProperty("year")
   private int year;
   @JsonProperty("month")
@@ -25,7 +27,8 @@ public class DailySummaryDTO {
     this.transactions = new ArrayList<>();
   }
 
-  public DailySummaryDTO(int year, int month, int day, int totalIncome, int totalExpense, List<SearchDTO> transactions) {
+  public DailySummaryDTO(String memberId, int year, int month, int day, int totalIncome, int totalExpense, List<SearchDTO> transactions) {
+    this.memberId = memberId;
     this.year = year;
     this.month = month;
     this.day = day;

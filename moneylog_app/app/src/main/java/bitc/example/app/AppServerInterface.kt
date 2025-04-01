@@ -93,6 +93,7 @@ interface AppServerInterface {
 // 월별 총 수입/지출 조회
 @GET("/main/monthly")
   fun getMonthlySummary(
+    @Query("memberId") memberId: String,
     @Query("year") year: Int,
     @Query("month") month: Int,
   ): Call<MonthlySummaryDTO>
@@ -100,6 +101,7 @@ interface AppServerInterface {
   // 특정 날짜의 수입/지출 리스트 조회 API
   @GET("/main/transactions")
   fun getDailySummary(
+    @Query("memberId") memberId: String,
     @Query("year") year: Int,
     @Query("month") month: Int,
     @Query("day") day: Int

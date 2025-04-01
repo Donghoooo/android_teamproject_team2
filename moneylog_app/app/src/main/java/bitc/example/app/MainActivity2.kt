@@ -25,6 +25,7 @@ import bitc.example.app.ui.DayDecorator
 import bitc.example.app.ui.SelectedDateDecorator
 
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.CalendarDay.today
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,11 +57,16 @@ class MainActivity2 : AppCompatActivity() {
       v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
       insets
     }
+    // SharedPreferences에서 memberId 가져오기
+    val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+    val memberId = sharedPreferences.getString("memberId", null)
 
-
-
-
-
+    if (memberId != null) {
+      Log.d("MainActivity2", "로그인한 사용자 ID: $memberId")
+      fetchMonthlyData(memberId, today().year, today().month + 1)  // 사용자 아이디를 이용해 데이터 가져오기
+    } else {
+      Log.e("MainActivity2", "사용자 ID를 불러오지 못함")
+    }
     calendarView = binding.calendarView
     tvDate = binding.tvDate
     tvTotalIncome = binding.tvTotalIncome
@@ -98,15 +104,15 @@ class MainActivity2 : AppCompatActivity() {
     val currentDay = today.day
 
     // ✅ 해당 월의 데이터 불러오기 (오늘 날짜 기준)
-    fetchMonthlyData(currentYear, currentMonth)
+    fetchMonthlyData(memberId.toString(), currentYear, currentMonth)
     // 오늘 날짜에 대한 데이터 가져오기 및 UI 업데이트(앱 처음 로딩 시 오늘 날짜 기준 정보 출력)
-    fetchDailyData(currentYear, currentMonth, currentDay)
+    fetchDailyData(memberId.toString(), currentYear, currentMonth, currentDay)
 
 // 달력에서 달이 변경될 때마다 해당 월의 수입/지출 업데이트
     calendarView.setOnMonthChangedListener { widget, date ->
       val selectedYear = date.year
       val selectedMonth = date.month + 1  // CalendarDay는 0부터 시작하므로 +1 필요
-      fetchMonthlyData(selectedYear, selectedMonth)
+      fetchMonthlyData(memberId.toString(), selectedYear, selectedMonth)
     }
 
     // 캘린더 날짜 선택 시 리스트 업데이트
@@ -132,7 +138,7 @@ class MainActivity2 : AppCompatActivity() {
 
         // 해당 날짜의 지출 및 수입 리스트 업데이트 (리사이클러뷰)
         adapter.updateData(searchItemList)
-        fetchDailyData(selectedYear, selectedMonth, selectedDay)
+        fetchDailyData(memberId.toString(), selectedYear, selectedMonth, selectedDay)
       }
     }
 
@@ -158,9 +164,9 @@ class MainActivity2 : AppCompatActivity() {
   }
 
 
-  private fun fetchMonthlyData(year: Int, month: Int) {
+  private fun fetchMonthlyData(memberId: String, year: Int, month: Int) {
 // 서버에서 해당 월의 총 수입, 지출 및 날짜별 데이터 가져오기
-    AppServerClass.instance.getMonthlySummary(year, month)
+    AppServerClass.instance.getMonthlySummary(memberId, year, month)
       .enqueue(object : Callback<MonthlySummaryDTO> {
         override fun onResponse(
           call: Call<MonthlySummaryDTO>,
@@ -222,8 +228,8 @@ class MainActivity2 : AppCompatActivity() {
     Log.d("DayDecorator", "데코레이터 데이터: $incomeExpenseMap")
     }
 
-  private fun fetchDailyData(year: Int, month: Int, day: Int){
-    AppServerClass.instance.getDailySummary(year, month, day)
+  private fun fetchDailyData(memberId: String, year: Int, month: Int, day: Int){
+    AppServerClass.instance.getDailySummary(memberId, year, month, day)
       .enqueue(object : Callback<DailySummaryDTO> {
         override fun onResponse(
           call: Call<DailySummaryDTO>,
@@ -241,13 +247,19 @@ class MainActivity2 : AppCompatActivity() {
               searchItemList.addAll(it.transactions ?: emptyList())
 
               Log.d("fetchDailyData", "검색된 거래 리스트 크기: ${searchItemList.size}")
-              mainDayList.visibility = View.VISIBLE
+//              mainDayList.visibility = View.VISIBLE
+
               // 리스트가 비어 있어도 RecyclerView가 보이도록 설정
+              if (searchItemList.isEmpty()) {
+                mainDayList.visibility = View.VISIBLE  // RecyclerView 보이게 설정
+              } else {
+                mainDayList.visibility = View.VISIBLE
+              }
 //              if (searchItemList.isEmpty()) {
 //                mainDayList.visibility = View.VISIBLE  // RecyclerView 보이게 설정
 //              }
               // 데이터 갱신 적용
-              adapter.notifyDataSetChanged()
+              adapter.updateData(searchItemList)
             }
           }
         }

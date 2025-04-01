@@ -17,24 +17,28 @@ public class MainController {
 
   @GetMapping("/main/monthly")
   public MonthlySummaryDTO displayMonthlySummary(
+      @RequestParam String memberId,
       @RequestParam int year,
       @RequestParam int month) throws Exception {
-    MonthlySummaryDTO monthlySummary = mainService.getMonthlySummary(year, month);
+    MonthlySummaryDTO monthlySummary = mainService.getMonthlySummary(memberId, year, month);
+    System.out.println("Member ID: " + memberId);
     System.out.println("Total Income: " + monthlySummary.getTotalIncome());
     System.out.println("Total Expense: " + monthlySummary.getTotalExpense());
 
     for (DailySummaryDTO daily : monthlySummary.getDailySummary()) {
       System.out.println("Day " + daily.getDay() + ": Income = " + daily.getTotalIncome() + ", Expense = " + daily.getTotalExpense());
     }
-    return mainService.getMonthlySummary(year,month);
+    return monthlySummary;
   }
 
   @GetMapping("/main/transactions")
   public DailySummaryDTO displayDailySummary(
+      @RequestParam String memberId,
       @RequestParam int year,
       @RequestParam int month,
       @RequestParam int day) throws Exception{
-    DailySummaryDTO dailySummary = mainService.getDailySummary(year, month, day);
+    DailySummaryDTO dailySummary = mainService.getDailySummary(memberId, year, month, day);
+    System.out.println("Member ID: " + memberId);
     System.out.println("Total Income: " + dailySummary.getTotalIncome());
     System.out.println("Total Expense: " + dailySummary.getTotalExpense());
 

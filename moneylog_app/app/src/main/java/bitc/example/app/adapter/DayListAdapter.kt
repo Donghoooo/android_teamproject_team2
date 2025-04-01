@@ -49,9 +49,9 @@ class DayListAdapter(private var searchItemList: MutableList<SearchListItem>): R
 
   // 데이터 업데이트 함수
   fun updateData(newList: List<SearchListItem>) {
-    searchItemList = newList as MutableList<SearchListItem>
-//    searchItemList.clear()
-//    searchItemList.addAll(newList)
+//    searchItemList = newList as MutableList<SearchListItem>
+    searchItemList.clear()
+    searchItemList.addAll(newList)
     notifyDataSetChanged()
   }
 }

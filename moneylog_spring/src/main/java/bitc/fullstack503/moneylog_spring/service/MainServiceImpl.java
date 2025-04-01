@@ -21,26 +21,26 @@ public class MainServiceImpl implements MainService {
 
   @Transactional
   @Override
-  public MonthlySummaryDTO getMonthlySummary(int year, int month) {
+  public MonthlySummaryDTO getMonthlySummary(String memberId, int year, int month) {
     // 해당 월의 수입과 지출 합계 계산
-    int totalIncome = mainMapper.getTotalIncome(year, month);
-    int totalExpense = mainMapper.getTotalExpense(year, month);
+    int totalIncome = mainMapper.getTotalIncome(memberId, year, month);
+    int totalExpense = mainMapper.getTotalExpense(memberId,year, month);
 
     // 해당 월의 날짜별 수입/지출 데이터 가져오기
-    List<DailySummaryDTO> dailySummary = mainMapper.getDailySummary(year, month);
+    List<DailySummaryDTO> dailySummary = mainMapper.getDailySummary(memberId, year, month);
 
-    return new MonthlySummaryDTO(totalIncome, totalExpense, dailySummary);
+    return new MonthlySummaryDTO(memberId, totalIncome, totalExpense, dailySummary);
   }
 
   @Transactional
   @Override
-  public DailySummaryDTO getDailySummary(int year, int month, int day) {
+  public DailySummaryDTO getDailySummary(String memberId, int year, int month, int day) {
     // 해당 날짜의 수입과 지출 합계 계산
-    int totalIncome = mainMapper.getTotalIncomeForDay(year, month, day);
-    int totalExpense = mainMapper.getTotalExpenseForDay(year, month, day);
+    int totalIncome = mainMapper.getTotalIncomeForDay(memberId, year, month, day);
+    int totalExpense = mainMapper.getTotalExpenseForDay(memberId, year, month, day);
 
     // 해당 날짜의 수입/지출 목록 가져오기
-    List<SearchDTO> transactions = mainMapper.getTransactionsForDay(year, month, day);
+    List<SearchDTO> transactions = mainMapper.getTransactionsForDay(memberId, year, month, day);
 
     // 로그 추가
     System.out.println("DB에서 가져온 특정 날짜 총 수입: " + totalIncome);
@@ -51,6 +51,6 @@ public class MainServiceImpl implements MainService {
       transactions = new ArrayList<>();
     }
 
-    return new DailySummaryDTO(year, month, day, totalIncome, totalExpense, transactions);
+    return new DailySummaryDTO(memberId, year, month, day, totalIncome, totalExpense, transactions);
   }
 }

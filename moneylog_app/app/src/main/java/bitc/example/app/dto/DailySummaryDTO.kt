@@ -4,6 +4,8 @@ import bitc.example.app.model.SearchListItem
 import com.google.gson.annotations.SerializedName
 
 data class DailySummaryDTO (
+  @SerializedName("memberId")
+  val memberId: String,
   @SerializedName("year")
   val year: Int,
   @SerializedName("month")

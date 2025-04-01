@@ -7,6 +7,7 @@
     FROM income_log
     WHERE YEAR(income_date) = #{year}
       AND MONTH(income_date) = #{month}
+    AND member_id = #{memberId}
   </select>
 
   <!-- 월별 지출 총합 -->
@@ -15,6 +16,7 @@
     FROM expense_log
     WHERE YEAR(expense_date) = #{year}
       AND MONTH(expense_date) = #{month}
+      AND member_id = #{memberId}
   </select>
 
   <!-- 날짜별 수입/지출 데이터 -->
@@ -29,6 +31,7 @@
       LEFT JOIN expense_log ON DATE(income_date) = DATE(expense_date)
     WHERE YEAR(income_date) = #{year}
       AND MONTH(income_date) = #{month}
+      AND income_log.member_id = #{memberId}
     GROUP BY YEAR(income_date), MONTH(income_date), DAY(income_date)
   </select>
 
@@ -39,6 +42,7 @@
     WHERE YEAR(income_date) = #{year}
       AND MONTH(income_date) = #{month}
       AND DAY(income_date) = #{day}
+      AND member_id = #{memberId}
   </select>
 
   <!-- 특정 날짜의 지출 총합 -->
@@ -48,6 +52,7 @@
     WHERE YEAR(expense_date) = #{year}
       AND MONTH(expense_date) = #{month}
       AND DAY(expense_date) = #{day}
+      AND member_id = #{memberId}
   </select>
 
   <!-- 특정 날짜의 수입/지출 내역 -->
@@ -57,11 +62,13 @@
     WHERE YEAR(income_date) = #{year}
       AND MONTH(income_date) = #{month}
       AND DAY(income_date) = #{day}
+      AND member_id = #{memberId}
     UNION ALL
     SELECT 'expense' AS type, expense_money AS money, expense_cate AS category, `expense_use` AS `use`, payment_option AS source
     FROM expense_log
     WHERE YEAR(expense_date) = #{year}
       AND MONTH(expense_date) = #{month}
       AND DAY(expense_date) = #{day}
+      AND member_id = #{memberId}
   </select>
 </mapper>

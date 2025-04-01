@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 
 data class MonthlySummaryDTO (
+  @SerializedName("memberId")
+  val memberId: String,
   @SerializedName("totalIncome")
   val totalIncome: Int,  // 총 수입
   @SerializedName("totalExpense")

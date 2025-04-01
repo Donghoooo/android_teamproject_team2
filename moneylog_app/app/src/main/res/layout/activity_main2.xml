@@ -136,7 +136,8 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       android:scrollbars="vertical"
-      android:paddingHorizontal="10dp"/>
+      android:paddingHorizontal="10dp"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
   </LinearLayout>
 
   <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
