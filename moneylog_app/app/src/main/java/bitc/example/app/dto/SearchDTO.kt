@@ -16,5 +16,7 @@ data class SearchDTO (
   @SerializedName("date")
   val date: String, // 거래 날짜
   @SerializedName("use")
-  val use: String // 내역
+  val use: String,// 내역
+  @SerializedName("memberId")
+  val memberId:String
 )

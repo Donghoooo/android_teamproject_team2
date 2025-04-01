@@ -119,6 +119,9 @@ class OutcomeReceiptActivity : AppCompatActivity() {
             val api = AppServerClass.instance
             val call = api.postOutcome(outcome)
             retrofitResponse(call)
+
+            val intent = Intent(this,MainActivity2::class.java)
+            startActivity(intent)
         }
 
         binding.calendarIcon.setOnClickListener{  val intent = Intent(this, MainActivity2::class.java)

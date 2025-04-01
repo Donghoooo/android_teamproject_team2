@@ -5,7 +5,7 @@
         SELECT 'income' AS type, income_log_seq AS seq, income_cate AS category, income_source AS source, income_money AS money, income_date AS date, `income_use` AS `use`
         FROM income_log
         <where>
-            member_id = 'test1'
+            member_id = #{memberId}
             AND income_date BETWEEN #{startDate} AND #{endDate}
             <if test="category != null and category.size() > 0">
                 AND income_cate IN
@@ -34,7 +34,7 @@
         SELECT 'expense' AS type, expense_log_seq AS seq, expense_cate AS category, payment_option AS source, expense_money AS money, expense_date AS date, `expense_use` AS `use`
         FROM expense_log
         <where>
-            member_id = 'test1'
+            member_id = #{memberId}
             AND expense_date BETWEEN #{startDate} AND #{endDate}
             <if test="category != null and category.size() > 0">
                 AND expense_cate IN
