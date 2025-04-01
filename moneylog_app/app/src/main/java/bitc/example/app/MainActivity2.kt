@@ -52,9 +52,7 @@ class MainActivity2 : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
-    val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
-    memberId = sharedPreferences.getString("memberId", "") ?: ""
-    Log.d("DEBUG", "SharedPreferences에 저장된 memberId: ${sharedPreferences.getString("memberId", "없음")}")
+
     setContentView(binding.root)
     ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
       val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
