@@ -28,10 +28,11 @@ import java.util.Locale
 class OutcomeCateActivity : AppCompatActivity() {
 
 //    =============== 달력 표시 ===========
-private lateinit var startDate: TextView
-    private lateinit var startDatePicker: ImageView
+
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
+    private lateinit var dateText : TextView
+    private lateinit var date: TextView
 
 
     //    TextView를 저장할 변수
@@ -131,7 +132,7 @@ private lateinit var startDate: TextView
         outcomeMoney = binding.outcomeResultCate
         outcomeDialog = binding.outcomeDialogCate
         btnSubmit = binding.btnSubmit
-        startDate = binding.date
+        date = binding.date
 
         binding.btnSubmit.setOnClickListener {
             val money =outcomeMoney.text.toString()
@@ -139,7 +140,7 @@ private lateinit var startDate: TextView
             val info = outcomeInfo.text.toString()
             val dialog = outcomeDialog.text.toString()
             val selectedCategory = selectedButton?.text.toString()
-            val date = startDate.text.toString()
+            val date = date.text.toString()
 
 
 
@@ -198,6 +199,15 @@ private lateinit var startDate: TextView
         }
 
 
+        val dateText = intent.getStringExtra("date")
+
+        if (dateText != null){
+            date.text = dateText
+        }
+        else{
+            date.text = "No date received"
+        }
+
 
 
 
@@ -213,21 +223,10 @@ private lateinit var startDate: TextView
 
 //        ========================= 달력 아이콘 선택 시, 날짜 선택 ===========================
 
-//    날짜 선택
-        startDate = binding.date
-        startDatePicker = binding.startDatePicker
 
 
-//    오늘날짜 기본값 설정
-        val today = Calendar.getInstance()
-        val todayDate = dateFormat.format(today.time)
-        startDate.text = todayDate
 
 
-//    시작 날짜 캘린더 아이콘 클릭 이벤트
-        startDatePicker.setOnClickListener {
-            showDatePicker(startDate)
-        }
 
     }
 
@@ -283,7 +282,7 @@ private fun onCategorySelected(button: AppCompatButton) {
 
     btnSubmit.isEnabled = selectedButton != null
     btnSubmit.isEnabled = outcomeDialog != null
-    btnSubmit.isEnabled = startDate != null
+    btnSubmit.isEnabled = date != null
 }
 
 

@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -28,7 +27,9 @@ import java.util.Locale
 class IncomeCateActivity : AppCompatActivity() {
 
 //    달력 표시
-    private lateinit var startDate: TextView
+    private lateinit var date: TextView
+
+    private lateinit var dateText : TextView
 
 
 
@@ -107,7 +108,7 @@ class IncomeCateActivity : AppCompatActivity() {
         incomeMemo = binding.incomeMemoCate
 //        btnSubmit 이란 변수는 incomeCate 의 btnSubmit 을 binding 한다.
         btnSubmit = binding.btnSubmit
-        startDate = binding.date
+        date = binding.date
 
 //        확인 버튼을 누를 시 발생되는 이벤트
         binding.btnSubmit.setOnClickListener {
@@ -117,7 +118,7 @@ class IncomeCateActivity : AppCompatActivity() {
             val memo = incomeMemo.text.toString()
             val dialog = incomeDialog.text.toString()
             val selectedCategory = selectedButton?.text.toString()
-            val date = startDate.text.toString()
+            val date = date.text.toString()
 
 
 //            intent를 사용하여 incomeReceiptActivity에 접근가능하게하고
@@ -155,12 +156,13 @@ class IncomeCateActivity : AppCompatActivity() {
         }
 
 
-//        =========================== addInfo 의 TextView 넘겨주기 ===========================
+//        =========================== addInfo 의 TextView 넘겨받기 ===========================
 
 
 
 
         incomeResult = binding.incomeResultCate
+
 
         val text = intent.getStringExtra("text_value2")
 
@@ -170,6 +172,16 @@ class IncomeCateActivity : AppCompatActivity() {
             incomeResult.text = "No data received"
         }
 
+
+
+        val dateText = intent.getStringExtra("date")
+
+        if (dateText != null){
+          date.text = dateText
+        }
+        else{
+            date.text = "No date received"
+        }
 
 
 
@@ -253,7 +265,7 @@ private fun showDatePicker(textView: TextView) {
 
         btnSubmit.isEnabled = selectedButton != null
         btnSubmit.isEnabled = incomeDialog != null
-        btnSubmit.isEnabled = startDate != null
+        btnSubmit.isEnabled = date != null
 
     }
 }

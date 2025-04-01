@@ -19,6 +19,7 @@ import bitc.example.app.dto.MonthlySummaryDTO
 import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.model.SearchListItem
 import bitc.example.app.sagmin.AddInfoActivity
+import bitc.example.app.sdh.MyPageActivity
 import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
 import bitc.example.app.ui.DayDecorator
@@ -35,6 +36,7 @@ class MainActivity2 : AppCompatActivity() {
     ActivityMain2Binding.inflate(layoutInflater)
   }
 
+  private lateinit var memberId: String
   private lateinit var selectedDateDecorator: SelectedDateDecorator // 날짜 선택시 뜨는 원형
   private lateinit var dayDecorator: DayDecorator // 날짜마다 수입지출 금액
   private lateinit var calendarView: MaterialCalendarView
@@ -50,6 +52,9 @@ class MainActivity2 : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
+    val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
+    memberId = sharedPreferences.getString("memberId", "") ?: ""
+    Log.d("DEBUG", "SharedPreferences에 저장된 memberId: ${sharedPreferences.getString("memberId", "없음")}")
     setContentView(binding.root)
     ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
       val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -121,7 +126,7 @@ class MainActivity2 : AppCompatActivity() {
         calendarView.invalidateDecorators()  // 데코레이터 갱신
 
         // UI에 선택한 날짜 표시
-        tvDate.text = "$selectedMonth.${String.format("%02d", selectedDay)}"
+        tvDate.text = "$selectedYear.$selectedMonth.${String.format("%02d", selectedDay)}"
 
         Log.d("SelectedDate", "선택된 날짜: ${date.year}-${date.month + 1}-${date.day}")
 ////         해당 날짜의 총 수입/지출을 불러와서 UI 업데이트
@@ -142,7 +147,7 @@ class MainActivity2 : AppCompatActivity() {
     binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
       startActivity(intent) }
 
-    binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageCheckActivity::class.java)
+    binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageActivity::class.java)
       startActivity(intent)  }
 
     binding.listIcon.setOnClickListener {

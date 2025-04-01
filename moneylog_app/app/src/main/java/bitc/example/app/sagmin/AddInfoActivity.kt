@@ -24,6 +24,8 @@ class AddInfoActivity : AppCompatActivity() {
 //
 private lateinit var binding: ActivityAddInfoBinding
 
+private lateinit var date:TextView
+
     private lateinit var outcomeResult : TextView
     private lateinit var btnOutcome: AppCompatButton
 
@@ -66,9 +68,11 @@ private lateinit var binding: ActivityAddInfoBinding
 
         incomeResult = binding.tvResult
         btnIncome = binding.btnIncome
+        date = binding.tvDate
 
         binding.btnIncome.setOnClickListener {
             val text = incomeResult.text.toString()
+            val date = date.text.toString()
 
             val sharedPreferences = getSharedPreferences("memberInfo", MODE_PRIVATE)
             val memberId = sharedPreferences.getString("memberId", "아이디").toString()
@@ -79,6 +83,7 @@ private lateinit var binding: ActivityAddInfoBinding
 
             val intent = Intent(this, IncomeCateActivity::class.java).apply{
             putExtra("text_value2",text)
+                putExtra("date",date)
             }
             startActivity(intent)
         }
@@ -109,6 +114,7 @@ private lateinit var binding: ActivityAddInfoBinding
 //            putExtra 메소드로 text_value 라는 키에 text를 넣어 전달한다.
             val intent = Intent(this, OutcomeCateActivity::class.java).apply{
                 putExtra("text_value",text)
+                putExtra("date",date)
             }
             startActivity(intent)
         }
