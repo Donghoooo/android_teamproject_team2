@@ -88,8 +88,8 @@ class MainActivity2 : AppCompatActivity() {
 
     binding.btnAdd.setOnClickListener {
       val date = tvDate.text.toString()
-      val intent = Intent(this,AddInfoActivity::class.java).apply{
-        putExtra("tvdate",date)
+      val intent = Intent(this, AddInfoActivity::class.java).apply {
+        putExtra("tvdate", date)
       }
       startActivity(intent)
     }
@@ -119,7 +119,7 @@ class MainActivity2 : AppCompatActivity() {
 
     // 캘린더 날짜 선택 시 리스트 업데이트
     calendarView.setOnDateChangedListener { widget, date, selected ->
-      if(selected) {
+      if (selected) {
         val selectedYear = date.year
         val selectedMonth = date.month + 1  // `CalendarDay`는 0부터 시작하는 월 사용 → `+1` 필요
         val selectedDay = date.day
@@ -145,13 +145,17 @@ class MainActivity2 : AppCompatActivity() {
     }
 
 
-    binding.calendarIcon.setOnClickListener{}
+    binding.calendarIcon.setOnClickListener {}
 
-    binding.chartIcon.setOnClickListener {  val intent = Intent(this, Analyze_List::class.java)
-      startActivity(intent) }
+    binding.chartIcon.setOnClickListener {
+      val intent = Intent(this, Analyze_List::class.java)
+      startActivity(intent)
+    }
 
-    binding.userIcon.setOnClickListener { val intent = Intent(this, MyPageActivity::class.java)
-      startActivity(intent)  }
+    binding.userIcon.setOnClickListener {
+      val intent = Intent(this, MyPageActivity::class.java)
+      startActivity(intent)
+    }
 
     binding.listIcon.setOnClickListener {
       val intent = Intent(this, MonthlyListActivity::class.java)
@@ -193,6 +197,7 @@ class MainActivity2 : AppCompatActivity() {
             }
           }
         }
+
         override fun onFailure(call: Call<MonthlySummaryDTO>, t: Throwable) {
           Toast.makeText(this@MainActivity2, "데이터 불러오기 실패", Toast.LENGTH_SHORT).show()
         }
@@ -201,7 +206,8 @@ class MainActivity2 : AppCompatActivity() {
 
   // 선택한 날짜의 총 수입/지출 업데이트 함수 추가
   private fun updateDailyTotal(date: CalendarDay, dailySummary: List<DailySummaryDTO>) {
-    val selectedDate = "${date.year}-${String.format("%02d", date.month + 1)}-${String.format("%02d", date.day)}"
+    val selectedDate =
+      "${date.year}-${String.format("%02d", date.month + 1)}-${String.format("%02d", date.day)}"
 
     // 해당 날짜의 데이터를 찾아서 UI 업데이트
     val summaryForDate = dailySummary.find {
@@ -228,9 +234,9 @@ class MainActivity2 : AppCompatActivity() {
     calendarView.addDecorator(DayDecorator(this, incomeExpenseMap))
     calendarView.invalidateDecorators()  // 데코레이터 즉시 반영
     Log.d("DayDecorator", "데코레이터 데이터: $incomeExpenseMap")
-    }
+  }
 
-  private fun fetchDailyData(memberId: String, year: Int, month: Int, day: Int){
+  private fun fetchDailyData(memberId: String, year: Int, month: Int, day: Int) {
     AppServerClass.instance.getDailySummary(memberId, year, month, day)
       .enqueue(object : Callback<DailySummaryDTO> {
         override fun onResponse(
@@ -244,42 +250,30 @@ class MainActivity2 : AppCompatActivity() {
               tvTotalIncome.text = "+ ${it.totalIncome} 원"
               tvTotalExpense.text = "- ${it.totalExpense} 원"
 
-              // 해당 날짜의 거래 리스트 갱신
+              // 기존 데이터 초기화
               searchItemList.clear()
-              // 각 거래 항목에 날짜 추가
+
+              // 리스트 업데이트
               it.transactions?.forEach { transaction ->
-                // `SearchListItem`에 날짜 추가
                 val selectedDate =
                   "${year}-${String.format("%02d", month)}-${String.format("%02d", day)}"
-                transaction.date = selectedDate // 날짜를 추가
+                transaction.date = selectedDate // 날짜 추가
 
                 searchItemList.add(transaction)
               }
 
-              Log.d("DataCheck", "데이터 목록: $searchItemList")
-              Log.d("fetchDailyData", "검색된 거래 리스트 크기: ${searchItemList.size}")
-//              mainDayList.visibility = View.VISIBLE
+              // ✅ RecyclerView 가시성 제어
+              mainDayList.visibility = if (searchItemList.isEmpty()) View.GONE else View.VISIBLE
 
-              // 리스트가 비어 있어도 RecyclerView가 보이도록 설정
-              if (searchItemList.isEmpty()) {
-                mainDayList.visibility = View.VISIBLE  // RecyclerView 보이게 설정
-              } else {
-                mainDayList.visibility = View.VISIBLE
-              }
-//              if (searchItemList.isEmpty()) {
-//                mainDayList.visibility = View.VISIBLE  // RecyclerView 보이게 설정
-//              }
-              // 데이터 갱신 적용
-              adapter.updateData(searchItemList)
-              Log.d("RecyclerView", "데이터가 갱신되었습니다.")
-
+              // ✅ 데이터 갱신 적용
+              adapter.notifyDataSetChanged()
             }
           }
         }
+
         override fun onFailure(call: Call<DailySummaryDTO>, t: Throwable) {
           Toast.makeText(this@MainActivity2, "데이터 불러오기 실패", Toast.LENGTH_SHORT).show()
         }
       })
   }
-
 }
