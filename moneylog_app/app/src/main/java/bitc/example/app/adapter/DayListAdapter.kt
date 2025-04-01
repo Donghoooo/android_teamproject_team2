@@ -1,5 +1,6 @@
 package bitc.example.app.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,10 @@ class DayListAdapter(private var searchItemList: MutableList<SearchListItem>): R
 
   override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
     val transaction = searchItemList[position]
+
+    // 날짜 값 표시 (디버깅용)
+    Log.d("Transaction Date", "Transaction Date: ${transaction.date}")
+
     // 카테고리, 내역, 결제 방식
     holder.tvCategory.text = transaction.category
     holder.tvUse.text = transaction.use

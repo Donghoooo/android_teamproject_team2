@@ -2,7 +2,7 @@ package bitc.example.app.model
 
 
 data class SearchListItem(
-  val date: String, // 날짜
+  var date: String, // 날짜
   val category: String, // 카테고리
   val use: String, // 내역
   val source: String, // 지불방식
