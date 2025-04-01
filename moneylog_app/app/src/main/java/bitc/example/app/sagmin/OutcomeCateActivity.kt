@@ -28,16 +28,17 @@ import java.util.Locale
 class OutcomeCateActivity : AppCompatActivity() {
 
 //    =============== 달력 표시 ===========
-private lateinit var startDate: TextView
-    private lateinit var startDatePicker: ImageView
+
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
+    private lateinit var dateText : TextView
+    private lateinit var date: TextView
 
 
     //    TextView를 저장할 변수
 //    lateinit 키워드는 변수가 나중에 초기화 될 것임을 나타낸다
     private lateinit var outResult : TextView
-
+    private lateinit var outcomeDialogCate: AppCompatButton
     private lateinit var btnSubmit : AppCompatButton
     private lateinit var outcomeInfo :EditText
             private lateinit var outcomeMemo : EditText
@@ -125,13 +126,12 @@ private lateinit var startDate: TextView
 
 //        =================== 작성한 내역 영수증페이지로 값 넘겨주기 ============================
 
-
         outcomeInfo = binding.outcomeInfoCate
         outcomeMemo = binding.outcomeMemoCate
         outcomeMoney = binding.outcomeResultCate
         outcomeDialog = binding.outcomeDialogCate
         btnSubmit = binding.btnSubmit
-        startDate = binding.date
+        date = binding.date
 
         binding.btnSubmit.setOnClickListener {
             val money =outcomeMoney.text.toString()
@@ -139,7 +139,7 @@ private lateinit var startDate: TextView
             val info = outcomeInfo.text.toString()
             val dialog = outcomeDialog.text.toString()
             val selectedCategory = selectedButton?.text.toString()
-            val date = startDate.text.toString()
+            val date = date.text.toString()
 
 
 
@@ -198,114 +198,68 @@ private lateinit var startDate: TextView
         }
 
 
+        val dateText = intent.getStringExtra("date")
+
+        if (dateText != null){
+            date.text = dateText
+        }
+        else{
+            date.text = "No date received"
+        }
+
 
 
 
 //========================================== 드롭다운 ======================================================
 
-//        btnDialog 버튼을 누르면 이벤트가 실행되도록 설정
         binding.outcomeDialogCate.setOnClickListener {
-//            버튼을 누르면 showBtnDialog 함수가 호출 된다.
-//            binding 은 ActivityOutcomeCateBinding의 객체로, 레이아웃의 뷰들을 바인딩하여 쉽게 접근하도록 해줌
-            showBtnDialog(binding)
+            showOutcomeCate(binding)
         }
-
-
-//        ========================= 달력 아이콘 선택 시, 날짜 선택 ===========================
-
-//    날짜 선택
-        startDate = binding.date
-        startDatePicker = binding.startDatePicker
-
-
-//    오늘날짜 기본값 설정
-        val today = Calendar.getInstance()
-        val todayDate = dateFormat.format(today.time)
-        startDate.text = todayDate
-
-
-//    시작 날짜 캘린더 아이콘 클릭 이벤트
-        startDatePicker.setOnClickListener {
-            showDatePicker(startDate)
-        }
+        outcomeDialogCate = binding.outcomeDialogCate
 
     }
 
-//    /paymentMethodSelectButton 버튼 아이디
+    // 버튼 선택 함수
+    private fun onCategorySelected(button: AppCompatButton) {
+        selectedButton?.let {
+            it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.default_button_color)
+        }
 
-    private fun showBtnDialog(binding: ActivityOutcomeCateBinding){
-//        드롭다운 종류 설정
-        val items = arrayOf("현금","이체","체크카드","신용카드")
-//        선택된 항목을 저장할 변수 = selectedItemIndex
-        var selectedItemIndex = 0
+        button.backgroundTintList = ContextCompat.getColorStateList(this, R.color.selected_button_color)
+        selectedButton = button
 
-//         AlertDialog.Builder 는 다이얼로그를 만드는 빌더 객체, this 는 현재 Activity를 의미
+        updateSubmitButtonState()
+    }
+
+    private fun showOutcomeCate(binding: ActivityOutcomeCateBinding) {
+        val items = arrayOf("현금", "이체", "체크카드", "신용카드")
+        var selectedItemIndex = -1 // 아무것도 선택 안 된 상태로 초기화
+
         val builder = AlertDialog.Builder(this)
-
-//         다이얼로그의 제목을 설정
         builder.setTitle("지불수단을 선택하세요")
-
-//            setSingleChoiceItems 항목을 단일 선택. items는 배열,기본 선택항목이 selectedItemIndex 이다.
-            .setSingleChoiceItems(items, selectedItemIndex) {
-//    사용자가 항목을 선택할때마다 which 값으로 선택된 항목의 인덱스가 전달, 이를 selectedItemIndex 에 저장
-                dialog, which -> selectedItemIndex = which }
-
-//               setPositiveButton("확인") 확인 버튼을 추가
-            .setPositiveButton("확인") {
-//               사용자가 선택한 항목을 selectedItem에 저장
-                dialog, which -> val selectedItem = items[selectedItemIndex]
-//                버튼의 텍스트를 사용자가 선택한 항목으로 변경한다.
-                binding.outcomeDialogCate.text = selectedItem
-                Toast.makeText(this, "선택된 항목: $selectedItem", Toast.LENGTH_SHORT).show()
+            .setSingleChoiceItems(items, -1) { _, which ->
+                selectedItemIndex = which // 선택된 인덱스 저장
             }
-            .setNegativeButton("취소", null)
-            .setCancelable(true) // 뒤로 가기 버튼으로 닫히게 설정
-            .show() // 다이얼로그
+            .setPositiveButton("확인") { _, _ ->
+                // 사용자가 지불수단을 선택한 경우에만 업데이트
+                if (selectedItemIndex != -1) {
+                    binding.outcomeDialogCate.text = items[selectedItemIndex]
+                    updateSubmitButtonState()
+                }
             }
-//    ======================================================================================================
-//      binding.btnBack.setOnClickListener{
-//            finish()
-//        }
-// 버튼 선택 함수
-private fun onCategorySelected(button: AppCompatButton) {
-    // 선택된 버튼이 있으면 원래 상태로 복원 (배경색 초기화)
-    selectedButton?.let {
-        // 이전에 선택된 버튼의 배경색을 기본 배경색으로 변경
-        it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.default_button_color)
+            .setNegativeButton("취소", null) // 아무것도 하지 않음
+            .setCancelable(true)
+            .show()
     }
 
-    // 현재 클릭된 버튼을 선택된 버튼으로 설정하고 배경색 변경
-    // 선택된 버튼의 배경색을 지정
-    button.backgroundTintList = ContextCompat.getColorStateList(this, R.color.selected_button_color)
+    private fun updateSubmitButtonState() {
+        val isCategorySelected = selectedButton != null // 카테고리 선택 여부
+        val isPaymentMethodSelected = outcomeDialogCate.text.isNotEmpty() && outcomeDialogCate.text != "선택해주세요" // 지불수단 선택 여부
 
-    // 현재 선택된 버튼을 저장
-    selectedButton = button
-
-    btnSubmit.isEnabled = selectedButton != null
-    btnSubmit.isEnabled = outcomeDialog != null
-    btnSubmit.isEnabled = startDate != null
-}
+        // 두 가지가 모두 선택되어야 btnSubmit 활성화
+        btnSubmit.isEnabled = isCategorySelected && isPaymentMethodSelected
+    }
 
 
-//    ==================== 달력 날짜 선택 설정 ===================================
-private fun showDatePicker(textView: TextView) {
-    val calendar = Calendar.getInstance()
-    val year = calendar.get(Calendar.YEAR)
-    val month = calendar.get(Calendar.MONTH)
-    val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-    val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-        val selectedDate = Calendar.getInstance()
-        selectedDate.set(selectedYear, selectedMonth, selectedDay)
-        selectedDate.set(Calendar.HOUR_OF_DAY, 0)
-        selectedDate.set(Calendar.MINUTE, 0)
-        selectedDate.set(Calendar.SECOND, 0)
-        selectedDate.set(Calendar.MILLISECOND, 0)
-
-        textView.text = dateFormat.format(selectedDate.time)
-    }, year, month, day)
-
-    datePickerDialog.show()
-}
     }
 

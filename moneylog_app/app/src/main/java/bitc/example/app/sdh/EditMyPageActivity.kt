@@ -13,6 +13,7 @@ import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.AppServerClass
+import bitc.example.app.MainActivity2
 import bitc.example.app.databinding.ActivityEditMyPageBinding
 import bitc.example.app.dto.MemberDTO
 import com.google.android.material.snackbar.Snackbar
@@ -93,7 +94,7 @@ class EditMyPageActivity : AppCompatActivity() {
         val call = api.memberUpdate(member)
         updateProcess(call)
         // 메인화면으로 Intent 넣으면 됨
-        val intent = Intent(this, MyPageActivity::class.java)
+        val intent = Intent(this, MainActivity2::class.java)
         startActivity(intent)
       }
 

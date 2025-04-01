@@ -28,6 +28,8 @@ class IncomeReceiptActivity : AppCompatActivity() {
 
   private lateinit var sharedPreferences: SharedPreferences
 
+  private lateinit var date : TextView
+
   //    값을 저장할 incomeResultReceipt 변수
   private lateinit var incomeResultReceipt: TextView
   private lateinit var incomeInfo: TextView

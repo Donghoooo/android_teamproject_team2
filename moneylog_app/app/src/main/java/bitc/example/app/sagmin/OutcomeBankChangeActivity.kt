@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,8 +69,11 @@ class OutcomeBankChangeActivity (
                 onConfirm(selectedBanks)
                 dismiss()
             }
-
+            updateConfirmButtonState(btnConfirm)
         }
+    private fun updateConfirmButtonState(btnConfirm: AppCompatButton) {
+        btnConfirm.isEnabled = !selectedBanks.isNullOrEmpty()  // 선택된 항목이 있으면 활성화
+    }
 
 
     }

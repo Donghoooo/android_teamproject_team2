@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -28,7 +27,9 @@ import java.util.Locale
 class IncomeCateActivity : AppCompatActivity() {
 
 //    달력 표시
-    private lateinit var startDate: TextView
+    private lateinit var date: TextView
+
+    private lateinit var dateText : TextView
 
 
 
@@ -37,7 +38,7 @@ class IncomeCateActivity : AppCompatActivity() {
     //  입력한 금액을 보내기에 필요한 금액 텍스트뷰 변수와 확인버튼 변수
     private lateinit var incomeResultReceipt: TextView
     private lateinit var btnSubmit: AppCompatButton
-
+    private lateinit var incomeDialogCate: AppCompatButton
     //    입력한 내역 , 메모 변수 생성
     private lateinit var incomeInfo: EditText
     private lateinit var incomeMemo: EditText
@@ -56,6 +57,8 @@ class IncomeCateActivity : AppCompatActivity() {
     private lateinit var btnDutch: AppCompatButton
     private lateinit var btnEtc: AppCompatButton
 
+    private var isCategorySelected = false
+    private var isMethodSelected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,9 +108,10 @@ class IncomeCateActivity : AppCompatActivity() {
         incomeResultReceipt = binding.incomeResultCate
         incomeInfo = binding.incomeInfoCate
         incomeMemo = binding.incomeMemoCate
+        incomeDialogCate = binding.incomeDialogCate
 //        btnSubmit 이란 변수는 incomeCate 의 btnSubmit 을 binding 한다.
         btnSubmit = binding.btnSubmit
-        startDate = binding.date
+        date = binding.date
 
 //        확인 버튼을 누를 시 발생되는 이벤트
         binding.btnSubmit.setOnClickListener {
@@ -117,7 +121,7 @@ class IncomeCateActivity : AppCompatActivity() {
             val memo = incomeMemo.text.toString()
             val dialog = incomeDialog.text.toString()
             val selectedCategory = selectedButton?.text.toString()
-            val date = startDate.text.toString()
+            val date = date.text.toString()
 
 
 //            intent를 사용하여 incomeReceiptActivity에 접근가능하게하고
@@ -155,12 +159,13 @@ class IncomeCateActivity : AppCompatActivity() {
         }
 
 
-//        =========================== addInfo 의 TextView 넘겨주기 ===========================
+//        =========================== addInfo 의 TextView 넘겨받기 ===========================
 
 
 
 
         incomeResult = binding.incomeResultCate
+
 
         val text = intent.getStringExtra("text_value2")
 
@@ -170,6 +175,16 @@ class IncomeCateActivity : AppCompatActivity() {
             incomeResult.text = "No data received"
         }
 
+
+
+        val dateText = intent.getStringExtra("date")
+
+        if (dateText != null){
+          date.text = dateText
+        }
+        else{
+            date.text = "No date received"
+        }
 
 
 
@@ -208,31 +223,6 @@ private fun showDatePicker(textView: TextView) {
     datePickerDialog.show()
 }
 
-    //  현금 결제 수단 선택
-    private fun showIncomeCate(binding: ActivityIncomeCateBinding) {
-        val items = arrayOf("현금", "계좌이체", "카카오페이", "무통장입금")
-
-        var selectedItemIndex  = 0
-
-        val builder = AlertDialog.Builder(this)
-
-        builder.setTitle("입금경로를 입력하세요")
-            .setSingleChoiceItems(items, selectedItemIndex ) { dialog, which ->
-                selectedItemIndex  = which
-            }
-            .setPositiveButton("확인") { dialog, which ->
-                val selectedItemIndex  = items[selectedItemIndex ]
-                binding.incomeDialogCate.text = selectedItemIndex
-                Toast.makeText(this, "선택된 항목 :$selectedItemIndex ", Toast.LENGTH_SHORT).show()
-            }
-            .setNegativeButton("취소", null)
-            .setCancelable(true)
-            .show()
-
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
-    }
     private fun onCategorySelected(button: AppCompatButton){
         // 선택된 버튼이 있으면 원래 상태로 복원 (배경색 초기화)
         selectedButton?.let {
@@ -251,9 +241,47 @@ private fun showDatePicker(textView: TextView) {
         // 현재 선택된 버튼을 저장
         selectedButton = button
 
-        btnSubmit.isEnabled = selectedButton != null
-        btnSubmit.isEnabled = incomeDialog != null
-        btnSubmit.isEnabled = startDate != null
+        isCategorySelected = true
+        updateSubmitButtonState()
+    }
+
+    //  현금 결제 수단 선택
+    private fun showIncomeCate(binding: ActivityIncomeCateBinding) {
+        val items = arrayOf("현금", "계좌이체", "카카오페이", "무통장입금")
+        var selectedItemIndex = 0
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("입금경로를 입력하세요")
+            .setSingleChoiceItems(items, selectedItemIndex) { dialog, which ->
+                selectedItemIndex = which
+            }
+            .setPositiveButton("확인") { dialog, which ->
+                if (selectedItemIndex != 0) {
+                    val selectedItem = items[selectedItemIndex]
+                    binding.incomeDialogCate.text = selectedItem
+                    isMethodSelected = true // 입금경로 선택됨
+                    updateSubmitButtonState()
+                } else {
+                    Toast.makeText(this, "입금경로를 선택하세요.", Toast.LENGTH_SHORT).show()
+                    // 선택 안 함 -> 버튼 비활성화 상태로 유지
+                    isMethodSelected = false
+                    updateSubmitButtonState()
+                }
+            }
+            .setNegativeButton("취소", null)
+            .setCancelable(true)
+            .show()
+
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+    }
+
+
+    private fun updateSubmitButtonState() {
+        // 카테고리와 입금 경로가 모두 선택되었을 때만 버튼을 활성화
+        btnSubmit.isEnabled = isCategorySelected && isMethodSelected
 
     }
 }
