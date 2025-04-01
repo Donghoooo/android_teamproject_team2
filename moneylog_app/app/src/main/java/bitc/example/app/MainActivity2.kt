@@ -96,6 +96,7 @@ class MainActivity2 : AppCompatActivity() {
 
     // 오늘 날짜 가져오기
     val today = CalendarDay.today()
+    tvDate.text = "${today.year}.${today.month + 1}.${String.format("%02d", today.day)}"
     calendarView.setSelectedDate(today)  // 앱 처음 로딩시 오늘 날짜 선택
     selectedDateDecorator.setSelectedDay(today)
     calendarView.invalidateDecorators()
