@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.databinding.ActivityIncomeBankChangeBinding
 
-// 검색 페이지에서 자산방식 선택했을때 뜨는 다이얼로그 로직
-
 class IncomeBankChangeActivity(
     context: Context,
     private var selectedBanks: String? = null ,
@@ -33,50 +31,43 @@ class IncomeBankChangeActivity(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//    enableEdgeToEdge()
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
-
-//    다이얼로그 창 크기 조정
+        // 다이얼로그 창 크기 조정
         window?.setLayout(
             (context.resources.displayMetrics.widthPixels * 0.8).toInt(),
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
         val btnCancel = binding.btnCancel
-        val btnConfirm = binding.btnConfirm
+        val btnConfirm = binding.btnConfirm  // 확인 버튼 참조 추가
         buttonContainer = binding.buttonContainer
         recyclerView = binding.bankList   // 체크박스 리스트
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-//    리스트 초기화
+        // ✅ 리스트 초기화 (체크박스 선택 시 버튼 상태 업데이트 추가)
         adapter = SBankAdapter(banks, selectedBanks) { updatedBanks ->
-            selectedBanks = updatedBanks // 선택된 항목을 업데이트
+            selectedBanks = updatedBanks // 선택된 항목 업데이트
+            updateConfirmButtonState(btnConfirm)  // ✅ 버튼 상태 즉시 업데이트
         }
         recyclerView.adapter = adapter
 
+        // ✅ 초기 버튼 상태 설정 (selectedBanks가 비어있다면 비활성화)
+        updateConfirmButtonState(btnConfirm)
 
-
-
-        //    취소 버튼 클릭 이벤트
+        // 취소 버튼 클릭 이벤트
         btnCancel.setOnClickListener { dismiss() }
 
-//    확인 버튼 클릭 이벤트
+        // 확인 버튼 클릭 이벤트
         btnConfirm.setOnClickListener {
             Log.d("IncomeBankChangeActivity", "확인 버튼 클릭됨, 선택된 은행: $selectedBanks")
             onConfirm(selectedBanks)
             dismiss()
         }
-        updateConfirmButtonState(btnConfirm)
     }
+
+    // ✅ 확인 버튼 상태 업데이트 함수 (선택된 값이 있으면 활성화)
     private fun updateConfirmButtonState(btnConfirm: AppCompatButton) {
-        btnConfirm.isEnabled = !selectedBanks.isNullOrEmpty()  // 선택된 항목이 있으면 활성화
+        btnConfirm.isEnabled = !selectedBanks.isNullOrEmpty()
     }
-
 }
-

@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import bitc.example.app.Analyze_List
 import bitc.example.app.AppServerClass
+import bitc.example.app.MainActivity2
 import bitc.example.app.databinding.ActivityDetailOutcomeBinding
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.kms.MonthlyListActivity
@@ -54,7 +55,8 @@ class DetailOutcomeActivity : AppCompatActivity() {
         }
 
 
-        binding.calendarIcon.setOnClickListener{}
+        binding.calendarIcon.setOnClickListener{  val intent = Intent(this,MainActivity2::class.java)
+            startActivity(intent)}
 
         binding.chartIcon.setOnClickListener {
             val intent = Intent(this,Analyze_List::class.java)
@@ -75,14 +77,14 @@ class DetailOutcomeActivity : AppCompatActivity() {
         }
 
 
-        binding.outcomeDialogReceipt.setOnClickListener{
-            val bankDialog = IncomeBankChangeActivity(this, selectedBanks ?: "") { selected ->
-                selectedBanks = selected.toString()
+
+        // ✅ 자산 방식 선택 다이얼로그 호출 (IncomeBankChangeActivity → OutcomeBankChangeActivity로 변경)
+        binding.outcomeDialogReceipt.setOnClickListener {
+            val bankDialog = OutcomeBankChangeActivity(this, selectedBanks ?: "") { selected ->
+                selectedBanks = selected
                 updateBankText()
             }
             bankDialog.show()
-
-
         }
 
 

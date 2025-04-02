@@ -55,16 +55,13 @@ class DetailIncomeActivity : AppCompatActivity() {
 
 
 
-        binding.incomeDialogReceipt.setOnClickListener{
+        binding.incomeDialogReceipt.setOnClickListener {
             val bankDialog = IncomeBankChangeActivity(this, selectedBanks ?: "") { selected ->
-                selectedBanks = selected.toString()
+                selectedBanks = selected  // 선택된 값 업데이트
                 updateBankText()
             }
             bankDialog.show()
-
-
         }
-
 
 
         binding.btnPassIncome.setOnClickListener {
