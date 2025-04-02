@@ -53,6 +53,7 @@ class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<R
                 putExtra("incomeMoney", datas[index].incomeMoney)
                 putExtra("incomeSource", datas[index].incomeSource)
                 putExtra("incomeMemo", datas[index].incomeMemo)
+                putExtra("incomeUse",datas[index].incomeUse)
             }
             context.startActivity(intent)
         }

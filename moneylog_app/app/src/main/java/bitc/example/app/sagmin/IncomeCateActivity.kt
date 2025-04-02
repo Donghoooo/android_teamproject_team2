@@ -124,6 +124,7 @@ class IncomeCateActivity : AppCompatActivity() {
             val date = date.text.toString()
 
 
+
 //            intent를 사용하여 incomeReceiptActivity에 접근가능하게하고
 //            putExtra에 설정한 "text_value3" 이라는 text 문자열에 저장
             val intent = Intent(this, IncomeReceiptActivity::class.java).apply {

@@ -1,5 +1,6 @@
 package bitc.example.app.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.model.SearchListItem
 import bitc.example.app.R
+import bitc.example.app.kms.MonthlyListActivity
+import bitc.example.app.sagmin.DetailIncomeActivity
+import bitc.example.app.sagmin.DetailOutcomeActivity
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -19,7 +23,13 @@ class DayListAdapter(private var searchItemList: MutableList<SearchListItem>): R
     val tvUse: TextView = view.findViewById(R.id.tvUse)
     val tvSource: TextView = view.findViewById(R.id.tvSource)
     val tvMoney: TextView = view.findViewById(R.id.tvMoney)
+
   }
+
+
+
+
+
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
     val view = LayoutInflater.from(parent.context)
@@ -48,6 +58,15 @@ class DayListAdapter(private var searchItemList: MutableList<SearchListItem>): R
       holder.tvMoney.setTextColor(holder.itemView.resources.getColor(R.color.expense, null))
     } else {
       holder.tvMoney.setTextColor(holder.itemView.resources.getColor(R.color.income, null))
+    }
+    holder.itemView.setOnClickListener {
+      val context = holder.itemView.context
+      val intent = if (transaction.type == "expense") {
+        Intent(context, DetailOutcomeActivity::class.java) // 지출 화면
+      } else {
+        Intent(context, DetailIncomeActivity::class.java) // 수입 화면
+      }
+      context.startActivity(intent)
     }
   }
   override fun getItemCount() = searchItemList.size
