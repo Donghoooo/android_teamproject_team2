@@ -27,7 +27,7 @@ class IncomeBankChangeActivity(
     private lateinit var recyclerView: RecyclerView
     private lateinit var buttonContainer: LinearLayout
     private lateinit var adapter: SBankAdapter
-    private val banks = listOf("현금", "계좌이체", "카카오페이", "무통장입금")
+    private val banks = listOf("현금", "계좌이체")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
