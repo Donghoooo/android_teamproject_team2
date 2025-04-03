@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.databinding.IncomItemRecyclerViewBinding
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.sagmin.DetailIncomeActivity
+import java.text.NumberFormat
 
 class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //class IncomAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -20,25 +21,17 @@ class IncomAdapter(val datas: MutableList<IncomeLogDTO>): RecyclerView.Adapter<R
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, index: Int) {
-
-
-
-
-
-
-//        Log.d("fullstack503", "onBindViewHolder : $position")
-//        Log.d("csy", "datas : $datas")
-
-//        val incomeDateList = datas.map { it.incomeDate }
-//        val incomeCateList = datas.map { it.incomeCate }
-//        val incomeMoneyList = datas.map { it.incomeMoney }
-
-
         val binding = (holder as IncomViewHolder).binding
+
+        val groupedIncome = datas[index]
+        val amount = groupedIncome.incomeMoney
+        val formattedAmount = NumberFormat.getNumberInstance().format(amount)
+        binding.incomItemMoneyData.text = "+ $formattedAmount 원"
+
 
         binding.incomItemDateData.text = datas[index].incomeDate
         binding.incomItemCateData.text = datas[index].incomeCate
-        binding.incomItemMoneyData.text = "+ " + datas[index].incomeMoney + "원"
+//        binding.incomItemMoneyData.text = "+ " + datas[index].incomeMoney + "원"
         binding.incomItemMemoData.text = datas[index].incomeMemo
         binding.incomItemSourceData.text = datas[index].incomeSource
         binding.incomItemUseData.text = datas[index].incomeUse

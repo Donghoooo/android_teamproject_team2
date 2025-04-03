@@ -10,6 +10,7 @@ import bitc.example.app.databinding.IncomItemRecyclerViewBinding
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
 import bitc.example.app.sagmin.DetailOutcomeActivity
+import java.text.NumberFormat
 
 class ExpenseAdapter(val datas: MutableList<ExpenseLogDTO>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -21,19 +22,18 @@ class ExpenseAdapter(val datas: MutableList<ExpenseLogDTO>): RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, index: Int) {
-//        Log.d("fullstack503", "onBindViewHolder : $position")
-//        Log.d("csy", "datas : $datas")
-
-//        val incomeDateList = datas.map { it.incomeDate }
-//        val incomeCateList = datas.map { it.incomeCate }
-//        val incomeMoneyList = datas.map { it.incomeMoney }
-
-
         val binding = (holder as ExpenseViewHolder).binding
+
+
+        val groupedExpense = datas[index]
+        val amount = groupedExpense.expenseMoney?.toIntOrNull() ?: 0
+        val formattedAmount = NumberFormat.getNumberInstance().format(amount)
+        binding.expenseItemMoneyData.text = "- $formattedAmount 원"
+
 
         binding.expenseItemDateData.text = datas[index].expenseDate
         binding.expenseItemCateData.text = datas[index].expenseCate
-        binding.expenseItemMoneyData.text = "- " + datas[index].expenseMoney + "원"
+//        binding.expenseItemMoneyData.text = "- " + datas[index].expenseMoney + "원"
         binding.expenseItemMemoData.text = datas[index].expenseMemo
         binding.expenseItemOptionData.text = datas[index].paymentOption
         binding.expenseItemUseData.text = datas[index].expenseUse
