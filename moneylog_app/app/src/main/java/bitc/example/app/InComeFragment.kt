@@ -106,24 +106,28 @@ class InComeFragment : Fragment() {
                     val result = res.body()
 
                     // 수입 합계 계산
-                    val totalIncome = result?.sumOf { it.incomeMoney?.toIntOrNull() ?: 0 }
+                    val totalIncome = result?.sumOf {
+                        it.incomeMoney?.let { money ->
+                            money.toString().replace(",", "").toIntOrNull() ?: 0
+                        } ?: 0
+                    } ?: 0
+
                     Log.d("fullstack503", totalIncome.toString())
                     totalIncomeMoney = totalIncome.toString()
 
-                    // 총 수입 데이터를 액티비티로 전달
+// 총 수입 데이터를 액티비티로 전달
                     (activity as? totalIncome)?.totalIncome(totalIncomeMoney)
 
                     Log.d("csy", "result : $result")
+
                     val categoryIncomeMap = mutableMapOf<String, Int>()
                     result?.forEach { incomeLog ->
                         val category = incomeLog.incomeCate ?: "Unknown"
-                        val amount = incomeLog.incomeMoney?.toIntOrNull() ?: 0
-
-                        // 카테고리별로 합산
-                        categoryIncomeMap[category] =
-                            categoryIncomeMap.getOrDefault(category, 0) + amount
+                        val amount = incomeLog.incomeMoney?.let { money ->
+                            money.toString().replace(",", "").toIntOrNull() ?: 0
+                        } ?: 0
+                        categoryIncomeMap[category] = categoryIncomeMap.getOrDefault(category, 0) + amount
                     }
-
                     val adapter = result?.let { InComeAdapter(it) }
                     binding.recyclerView.layoutManager = LinearLayoutManager(context)
                     binding.recyclerView.adapter = adapter

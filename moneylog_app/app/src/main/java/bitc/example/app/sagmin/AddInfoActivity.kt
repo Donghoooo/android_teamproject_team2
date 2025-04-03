@@ -3,6 +3,7 @@ package bitc.example.app.sagmin
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.telephony.PhoneNumberUtils.formatNumber
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -18,6 +19,8 @@ import bitc.example.app.databinding.ActivityAddInfoBinding
 import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.sdh.MyPageCheckActivity
 import bitc.example.app.ui.CateSearchActivity
+import java.text.NumberFormat
+import java.util.Locale
 
 class AddInfoActivity : AppCompatActivity() {
 
@@ -48,18 +51,28 @@ private lateinit var date:TextView
             insets
         }
         //        입력한 금액이 기본값 0원일 경우 수입, 지출 버튼이 눌러지지 않음
+
         binding.tvResult.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(editable: Editable?) {
+                binding.tvResult.removeTextChangedListener(this)
+
+                val text = editable.toString().replace(",", "").replace("원", "")
+                val formatted = if (text.isNotEmpty()) {
+                    val number = text.toLongOrNull() ?: 0
+                    formatNumber(number)
+                } else {
+                    "0원"
+                }
+
+                binding.tvResult.text = formatted
+                binding.tvResult.addTextChangedListener(this)
                 checkSubmitButtonState()
             }
-            override fun afterTextChanged(editable: Editable?) {}
-
         })
-
-        checkSubmitButtonState()
-
 
 //        ================Addinfo에서 입력한 금액과 수입 선택 시 입금 카테 선택페이지로 넘기기 =======
 
@@ -289,5 +302,23 @@ private lateinit var date:TextView
         binding.btnIncome.isEnabled = result != "0원"
         binding.btnOutcome.isEnabled = result != "0원"
     }
+    private fun appendNumber(digit: String) {
+        var num = binding.tvResult.text.toString().replace(",", "").replace("원", "")
+        num = if (num == "0") digit else num + digit
+        binding.tvResult.text = formatNumber(num.toLong())
+    }
 
+    private fun deleteLastDigit() {
+        var num = binding.tvResult.text.toString().replace(",", "").replace("원", "")
+        if (num.isNotEmpty() && num != "0") {
+            num = num.dropLast(1)
+        }
+        binding.tvResult.text = if (num.isNotEmpty()) formatNumber(num.toLong()) else "0원"
+    }
+
+    private fun formatNumber(value: Long): String {
+        return NumberFormat.getNumberInstance(Locale.KOREA).format(value) + "원"
+    }
 }
+
+
