@@ -20,6 +20,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.NumberFormat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -113,9 +114,12 @@ class InComeFragment : Fragment() {
                     } ?: 0
 
                     Log.d("fullstack503", totalIncome.toString())
-                    totalIncomeMoney = totalIncome.toString()
+                    val formattedTotalIncome = NumberFormat.getNumberInstance().format(totalIncome)
+                    // 포맷팅된 금액을 totalExpenMoney에 할당
+                    totalIncomeMoney = formattedTotalIncome
+                    // 총 수입 데이터를 액티비티로 전달
 
-// 총 수입 데이터를 액티비티로 전달
+                    // 총 수입 데이터를 액티비티로 전달
                     (activity as? totalIncome)?.totalIncome(totalIncomeMoney)
 
                     Log.d("csy", "result : $result")

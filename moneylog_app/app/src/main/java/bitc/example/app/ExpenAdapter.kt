@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bitc.example.app.databinding.ItemRecyclerView2Binding
 import bitc.example.app.dto.ExpenseLogDTO
 import bitc.example.app.dto.IncomeLogDTO
+import java.text.NumberFormat
 
 class ExpenAdapter(val datas: List<ExpenseLogDTO>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -51,6 +52,9 @@ class ExpenAdapter(val datas: List<ExpenseLogDTO>) :
         binding.CateDate1.text = groupedExpen.category1
         binding.MoneyDate1.text = groupedExpen.amount1 + "원"
 
+        val amount = groupedExpen.amount1.toInt()
+        val formattedAmount = NumberFormat.getNumberInstance().format(amount)
+        binding.MoneyDate1.text = "$formattedAmount 원"
 
     }
 
