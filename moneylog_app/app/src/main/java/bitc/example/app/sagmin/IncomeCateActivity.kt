@@ -248,7 +248,7 @@ private fun showDatePicker(textView: TextView) {
 
     //  현금 결제 수단 선택
     private fun showIncomeCate(binding: ActivityIncomeCateBinding) {
-        val items = arrayOf("현금", "계좌이체")
+        val items = arrayOf("선택","현금", "계좌이체")
         var selectedItemIndex = 0
 
         val builder = AlertDialog.Builder(this)
