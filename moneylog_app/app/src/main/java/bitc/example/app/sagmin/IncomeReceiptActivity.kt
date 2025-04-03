@@ -134,6 +134,10 @@ class IncomeReceiptActivity : AppCompatActivity() {
       val date = binding.date.text.toString()
       val cate = binding.btnPassIncome.text.toString()
       val money = binding.incomeMoneyReceipt.text.toString()
+        ?.replace(",", "") // 쉼표 제거
+        ?.replace("원", "") // '원' 제거
+        ?.trim() // 공백 제거
+        ?.toIntOrNull() ?: 0
       val source = binding.incomeDialogReceipt.text.toString()
       val incomeMemo = binding.incomeMemoReceipt.text.toString()
       val incomeUse = binding.incomeInfoReceipt.text.toString()
@@ -165,12 +169,13 @@ class IncomeReceiptActivity : AppCompatActivity() {
           Log.d("fullstack503", "result : $result")
         }
         else {
-          Log.d("fullstack503", "송신 실패")
+          val errorMsg = res.errorBody()?.string() ?: "에러 메시지 없음"
+          Log.d("fullstack503", "송신 실패 - 응답 코드: ${res.code()}, 메시지: $errorMsg")
         }
       }
 
       override fun onFailure(p0: Call<String>, t: Throwable) {
-        Log.d("fullstack503", "message : $t.message")
+        Log.d("fullstack503", "송신 실패: ${t.message}")
       }
     })
   }

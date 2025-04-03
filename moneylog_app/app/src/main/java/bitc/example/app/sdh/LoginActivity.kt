@@ -15,7 +15,6 @@ import bitc.example.app.MainActivity2
 import bitc.example.app.databinding.ActivityLoginBinding
 import bitc.example.app.dto.MemberDTO
 import bitc.example.app.kms.MonthlyListActivity
-import bitc.example.app.sagmin.AddInfoActivity
 import bitc.example.app.ui.SelectedDateDecorator
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call

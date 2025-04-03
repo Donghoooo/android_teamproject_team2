@@ -18,9 +18,9 @@ class InComeAdapter(val datas: List<IncomeLogDTO>) :
 
         // 데이터를 순회하며 카테고리별로 합산
         for (income in data) {
-            val category = income.incomeCate
-            val amount = income.incomeMoney?.toIntOrNull() ?: 0  // "incomeMoney"를 Int로 변환
-            groupedMap[category.toString()] = groupedMap.getOrDefault(category, 0) + amount
+            val category = income.incomeCate.toString()  // null 방지
+            val amount = income.incomeMoney?.toString()?.toIntOrNull() ?: 0  // 변환 가능할 때만 Int로 변환
+            groupedMap[category] = groupedMap.getOrDefault(category, 0) + amount
         }
 
         // 그룹화된 데이터 리스트로 변환

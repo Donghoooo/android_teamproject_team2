@@ -79,7 +79,7 @@
             android:id="@+id/tv_result"
             android:textSize="40sp"
             android:textColor="#53D2C2"
-            android:text="0원"
+            android:text="0"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="20dp"
             android:padding="10dp"

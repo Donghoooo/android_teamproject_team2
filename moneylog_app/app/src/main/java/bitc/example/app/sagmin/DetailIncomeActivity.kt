@@ -96,7 +96,7 @@ class DetailIncomeActivity : AppCompatActivity() {
 
         binding.btnUpdate.setOnClickListener {
             val cate = binding.btnPassIncome.text.toString()
-            val money = binding.incomeMoneyReceipt.text.toString()
+            val money = binding.incomeMoneyReceipt.text.toString().replace(",", "").toIntOrNull() ?: 0
             val source = binding.incomeDialogReceipt.text.toString()
             val incomeMemo = binding.incomeMemoReceipt.text.toString()
             val incomeUse = binding.incomeInfoReceipt.text.toString()
