@@ -12,6 +12,7 @@ import bitc.example.app.R
 import bitc.example.app.kms.MonthlyListActivity
 import bitc.example.app.sagmin.DetailIncomeActivity
 import bitc.example.app.sagmin.DetailOutcomeActivity
+import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -50,8 +51,10 @@ class DayListAdapter(private var searchItemList: MutableList<SearchListItem>): R
 
 
     // 금액에 3자리마다 쉼표 추가
-//    val formattedMoney = NumberFormat.getNumberInstance(Locale.KOREA).format(transaction.money)
-    holder.tvMoney.text = "${transaction.money} 원"
+    val money = transaction.money.toString().replace(",", "").toIntOrNull() ?: 0
+    val formattedMoney = NumberFormat.getNumberInstance(Locale.KOREA).format(money)
+    holder.tvMoney.text = "$formattedMoney 원"
+//    holder.tvMoney.text = "${transaction.money} 원"
 
     // 수입/지출에 따라 색상 변경
     if (transaction.type == "expense") {

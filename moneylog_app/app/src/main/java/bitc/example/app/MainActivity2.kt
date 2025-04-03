@@ -30,6 +30,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DecimalFormat
 
 class MainActivity2 : AppCompatActivity() {
   private val binding: ActivityMain2Binding by lazy {
@@ -187,8 +188,11 @@ class MainActivity2 : AppCompatActivity() {
             summary?.let {
               Log.d("fetchMonthlyData", "서버 응답: ${it.dailySummary}")
               // 월 총 수입/지출 출력
-              tvMonthTotalIncome.text = "수입: ${it.totalIncome} 원"
-              tvMonthTotalExpense.text = "지출: ${it.totalExpense} 원"
+              val formatter = DecimalFormat("#,###")
+              tvMonthTotalIncome.text = "수입 : ${formatter.format(it.totalIncome)} 원"
+              tvMonthTotalExpense.text = "지출 : ${formatter.format(it.totalExpense)} 원"
+//              tvMonthTotalIncome.text = "수입: ${it.totalIncome} 원"
+//              tvMonthTotalExpense.text = "지출: ${it.totalExpense} 원"
 
               // 캘린더 업데이트
               updateCalendarWithIncomeExpense(it.dailySummary)
@@ -219,8 +223,11 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     if (summaryForDate != null) {
-      tvTotalIncome.text = "수입: ${summaryForDate.totalIncome} 원"
-      tvTotalExpense.text = "지출: ${summaryForDate.totalExpense} 원"
+      val formatter = DecimalFormat("#,###")
+      tvTotalIncome.text = "수입 : ${formatter.format(summaryForDate.totalIncome)} 원"
+      tvTotalExpense.text = "지출 : ${formatter.format(summaryForDate.totalExpense)} 원"
+//      tvTotalIncome.text = "수입: ${summaryForDate.totalIncome} 원"
+//      tvTotalExpense.text = "지출: ${summaryForDate.totalExpense} 원"
     } else {
       tvTotalIncome.text = "수입: 원"
       tvTotalExpense.text = "지출: 원"
@@ -251,8 +258,11 @@ class MainActivity2 : AppCompatActivity() {
             val summary = response.body()
             summary?.let {
               // 날짜별 총 수입/지출 UI 업데이트
-              tvTotalIncome.text = "+ ${it.totalIncome} 원"
-              tvTotalExpense.text = "- ${it.totalExpense} 원"
+              val formatter = DecimalFormat("#,###")
+              tvTotalIncome.text = "+ ${formatter.format(it.totalIncome)} 원"
+              tvTotalExpense.text = "- ${formatter.format(it.totalExpense)} 원"
+//              tvTotalIncome.text = "+ ${it.totalIncome} 원"
+//              tvTotalExpense.text = "- ${it.totalExpense} 원"
 
               // 기존 데이터 초기화
               searchItemList.clear()
